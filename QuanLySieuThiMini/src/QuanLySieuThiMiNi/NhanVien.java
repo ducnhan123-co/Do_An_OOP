@@ -16,8 +16,9 @@ public class NhanVien {
     private String sodienthoai;
     private double luong;
     private String gioiTinh;
-
+    private static int tongSoNhanVien = 0;
     public NhanVien() {
+        tongSoNhanVien++;
     }
 
     public NhanVien(int manv, String chucvu, String honhanvien, String tennhanvien, String ngaysinh, String diachi, String sodienthoai, double luong, String gioiTinh) {
@@ -235,5 +236,41 @@ public class NhanVien {
            return -1;
        }
    }
+
+    public int getNamSinh() {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate birthDate = LocalDate.parse(this.ngaysinh, formatter);
+            return birthDate.getYear();
+        } catch (DateTimeParseException e) {
+            System.out.println("Ngày sinh không hợp lệ: " + this.ngaysinh);
+            return -1;
+        }
+    }
+
+    // Phương thức static để trả về tổng số nhân viên
+    public static int getTongSoNhanVien() {
+        return tongSoNhanVien;
+    }
+    //    private int manv;
+//    private String chucvu;
+//    private String honhanvien;
+//    private String tennhanvien;
+//    private String ngaysinh;
+//    private String diachi;
+//    private String sodienthoai;
+//    private double luong;
+//    private String gioiTinh;
+    public void xuatNhanVien() {
+        System.out.println("Mã nhân viên ");
+        System.out.println("Chưc vụ");
+        System.out.println("Họ nhân viên: ");
+        System.out.println("Tên nhân viên: ");
+        System.out.println("Ngày sinh: ");
+        System.out.println("Địa chỉ: ");
+        System.out.println("Số điện thoại: ");
+        System.out.println("Lương cơ bản: ");
+        System.out.println("Giới tính: ");
+    }
 
 }
