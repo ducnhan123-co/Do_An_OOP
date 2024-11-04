@@ -71,7 +71,7 @@ public class NhaCungCap {
                 Scanner in = new Scanner(System.in);
                 System.out.print("nhap ma nha cung cap");
                 this.maNCC = in.nextInt();
-                in.nextLine().trim();
+                in.nextLine();
                 System.out.print("nhap ten nha cung cap");
                 this.tenNCC = in.nextLine().trim();
                 System.out.print("nhap so dien thoai nha cung cap");
