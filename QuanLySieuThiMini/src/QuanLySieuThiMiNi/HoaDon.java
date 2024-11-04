@@ -30,7 +30,7 @@ public class HoaDon {
         this.maKH = other.maKH;
         this.maNV = other.maNV;
         this.ngayTao = other.ngayTao;
-        this.tongTien = other.tongtien;
+        this.tongTien = other.tongTien;
         this.phuongThucTinhToan = other.phuongThucTinhToan;
         this.tienTra = other.tienTra;
         this.tienThua = other.tienThua;
@@ -120,7 +120,7 @@ public class HoaDon {
                 System.out.print("nhap tong tien: ");
                 this.tongTien = in.nextFloat();
                 System.out.print("nhap phuong thuc tinh toan: ");
-                this.tongTien = in.nextLine();
+                this.tongTien = in.nextFloat();
                 System.out.print("nhap tien tra: ");
                 this.tongTien = in.nextFloat();
                 System.out.print("nhap tien thua: ");
