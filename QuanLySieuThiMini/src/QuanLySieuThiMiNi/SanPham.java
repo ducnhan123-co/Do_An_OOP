@@ -148,9 +148,4 @@ public class SanPham {
             }
         }
     }
-
-    public static void main(String[] args) {
-        String a = new Scanner(System.in).nextLine().trim().trim();
-        System.out.println(a);
-    }
 }
