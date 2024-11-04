@@ -107,9 +107,9 @@ public class KhachHang {
                 this.maKH = in.nextInt();
                 System.out.print("nhap ho khach hang: ");
                 in.nextLine();
-                this.hoKH = in.nextLine();
+                this.hoKH = in.nextLine().trim();
                 System.out.print("nhap ten khach hang: ");
-                this.tenKH = in.nextLine();
+                this.tenKH = in.nextLine().trim();
                 System.out.println("nhap ngay sinh khach hang: ");
                 System.out.print("nhap ngay: ");
                 this.ngaySinh.setDate(in.nextInt());
@@ -119,11 +119,11 @@ public class KhachHang {
                 this.ngaySinh.setYear(in.nextInt());
                 System.out.print("nhap gioi tinh khach hang: ");
                 in.nextLine();
-                this.gioiTinh = in.nextLine();
+                this.gioiTinh = in.nextLine().trim();
                 System.out.print("nhap sdt khach hang: ");
-                this.sdt = in.nextLine();
+                this.sdt = in.nextLine().trim();
                 System.out.print("nhap dia chi khach hang: ");
-                this.diaChi = in.nextLine();
+                this.diaChi = in.nextLine().trim();
 
                 if (sdt.length() != 10)
                     throw new Exception("so dien thoai khong hop le");
@@ -139,9 +139,9 @@ public class KhachHang {
             try {
                 Scanner in = new Scanner(System.in);
                 System.out.print("nhap ho khach hang: ");
-                this.hoKH = in.nextLine();
+                this.hoKH = in.nextLine().trim();
                 System.out.print("nhap ten khach hang: ");
-                this.tenKH = in.nextLine();
+                this.tenKH = in.nextLine().trim();
                 System.out.println("nhap ngay sinh khach hang: ");
                 System.out.print("nhap ngay: ");
                 this.ngaySinh.setDate(in.nextInt());
@@ -151,11 +151,11 @@ public class KhachHang {
                 this.ngaySinh.setYear(in.nextInt());
                 System.out.print("nhap gioi tinh khach hang: ");
                 in.nextLine();
-                this.gioiTinh = in.nextLine();
+                this.gioiTinh = in.nextLine().trim();
                 System.out.print("nhap sdt khach hang: ");
-                this.sdt = in.nextLine();
+                this.sdt = in.nextLine().trim();
                 System.out.print("nhap dia chi khach hang: ");
-                this.diaChi = in.nextLine();
+                this.diaChi = in.nextLine().trim();
 
                 if (sdt.length() != 10)
                     throw new Exception("so dien thoai khong hop le");

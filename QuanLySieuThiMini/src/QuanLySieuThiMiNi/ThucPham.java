@@ -41,7 +41,7 @@ public class ThucPham extends SanPham{
             try {
                 Scanner in = new Scanner(System.in) ;
                 System.out.print("Nhap loai thuc pham: ");
-                this.loaiThucPham = in.nextLine();
+                this.loaiThucPham = in.nextLine().trim();
                 System.out.print("Nhap han su dung thuc pham: ");
                 this.hanSuDung = in.nextInt();
             } catch (Exception e) {

@@ -95,9 +95,9 @@ public class SanPham {
                 this.maSP = in.nextInt();
                 in.nextLine();
                 System.out.print("Nhap ten san pham: ");
-                this.tenSP = in.nextLine();
+                this.tenSP = in.nextLine().trim();
                 System.out.print("Nhap don vi tinh san pham: ");
-                this.DVT = in.nextLine();
+                this.DVT = in.nextLine().trim();
                 System.out.print("Nhap gia san pham: ");
                 this.donGia = in.nextFloat();
                 System.out.print("Nhap so luong san pham: ");
@@ -111,7 +111,7 @@ public class SanPham {
                 ngaySX.setYear(in.nextInt());
                 System.out.print("Nhap mo ta san pham: ");
                 in.nextLine();
-                this.moTa = in.nextLine();
+                this.moTa = in.nextLine().trim();
 
                 break;
             } catch (Exception e) {
@@ -124,9 +124,9 @@ public class SanPham {
             try {
                 Scanner in = new Scanner(System.in);
                 System.out.print("Nhap ten san pham: ");
-                this.tenSP = in.nextLine();
+                this.tenSP = in.nextLine().trim();
                 System.out.print("Nhap don vi tinh san pham: ");
-                this.DVT = in.nextLine();
+                this.DVT = in.nextLine().trim();
                 System.out.print("Nhap gia san pham: ");
                 this.donGia = in.nextFloat();
                 System.out.print("Nhap so luong san pham: ");
@@ -140,7 +140,7 @@ public class SanPham {
                 ngaySX.setYear(in.nextInt());
                 System.out.print("Nhap mo ta san pham: ");
                 in.nextLine();
-                this.moTa = in.nextLine();
+                this.moTa = in.nextLine().trim();
 
                 break;
             } catch (Exception e) {
@@ -150,7 +150,7 @@ public class SanPham {
     }
 
     public static void main(String[] args) {
-        SanPham a = new SanPham();
-        a.nhap();
+        String a = new Scanner(System.in).nextLine().trim().trim();
+        System.out.println(a);
     }
 }

@@ -71,15 +71,15 @@ public class NhaCungCap {
                 Scanner in = new Scanner(System.in);
                 System.out.print("nhap ma nha cung cap");
                 this.maNCC = in.nextInt();
-                in.nextLine();
+                in.nextLine().trim();
                 System.out.print("nhap ten nha cung cap");
-                this.tenNCC = in.nextLine();
+                this.tenNCC = in.nextLine().trim();
                 System.out.print("nhap so dien thoai nha cung cap");
-                this.sdtNCC = in.nextLine();
+                this.sdtNCC = in.nextLine().trim();
                 System.out.print("nhap email nha cung cap");
-                this.emailNCC = in.nextLine();
+                this.emailNCC = in.nextLine().trim();
                 System.out.print("nhap dia chi nha cung cap");
-                this.diaChiNCC = in.nextLine();
+                this.diaChiNCC = in.nextLine().trim();
 
                 break;
             } catch (Exception e) {
@@ -92,13 +92,13 @@ public class NhaCungCap {
             try {
                 Scanner in = new Scanner(System.in);
                 System.out.print("nhap ten nha cung cap");
-                this.tenNCC = in.nextLine();
+                this.tenNCC = in.nextLine().trim();
                 System.out.print("nhap so dien thoai nha cung cap");
-                this.sdtNCC = in.nextLine();
+                this.sdtNCC = in.nextLine().trim();
                 System.out.print("nhap email nha cung cap");
-                this.emailNCC = in.nextLine();
+                this.emailNCC = in.nextLine().trim();
                 System.out.print("nhap dia chi nha cung cap");
-                this.diaChiNCC = in.nextLine();
+                this.diaChiNCC = in.nextLine().trim();
 
                 break;
             } catch (Exception e) {

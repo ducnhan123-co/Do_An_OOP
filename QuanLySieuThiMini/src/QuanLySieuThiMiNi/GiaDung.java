@@ -42,7 +42,7 @@ public class GiaDung extends SanPham{
             try {
                 Scanner in = new Scanner(System.in) ;
                 System.out.print("Nhap thuong hieu: ");
-                this.thuongHieu = in.nextLine();
+                this.thuongHieu = in.nextLine().trim();
                 System.out.print("Nhap so ngay bao hanh: ");
                 this.baoHanh = in.nextInt();
             } catch (Exception e) {
