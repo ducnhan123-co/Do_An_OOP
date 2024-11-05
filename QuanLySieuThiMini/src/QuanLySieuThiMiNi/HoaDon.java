@@ -34,8 +34,6 @@ public class HoaDon {
         this.maKH = other.maKH;
         this.maNV = other.maNV;
         this.ngayTao = other.ngayTao;
-        this.soLuong = other.soLuong;
-        this.donGia = other.donGia;
         this.tongTien = other.tongTien;
         this.phuongThucTinhToan = other.phuongThucTinhToan;
         this.tienTra = other.tienTra;
