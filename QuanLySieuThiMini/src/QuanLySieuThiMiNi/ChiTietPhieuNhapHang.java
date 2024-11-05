@@ -2,7 +2,8 @@ package QuanLySieuThiMiNi;
 
 public class ChiTietPhieuNhapHang {
 	private int maphieu, maSp, sl;
-
+//	private SanPham masp;
+	
 	public ChiTietPhieuNhapHang(int maphieu, int maSp, int sl) {
 		this.maphieu = maphieu;
 		this.maSp = maSp;
@@ -32,6 +33,7 @@ public class ChiTietPhieuNhapHang {
 	public void setSl(int sl) {
 		this.sl = sl;
 	}
+	
 	
 	
 	
