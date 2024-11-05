@@ -1,5 +1,6 @@
 package QuanLySieuThiMiNi;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -164,6 +165,11 @@ public class HoaDon {
     public void setTongDonGia() {
         tongTien = soLuong*donGia;
         System.out.println("Tong don gia cua hoa don: "+tongTien);
+    }
+
+    public static void main(String[] args) {
+        LocalDate a = LocalDate.now() ;
+        System.out.printf("%d/%d/%d", a.getDayOfMonth(), a.getMonth().getValue(), a.getYear());
     }
 
 }

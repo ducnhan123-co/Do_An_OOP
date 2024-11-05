@@ -1,7 +1,7 @@
 package QuanLySieuThiMiNi;
 
 import java.util.Scanner;
-public class PhieuNhapHang {
+public class  PhieuNhapHang {
     private int maPhieu, maNCC;
     private double tongTien;
     private Ngay ngayNhapHang;
