@@ -9,21 +9,21 @@ public class HoaDon {
     private int maHD;
     private KhachHang maKH;
     private NhanVien maNV;
-    private Date ngayTao;
-    private int soLuong;
-    private float donGia;
+    private LocalDate ngayTaoHoaDon;
+    // private int soLuong;
+    // private float donGia;
     private float tongTien;
     private String phuongThucTinhToan;
     private float tienTra;
     private float tienThua;
 
-    public HoaDon(int maHD, KhachHang maKH, NhanVien maNV, Date ngayTao, int soLuong, float donGia, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
+    public HoaDon(int maHD, KhachHang maKH, NhanVien maNV, LocalDate ngayTaoHoaDon, int soLuong, float donGia, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
         this.maHD = maHD;
         this.maKH = maKH;
         this.maNV = maNV;
-        this.ngayTao = ngayTao;
-        this.soLuong = soLuong;
-        this.donGia = donGia;
+        this.ngayTaoHoaDon = LocalDate.now();
+        // this.soLuong = soLuong;
+        // this.donGia = donGia;
         this.tongTien = tongtien;
         this.phuongThucTinhToan = phuongThucTinhToan;
         this.tienTra = tienTra;
@@ -34,7 +34,7 @@ public class HoaDon {
         this.maHD = other.maHD;
         this.maKH = other.maKH;
         this.maNV = other.maNV;
-        this.ngayTao = other.ngayTao;
+        this.ngayTaoHoaDon = LocalDate.now();
         this.tongTien = other.tongTien;
         this.phuongThucTinhToan = other.phuongThucTinhToan;
         this.tienTra = other.tienTra;
@@ -65,29 +65,29 @@ public class HoaDon {
         this.maNV = maNV;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public LocalDate getNgayTaoHoaDon() {
+        return ngayTaoHoaDon;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setNgayTaoHoaDon(LocalDate ngayTaoHoaDon) {
+        this.ngayTaoHoaDon = ngayTaoHoaDon;
     }
 
-    public int getSoLuong() {
-        return soLuong;
-    }
+    // public int getSoLuong() {
+    //     return soLuong;
+    // }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
+    // public void setSoLuong(int soLuong) {
+    //     this.soLuong = soLuong;
+    // }
 
-    public float getDonGia() {
-        return donGia;
-    }
+    // public float getDonGia() {
+    //     return donGia;
+    // }
 
-    public void setDonGia(float donGia) {
-        this.donGia = donGia;
-    }
+    // public void setDonGia(float donGia) {
+    //     this.donGia = donGia;
+    // }
 
     public float getTongTien() {
         return tongTien;
@@ -125,51 +125,70 @@ public class HoaDon {
         while(true) {
             try {
 
-                System.out.println("Nhap ma hoa don: ");
+                System.out.println("Nhập mã hóa đơn: ");
                 this.maHD = in.nextInt();
-                System.out.print("nhap ma khach hang: ");
-                int maKH = in.nextInt(); 
-                System.out.print("nhap ma nhan vien: ");
-                int maNV = in.nextInt();
-                System.out.print("nhap ngay tao hoa don: ");
-                System.out.print("nhap ngay: ");
-                this.ngayTao.setDate(in.nextInt());
-                System.out.print("nhap thang: ");
-                this.ngayTao.setMonth(in.nextInt());
-                System.out.print("nhap nam: ");
-                this.ngayTao.setYear(in.nextInt());
-                System.out.println("Nhap so luong: ");
-                this.soLuong = in.nextInt();
-                System.out.println("Nhap don gia: ");
-                this.donGia = in.nextFloat();
-                System.out.print("tong tien: ");
-                this.tongTien = soLuong*donGia;
-                System.out.print("nhap phuong thuc tinh toan: ");
-                this.tongTien = in.nextFloat();
-                System.out.print("nhap tien tra: ");
-                this.tongTien = in.nextFloat();
-                System.out.print("nhap tien thua: ");
-                this.tongTien = in.nextFloat();
+                System.out.print("nhập mã khách hàng: ");
+                this.maKH.setMaKH(in.nextInt());
+                System.out.print("nhập mã nhân viên: ");
+                this.maNV.setManv(in.nextInt());
+                System.out.print("nhập ngày tạo hóa đơn: ");
+                this.ngayTaoHoaDon = LocalDate.now();
                 
+                
+                // Tính tổng tiền từ các chi tiết mặt hàng
+                this.tongTien = tinhTongTien();
+                System.out.printf("Tổng tiền: %.2f\n", this.tongTien);
+                
+                System.out.print("nhập phương thức tính toán: ");
+                this.phuongThucTinhToan = in.nextLine();
+
+                // Nhập tiền trả và tiền thừa
+                System.out.print("Nhập tiền trả: ");
+                this.tienTra = in.nextFloat();
+                this.tienThua = this.tienTra - tongTien;  // Tiền thừa = tiền trả - tổng tiền
+                System.out.printf("Tiền thừa: %.2f\n", tienThua);
+                break;
             } catch (Exception e) {
                 System.out.println("Hãy nhập lại!");
+                in.nextLine();
             }
         }
     }
 
     public void xuatHoaDon() {
-        System.out.printf("|%-20d|%-20d|%-20d|%-20d|%-20f|%-20s|%-20f|%-20f|", maHD, maKH, maNV, soLuong, donGia, phuongThucTinhToan, tienTra, tienThua);
-        System.out.println("*Tong thanh toan: "+tongTien);
+        System.out.printf("|%-20d|%-20d|%-20d|%-20s|%-20f|%-20f|", maHD, maKH, maNV, /*soLuong, donGia,*/ phuongThucTinhToan, tienTra, tienThua);
     }
 
-    public void setTongDonGia() {
-        tongTien = soLuong*donGia;
-        System.out.println("Tong don gia cua hoa don: "+tongTien);
+    // Phương thức tính tổng tiền từ chi tiết hóa đơn nhập vào
+    public float tinhTongTien() {
+        float tongTien = 0;
+        System.out.print("Nhập số lượng mặt hàng: ");
+        int soLuongMatHang = in.nextInt();
+
+        //Nhập từng chi tiết hóa đơn và tính tổng tiền
+        for(int i = 0; i < soLuongMatHang; i++) {
+            System.out.println("-Nhập chi tiết hóa đơn thứ " + (i + 1) + ":");
+            System.out.print("+Nhập số lượng: ");
+            int soLuong = in.nextInt();
+            System.out.print("+Nhập đơn giá: ");
+            float donGia = in.nextFloat();
+
+            ChiTietHoaDon chiTiet = new ChiTietHoaDon(soLuong, donGia);
+            tongTien += chiTiet.getDonGia() * chiTiet.getSoLuong();  // Cộng dồn tổng tiền
+        }
+        return tongTien;
     }
 
+<<<<<<< HEAD
     public static void main(String[] args) {
         LocalDate a = LocalDate.now() ;
         System.out.printf("%d/%d/%d", a.getDayOfMonth(), a.getMonth().getValue(), a.getYear());
     }
+=======
+    // public float getThanhTien() {
+    //     return this.soLuong * this.donGia;
+    // }
+
+>>>>>>> 1de8ea724612d2118f6d357fecefeae6a3fc84f1
 
 }
