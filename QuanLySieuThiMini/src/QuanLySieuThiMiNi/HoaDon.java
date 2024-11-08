@@ -7,16 +7,17 @@ import java.util.Scanner;
 public class HoaDon {
     private int maHD;
     private KhachHang maKH;
-    private NhanVien maNV;
+    private int maNV;
     private LocalDate ngayTaoHoaDon;
     private float tongTien=0;
     private String phuongThucTinhToan;
+//    private boolean trangthaithanhtoan; ???
     private float tienTra;
     private float tienThua;
 
     public HoaDon(){}
 
-    public HoaDon(int maHD, KhachHang maKH, NhanVien maNV, LocalDate ngayTaoHoaDon, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
+    public HoaDon(int maHD, KhachHang maKH, int maNV, LocalDate ngayTaoHoaDon, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
         this.maHD = maHD;
         this.maKH = maKH;
         this.maNV = maNV;
@@ -54,11 +55,11 @@ public class HoaDon {
         this.maKH = maKH;
     }
 
-    public NhanVien getMaNV() {
+    public int getMaNV() {
         return maNV;
     }
 
-    public void setMaNV(NhanVien maNV) {
+    public void setMaNV(int maNV) {
         this.maNV = maNV;
     }
 
@@ -110,8 +111,9 @@ public class HoaDon {
                 this.maHD = in.nextInt();
                 System.out.print("nhập mã khách hàng: ");
                 this.maKH.setMaKH(in.nextInt());
-                System.out.print("nhập mã nhân viên: ");
-                this.maNV.setManv(in.nextInt());
+//                System.out.print("nhập mã nhân viên: ");
+                //Này không cần nhập mã nhân viên cũng được ha ,tại bên Nhân Viên là nhập + set ngày khi tạo hoá đơn mới rồi a nên ko cần cũng được
+//                this.maNV.setManv(in.nextInt());
                 this.ngayTaoHoaDon = LocalDate.now();
                 System.out.println("nhập chi tiết hóa đơn: ");
                 while (true) {
