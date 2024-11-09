@@ -121,10 +121,11 @@ public class HoaDon {
                     int maSP = in.nextInt();
                     System.out.print("nhập số lượng: ");
                     int soLuong = in.nextInt();
-                    tongTien += soLuong*(danhSachSanPham.getGia(maSP));
+                    tongTien += soLuong*(danhSachSanPham.tim(maSP).getDonGia());
                     System.out.println("(1) thanh toan");
                     System.out.println("(0) tiep tuc");
-
+                    if (in.nextInt() == 1)
+                        break;
                 }
                 System.out.printf("Tổng tiền: %.2f\n", this.tongTien);
                 System.out.print("nhập phương thức tính toán: ");
