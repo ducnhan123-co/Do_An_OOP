@@ -3,50 +3,39 @@ package QuanLySieuThiMiNi;
 import java.util.Date;
 import java.util.Scanner;
 
-public class ThucPham extends SanPham{
+public class ThucPham extends SanPham {
     private String loaiThucPham;
     private int hanSuDung;
 
-    public ThucPham() {}
+    public ThucPham() {
+        super();  // Constructor mặc định của lớp cha (SanPham)
+        this.loaiThucPham = "";
+        this.hanSuDung = 0;
+    }
+
     public ThucPham(int maSP, String tenSP, String DVT, float donGia, int soLuong, Date ngaySX, String moTa, String loaiThucPham, int hanSuDung) {
-        super(maSP, tenSP, DVT, donGia, soLuong, ngaySX, moTa);
+        super(maSP, tenSP, DVT, donGia, soLuong, ngaySX, moTa); // Gọi constructor của lớp cha
         this.loaiThucPham = loaiThucPham;
-        this.hanSuDung = hanSuDung;
-    }
-    public ThucPham(ThucPham other) {
-        super((SanPham) other);
-        this.loaiThucPham = other.loaiThucPham;
-        this.hanSuDung = other.hanSuDung;
-    }
-
-    public String getLoaiThucPham() {
-        return loaiThucPham;
-    }
-
-    public void setLoaiThucPham(String loaiThucPham) {
-        this.loaiThucPham = loaiThucPham;
-    }
-
-    public int getHanSuDung() {
-        return hanSuDung;
-    }
-
-    public void setHanSuDung(int hanSuDung) {
         this.hanSuDung = hanSuDung;
     }
 
     public void nhap() {
-        super.nhap();
-        while (true) {
-            try {
-                Scanner in = new Scanner(System.in) ;
-                System.out.print("Nhap loai thuc pham: ");
-                this.loaiThucPham = in.nextLine().trim();
-                System.out.print("Nhap han su dung thuc pham: ");
-                this.hanSuDung = in.nextInt();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        super.nhap();  // Nhập thông tin sản phẩm từ lớp cha
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nhập loại thực phẩm: ");
+        loaiThucPham = sc.nextLine();
+
+        System.out.print("Nhập hạn sử dụng (ngày): ");
+        hanSuDung = sc.nextInt();
     }
+
+    public void xuat() {
+        super.xuat();  // Gọi phương thức xuat() từ lớp cha (SanPham)
+        System.out.printf("|%-20s|%-10d ngày|\n", loaiThucPham, hanSuDung);  // Thêm thông tin loại thực phẩm và hạn sử dụng
+    }
+
+
+
 }
+
