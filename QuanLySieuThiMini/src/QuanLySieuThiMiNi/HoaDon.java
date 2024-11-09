@@ -109,7 +109,7 @@ public class HoaDon {
                 Scanner in = new Scanner(System.in);
                 System.out.println("Nhập mã hóa đơn: ");
                 this.maHD = in.nextInt();
-                System.out.print("nhập mã khách hàng: ");
+                System.out.println("nhập mã khách hàng: ");
                 this.maKH.setMaKH(in.nextInt());
 //                System.out.print("nhập mã nhân viên: ");
                 //Này không cần nhập mã nhân viên cũng được ha ,tại bên Nhân Viên là nhập + set ngày khi tạo hoá đơn mới rồi a nên ko cần cũng được
@@ -121,10 +121,11 @@ public class HoaDon {
                     int maSP = in.nextInt();
                     System.out.print("nhập số lượng: ");
                     int soLuong = in.nextInt();
-                    tongTien += soLuong*(danhSachSanPham.getGia(maSP));
+                    tongTien += soLuong*(danhSachSanPham.tim(maSP).getDonGia());
                     System.out.println("(1) thanh toan");
                     System.out.println("(0) tiep tuc");
-
+                    if (in.nextInt() == 1)
+                        break;
                 }
                 System.out.printf("Tổng tiền: %.2f\n", this.tongTien);
                 System.out.print("nhập phương thức tính toán: ");
@@ -143,7 +144,7 @@ public class HoaDon {
     }
 
     public void xuatHoaDon() {
-        System.out.printf("|%-20d|%-20d|%-20d|%-20s|%-20f|%-20f|", maHD, maKH, maNV, /*soLuong, donGia,*/ phuongThucTinhToan, tienTra, tienThua);
+        System.out.printf("|%-20d|%-20d|%-20d|%-20s|%-20f|%-20f|", maHD, maKH, maNV, phuongThucTinhToan, tienTra, tienThua);
     }
 
     // Phương thức tính tổng tiền từ chi tiết hóa đơn nhập vào

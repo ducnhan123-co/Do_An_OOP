@@ -43,4 +43,9 @@ public class DanhSachSanPham {
         }
         return null;
     }
+
+    public void thongKeSanPham() {
+
+    }
+
 }
