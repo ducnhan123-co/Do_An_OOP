@@ -5,25 +5,23 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class HoaDon {
-    public static Scanner in = new Scanner(System.in);
     private int maHD;
     private KhachHang maKH;
-    private NhanVien maNV;
+    private int maNV;
     private LocalDate ngayTaoHoaDon;
-    // private int soLuong;
-    // private float donGia;
-    private float tongTien;
+    private float tongTien=0;
     private String phuongThucTinhToan;
+//    private boolean trangthaithanhtoan; ???
     private float tienTra;
     private float tienThua;
 
-    public HoaDon(int maHD, KhachHang maKH, NhanVien maNV, LocalDate ngayTaoHoaDon, int soLuong, float donGia, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
+    public HoaDon(){}
+
+    public HoaDon(int maHD, KhachHang maKH, int maNV, LocalDate ngayTaoHoaDon, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
         this.maHD = maHD;
         this.maKH = maKH;
         this.maNV = maNV;
-        this.ngayTaoHoaDon = LocalDate.now();
-        // this.soLuong = soLuong;
-        // this.donGia = donGia;
+        this.ngayTaoHoaDon = ngayTaoHoaDon;
         this.tongTien = tongtien;
         this.phuongThucTinhToan = phuongThucTinhToan;
         this.tienTra = tienTra;
@@ -34,7 +32,7 @@ public class HoaDon {
         this.maHD = other.maHD;
         this.maKH = other.maKH;
         this.maNV = other.maNV;
-        this.ngayTaoHoaDon = LocalDate.now();
+        this.ngayTaoHoaDon = other.ngayTaoHoaDon;
         this.tongTien = other.tongTien;
         this.phuongThucTinhToan = other.phuongThucTinhToan;
         this.tienTra = other.tienTra;
@@ -57,11 +55,11 @@ public class HoaDon {
         this.maKH = maKH;
     }
 
-    public NhanVien getMaNV() {
+    public int getMaNV() {
         return maNV;
     }
 
-    public void setMaNV(NhanVien maNV) {
+    public void setMaNV(int maNV) {
         this.maNV = maNV;
     }
 
@@ -72,22 +70,6 @@ public class HoaDon {
     public void setNgayTaoHoaDon(LocalDate ngayTaoHoaDon) {
         this.ngayTaoHoaDon = ngayTaoHoaDon;
     }
-
-    // public int getSoLuong() {
-    //     return soLuong;
-    // }
-
-    // public void setSoLuong(int soLuong) {
-    //     this.soLuong = soLuong;
-    // }
-
-    // public float getDonGia() {
-    //     return donGia;
-    // }
-
-    // public void setDonGia(float donGia) {
-    //     this.donGia = donGia;
-    // }
 
     public float getTongTien() {
         return tongTien;
@@ -121,24 +103,31 @@ public class HoaDon {
         this.tienThua = tienThua;
     }
 
-    public void nhapHoaDon() {
+    public void nhapHoaDon(DanhSachSanPham danhSachSanPham) {
         while(true) {
             try {
-
+                Scanner in = new Scanner(System.in);
                 System.out.println("Nhập mã hóa đơn: ");
                 this.maHD = in.nextInt();
                 System.out.print("nhập mã khách hàng: ");
                 this.maKH.setMaKH(in.nextInt());
-                System.out.print("nhập mã nhân viên: ");
-                this.maNV.setManv(in.nextInt());
-                System.out.print("nhập ngày tạo hóa đơn: ");
+//                System.out.print("nhập mã nhân viên: ");
+                //Này không cần nhập mã nhân viên cũng được ha ,tại bên Nhân Viên là nhập + set ngày khi tạo hoá đơn mới rồi a nên ko cần cũng được
+//                this.maNV.setManv(in.nextInt());
                 this.ngayTaoHoaDon = LocalDate.now();
-                
-                
-                // Tính tổng tiền từ các chi tiết mặt hàng
-                this.tongTien = tinhTongTien();
+                System.out.println("nhập chi tiết hóa đơn: ");
+                while (true) {
+                    System.out.print("nhập mã sản : ");
+                    int maSP = in.nextInt();
+                    System.out.print("nhập số lượng: ");
+                    int soLuong = in.nextInt();
+                    tongTien += soLuong*(danhSachSanPham.tim(maSP).getDonGia());
+                    System.out.println("(1) thanh toan");
+                    System.out.println("(0) tiep tuc");
+                    if (in.nextInt() == 1)
+                        break;
+                }
                 System.out.printf("Tổng tiền: %.2f\n", this.tongTien);
-                
                 System.out.print("nhập phương thức tính toán: ");
                 this.phuongThucTinhToan = in.nextLine();
 
@@ -150,7 +139,6 @@ public class HoaDon {
                 break;
             } catch (Exception e) {
                 System.out.println("Hãy nhập lại!");
-                in.nextLine();
             }
         }
     }
@@ -160,28 +148,22 @@ public class HoaDon {
     }
 
     // Phương thức tính tổng tiền từ chi tiết hóa đơn nhập vào
-    public float tinhTongTien() {
-        float tongTien = 0;
-        System.out.print("Nhập số lượng mặt hàng: ");
-        int soLuongMatHang = in.nextInt();
-
-        //Nhập từng chi tiết hóa đơn và tính tổng tiền
-        for(int i = 0; i < soLuongMatHang; i++) {
-            System.out.println("-Nhập chi tiết hóa đơn thứ " + (i + 1) + ":");
-            System.out.print("+Nhập số lượng: ");
-            int soLuong = in.nextInt();
-            System.out.print("+Nhập đơn giá: ");
-            float donGia = in.nextFloat();
-
-            ChiTietHoaDon chiTiet = new ChiTietHoaDon(soLuong, donGia);
-            tongTien += chiTiet.getDonGia() * chiTiet.getSoLuong();  // Cộng dồn tổng tiền
-        }
-        return tongTien;
-    }
-
-    // public float getThanhTien() {
-    //     return this.soLuong * this.donGia;
-    // }
-
-
+//    public float tinhTongTien() {
+//        float tongTien = 0;
+//        System.out.print("Nhập số lượng mặt hàng: ");
+//        int soLuongMatHang = in.nextInt();
+//
+//        //Nhập từng chi tiết hóa đơn và tính tổng tiền
+//        for(int i = 0; i < soLuongMatHang; i++) {
+//            System.out.println("-Nhập chi tiết hóa đơn thứ " + (i + 1) + ":");
+//            System.out.print("+Nhập số lượng: ");
+//            int soLuong = in.nextInt();
+//            System.out.print("+Nhập đơn giá: ");
+//            float donGia = in.nextFloat();
+//
+//            ChiTietHoaDon chiTiet = new ChiTietHoaDon(soLuong, donGia);
+//            tongTien += chiTiet.getDonGia() * chiTiet.getSoLuong();  // Cộng dồn tổng tiền
+//        }
+//        return tongTien;
+//    }
 }

@@ -1,6 +1,8 @@
 package QuanLySieuThiMiNi;
 
 import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class SanPham {
@@ -8,10 +10,21 @@ public class SanPham {
     private String tenSP, DVT;
     private float donGia;
     private int soLuong;
-    private Date ngaySX = new Date();
+    private Date ngaySX;
     private String moTa;
 
-    public SanPham(){}
+    // Constructor mặc định
+    public SanPham() {
+        this.maSP = 0;
+        this.tenSP = "";
+        this.DVT = "";
+        this.donGia = 0.0f;
+        this.soLuong = 0;
+        this.ngaySX = new Date();
+        this.moTa = "";
+    }
+
+    // Constructor có tham số
     public SanPham(int maSP, String tenSP, String DVT, float donGia, int soLuong, Date ngaySX, String moTa) {
         this.maSP = maSP;
         this.tenSP = tenSP;
@@ -21,131 +34,72 @@ public class SanPham {
         this.ngaySX = ngaySX;
         this.moTa = moTa;
     }
-    public SanPham(SanPham other) {
-        this.maSP = other.maSP;
-        this.tenSP = other.tenSP;
-        this.DVT = other.DVT;
-        this.donGia = other.donGia;
-        this.soLuong = other.soLuong;
-        this.ngaySX = other.ngaySX;
-        this.moTa = other.moTa;
-    }
 
-    public int getMaSP() {
-        return maSP;
-    }
+    // Getters and Setters
+    public int getMaSP() { return maSP; }
+    public void setMaSP(int maSP) { this.maSP = maSP; }
 
-    public void setMaSP(int maSP) {
-        this.maSP = maSP;
-    }
+    public String getTenSP() { return tenSP; }
+    public void setTenSP(String tenSP) { this.tenSP = tenSP; }
 
-    public String getTenSP() {
-        return tenSP;
-    }
+    public String getDVT() { return DVT; }
+    public void setDVT(String DVT) { this.DVT = DVT; }
 
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
-    }
+    public float getDonGia() { return donGia; }
+    public void setDonGia(float donGia) { this.donGia = donGia; }
 
-    public String getDVT() {
-        return DVT;
-    }
+    public int getSoLuong() { return soLuong; }
+    public void setSoLuong(int soLuong) { this.soLuong = soLuong; }
 
-    public void setDVT(String DVT) {
-        this.DVT = DVT;
-    }
+    public Date getNgaySX() { return ngaySX; }
+    public void setNgaySX(Date ngaySX) { this.ngaySX = ngaySX; }
 
-    public float getDonGia() {
-        return donGia;
-    }
+    public String getMoTa() { return moTa; }
+    public void setMoTa(String moTa) { this.moTa = moTa; }
 
-    public void setDonGia(float donGia) {
-        this.donGia = donGia;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public Date getNgaySX() {
-        return ngaySX;
-    }
-
-    public void setNgaySX(Date ngaySX) {
-        this.ngaySX = ngaySX;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-
+    // Nhập thông tin sản phẩm
     public void nhap() {
-        while (true) {
-            try {
-                Scanner in = new Scanner(System.in);
-                System.out.print("Nhap ma san pham: ");
-                this.maSP = in.nextInt();
-                in.nextLine();
-                System.out.print("Nhap ten san pham: ");
-                this.tenSP = in.nextLine().trim();
-                System.out.print("Nhap don vi tinh san pham: ");
-                this.DVT = in.nextLine().trim();
-                System.out.print("Nhap gia san pham: ");
-                this.donGia = in.nextFloat();
-                System.out.print("Nhap so luong san pham: ");
-                this.soLuong = in.nextInt();
-                System.out.println("Nhap ngay san xuat san pham: ");
-                System.out.print("Nhap ngay: ");
-                ngaySX.setDate(in.nextInt());
-                System.out.print("Nhap thang: ");
-                ngaySX.setMonth(in.nextInt());
-                System.out.print("Nhap nam: ");
-                ngaySX.setYear(in.nextInt());
-                System.out.print("Nhap mo ta san pham: ");
-                in.nextLine();
-                this.moTa = in.nextLine().trim();
+        Scanner sc = new Scanner(System.in);
 
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        System.out.print("Nhập mã sản phẩm: ");
+        maSP = sc.nextInt();
+        sc.nextLine(); // Đọc ký tự còn lại sau khi nhập số
+
+        System.out.print("Nhập tên sản phẩm: ");
+        tenSP = sc.nextLine();
+
+        System.out.print("Nhập đơn vị tính (ĐVT): ");
+        DVT = sc.nextLine();
+
+        System.out.print("Nhập đơn giá: ");
+        donGia = sc.nextFloat();
+
+        System.out.print("Nhập số lượng: ");
+        soLuong = sc.nextInt();
+        sc.nextLine(); // Đọc dòng trống
+
+        System.out.print("Nhập mô tả sản phẩm: ");
+        moTa = sc.nextLine();
+
+        System.out.print("Nhập ngày sản xuất (yyyy-MM-dd): ");
+        String dateInput = sc.nextLine();
+        try {
+            ngaySX = new SimpleDateFormat("yyyy-MM-dd").parse(dateInput);
+        } catch (ParseException e) {
+            System.out.println("Ngày không hợp lệ, sử dụng ngày hiện tại.");
+            ngaySX = new Date();
         }
     }
-    public void sua() {
-        while (true) {
-            try {
-                Scanner in = new Scanner(System.in);
-                System.out.print("Nhap ten san pham: ");
-                this.tenSP = in.nextLine().trim();
-                System.out.print("Nhap don vi tinh san pham: ");
-                this.DVT = in.nextLine().trim();
-                System.out.print("Nhap gia san pham: ");
-                this.donGia = in.nextFloat();
-                System.out.print("Nhap so luong san pham: ");
-                this.soLuong = in.nextInt();
-                System.out.println("Nhap ngay san xuat san pham: ");
-                System.out.print("Nhap ngay: ");
-                ngaySX.setDate(in.nextInt());
-                System.out.print("Nhap thang: ");
-                ngaySX.setMonth(in.nextInt());
-                System.out.print("Nhap nam: ");
-                ngaySX.setYear(in.nextInt());
-                System.out.print("Nhap mo ta san pham: ");
-                in.nextLine();
-                this.moTa = in.nextLine().trim();
 
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
+    // Xuất thông tin sản phẩm
+    public void xuat() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng ngày là "yyyy-MM-dd"
+        String formattedDate = sdf.format(ngaySX); // Chuyển đổi ngày thành chuỗi theo định dạng
+
+        System.out.printf("|%-10d|%-15s|%-10s|%-10.2f|%-10d|%-15s|%-20s|\n",
+                maSP, tenSP, DVT, donGia, soLuong, formattedDate, moTa);
     }
 }
+
+
+
