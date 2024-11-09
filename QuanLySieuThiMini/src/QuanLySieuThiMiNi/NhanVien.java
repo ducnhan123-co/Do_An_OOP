@@ -3,6 +3,7 @@ package QuanLySieuThiMiNi;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -11,17 +12,18 @@ public class NhanVien {
     private String chucvu;
     private String honhanvien;
     private String tennhanvien;
-    private String ngaysinh;
+    private Date ngaysinh = new Date();
     private String diachi;
     private String sodienthoai;
     private double luong;
     private String gioiTinh;
+
     private static int tongSoNhanVien = 0;
     public NhanVien() {
         tongSoNhanVien++;
     }
 
-    public NhanVien(int manv, String chucvu, String honhanvien, String tennhanvien, String ngaysinh, String diachi, String sodienthoai, double luong, String gioiTinh) {
+    public NhanVien(int manv, String chucvu, String honhanvien, String tennhanvien, Date ngaysinh, String diachi, String sodienthoai, double luong, String gioiTinh) {
         this.manv = manv;
         this.chucvu = chucvu;
         this.honhanvien = honhanvien;
@@ -78,11 +80,11 @@ public class NhanVien {
         this.tennhanvien = tennhanvien;
     }
 
-    public String getNgaysinh() {
+    public Date getNgaysinh() {
         return ngaysinh;
     }
 
-    public void setNgaysinh(String ngaysinh) {
+    public void setNgaysinh(Date ngaysinh) {
         this.ngaysinh = ngaysinh;
     }
 
@@ -118,15 +120,6 @@ public class NhanVien {
         this.gioiTinh = gioiTinh;
     }
 
-//    private int manv;
-//    private String chucvu;
-//    private String honhanvien;
-//    private String tennhanvien;
-//    private String ngaysinh;
-//    private String diachi;
-//    private String sodienthoai;
-//    private double luong;
-//    private String gioiTinh;
 
     public void nhapNhanVien() {
         Scanner sc = new Scanner(System.in);
@@ -145,21 +138,13 @@ public class NhanVien {
         System.out.println("Nhập tên nhân viên:");
         this.tennhanvien = sc.nextLine();
 
-        // Nhập ngày sinh với xử lý try-catch
-        boolean validDate = false;
-        while (!validDate) {
-            System.out.println("Nhập ngày sinh (định dạng yyyy-MM-dd): ");
-            String ngaySinhStr = sc.nextLine();
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate ngaySinh = LocalDate.parse(ngaySinhStr, formatter);
-                this.ngaysinh = ngaySinh.toString();
-                validDate = true;
-            } catch (DateTimeParseException e) {
-                System.out.println("Ngày sinh không hợp lệ. Vui lòng nhập lại theo định dạng yyyy-MM-dd.");
-            }
-        }
-
+        System.out.println("nhap ngay sinh khach hang: ");
+        System.out.print("nhap ngay: ");
+        this.ngaysinh.setDate(sc.nextInt());
+        System.out.print("nhap thang: ");
+        this.ngaysinh.setMonth(sc.nextInt());
+        System.out.print("nhap nam: ");
+        this.ngaysinh.setYear(sc.nextInt());
         System.out.println("Nhập địa chỉ:");
         this.diachi = sc.nextLine();
 
@@ -224,43 +209,190 @@ public class NhanVien {
 
         System.out.println("Cập nhật thông tin nhân viên hoàn tất!");
     }
-   public int getNamSinh(NhanVien nhanVien)
-   {
-       String ngaySinh=nhanVien.getNgaysinh();
-       try {
-           DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd/MM/yyyy");
-           LocalDate birthDate = LocalDate.parse(ngaySinh, formatter);
-           return birthDate.getYear();
-       } catch (DateTimeParseException e) {
-           System.out.println("Ngay sinh khong hop le: "+ngaySinh);
-           return -1;
-       }
-   }
-
     public int getNamSinh() {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate birthDate = LocalDate.parse(this.ngaysinh, formatter);
-            return birthDate.getYear();
-        } catch (DateTimeParseException e) {
-            System.out.println("Ngày sinh không hợp lệ: " + this.ngaysinh);
-            return -1;
-        }
+        return ngaysinh.getYear() + 1900; // Lấy năm và cộng lại 1900 để có năm đầy đ
     }
+
 
     // Phương thức static để trả về tổng số nhân viên
     public static int getTongSoNhanVien() {
         return tongSoNhanVien;
     }
-    //    private int manv;
-//    private String chucvu;
-//    private String honhanvien;
-//    private String tennhanvien;
-//    private String ngaysinh;
-//    private String diachi;
-//    private String sodienthoai;
-//    private double luong;
-//    private String gioiTinh;
+
+
+    public void themHoaDon(DanhSachHoaDon danhSachHoaDon, DanhSachHoaDonChiTiet danhSachHoaDonChiTiet, DanhSachSanPham danhSachSanPham) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Tạo hóa đơn mới
+        HoaDon hoaDonMoi = new HoaDon();
+        hoaDonMoi.setMaNV(this.manv);  // Lấy mã nhân viên từ đối tượng NhanVien
+        hoaDonMoi.nhapHoaDon(danhSachSanPham);  // Nhập thông tin hóa đơn bao gồm sản phẩm
+
+        // Danh sách lưu chi tiết hóa đơn
+        ArrayList<ChiTietHoaDon> chiTietList = new ArrayList<>();
+
+        // Nhập các chi tiết hóa đơn
+        System.out.print("Nhập số lượng chi tiết hóa đơn: ");
+        int soLuongChiTiet = scanner.nextInt();
+
+        for (int i = 0; i < soLuongChiTiet; i++) {
+            System.out.println("Nhập chi tiết hóa đơn " + (i + 1) + ":");
+
+            // Nhập mã sản phẩm
+            System.out.print("Mã sản phẩm: ");
+            int maSanPham = scanner.nextInt();
+
+            // Nhập số lượng
+            System.out.print("Số lượng: ");
+            int soLuong = scanner.nextInt();
+
+            // Nhập đơn giá
+            System.out.print("Đơn giá: ");
+            float donGia = scanner.nextFloat();
+
+            // Tạo đối tượng chi tiết hóa đơn mới
+            ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(maSanPham, soLuong, donGia);
+
+            // Thêm chi tiết hóa đơn vào danh sách tạm thời
+            chiTietList.add(chiTietHoaDon);
+
+            // Thêm chi tiết vào danh sách chi tiết hóa đơn của danh sách
+            danhSachHoaDonChiTiet.themHoaDonChiTiet(chiTietHoaDon); // chua co phuong thuc nay ben chi tiet hoa don ??
+        }
+
+        // Gán danh sách chi tiết cho hóa đơn
+        hoaDonMoi.setChiTietList(chiTietList);
+
+        // Thêm hóa đơn vào danh sách hóa đơn
+        danhSachHoaDon.themHoaDon(hoaDonMoi);//chua co phuong thuc nay ? ben hoa don ?
+
+        // Thông báo
+        System.out.println("Hóa đơn đã được tạo bởi nhân viên: " + this.tenNhanVien);
+    }
+
+    public void xoaHoaDon(DanhSachHoaDon danhSachHoaDon, DanhSachHoaDonChiTiet danhSachHoaDonChiTiet) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập mã hóa đơn cần xóa: ");
+        int maHoaDon = scanner.nextInt();
+
+        // Tìm kiếm hóa đơn trong danh sách
+        HoaDon hoaDonCanXoa = null;
+        for (HoaDon hoaDon : danhSachHoaDon) {
+            if (hoaDon.getMaHD()==maHoaDon)
+            {
+                hoaDonCanXoa = hoaDon;
+                break;
+            }
+        }
+
+        if (hoaDonCanXoa != null) {
+            // Xóa chi tiết hóa đơn liên quan
+            for (ChiTietHoaDon chiTiet : danhSachHoaDonChiTiet) {
+                danhSachHoaDonChiTiet.xoaHoaDonChiTiet(chiTiet); // Phương thức xóa chi tiết
+            }
+            // Xóa hóa đơn
+            danhSachHoaDon.xoaHoaDon(hoaDonCanXoa);
+
+            System.out.println("Hóa đơn đã được xóa thành công.");
+        } else {
+            System.out.println("Không tìm thấy hóa đơn với mã: " + maHoaDon);
+        }
+    }
+    public void capNhatHoaDon(DanhSachHoaDon danhSachHoaDon, DanhSachHoaDonChiTiet danhSachHoaDonChiTiet) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nhập mã hóa đơn cần cập nhật: ");
+        String maHoaDon = scanner.nextLine();
+
+        // Tìm kiếm hóa đơn trong danh sách
+        HoaDon hoaDonCanCapNhat = null;
+        for (HoaDon hoaDon : danhSachHoaDon.getDanhSachHoaDon()) {
+            if (hoaDon.getMaHoaDon().equals(maHoaDon)) {
+                hoaDonCanCapNhat = hoaDon;
+                break;
+            }
+        }
+
+        if (hoaDonCanCapNhat != null) {
+            System.out.println("Hóa đơn tìm thấy: " + hoaDonCanCapNhat);
+
+            // Cập nhật thông tin hóa đơn hoặc chi tiết hóa đơn
+            // Ví dụ, thay đổi số lượng sản phẩm
+            System.out.print("Nhập mã sản phẩm muốn cập nhật: ");
+            int maSanPham = scanner.nextInt();
+            HoaDonChiTiet chiTietCanCapNhat = null;
+            for (HoaDonChiTiet chiTiet : hoaDonCanCapNhat.getChiTietList()) {
+                if (chiTiet.getMaSanPham() == maSanPham) {
+                    chiTietCanCapNhat = chiTiet;
+                    break;
+                }
+            }
+
+            if (chiTietCanCapNhat != null) {
+                System.out.print("Nhập số lượng mới: ");
+                int soLuongMoi = scanner.nextInt();
+                chiTietCanCapNhat.setSoLuong(soLuongMoi);
+
+                // Cập nhật lại chi tiết hóa đơn
+                danhSachHoaDonChiTiet.capNhatChiTietHoaDon(chiTietCanCapNhat);
+                System.out.println("Chi tiết hóa đơn đã được cập nhật.");
+            }
+        } else {
+            System.out.println("Không tìm thấy hóa đơn với mã: " + maHoaDon);
+        }
+    }
+    // Phương thức thanh toán hóa đơn
+    public void thanhToanHoaDon(DanhSachHoaDon danhSachHoaDon) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập mã hóa đơn cần thanh toán
+        System.out.println("Nhập mã hóa đơn cần thanh toán: ");
+        String maHoaDon = scanner.nextLine();
+
+        // Tìm kiếm hóa đơn trong danh sách
+        HoaDon hoaDonCanThanhToan = null;
+        for (HoaDon hoaDon : danhSachHoaDon.getDanhSachHoaDon()) {
+            if (hoaDon.getMaHoaDon().equals(maHoaDon)) {
+                hoaDonCanThanhToan = hoaDon;
+                break;
+            }
+        }
+
+        if (hoaDonCanThanhToan != null) {
+            // Hiển thị thông tin hóa đơn cho nhân viên và khách hàng
+            System.out.println("Thông tin hóa đơn:");
+            System.out.println(hoaDonCanThanhToan);
+
+            // Yêu cầu khách hàng nhập số tiền thanh toán
+            System.out.println("Khách hàng trả tiền: ");
+            float soTienThanhToan = scanner.nextFloat();
+
+            // Kiểm tra số tiền thanh toán có đủ không
+            if (soTienThanhToan >= hoaDonCanThanhToan.getTongTien()) {
+                // Cập nhật trạng thái hóa đơn thành đã thanh toán
+                hoaDonCanThanhToan.setThanhToan(true); //ben hoa don
+
+                // Tính tiền thừa (nếu có)
+                float tienThua = soTienThanhToan - hoaDonCanThanhToan.getTongTien();
+
+                // In ra thông báo và tiền thừa nếu có
+                System.out.println("Thanh toán thành công.");
+                if (tienThua > 0) {
+                    System.out.println("Tiền thừa: " + tienThua);
+                }
+                System.out.println("Cảm ơn khách hàng đã thanh toán.");
+
+            } else {
+                // Trường hợp số tiền thanh toán không đủ
+                System.out.println("Số tiền thanh toán không đủ. Vui lòng kiểm tra lại.");
+            }
+        } else {
+            // Trường hợp không tìm thấy hóa đơn
+            System.out.println("Không tìm thấy hóa đơn với mã: " + maHoaDon);
+        }
+    }
+
+
     public void xuatNhanVien() {
         System.out.println("Mã nhân viên ");
         System.out.println("Chưc vụ");
@@ -272,5 +404,7 @@ public class NhanVien {
         System.out.println("Lương cơ bản: ");
         System.out.println("Giới tính: ");
     }
+
+
 
 }
