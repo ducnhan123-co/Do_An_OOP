@@ -121,7 +121,7 @@ public class HoaDon {
                     int maSP = in.nextInt();
                     System.out.print("nhập số lượng: ");
                     int soLuong = in.nextInt();
-                    tongTien += soLuong*(danhSachSanPham.tim(maSP).getDonGia());
+//                    tongTien += soLuong*(danhSachSanPham.tim(maSP).getDonGia());
                     System.out.println("(1) thanh toan");
                     System.out.println("(0) tiep tuc");
                     if (in.nextInt() == 1)
