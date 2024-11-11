@@ -394,17 +394,24 @@ public class NhanVien {
 
 
     public void xuatNhanVien() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("Mã nhân viên ");
-        System.out.println("Chưc vụ");
+        
+        System.out.println("Chức vụ: ");
+        
         System.out.println("Họ nhân viên: ");
+        
         System.out.println("Tên nhân viên: ");
+        
         System.out.println("Ngày sinh: ");
+        
         System.out.println("Địa chỉ: ");
+        
         System.out.println("Số điện thoại: ");
+        
         System.out.println("Lương cơ bản: ");
+        
         System.out.println("Giới tính: ");
+        
     }
-
-
-
 }
