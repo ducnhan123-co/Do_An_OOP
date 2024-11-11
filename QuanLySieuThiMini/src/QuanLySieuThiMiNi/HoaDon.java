@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class HoaDon {
     private int maHD;
-    private KhachHang maKH;
+    private int maKH;
     private int maNV;
     private LocalDate ngayTaoHoaDon;
     private float tongTien=0;
@@ -17,7 +17,7 @@ public class HoaDon {
 
     public HoaDon(){}
 
-    public HoaDon(int maHD, KhachHang maKH, int maNV, LocalDate ngayTaoHoaDon, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
+    public HoaDon(int maHD, int maKH, int maNV, LocalDate ngayTaoHoaDon, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
         this.maHD = maHD;
         this.maKH = maKH;
         this.maNV = maNV;
@@ -47,11 +47,11 @@ public class HoaDon {
         this.maHD = maHD;
     }
 
-    public KhachHang getMaKH() {
+    public int getMaKH() {
         return maKH;
     }
 
-    public void setMaKH(KhachHang maKH) {
+    public void setMaKH(int maKH) {
         this.maKH = maKH;
     }
 
@@ -110,7 +110,7 @@ public class HoaDon {
                 System.out.println("Nhập mã hóa đơn: ");
                 this.maHD = in.nextInt();
                 System.out.println("nhập mã khách hàng: ");
-                this.maKH.setMaKH(in.nextInt());
+                this.maHD = in.nextInt();
 //                System.out.print("nhập mã nhân viên: ");
                 //Này không cần nhập mã nhân viên cũng được ha ,tại bên Nhân Viên là nhập + set ngày khi tạo hoá đơn mới rồi a nên ko cần cũng được
 //                this.maNV.setManv(in.nextInt());
