@@ -159,8 +159,6 @@ public class DanhSachHoaDon {
         System.out.println("Tổng số tiền của tất cả các hóa đơn: "+tongTien);
     }
 
-
-
     // Đọc file
     public void docFile() {}
 
