@@ -79,11 +79,17 @@ public class DanhSachSanPham {
             }
         }
     }
-
-
-
-
-
+    
+    // Phương thức tìm sản phẩm theo mã sản phẩm
+    public SanPham timSanPhamTheoMa(int maSP) {
+        for(SanPham sp: DS_SanPham){
+            if(sp.getMaSP() == maSP){
+                return sp;  // Trả về sản phẩm nếu tìm thấy
+            }
+        }
+        System.out.println("Sản phẩm với mã " + maSP + " không tồn tại!");
+        return null;  // Nếu không tìm thấy, trả về null
+    }
 }
 
 
