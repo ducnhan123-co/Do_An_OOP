@@ -1,15 +1,24 @@
 package QuanLySieuThiMiNi;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Scanner;
 import java.util.Arrays;
+
+import static java.util.Arrays.copyOf;
 
 public class DanhSachSanPham {
     private SanPham[] DS_SanPham = new SanPham[0];
 
+
+    private void push(SanPham sanPham) {
+        DS_SanPham = copyOf(DS_SanPham, DS_SanPham.length+1);
+        DS_SanPham[DS_SanPham.length-1] = sanPham;
+    }
     // Thêm sản phẩm gia dụng hoặc thực phẩm vào danh sách
     public void themGiaDungHayThucPham() {
         // Resize array dynamically
-        DS_SanPham = Arrays.copyOf(DS_SanPham, DS_SanPham.length + 1);
+        DS_SanPham = copyOf(DS_SanPham, DS_SanPham.length + 1);
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Chọn loại sản phẩm (1-Gia dụng, 2-Thực phẩm): ");
@@ -58,7 +67,7 @@ public class DanhSachSanPham {
 
     public void xuatDanhSach() {
         // Tiêu đề chung cho tất cả sản phẩm
-        System.out.printf("|%-10s|%-15s|%-10s|%-10s|%-10s|%-15s|%-20s|%-20s|%-10s|\n",
+        System.out.printf("|%-10s|%-15s|%-10s|%-10s|%-10s|%-15s|%-40s|%-20s|%-10s|\n",
                 "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Loại/Thương Hiệu", "Hạn SD/Bảo Hành");
 
         // Xuất danh sách sản phẩm gia dụng
@@ -89,6 +98,28 @@ public class DanhSachSanPham {
         }
         System.out.println("Sản phẩm với mã " + maSP + " không tồn tại!");
         return null;  // Nếu không tìm thấy, trả về null
+    }
+
+    public void init() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham.txt"));
+            String line ;
+            while ((line = reader.readLine()) != null) {
+                String[] sp = line.split(",");
+                if (Integer.parseInt(sp[0].trim()) == 0)
+                    push(new ThucPham(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Integer.parseInt(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
+                else
+                    push(new GiaDung(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Integer.parseInt(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static void main(String[] args) {
+        DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
+        danhSachSanPham.init();
+        danhSachSanPham.xuatDanhSach();
     }
 }
 

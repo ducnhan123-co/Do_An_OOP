@@ -144,14 +144,14 @@ public class HoaDon {
         }
     }
 
-    public void xuatHoaDon() {
-        System.out.printf("|%-20d|%-20d|%-20d|%-20s|%-20f|%-20f|", maHD, maKH, maNV, phuongThucTinhToan, tienTra, tienThua);
-        System.out.println("Chi tiết hóa đơn:");
-        for (int i = 0; i < soLuongChiTiet; i++) {
-            ChiTietHoaDon chiTiet = chiTietHoaDonArray[i];
-            System.out.printf("|%-20d|%-20d|%-20f|\n", chiTiet.getMaSP(), chiTiet.getSoLuong(), chiTiet.tinhGiaTri());
-        }
-    }
+//    public void xuatHoaDon() {
+//        System.out.printf("|%-20d|%-20d|%-20d|%-20s|%-20f|%-20f|", maHD, maKH, maNV, phuongThucTinhToan, tienTra, tienThua);
+//        System.out.println("Chi tiết hóa đơn:");
+//        for (int i = 0; i < soLuongChiTiet; i++) {
+//            ChiTietHoaDon chiTiet = chiTietHoaDonArray[i];
+//            System.out.printf("|%-20d|%-20d|%-20f|\n", chiTiet.getMaSP(), chiTiet.getSoLuong(), chiTiet.tinhGiaTri());
+//        }
+//    }
 
     public void suaHoaDon(DanhSachSanPham danhSachSanPham) {
         while (true) {

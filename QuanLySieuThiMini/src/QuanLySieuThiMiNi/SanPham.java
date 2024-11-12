@@ -86,10 +86,7 @@ public class SanPham {
 
     // Xuất thông tin sản phẩm
     public void xuat() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng ngày là "yyyy-MM-dd"
-        String formattedDate = sdf.format(ngaySX); // Chuyển đổi ngày thành chuỗi theo định dạng
-
-        System.out.printf("|%-10d|%-15s|%-10s|%-10.2f|%-10d|%-15s|%-20s|\n",
-                maSP, tenSP, DVT, donGia, soLuong, formattedDate, moTa);
+        System.out.printf("|%-10d|%-15s|%-10s|%-10.2f|%-10d|%-15s|%-40s",
+                maSP, tenSP, DVT, donGia, soLuong, ngaySX, moTa);
     }
 }
