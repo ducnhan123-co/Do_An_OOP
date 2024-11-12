@@ -100,6 +100,3 @@ public class SanPham {
                 maSP, tenSP, DVT, donGia, soLuong, formattedDate, moTa);
     }
 }
-
-
-
