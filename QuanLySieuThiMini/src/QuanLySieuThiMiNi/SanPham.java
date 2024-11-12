@@ -10,7 +10,7 @@ public class SanPham {
     private String tenSP, DVT;
     private float donGia;
     private int soLuong;
-    private Date ngaySX;
+    private String ngaySX;
     private String moTa;
 
     // Constructor mặc định
@@ -20,12 +20,11 @@ public class SanPham {
         this.DVT = "";
         this.donGia = 0.0f;
         this.soLuong = 0;
-        this.ngaySX = new Date();
         this.moTa = "";
     }
 
     // Constructor có tham số
-    public SanPham(int maSP, String tenSP, String DVT, float donGia, int soLuong, Date ngaySX, String moTa) {
+    public SanPham(int maSP, String tenSP, String DVT, float donGia, int soLuong, String ngaySX, String moTa) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.DVT = DVT;
@@ -51,8 +50,8 @@ public class SanPham {
     public int getSoLuong() { return soLuong; }
     public void setSoLuong(int soLuong) { this.soLuong = soLuong; }
 
-    public Date getNgaySX() { return ngaySX; }
-    public void setNgaySX(Date ngaySX) { this.ngaySX = ngaySX; }
+    public String getNgaySX() { return ngaySX; }
+    public void setNgaySX(String ngaySX) { this.ngaySX = ngaySX; }
 
     public String getMoTa() { return moTa; }
     public void setMoTa(String moTa) { this.moTa = moTa; }
@@ -83,12 +82,6 @@ public class SanPham {
 
         System.out.print("Nhập ngày sản xuất (yyyy-MM-dd): ");
         String dateInput = sc.nextLine();
-        try {
-            ngaySX = new SimpleDateFormat("yyyy-MM-dd").parse(dateInput);
-        } catch (ParseException e) {
-            System.out.println("Ngày không hợp lệ, sử dụng ngày hiện tại.");
-            ngaySX = new Date();
-        }
     }
 
     // Xuất thông tin sản phẩm

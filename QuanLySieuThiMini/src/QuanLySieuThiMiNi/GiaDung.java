@@ -13,15 +13,15 @@ public class GiaDung extends SanPham {
         this.baoHanh = 0;
     }
 
-    public GiaDung(int maSP, String tenSP, String DVT, float donGia, int soLuong, Date ngaySX, String moTa, String thuongHieu, int baoHanh) {
+    public GiaDung(int maSP, String tenSP, String DVT, float donGia, int soLuong, String ngaySX, String moTa, String thuongHieu, int baoHanh) {
         super(maSP, tenSP, DVT, donGia, soLuong, ngaySX, moTa); // Gọi constructor của lớp cha
         this.thuongHieu = thuongHieu;
         this.baoHanh = baoHanh;
     }
 
     public void nhap() {
-        super.nhap();  // Nhập thông tin sản phẩm từ lớp cha
         Scanner sc = new Scanner(System.in);
+        super.nhap();  // Nhập thông tin sản phẩm từ lớp cha
 
         System.out.print("Nhập thương hiệu: ");
         thuongHieu = sc.nextLine();

@@ -13,7 +13,7 @@ public class ThucPham extends SanPham {
         this.hanSuDung = 0;
     }
 
-    public ThucPham(int maSP, String tenSP, String DVT, float donGia, int soLuong, Date ngaySX, String moTa, String loaiThucPham, int hanSuDung) {
+    public ThucPham(int maSP, String tenSP, String DVT, float donGia, int soLuong, String ngaySX, String moTa, String loaiThucPham, int hanSuDung) {
         super(maSP, tenSP, DVT, donGia, soLuong, ngaySX, moTa); // Gọi constructor của lớp cha
         this.loaiThucPham = loaiThucPham;
         this.hanSuDung = hanSuDung;
