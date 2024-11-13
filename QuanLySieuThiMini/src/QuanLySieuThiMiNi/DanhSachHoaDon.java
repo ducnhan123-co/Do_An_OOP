@@ -40,13 +40,13 @@ public class DanhSachHoaDon {
     }
 
     // Xem danh sách hóa đơn
-//    public void xemDS() {
-//        System.out.println("+-------------DANH SÁCH HÓA ĐƠN-------------+");
-//        for(int i=0; i<n; i++){
-//            dshd[i].xuatHoaDon();
-//        }
-//        System.out.println("+-------------------------------------------+");
-//    }
+   public void xemDS() {
+       System.out.println("+-------------DANH SÁCH HÓA ĐƠN-------------+");
+       for(int i=0; i<n; i++){
+           dshd[i].xuatHoaDon();
+       }
+       System.out.println("+-------------------------------------------+");
+   }
 
     // Thêm 1 hóa đơn vào cuối danh sách
     public void push(HoaDon hd) {
