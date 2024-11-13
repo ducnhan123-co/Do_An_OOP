@@ -1,6 +1,7 @@
 package QuanLySieuThiMiNi;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class PhieuNhapHang {
@@ -10,7 +11,10 @@ public class PhieuNhapHang {
     private ChiTietPhieuNhapHang[] chiTietPhieu;
     private int productCount;
 
- 
+    // Mảng lưu trữ các mã phiếu đã nhập (static để dùng chung cho tất cả các đối tượng)
+    private static int[] maPhieuList = new int[0];  // Dùng để kiểm tra trùng mã phiếu
+    private static int maPhieuCount = 0;  // Số lượng mã phiếu đã nhập
+
     public PhieuNhapHang() {
         this.chiTietPhieu = new ChiTietPhieuNhapHang[0];
         this.productCount = 0;
@@ -24,12 +28,8 @@ public class PhieuNhapHang {
         this.ngayNhapHang = ngayNhapHang;
     }
 
-    // Copy constructor
-    public PhieuNhapHang(PhieuNhapHang x) {
-        this(x.maPhieu, x.maNCC, x.tongTien, x.ngayNhapHang);
-    }
+    // Getter và setter
 
-    // Getters and setters
     public int getMaPhieu() {
         return maPhieu;
     }
@@ -62,7 +62,16 @@ public class PhieuNhapHang {
         this.ngayNhapHang = ngayNhapHang;
     }
 
-  
+    // Kiểm tra mã phiếu đã tồn tại trong danh sách
+    private boolean checkMaPhieu(int maPhieu) {
+        for (int i = 0; i < maPhieuCount; i++) {
+            if (maPhieuList[i] == maPhieu) 
+                return true;
+        }
+        return false;
+    }
+
+    // Phương thức thêm hoặc cập nhật sản phẩm trong phiếu
     private int findProductIndex(int maSP) {
         for (int i = 0; i < productCount; i++) {
             if (chiTietPhieu[i].getMaSp() == maSP) {
@@ -72,16 +81,14 @@ public class PhieuNhapHang {
         return -1;
     }
 
-
     public void addOrUpdateProduct(int maSP, int soLuong, double donGia) {
         int index = findProductIndex(maSP);
         if (index != -1) {
-
             chiTietPhieu[index].setSl(soLuong);
             chiTietPhieu[index].setDonGia(donGia);
         } else {
-
-            ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang(maPhieu, maSP, soLuong, donGia);
+            // Add new product
+            ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang(maPhieu, maSP, soLuong, donGia, soLuong * donGia);
             ChiTietPhieuNhapHang[] newChiTietPhieu = new ChiTietPhieuNhapHang[productCount + 1];
             System.arraycopy(chiTietPhieu, 0, newChiTietPhieu, 0, productCount);
             newChiTietPhieu[productCount] = chiTiet;
@@ -90,19 +97,37 @@ public class PhieuNhapHang {
         }
     }
 
-    // Recalculate tongTien based on all products
+    // Cập nhật tổng tiền của phiếu
     public void updateTongTien() {
         tongTien = 0;
         for (int i = 0; i < productCount; i++) {
-            tongTien += chiTietPhieu[i].getSl() * chiTietPhieu[i].getDonGia();
+            chiTietPhieu[i].updateThanhTien();
+            tongTien += chiTietPhieu[i].getThanhTien();
         }
     }
 
-
+    // Nhập phiếu nhập hàng, kiểm tra mã phiếu không trùng
     public void nhapPhieu() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập mã phiếu: ");
-        maPhieu = sc.nextInt();
+        int mp;
+
+        // Yêu cầu nhập mã phiếu không trùng lặp
+        while (true) {
+            System.out.print("Nhập mã phiếu: ");
+            mp = sc.nextInt();
+            if (!checkMaPhieu(mp)) {
+                // Nếu mã phiếu không trùng, lưu lại mã phiếu vào mảng
+                maPhieuList = Arrays.copyOf(maPhieuList, maPhieuCount + 1);
+                maPhieuList[maPhieuCount] = mp;
+                maPhieuCount++;
+                break;
+            } 
+            else 
+                System.out.println("Mã phiếu đã tồn tại, vui lòng nhập lại.");
+        }
+
+        this.maPhieu = mp;
+
         System.out.print("Nhập mã nhà cung cấp: ");
         maNCC = sc.nextInt();
         ngayNhapHang = LocalDate.now();
@@ -119,23 +144,21 @@ public class PhieuNhapHang {
             System.out.print("Nhập đơn giá: ");
             double donGia = sc.nextDouble();
 
-
             addOrUpdateProduct(maSP, soLuong, donGia);
         }
 
-  
         updateTongTien();
         System.out.println("Tổng tiền của phiếu nhập hàng là: " + tongTien);
     }
 
+    // Xuất thông tin phiếu nhập hàng
     public void xuatPhieu() {
-        System.out.printf("|%-8s|%-15s|%-14s|%-15s|\n", maPhieu, maNCC, ngayNhapHang, tongTien);
-        System.out.println("Chi tiết sản phẩm nhập:");
-        System.out.printf("|%-8s|%-8s|%-8s|\n", "Mã SP", "Số lượng", "Đơn giá");
+        System.out.println("Chi tiết sản phẩm của mã phiếu " + getMaPhieu());
+        System.out.printf("|%-8s|%-8s|%-10s|%-10s|\n", "Mã SP", "Số lượng", "Đơn giá", "Thành Tiền");
 
         for (int i = 0; i < productCount; i++) {
             ChiTietPhieuNhapHang chiTiet = chiTietPhieu[i];
-            System.out.printf("|%-8d|%-8d|%-8.2f|\n", chiTiet.getMaSp(), chiTiet.getSl(), chiTiet.getDonGia());
+            System.out.printf("|%-8d|%-8d|%-10.2f|%-10.2f|\n", chiTiet.getMaSp(), chiTiet.getSl(), chiTiet.getDonGia(), chiTiet.getThanhTien());
         }
     }
 }
