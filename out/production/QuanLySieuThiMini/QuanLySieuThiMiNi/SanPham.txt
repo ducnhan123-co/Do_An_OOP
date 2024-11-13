@@ -1,100 +1,100 @@
-1, 0,keo, yen, 66000, 976, 15-8-2024, zCZQgxJHYkfMoZIPWpUUZXTCUcohbahavhgnfAsy, china, 3
-1, 1,keo, yen, 13000, 302, 24-11-2024, vzdLfWVUUIvFXBkEsurrSMyOlZmBtuNPszYyJtXS, lock&lock, 2
-1, 2,quat, europe, 83000, 910, 22-8-2024, KsrcCbsBWCWYuKzARYxWbeEIGtJPcXtOvrQBijpz, VietNam, 3
-0, 3,thit heo, yen, 57000, 72, 17-1-2024, lthxGLnSwwkRnFjPuhvMsEIHvyXwVF, thit, 6
-1, 4,bang keo, europe, 50000, 636, 17-8-2024, QDobcTspMfElqmTTnWBWAsknImpjTnimdbanFrPJ, china, 3
-1, 5,bang keo, yen, 23000, 369, 25-9-2024, ZclNUgjWzhOBUrQcfVZgZqsHVfZkfBBPyBQKJHnd, Thai, 3
-0, 6,ca thu, europe, 20000, 643, 3-3-2024, fAPLvFVRVdNlnCKkGNnzuNzjKrzNkU, thit, 9
-0, 7,thit bo, dolar, 20000, 964, 11-6-2024, wqjkBuBFmeLENfrdlkSRESzqvzvBKk, thit, 5
-0, 8,rau, dolar, 94000, 178, 22-5-2024, hnFVRXXaBCmSgUSFKxdcVLPeZKhqCu, rau, 9
-1, 9,dung cu bep, europe, 98000, 648, 16-10-2024, ADEsDzGRuNZMDdUkHaDtsazBAQJZuuCtBDydmtab, china, 1
-1, 10,dung cu bep, europe, 43000, 534, 24-8-2024, ewujPklyrghvNaHOrpoxztRvAKAYQEaDTggDDjwr, Thai, 2
-1, 11,but, yen, 88000, 519, 2-6-2024, xqwxMWYWpBXXRmSWEETfbfbAxxTvBXBLntPlzkOo, lock&lock, 2
-1, 12,kim, dolar, 65000, 990, 21-6-2024, mWRBfzAuZBkLXfODHFakNpLhApfUhGlSUnsfnXit, lock&lock, 3
-1, 13,bang keo, yen, 79000, 656, 12-11-2024, JzMSKfllTfPxCfPvuRQGdOUXgJQuqHrVSDsTPmqd, china, 2
-0, 14,thit bo, dolar, 91000, 903, 18-11-2024, sCyGtACGJXTYEBtYhKelzIfKxDplQL, thit, 8
-1, 15,bang keo, europe, 42000, 252, 3-3-2024, vPIMlxZUVpjyEdJSyKvBJWssQHBIoIByzksfnIYz, Thai, 3
-1, 16,dao, dolar, 37000, 557, 23-10-2024, LlrhRXgJPwmoepAjTrtlyRmzSGBvSoVbRwIdrsjg, lock&lock, 1
-0, 17,duong, dolar, 11000, 998, 28-9-2024, peHRiSNRtBsGMBePZogcnrzzAptAai, gia vi, 6
-1, 18,bang keo, europe, 31000, 64, 21-4-2024, RFkPvXjTmiWoZFuBJFOaVGddjyTVaCtXoEuRoLud, china, 3
-1, 19,dao, dolar, 88000, 748, 16-1-2024, OvypRVtppqRKbJSlBBqodmjOuHXEQovsbADyFdZV, Thai, 1
-0, 20,thit heo, vnd, 60000, 266, 11-10-2024, FFPinPnQrNGgUcRQtyQLJrTPfyuYof, thit, 7
-1, 21,dung cu bep, yen, 34000, 372, 6-2-2024, HUrtFOBQaDdRLEXJiUByEecMknuORNiZvKZQZuhu, VietNam, 1
-1, 22,but, yen, 17000, 826, 19-6-2024, KwjWXccGkOWQrZwzReTVaabzZFHPlzJUuFaQvxQq, china, 2
-1, 23,kim, yen, 56000, 291, 15-7-2024, jIjocuYdiVCaTSnFBUWKcXPOJjhpiutUMVDtzAYI, sharp, 1
-0, 24,muoi, dolar, 64000, 857, 11-6-2024, WMjDpbdijQObJsjzpInwdGEBYcylGq, gia vi, 5
-0, 25,duong, europe, 19000, 930, 4-1-2024, ILLItFOAPLlxMRccplDcHfGzuBOsux, gia vi, 5
-1, 26,dao, europe, 60000, 202, 24-12-2024, JkuZpYELztDmIEQYnfMfmhYmxgLgQHcaLtdPmDAa, sharp, 1
-0, 27,rau, dolar, 96000, 910, 27-12-2024, RaPZiDFjbqxrVHcuFyUmfrjnUwPxVJ, rau, 5
-0, 28,thit heo, vnd, 92000, 877, 4-9-2024, oCQrfWoMPnflaQauDmDaQIJuJAWAZO, thit, 6
-1, 29,kim, yen, 34000, 840, 21-6-2024, AqcDptErKspwkSNCdCZFyRqYVgOXImQXlsslifKl, lock&lock, 1
-0, 30,ga, dolar, 64000, 946, 7-7-2024, DbojRBwORSlfBanyCElFufVltuITvy, thit, 10
-1, 31,dung cu bep, vnd, 65000, 818, 18-1-2024, zyMxAQRgurtebNXFQbWJKimpXGFRfefxlOdiuphL, sharp, 2
-0, 32,duong, europe, 48000, 859, 25-3-2024, sfeUEMclkGJBkCHkXdpNBPIBkUSOeZ, gia vi, 6
-1, 33,bang keo, europe, 100000, 671, 3-10-2024, BiCmYTyhZVpLSupffbHDpLUMojyDUdVoSwhtwuks, china, 3
-1, 34,but, dolar, 41000, 297, 14-7-2024, kCnKIPIUilbKDwZBKQvQAzLEJNlzsLByZBvFGHOi, VietNam, 2
-1, 35,keo, yen, 27000, 407, 12-8-2024, ffOjjnRoNFBDcEInsrshTqcLbtmDwposTFtGQJAw, Thai, 2
-1, 36,bang keo, vnd, 57000, 338, 19-7-2024, WMWKaewdPuXADrWFMyhmpDPRUSXoplomhchanrNy, VietNam, 1
-0, 37,rau, dolar, 25000, 666, 13-10-2024, eJnBspbabknhhWUEPsoZLnVKFqkcjn, rau, 5
-1, 38,but, vnd, 44000, 130, 26-6-2024, rVATaFrYkMvIjUvONhxBeyLqtNyFpgAhiELfIXue, sharp, 2
-0, 39,ca thu, vnd, 61000, 543, 2-3-2024, MqaTAOuRLreNegGrDhyqiSvdszvfML, thit, 7
-0, 40,thit heo, yen, 45000, 435, 24-6-2024, rmhWFZCsUYkaoUrFqboDvyBmoEXkuo, thit, 10
-0, 41,ca thu, vnd, 35000, 192, 15-2-2024, MkPnHQlzIhDNSzgHMHpZThKjTMFoTz, thit, 10
-0, 42,rau, yen, 95000, 644, 22-3-2024, hZWNLalmbtNVvwNUsiHlYyIigrJUCP, rau, 8
-0, 43,duong, europe, 83000, 408, 18-1-2024, UfTAvLGMyFrkFWADPsMewoQyabnNdf, gia vi, 7
-0, 44,muoi, yen, 100000, 36, 27-11-2024, yLymwCKzVWuUqfwzOsXpAorKqRtdeL, gia vi, 5
-0, 45,rau, dolar, 32000, 269, 26-10-2024, kIMrmlPFTMJFAWJZuUboSycQjrGyFf, rau, 8
-1, 46,dao, dolar, 38000, 557, 25-5-2024, cuarLCLfTBwcJioGyydOQaUZzkTJlQaerjPSQFCb, Thai, 1
-0, 47,bot ngot, yen, 84000, 758, 2-9-2024, GObFVTWvrKUNFHBITewmLAuLyekzih, gia vi, 6
-0, 48,muoi, dolar, 99000, 652, 24-2-2024, VHnqgTgKCWrYgVzycAWrjKeryfRjDs, gia vi, 9
-0, 49,bot ngot, dolar, 69000, 234, 3-10-2024, RJiTXdQlNVXPZQFWloAlsfOtYhbmqw, gia vi, 8
-0, 50,thit bo, vnd, 38000, 198, 8-6-2024, IOyysjbWCsqaQHTBGmArDtIERbpDrg, thit, 5
-0, 51,duong, europe, 13000, 259, 26-2-2024, UPSAKQaonUelpYEfWDiSVlFFLgWKLF, gia vi, 6
-1, 52,kim, vnd, 87000, 745, 3-1-2024, DUdQXGNNfpwknBIClJLAMKLAGNzmLRsPXocZBLvc, china, 3
-0, 53,tieu, europe, 89000, 319, 15-2-2024, USfpAMziqyroTLXajYNkXefOJchUEl, gia vi, 9
-0, 54,thit heo, vnd, 76000, 641, 27-12-2024, KMbyDGekJsjYVKcWmbKZUOpkfWlXYA, thit, 9
-1, 55,but, yen, 19000, 537, 4-1-2024, hmvSHAKLVUvBrMscaOilmTBZDiWjxyzbHnXOBGgo, sharp, 1
-0, 56,ga, vnd, 13000, 661, 12-9-2024, qgngiNantZaVBuauXptjmpNMCorMrq, thit, 6
-0, 57,ga, europe, 28000, 380, 27-12-2024, lGnMrcBwqjVPdlOjBXgahqANgAlsEW, thit, 8
-0, 58,thit heo, dolar, 75000, 164, 26-9-2024, MNZiRMPTolnlnfWqWUgXDwetAAKSur, thit, 7
-0, 59,tieu, yen, 71000, 467, 7-9-2024, jojiVTjcgpzeCIpFATrGuOOnuVvuqX, gia vi, 6
-0, 60,duong, vnd, 61000, 938, 13-1-2024, bpYUaduRVGFnBlrJDMUYLVMupyUksS, gia vi, 8
-0, 61,duong, yen, 30000, 143, 14-8-2024, fkGCxPRLHrXQdfIALxQiLaEVEKUlNZ, gia vi, 10
-0, 62,thit heo, dolar, 84000, 94, 11-7-2024, zZRVWnDSJkZMqhCHCABDVoGHnxBYle, thit, 6
-0, 63,duong, vnd, 93000, 165, 21-8-2024, PDhBvuuZFvQgFBnVqtbpnjzAhKfOWA, gia vi, 6
-1, 64,but, vnd, 89000, 738, 15-6-2024, XWSuYpdhosuBGCLZlikbeYztgyJGPcmRKXVZwZIA, Thai, 2
-0, 65,bot ngot, vnd, 36000, 312, 15-10-2024, SSwKciXdFkGQFpfzufenxNoIBAkzlW, gia vi, 9
-0, 66,bot ngot, europe, 86000, 727, 6-5-2024, OSxCuWwjlSxlnoSJClpHPnfCgVodcw, gia vi, 10
-0, 67,duong, vnd, 46000, 763, 5-7-2024, fFymrgAuQpDQOmpIqCKJmRsKYdhVUy, gia vi, 10
-0, 68,bot ngot, europe, 91000, 413, 11-1-2024, sziKIodCSuTTMbolFZFTHzXrFNjtlD, gia vi, 6
-0, 69,bot ngot, dolar, 96000, 690, 3-2-2024, RxeazIGmSZXYfCwNhwPvvSMTmvWfJe, gia vi, 9
-1, 70,dung cu bep, dolar, 10000, 219, 19-10-2024, UQLMQLrRKYceCRpyDkoZKDKgDhlmzgLGGyACqYED, lock&lock, 2
-0, 71,thit bo, yen, 61000, 776, 5-9-2024, hrOSyDnhwEsQREUiRyAnmROpNtaRfZ, thit, 7
-0, 72,thit bo, europe, 52000, 969, 22-6-2024, amwURJoYEpbBSGaDQJncjcXyMuEYfH, thit, 10
-0, 73,thit heo, vnd, 39000, 29, 5-11-2024, hlzWYBhMtSPHfrbmcHgoIDxAcCjxpR, thit, 8
-0, 74,duong, vnd, 65000, 854, 21-1-2024, ohqBhRrDTTOcHNPUuDiFWhaLPNsaaT, gia vi, 8
-1, 75,kim, vnd, 15000, 558, 4-3-2024, JKzYkfANmHjyViYDGoDAlkHXklKarXoSPRECwTjp, lock&lock, 1
-0, 76,ga, vnd, 72000, 533, 28-2-2024, msQSapxDedqakyJahbEArgXuWMXrrt, thit, 7
-1, 77,bang keo, vnd, 60000, 543, 14-6-2024, rrIdHtpONmLUbCtCATqWoHjMsPAAZAKOcIvATXoD, lock&lock, 1
-1, 78,dao, europe, 49000, 898, 1-6-2024, TQImOOHbVslGhmhIuhPjqKmpLWbUfOsUShcKjAtj, china, 3
-1, 79,dao, yen, 65000, 146, 27-9-2024, ETsZhxOsqxErjdVqIDWeIfBbLDaUeyXowbDEpPSh, china, 3
-0, 80,bot ngot, dolar, 35000, 440, 8-4-2024, keOwDcnKGCsenakkfYfIaVNgliCjVU, gia vi, 8
-1, 81,quat, vnd, 93000, 266, 16-12-2024, KeSJAQXMEbfUmTjxwVALLWBlkJeWNtyFBXDQpxlu, china, 1
-0, 82,ca thu, dolar, 98000, 528, 11-9-2024, opzdYdouldJyrbVnGcXxppYJOKLvLx, thit, 9
-1, 83,quat, europe, 21000, 564, 2-3-2024, dgTBOUnGTqFgbzJPyeUsnLGlKUuoGRgdacjntwBv, VietNam, 3
-1, 84,kim, vnd, 51000, 874, 16-4-2024, KEYnowaPNjZXWnqAYALvmyMJycshiWPuPACVDRRD, Thai, 2
-0, 85,duong, vnd, 89000, 928, 12-9-2024, HKnFdxroOVdXAbqhTJYNmLPdIYQXBR, gia vi, 8
-0, 86,ga, dolar, 11000, 469, 4-12-2024, xEEtqvovajNgFypcbZAFJubwrRYOej, thit, 7
-0, 87,duong, vnd, 77000, 223, 24-3-2024, KvwngXrdYqJvVsNOwAUtnQiUrLEqSn, gia vi, 10
-0, 88,ca thu, yen, 20000, 266, 4-9-2024, XUfKHFCKgUTsybRJLzpnjnrPeexdgL, thit, 10
-1, 89,quat, vnd, 19000, 443, 20-6-2024, UGpXThDSapHWPcwwWGNweDHvLSEZMbYDGagliHEH, Thai, 2
-0, 90,duong, yen, 15000, 238, 28-3-2024, GqXvEYDUKhKYiUsRNoYTvFMZpareZH, gia vi, 10
-0, 91,tieu, yen, 87000, 966, 8-7-2024, RFUyqtpUAbZaKEvhWpkEajglNdPicF, gia vi, 9
-1, 92,bang keo, yen, 33000, 402, 9-11-2024, UZOWoLBfURrDqJJBLcQFamVrlTFkqnsePYisnldF, Thai, 2
-0, 93,thit bo, yen, 51000, 37, 9-3-2024, wtjAglrYRBpEjwIyGtjXmwZGwXYFpR, thit, 5
-0, 94,rau, dolar, 33000, 975, 26-8-2024, HdzfYZLGlqDAJVMNRNmEsVaUiRBenq, rau, 8
-0, 95,thit bo, europe, 70000, 862, 25-10-2024, AwKQciAzVpLdmsPJtevMEVTLolLwqB, thit, 10
-1, 96,dung cu bep, europe, 32000, 175, 6-4-2024, LxQGVXYSUmApsQiYsizjaRcufeRxmAxxAlLxupST, china, 1
-1, 97,kim, europe, 37000, 247, 11-8-2024, gHJbSwBCDgeJmMLWIAsvVwOhQFLwpTxpGkJiTsPc, china, 1
-0, 98,muoi, europe, 61000, 869, 15-2-2024, GSyJJrHNdFCjfPWvUsTblVlttbYaHF, gia vi, 5
-1, 99,dao, dolar, 69000, 894, 18-2-2024, PeGtVcgDKeTTZDoofbUqSHrOYQssdmAMxSpXxtZW, Thai, 2
+1,0,dung cu bep,cai,98000,464,26-4-2024,gnNQURkYrNXEuLxwLElnetghpbdvDSlazNAHNhaB,sharp,1
+0,1,rau,gam, 45000,490,12-6-2024,CgTMbJakUYCSOUFflpjXZjhXyZFVpl,rau,8
+0,2,rau,gam, 25000,694,7-12-2024,vThNyrNPNyXsPrJKnCvFclqkZNSlbf,rau,10
+1,3,quat,cai,77000,300,14-7-2024,ivYahpPUBtyQOFJBurnGoBdijQnthNUheAkOCuQA,lock&lock,3
+0,4,ca thu,gam, 15000,486,10-9-2024,VCkbdyaQIbjpGqsCafvRvZqOzYRIDA,thit,8
+1,5,keo,cai,82000,748,2-12-2024,zmdyEJgqaFgnsHjQvAJHPYuqJeIDJwrMQiTXyrFz,lock&lock,2
+1,6,dao,cai,87000,534,9-1-2024,BqsHMSRgeBsoNYSZoJvRmIxYIXswFlHHDJXXcMEv,china,2
+0,7,tieu,gam, 61000,600,10-10-2024,ZkSIMLVJYsdMCfeQIKCdEkmhWFEQdr,gia vi,8
+1,8,quat,cai,46000,406,23-7-2024,GvIEEgqrcmgXxLmTLzntNaLhYJGckPqjkjhwjgLi,sharp,2
+0,9,thit bo,gam, 29000,209,2-8-2024,JoEpfRqkrhhRToqsxaJOfdFZqkVcCd,thit,8
+0,10,rau,gam, 36000,804,8-4-2024,MMxKuFJcsvJpAtpftlYwccWdHJFqmg,rau,7
+0,11,duong,gam, 25000,543,20-9-2024,ZmuIfdvyKDJEelEGWQZEoXKbpFmALR,gia vi,7
+0,12,duong,gam, 96000,683,16-4-2024,DKgmsKWCrgJckZpqxYIhIkPnZMZQul,gia vi,8
+1,13,bang keo,cai,41000,191,3-11-2024,CryPBuZCgAUoTupopMpJffrxRBunzuZFpyWvHlCZ,sharp,2
+1,14,dung cu bep,cai,40000,890,13-7-2024,hQANkvVDLsRZwCaCECsgyhspGaxiZVfepGXthIUm,lock&lock,2
+1,15,dao,cai,84000,212,22-12-2024,OhFVNgfOguZlInoGjXCcqqoABypFhiYQuZujjUWe,china,2
+0,16,thit bo,gam, 78000,286,2-10-2024,sYnrSQbtKIHvbfTRdVhiYsHTzbrHpU,thit,6
+1,17,but,cai,93000,586,24-6-2024,mHPMfRyLXXiODgvJSzIuMzjoijVumYwXsfOZfwEn,Thai,2
+1,18,but,cai,48000,807,23-7-2024,wDbVLRedXzGHSNWxVGFGAITZmioNNVAjMDXSsFWS,VietNam,1
+1,19,kim,cai,93000,664,17-5-2024,LpJWeBwsRtnpDowlNTcHoFooHzEMbMViiTZNnNrR,sharp,1
+1,20,kim,cai,59000,178,18-1-2024,kLOEnCeLHaRxGwWrzvkIhCBaenglyfoxPxBTaBJP,Thai,2
+0,21,tieu,gam, 79000,287,24-12-2024,rbPzlZipDSITvwPpMVRfnajEViNkQb,gia vi,10
+1,22,keo,cai,41000,264,27-3-2024,KDCoOpvvNXSAgGKAOePJzvWPCoYkQaqKdxHehRHq,Thai,2
+0,23,thit bo,gam, 79000,580,26-10-2024,NZWCkMSedJrszkvwQZuPUBMuQvEEkb,thit,10
+0,24,tieu,gam, 27000,551,8-7-2024,MCagtSeqXEGYIbKcgvwcnNuaksHYqr,gia vi,6
+0,25,ga,gam, 68000,491,28-8-2024,eouRSPEAmEWffPqfFGVOHrdVnEugCv,thit,6
+1,26,dung cu bep,cai,32000,641,21-4-2024,AJaGhNyaotknCgXiBGvdoLBXCtdEorDqTqUgcMDm,VietNam,1
+0,27,rau,gam, 69000,608,19-5-2024,ZkrmxkYuJpdYGxgaFnanNWkOdtOnhI,rau,6
+0,28,duong,gam, 84000,433,10-3-2024,lKZjoedgPraOQZmJKGShVPTBdOnlcL,gia vi,8
+1,29,bang keo,cai,36000,269,25-12-2024,nPJVmNNuerSfcojCeUQTIxVjInOezXtymlQBfBHw,sharp,3
+0,30,thit heo,gam, 32000,91,5-12-2024,AgGqRyPnvzEWsGEBUmWhBYWoUwObzO,thit,10
+0,31,rau,gam, 51000,996,27-11-2024,IvWgISIFZdgZslCQeYNEBCOFddlatq,rau,10
+0,32,thit bo,gam, 22000,24,21-11-2024,yKhYQUzxHscgAjTzSPTgTqtsROqeKw,thit,6
+0,33,ca thu,gam, 80000,467,18-2-2024,WcawOGAEhMixHUelRPucLbJxFhFePX,thit,7
+1,34,keo,cai,41000,221,7-12-2024,ASolGXtveLKNeeigmjywXtUjzkqVnVxmTDOWFFpL,lock&lock,1
+1,35,bang keo,cai,16000,258,8-6-2024,GEowOpwxsvWbXzTmGLoUdZsbCLoetRkMnaodQodr,Thai,1
+0,36,rau,gam, 97000,901,13-8-2024,rLPGeVAFpkNuPcxsmblaQuWWeHIrxm,rau,6
+1,37,keo,cai,81000,629,28-12-2024,codHCYfkzcStyIYVYFNiEExrXfLvDbPLXAOvwoWu,sharp,2
+0,38,ga,gam, 17000,349,5-2-2024,eIAYvrgsUmZwFgHmuHWacfhMrYsLaB,thit,7
+0,39,thit bo,gam, 73000,880,26-5-2024,iebiSUVCDQsBDKplaWGYMxcqHiUpgc,thit,7
+1,40,dung cu bep,cai,61000,737,14-5-2024,GMcOPzOKCwnwmvPoHFBqBgeqCsfTfVYgfbWVRksk,lock&lock,3
+0,41,ca thu,gam, 73000,430,17-1-2024,CRdaxBgwclLldgyXTtUioNOInrkSzF,thit,10
+0,42,thit heo,gam, 26000,586,13-3-2024,NIGbIHsCVusjsYvTdwFrZvDaNTzHZa,thit,10
+1,43,kim,cai,27000,788,18-8-2024,PTvOOVrFgSJOCnSnCKdpPlfMVGZIAYULUwFsWnpA,china,3
+0,44,ca thu,gam, 44000,228,27-7-2024,CHKOZBVAYOrrpXwMEJyPBnnZvLhKER,thit,5
+0,45,ga,gam, 32000,746,18-5-2024,otJuPJNXIwEAynsvQPXWZPdCfnNGtU,thit,7
+1,46,dung cu bep,cai,79000,599,25-8-2024,WoVGpNJZbYDssuhsPxVRUNFUICHJcaQUiAPFeGpZ,sharp,2
+0,47,bot ngot,gam, 62000,76,28-7-2024,RQCxcOyDNWaGRSKoZIHevhKFBQbCtY,gia vi,6
+1,48,kim,cai,86000,674,12-11-2024,qkCwbNgqwQfyCvxJQWGnGGzGeBxCTVYYzsQuudfs,sharp,1
+0,49,duong,gam, 66000,658,17-8-2024,HwHcZSepVYrOgXQAkSrsmdsjQntVLG,gia vi,9
+0,50,muoi,gam, 77000,279,22-1-2024,KxGRJmegsVynmhFCrgOmssyViofgog,gia vi,7
+0,51,duong,gam, 47000,573,16-1-2024,SGKFliQZvGBbMrTlVVeCsiogTbFwga,gia vi,9
+1,52,dung cu bep,cai,53000,314,15-9-2024,EWQcmmKTqxGfmmhPqWwwLWtBAHVCTHfNQLQsvDKm,Thai,3
+0,53,rau,gam, 44000,888,15-11-2024,DgYxRqUURTWDItNeKjFOqgyMZiAPNh,rau,6
+1,54,keo,cai,24000,651,21-3-2024,UmLCXkRSoZSdUdjVYXBaaEsuyYuxsdOesIurJtAN,sharp,3
+1,55,bang keo,cai,90000,870,24-4-2024,MVmvMGpDbAsErsdzDdoKOkDuyPmqaDhFgdpXROeM,Thai,3
+0,56,tieu,gam, 11000,305,4-2-2024,uoIDKytEbNynzdwPLlaCScOQmKBaUH,gia vi,6
+0,57,ga,gam, 80000,503,2-10-2024,QptlakxrMeXQmKqIdaXzRPsoSFnafc,thit,8
+1,58,dao,cai,60000,499,1-5-2024,ysTlulOawUymUcJNfjAoPuAXCYmBxpNuSnKkeIWF,china,3
+1,59,but,cai,58000,829,17-8-2024,hgJBcibvoaBQgaERRdPSIYXjjmnRwVrwyegDTcHM,VietNam,1
+1,60,but,cai,26000,117,26-5-2024,SOyQFRxxbCbFzGijktLSORhYBlhFnFNEfDlnYPmA,Thai,3
+0,61,ca thu,gam, 40000,504,3-9-2024,RdlTaeiWXNjLGbmItkHtTvONeTakzD,thit,7
+0,62,duong,gam, 30000,289,22-2-2024,uZwSBtjBZGwoRPTmwFsjducODlTKSF,gia vi,9
+1,63,quat,cai,23000,770,16-4-2024,XSOBAwnGzGidpCsjMixJPXMXaFKQAQmxbdZQRscl,china,3
+0,64,ca thu,gam, 24000,55,2-10-2024,RTItfUpUEzbMtvHkZvaHQIuYmHLgkx,thit,5
+1,65,keo,cai,63000,873,7-12-2024,NToenOAelPFMntDiERxwxjNFbScQNJribKxmSoZK,china,1
+0,66,thit heo,gam, 86000,457,19-11-2024,jFcytrRDLzQojCVesYTmEFJnjrBOdl,thit,9
+1,67,dao,cai,64000,873,20-7-2024,XZbcGDvvOSYzEEoeZLBkjaSfYhczxoyNYWpliedP,VietNam,2
+0,68,rau,gam, 71000,722,12-2-2024,CUNbUmLhQCneruSxhTmWNjcASAVfMd,rau,9
+0,69,duong,gam, 33000,451,28-8-2024,vgmkaqtrSupATIUVOHPWTASIaFmWNy,gia vi,6
+1,70,but,cai,18000,302,17-1-2024,pweTqdaGZWvAnQFqngMhlZFXEvokvDxXhcLRKHLq,china,1
+0,71,thit bo,gam, 79000,475,3-2-2024,oIgZmmrYgrKsLKoScDnMFEdaMcHHme,thit,7
+0,72,ca thu,gam, 88000,421,21-11-2024,BgqTHtIcYzldGRaSwURiJdcuHguSYY,thit,6
+0,73,ca thu,gam, 88000,952,20-2-2024,UtdYTlPzNPaqrHMzQQduJoqmRNvNYa,thit,6
+0,74,bot ngot,gam, 61000,676,26-8-2024,SgmpwcnGmGlxRIbQBIGnSeWCEuEknc,gia vi,6
+1,75,quat,cai,63000,454,1-9-2024,noJEQPuQSagPxKPXWOIKFdtXznwkJPFzfUEpJbAP,sharp,3
+0,76,thit heo,gam, 43000,699,19-6-2024,qziiHiyJOntHuxkDXFOgHUEaZEcNgj,thit,10
+1,77,dao,cai,22000,90,6-1-2024,sQOLYkPZcuHdoKkJQYyATHRCIksuKmhrMkmZZgig,Thai,2
+0,78,bot ngot,gam, 52000,430,16-5-2024,WTDicVOTHvLeDefnBNthqaVDLwMNxA,gia vi,10
+1,79,quat,cai,19000,573,10-6-2024,JvZTTQTvUIUJQkXjmlRizpnGYLHyNVhgDnpduuaa,lock&lock,1
+1,80,but,cai,98000,701,17-12-2024,BbhVjyEgmDmxenQEWSJaVsnKVfWrIVoDUyjvkZjE,Thai,2
+1,81,bang keo,cai,16000,682,15-8-2024,DxsFOwQxqUzgQUYkJBXihhZUeyCTcMdkdUOPEVAc,lock&lock,3
+0,82,bot ngot,gam, 86000,317,5-12-2024,ZqXxHhWcvzqfisvIUrCuOwJYjqvMZT,gia vi,5
+0,83,tieu,gam, 78000,794,28-8-2024,ewosUymXsbeNZduHIMaacwdGMMTNnu,gia vi,10
+0,84,rau,gam, 81000,570,24-8-2024,vRBvyeXQzXtYEcRvmrAtymvrFVZjeN,rau,10
+1,85,but,cai,100000,887,17-12-2024,yBwuXlRCUzGfAFrORkOyCIaxXNJdwZqqfDlOVPFe,china,3
+1,86,but,cai,57000,656,13-1-2024,eXAderVnFnrdJozjvCLYpclykyVXDgtFuvNQlcUZ,lock&lock,2
+1,87,dung cu bep,cai,70000,627,23-3-2024,xzqNYMTGYpwmnpXUBZxuSrsbBNFwZTCvrswTChLK,lock&lock,1
+1,88,kim,cai,79000,651,23-2-2024,HkpCbMqOjXCcvnEovQDSENFWurvXaBsDlGWGSeBT,VietNam,1
+0,89,bot ngot,gam, 48000,908,1-12-2024,QIpLLOCbYBuotScAhdKGQxIkoBJUiS,gia vi,10
+1,90,but,cai,27000,833,1-12-2024,pUNMQqnOGLOkUIlikjbhYwhvdlorXeWldtnoFQlY,sharp,1
+1,91,kim,cai,91000,386,27-10-2024,ClzXirEYapEqYPodHvcyMxIgAbUvazpESsnbOLAh,china,1
+0,92,ca thu,gam, 36000,885,24-10-2024,dPLQdhBWfbjxOvzAJodnOeOADVUJrj,thit,9
+0,93,rau,gam, 24000,685,19-3-2024,PYRfpWppOHgPmisbhMbINTMPCWjIac,rau,9
+1,94,keo,cai,39000,424,5-8-2024,DkCScHSuQaEGFHYEHtmwKJmJVMSKLLavFitlNSrP,lock&lock,1
+1,95,dung cu bep,cai,98000,901,24-6-2024,vINvhKnSltasgWNqWlEsYNlNLGIojTKFGroLCNfa,VietNam,1
+1,96,quat,cai,49000,58,6-1-2024,ivfbqYfTZfJOWTRRLgOegzBgmCCOCVAmezhlMBNi,Thai,1
+1,97,keo,cai,82000,132,8-11-2024,xLjHHFluWVSyXekHIIfObIrhhsyEopAlHZqogcGG,Thai,1
+1,98,dung cu bep,cai,30000,880,7-5-2024,qFNMrtDYKoStkdKIIpcYGuhxzWXbVDmoRQxHYNYf,Thai,3
+1,99,keo,cai,39000,461,3-11-2024,qYMaZvYQAVlsSckIqgwjxgbePzGRWxlYHCmVIxiL,Thai,2
