@@ -13,8 +13,8 @@ public class DanhSachHoaDon {
         this.n = 0;
     }
 
-    public DanhSachHoaDon(HoaDon[] dshd, int n) {
-        this.dshd = dshd;
+    public DanhSachHoaDon(int n) {
+        dshd = new HoaDon[n];
         this.n = n;
     }
 
@@ -49,24 +49,36 @@ public class DanhSachHoaDon {
    }
 
     // Thêm 1 hóa đơn vào cuối danh sách
-    public void push(HoaDon hd) {
-        dshd = Arrays.copyOf(dshd,n+1);
-        dshd[n] = hd;
-        n++;
+    public void themHoaDon() {
+        if(n >= dshd.length) {
+            System.out.println("Danh sách đã đầy, không thể thêm nhân viên mới.");
+            return;
+        }
+        // HoaDon hoaDon = new HoaDon();
+        // hoaDon.nhapHoaDon();
+        // dshd = Arrays.copyOf(dshd, n+1);
+        // dshd[n] = hoaDon;
+        // n++;
+        // System.out.println("Đã thêm 1 hóa đơn vào cuối danh sách thành công.");
+        dshd = Arrays.copyOf(dshd, n+1);
         dshd[n] = new HoaDon();
+        dshd[n].nhapHoaDon();
+        n++;
+        System.out.println("Đã thêm 1 hóa đơn vào cuối danh sách thành công.");
     }
 
     // Thêm nhiều hóa đơn vào danh sách
-    public void nhapNhieuHoaDon(DanhSachSanPham danhSachSanPham) {
+    public void nhapDanhSachHoaDon() {
         Scanner sc = new Scanner(System.in);
         System.out.println("nhập số lượng hóa đơn: ");
         int soLuong = sc.nextInt();
-        for(int i=0; i<soLuong; i++) {
-            dshd[i].nhapHoaDon(danhSachSanPham);
-            sc.nextLine();
+        for(int i=n; i<n+soLuong; i++) {
+            System.out.println("Nhập thông tin cho hóa đơn thứ " + (i + 1) + ": ");
+            dshd[i] = new HoaDon();
+            dshd[i].nhapHoaDon();
         }
-        dshd = Arrays.copyOf(dshd, soLuong);
-        this.n = soLuong;
+        // dshd = Arrays.copyOf(dshd, n+soLuong);
+        this.n += soLuong;
     }
 
     // Sửa hóa đơn
@@ -75,7 +87,7 @@ public class DanhSachHoaDon {
     // }
 
     // Xóa hóa đơn theo Mã hóa đơn
-    public void xoaHoaDon(int maHD) {
+    public void xoaHoaDonTheoMa(int maHD) {
         for(int i=0; i<n; i++) {
             if(dshd[i].getMaHD() == maHD) {
                 for(int j=i; j<n-1; j++) {
@@ -93,7 +105,7 @@ public class DanhSachHoaDon {
     }
 
     // Xóa hóa đơn theo ngày (LocalDate)
-    public void xoaHoaDonTheoNgay(LocalDate ngayXoa) {
+    public void xoaHoaDonTheoNgay(String ngayXoa) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
             // Kiểm tra nếu ngày tạo hóa đơn trùng với ngày xóa
@@ -146,19 +158,18 @@ public class DanhSachHoaDon {
     // Tìm kiếm và liệt kê các hóa đơn theo ngày tạo hóa đơn
     public void timHoaDonTheoNgayTaoHoaDon() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập ngày tạo hóa đơn (yyyy-MM-dd): ");
-        String ngayNhap = sc.nextLine();
-        LocalDate ngayTao = LocalDate.parse(ngayNhap); // Chuyển chuỗi thành LocalDate
+        System.out.println("Nhập ngày tạo hóa đơn (dd-mm-yyyy): ");
+        String ngayTao = sc.nextLine() ;
         boolean found=false;
         
         // Duyệt qua tất cả các hóa đơn để tìm những hóa đơn có ngày tạo bằng ngày nhập
         System.out.println("DANH SÁCH HÓA ĐƠN ");
-//        for (int i = 0; i < n; i++) {
-//            if (dshd[i].getNgayTaoHoaDon().equals(ngayTao)) {  // So sánh ngày tạo
-//                dshd[i].xuatHoaDon();;  // Xuất thông tin của hóa đơn tìm được
-//                found = true;  // Đánh dấu là đã tìm thấy ít nhất một hóa đơn
-//            }
-//        }
+        for (int i = 0; i < n; i++) {
+            if (dshd[i].getNgayTaoHoaDon().equals(ngayTao)) {  // So sánh ngày tạo
+                dshd[i].xuatHoaDon();;  // Xuất thông tin của hóa đơn tìm được
+                found = true;  // Đánh dấu là đã tìm thấy ít nhất một hóa đơn
+            }
+        }
 
         // Nếu không tìm thấy hóa đơn nào
         if (!found) {
@@ -167,7 +178,7 @@ public class DanhSachHoaDon {
     }
 
     // Tìm kiếm hóa đơn theo giá trị tổng tiền (Trả về kiểu HoaDon)
-    public HoaDon timTheoTongTien(float tongTien) {
+    public HoaDon timHoaDonTheoTongTien(float tongTien) {
         for(HoaDon i: dshd) {
             if(i.getTongTien() == tongTien) {
                 return i;
