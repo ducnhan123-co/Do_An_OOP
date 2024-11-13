@@ -19,7 +19,7 @@ public class QuanLyPhieuNhapHang {
 	        System.out.println("-----------------------------------------------------------------");
 	        System.out.print("Chọn chức năng: ");
 	        int choice = sc.nextInt();
-	        sc.nextLine(); // Consume newline
+	        sc.nextLine();
 
 	        switch (choice) {
 	            case 1:

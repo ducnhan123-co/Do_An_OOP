@@ -15,16 +15,25 @@ public class DanhSachPhieuNhapHang {
         n++;
     }
 
-    
     public void xuatPhieuNhapHang() {
         if (n == 0) {
             System.out.println("Danh sách trống.");
             return;
         }
+
+        // In danh sách các phiếu nhập (phần thông tin cơ bản của từng phiếu)
+        System.out.println("Danh sách phiếu nhập:");
         System.out.printf("|%-8s|%-15s|%-14s|%-15s|\n", "Mã Phiếu", "Mã Nhà Cung Cấp", "Ngày Nhập Hàng", "Tổng tiền");
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) 
+            System.out.printf("|%-8s|%-15s|%-14s|%-15.2f|\n", phieu[i].getMaPhieu(), phieu[i].getMaNCC(), phieu[i].getNgayNhapHang(), phieu[i].getTongTien());
+
+        // Sau khi in xong danh sách các phiếu, in chi tiết sản phẩm của từng phiếu
+        for (int i = 0; i < n; i++) 
+            // In từng dòng chi tiết sản phẩm của phiếu
             phieu[i].xuatPhieu();
     }
+
+
 
 
     public int timGanDungTheoMa(String ma) {
@@ -48,9 +57,9 @@ public class DanhSachPhieuNhapHang {
             phieu = Arrays.copyOf(phieu, n - 1);
             n--;
             System.out.println("Đã xóa phiếu nhập hàng với mã: " + mp);
-        } else {
+        } 
+        else
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + mp);
-        }
     }
 
 
@@ -106,8 +115,9 @@ public class DanhSachPhieuNhapHang {
 
             phieu[vt].updateTongTien();
             System.out.println("Phiếu nhập hàng đã được cập nhật thành công với tổng tiền mới: " + phieu[vt].getTongTien());
-        } else {
+        } 
+        else
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + mp);
-        }
+        
     }
 }

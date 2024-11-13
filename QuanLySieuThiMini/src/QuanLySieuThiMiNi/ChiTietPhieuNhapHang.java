@@ -4,14 +4,32 @@ public class ChiTietPhieuNhapHang {
     private int maPhieu;
     private int maSp;
     private int sl;
+    private double thanhtien;
     private double donGia;
 
 
-    public ChiTietPhieuNhapHang(int maPhieu, int maSp, int sl, double donGia) {
+    public ChiTietPhieuNhapHang(int maPhieu, int maSp, int sl, double donGia, double thanhTien) {
         this.maPhieu = maPhieu;
         this.maSp = maSp;
         this.sl = sl;
         this.donGia = donGia;
+        this.thanhtien = thanhTien;
+    }
+    
+    public ChiTietPhieuNhapHang() {
+    	this.maPhieu = 0;
+    	this.maSp = 0;
+    	this.sl = 0;
+    	this.donGia = 0;
+    	this.thanhtien = 0;
+    }
+    
+    public ChiTietPhieuNhapHang(ChiTietPhieuNhapHang x) {
+    	this.maPhieu = x.maPhieu;
+        this.maSp = x.maSp;
+        this.sl = x.sl;
+        this.donGia = x.donGia;
+        this.thanhtien = x.thanhtien;
     }
 
 
@@ -46,4 +64,17 @@ public class ChiTietPhieuNhapHang {
     public void setDonGia(double donGia) {
         this.donGia = donGia;
     }
+    
+    public double getThanhTien() {
+        return thanhtien;
+    }
+
+    public void setThanhTien(double donGia) {
+        this.donGia = donGia;
+    }
+    
+    public void updateThanhTien() {
+        this.thanhtien = this.sl * this.donGia;
+    }
+    
 }
