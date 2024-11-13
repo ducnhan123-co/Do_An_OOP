@@ -56,7 +56,10 @@ public class ChiTietHoaDon {
         this.donGia = donGia;
     }
 
-    // Tính tổng tiền cho từng mặt hàng
+    // Tính thành tiền cho từng sản phẩm mua
+    public float tinhThanhTien() {
+        return this.soLuong*this.donGia;
+    }
    
     // Giá nếu mua sản phẩm trên 500k thì được giảm 10%
 }

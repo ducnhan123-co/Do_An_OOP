@@ -107,6 +107,13 @@ public class HoaDon {
     private int soLuongChiTiet = 0; // Đếm số lượng chi tiết hóa đơn đã thêm vào
 
 
+    // Tính tổng tiền của hóa đơn
+    // public float tinhTongTien() {
+    //     for(int i=0; i<n; i++) {
+
+    //     }
+    // }
+
     public void nhapHoaDon(DanhSachSanPham danhSachSanPham) { // Ko nên truyền tham số mà mình nên làm ra mảng DSSP
         while(true) {
             try {
@@ -144,14 +151,14 @@ public class HoaDon {
         }
     }
 
-//    public void xuatHoaDon() {
-//        System.out.printf("|%-20d|%-20d|%-20d|%-20s|%-20f|%-20f|", maHD, maKH, maNV, phuongThucTinhToan, tienTra, tienThua);
-//        System.out.println("Chi tiết hóa đơn:");
-//        for (int i = 0; i < soLuongChiTiet; i++) {
-//            ChiTietHoaDon chiTiet = chiTietHoaDonArray[i];
-//            System.out.printf("|%-20d|%-20d|%-20f|\n", chiTiet.getMaSP(), chiTiet.getSoLuong(), chiTiet.tinhGiaTri());
-//        }
-//    }
+   public void xuatHoaDon() {
+       System.out.printf("|%-20d|%-20d|%-20d|%-20s|%-20f|%-20f|", maHD, maKH, maNV, phuongThucTinhToan, tienTra, tienThua);
+       System.out.println("Chi tiết hóa đơn:");
+       for (int i = 0; i < soLuongChiTiet; i++) {
+           ChiTietHoaDon chiTiet = chiTietHoaDonArray[i];
+           System.out.printf("|%-20d|%-20d|%-20f|\n", chiTiet.getMaSP(), chiTiet.getSoLuong(), chiTiet.tinhThanhTien());
+       }
+   }
 
     public void suaHoaDon(DanhSachSanPham danhSachSanPham) {
         while (true) {
