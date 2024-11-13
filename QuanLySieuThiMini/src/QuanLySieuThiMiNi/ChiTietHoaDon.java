@@ -11,12 +11,11 @@ public class ChiTietHoaDon {
     public ChiTietHoaDon() {}
 
     public ChiTietHoaDon( int maSP, int soLuong ,float donGia ) {
-//        this.maHD = maHD;
+//      this.maHD = maHD;
         this.maSP = maSP;
         this.soLuong = soLuong;
         this.donGia = donGia;
     }
-
 
     public ChiTietHoaDon(int maHD, int maSP, int soLuong) {
         this.maHD = maHD;
