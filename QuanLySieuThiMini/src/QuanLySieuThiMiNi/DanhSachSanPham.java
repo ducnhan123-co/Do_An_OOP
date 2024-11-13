@@ -111,6 +111,7 @@ public class DanhSachSanPham {
                 else
                     push(new GiaDung(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Integer.parseInt(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
             }
+            reader.close();
         } catch (Exception e) {
 
         }
