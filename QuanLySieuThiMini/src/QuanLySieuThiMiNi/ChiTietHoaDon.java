@@ -55,9 +55,17 @@ public class ChiTietHoaDon {
         this.donGia = donGia;
     }
 
+    private DanhSachSanPham dssp;
+
     // Tính thành tiền cho từng sản phẩm mua
     public float tinhThanhTien() {
         return this.soLuong*this.donGia;
+    }
+
+    // Hàm xuất chi tiết hóa đơn
+    public void xuatChiTiet() {
+        String tenSP = dssp.timTenSanPhamTheoMa(maSP);
+        System.out.printf("| %-10s | %-15s | %-10d | %-10d | %-10d |\n", maSP, tenSP, donGia, soLuong, tinhThanhTien());
     }
    
     // Giá nếu mua sản phẩm trên 500k thì được giảm 10%

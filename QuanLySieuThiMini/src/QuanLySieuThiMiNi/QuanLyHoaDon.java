@@ -28,12 +28,14 @@ public class QuanLyHoaDon {
             
             int choice = sc.nextInt();
             sc.nextLine(); // Bỏ qua dòng trống
-            try {
-                choice = Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Vui lòng nhập lại số hợp lệ");
-                continue;
-            }
+
+            // try {
+            //     choice = Integer.parseInt(sc.nextLine());
+            // } catch (NumberFormatException e) {
+            //     System.out.println("Vui lòng nhập lại số hợp lệ");
+            //     continue;
+            // }
+            
             switch(choice) {
                 case 1:
                     ds.themHoaDon();

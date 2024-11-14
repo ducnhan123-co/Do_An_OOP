@@ -102,6 +102,27 @@ public class DanhSachSanPham {
         return null;  // Nếu không tìm thấy, trả về null
     }
 
+    // Phương thức tìm sản phẩm theo mã và trả về đơn giá
+    public float timDonGiaTheoMa(int maSP) {
+        for(SanPham sp: DS_SanPham) {
+            if(sp.getMaSP() == maSP) {
+                return sp.getDonGia();
+            }
+        }
+        System.out.println("Không tìm thấy sản phẩm với mã: "+maSP);
+        return -1;
+    }
+
+    // Phương thức tìm tên sản phẩm theo mã sản phẩm
+    public String timTenSanPhamTheoMa(int maSP) {
+        for(SanPham sp: DS_SanPham) {
+            if(sp.getMaSP() == maSP) {
+                return sp.getTenSP();
+            }
+        }
+        return null;
+    }
+
     public void init() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham.txt"));
