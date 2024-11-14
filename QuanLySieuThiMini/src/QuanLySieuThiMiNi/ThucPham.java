@@ -19,6 +19,22 @@ public class ThucPham extends SanPham {
         this.hanSuDung = hanSuDung;
     }
 
+    public String getLoaiThucPham() {
+        return loaiThucPham;
+    }
+
+    public void setLoaiThucPham(String loaiThucPham) {
+        this.loaiThucPham = loaiThucPham;
+    }
+
+    public int getHanSuDung() {
+        return hanSuDung;
+    }
+
+    public void setHanSuDung(int hanSuDung) {
+        this.hanSuDung = hanSuDung;
+    }
+
     public void nhap() {
         super.nhap();  // Nhập thông tin sản phẩm từ lớp cha
         Scanner sc = new Scanner(System.in);

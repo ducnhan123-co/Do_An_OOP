@@ -19,6 +19,22 @@ public class GiaDung extends SanPham {
         this.baoHanh = baoHanh;
     }
 
+    public String getThuongHieu() {
+        return thuongHieu;
+    }
+
+    public void setThuongHieu(String thuongHieu) {
+        this.thuongHieu = thuongHieu;
+    }
+
+    public int getBaoHanh() {
+        return baoHanh;
+    }
+
+    public void setBaoHanh(int baoHanh) {
+        this.baoHanh = baoHanh;
+    }
+
     public void nhap() {
         Scanner sc = new Scanner(System.in);
         super.nhap();  // Nhập thông tin sản phẩm từ lớp cha

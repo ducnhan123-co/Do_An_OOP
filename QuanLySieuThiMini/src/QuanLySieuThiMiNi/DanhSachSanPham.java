@@ -1,7 +1,9 @@
 package QuanLySieuThiMiNi;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -117,6 +119,29 @@ public class DanhSachSanPham {
         }
     }
 
+    public void save() {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham2.txt"));
+            for (SanPham sanPham: DS_SanPham) {
+                String loai;
+                String line ;
+                if (sanPham instanceof ThucPham) {
+                    loai = "0";
+                    ThucPham thucPham = (ThucPham)sanPham;
+                    line = String.format("%s,%d,%s,%s,%f,%d,%s,%s,%s,%d\n", loai, sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getDVT(), sanPham.getDonGia(), sanPham.getSoLuong(), sanPham.getNgaySX(),sanPham.getMoTa(),thucPham.getLoaiThucPham(),thucPham.getHanSuDung());
+                }
+                else {
+                    loai = "1";
+                    GiaDung giaDung = (GiaDung)sanPham;
+                    line = String.format("%s,%d,%s,%s,%f,%d,%s,%s,%s,%d\n", loai, sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getDVT(), sanPham.getDonGia(), sanPham.getSoLuong(), sanPham.getNgaySX(),sanPham.getMoTa(),giaDung.getThuongHieu(),giaDung.getBaoHanh());
+                }
+                bw.write(line);
+            }
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
         danhSachSanPham.init();
