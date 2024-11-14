@@ -1,6 +1,8 @@
 package QuanLySieuThiMiNi;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -132,7 +134,21 @@ public class PhieuNhapHang {
         maNCC = sc.nextInt();
         ngayNhapHang = LocalDate.now();
         tongTien = 0;
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+        while (true) {
+            System.out.print("Nhập ngày nhập hàng (dd/MM/yyyy): ");
+            sc.nextLine(); // Clear buffer
+            String ngayNhapStr = sc.nextLine();
+            try {
+                ngayNhapHang = LocalDate.parse(ngayNhapStr, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập lại theo định dạng dd/MM/yyyy.");
+            }
+        }
+        
         while (true) {
             System.out.print("Nhập mã sản phẩm (hoặc nhập -1 để kết thúc): ");
             int maSP = sc.nextInt();
@@ -162,4 +178,5 @@ public class PhieuNhapHang {
         }
     }
 }
+
 

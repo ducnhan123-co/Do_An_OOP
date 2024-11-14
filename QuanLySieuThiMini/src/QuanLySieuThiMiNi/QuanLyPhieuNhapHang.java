@@ -15,7 +15,10 @@ public class QuanLyPhieuNhapHang {
 	        System.out.println("3. Tìm kiếm phiếu nhập hàng theo mã phiếu");
 	        System.out.println("4. Tìm kiếm phiếu và sửa thông tin theo mã phiếu");
 	        System.out.println("5. Xoá phiếu nhập hàng theo mã phiếu");
-	        System.out.println("6. Thoát");
+	        System.out.println("6. Thống kê phiếu nhập theo ngày");
+	        System.out.println("7. Thống kê phiếu nhập theo tháng");
+	        System.out.println("8. Thống kê phiếu nhập theo năm");
+	        System.out.println("9. Thoát");
 	        System.out.println("-----------------------------------------------------------------");
 	        System.out.print("Chọn chức năng: ");
 	        int choice = sc.nextInt();
@@ -38,6 +41,15 @@ public class QuanLyPhieuNhapHang {
 	                DSPNH.xoaTheoMa();
 	                break;
 	            case 6:
+	            	DSPNH.thongKeTheoNgay();
+	            	break;
+	            case 7:
+	            	DSPNH.thongKeTheoThang();
+	            	break;
+	            case 8:
+	            	DSPNH.thongKeTheoNam();
+	            	break;
+	            case 9:
 	                System.out.println("Đã thoát chương trình.");
 	                return;
 	            default:
@@ -46,4 +58,5 @@ public class QuanLyPhieuNhapHang {
 	    }
 	}
 }
+
 
