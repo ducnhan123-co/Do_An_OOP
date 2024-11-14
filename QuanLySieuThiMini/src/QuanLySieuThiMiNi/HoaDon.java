@@ -1,6 +1,8 @@
 package QuanLySieuThiMiNi;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -102,6 +104,8 @@ public class HoaDon {
         this.tienThua = tienThua;
     }
 
+    // Không biết có dùng được DanhSachSanPham ko nhỉ ?
+    DanhSachSanPham danhSachSanPham;
     public void nhapHoaDon() { // Ko nên truyền tham số 
         while(true) {
             try {
@@ -109,34 +113,58 @@ public class HoaDon {
                 System.out.println("Nhập mã hóa đơn: ");
                 this.maHD = in.nextInt(); 
                 System.out.println("Nhập mã khách hàng: ");
-                this.maHD = in.nextInt();
-                System.out.println("Nhập ngày tạo hóa đơn: ");
-                this.ngayTaoHoaDon = in.nextLine();
-                System.out.println("Nhập chi tiết hóa đơn: ");
+                this.maKH = in.nextInt();
+                
+                // Nhập ngày lập hóa đơn
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                this.ngayTaoHoaDon = LocalDate.now().format(formatter);
+                in.nextLine();
                 while (true) {
-                    System.out.print("Nhập mã sản phẩm: ");
+                    System.out.print("Nhập ngày lập hóa đơn (dd/MM/yyyy): ");
+                    in.nextLine(); // Clear buffer
+                    String ngayNhapStr = in.nextLine();
+                    try{
+                        LocalDate.parse(ngayNhapStr, formatter);
+                        this.ngayTaoHoaDon = ngayNhapStr;
+                        break;
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập lại theo định dạng dd/MM/yyyy.");
+                    }
+                }
+            
+                System.out.print("Nhập phương thức tính toán: ");
+                this.phuongThucTinhToan = in.nextLine();
+
+                System.out.println("-Nhập chi tiết hóa đơn: ");
+                while(true) {
+                    System.out.print("+Nhập mã sản phẩm: ");
                     int maSP = in.nextInt();
-                    SanPham sanPham = danhSachSanPham.timSanPhamTheoMa(maSP);
-                    if(sanPham == null) {
+                    
+                    float donGia = danhSachSanPham.timDonGiaTheoMa(maSP);
+                    if(donGia == -1) {
                         System.out.println("Sản phẩm không tồn tại!");
                         continue;
                     }
-                    System.out.print("Nhập số lượng: ");
+                    System.out.print("+Nhập số lượng: ");
                     int soLuong = in.nextInt();
-                    //    How?  tongTien += soLuong*(danhSachSanPham.timSanPhamTheoMa(maSP).getDonGia());
+                    
+                    // Cách 1:
+                    tongTien += soLuong*(danhSachSanPham.timSanPhamTheoMa(maSP).getDonGia());
+                    // Cách 2:
+                    // tongTien += soLuong*(danhSachSanPham.timDonGiaTheoMa(maSP));
+
                     System.out.println("(1) Thanh toán");
                     System.out.println("(0) Tiếp tục");
                     if (in.nextInt() == 1)
                         break;
                 }
                 System.out.printf("Tổng tiền: %.2f\n", this.tongTien);
-                System.out.print("Nhập phương thức tính toán: ");
-                this.phuongThucTinhToan = in.nextLine();
 
                 // Nhập tiền trả và tiền thừa
                 System.out.print("Nhập tiền trả: ");
                 this.tienTra = in.nextFloat();
-                this.tienThua = this.tienTra - tongTien;  // Tiền thừa = tiền trả - tổng tiền
+                // this.tienThua = this.tienTra - tongTien;  // Tiền thừa = tiền trả - tổng tiền
+                tinhTienThua();
                 System.out.printf("Tiền thừa: %.2f\n", tienThua);
                 break;
             } catch (Exception e) {
@@ -145,14 +173,40 @@ public class HoaDon {
         }
     }
 
-   public void xuatHoaDon() {
-       System.out.printf("|%-20d|%-20d|%-20d|%-20s|%-20f|%-20f|", maHD, maKH, maNV, phuongThucTinhToan, tienTra, tienThua);
-       System.out.println("Chi tiết hóa đơn:");
-       for (int i = 0; i < soLuongChiTiet; i++) {
-           ChiTietHoaDon chiTiet = chiTietHoaDonArray[i];
-           System.out.printf("|%-20d|%-20d|%-20f|\n", chiTiet.getMaSP(), chiTiet.getSoLuong(), chiTiet.tinhThanhTien());
-       }
-   }
+    public static int chiTietCount;
+    private ChiTietHoaDon[] chiTietArray;
+    
+    public void tinhTienThua() {
+        tienThua = tienTra - tongTien;
+    }
+
+    // Hàm xuất hóa đơn
+    public void xuatHoaDon() {
+        System.out.println("Mã hóa đơn: "+this.maHD);
+        System.out.println("Mã khách hàng: "+this.maKH);
+        System.out.println("Mã nhân viên: "+this.maNV);
+        System.out.println("Ngày lập hóa đơn: "+ngayTaoHoaDon);
+        System.out.println("Phương thức thanh toán: "+phuongThucTinhToan);
+        System.out.println("Tiền trả: "+tienTra+"đ");
+        
+        // Kiểm tra danh sách chi tiết hóa đơn
+        if(chiTietCount == 0) {
+            System.out.println("Chưa có sản phẩm trong hóa đơn.");
+        }else {
+            System.out.println("STT | Mã HD | Mã SP | Số Lượng | Đơn Giá | Thành Tiền |");
+            for(int i = 0; i < chiTietCount; i++) {
+                System.out.printf("|%-4d | %-6d | %-9d | %-8.2f | %-11.2f |\n", i+1, chiTietArray[i].getMaSP(), chiTietArray[i].getSoLuong(), chiTietArray[i].getDonGia(), chiTietArray[i].tinhThanhTien());
+            }
+        } 
+        tinhTienThua();
+        if(tienThua >= 0) {
+            System.out.println("Tiền thừa: "+tienThua+"đ");
+        }
+        else {
+            System.out.println("Khách hàng thiếu: "+(-tienThua)+"đ");
+        }
+        System.out.println("-------------------------------------------------------");
+    }
 
     public void suaHoaDon(DanhSachSanPham danhSachSanPham) {
         while (true) {
@@ -180,8 +234,10 @@ public class HoaDon {
                         this.maNV = in.nextInt();
                         break;
                     case 3:
-                        System.out.print("Nhập ngày tạo hóa đơn mới (YYYY-MM-DD): ");
+                        System.out.print("Nhập ngày tạo hóa đơn mới (dd-MM-YYYY): ");
                         this.ngayTaoHoaDon = in.nextLine();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        LocalDate ngay = LocalDate.parse(this.ngayTaoHoaDon, formatter);
                         break;
                     case 4:
                         System.out.print("Nhập phương thức thanh toán mới: ");

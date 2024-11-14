@@ -40,26 +40,19 @@ public class DanhSachHoaDon {
     }
 
     // Xem danh sách hóa đơn
-   public void xemDS() {
-       System.out.println("+-------------DANH SÁCH HÓA ĐƠN-------------+");
-       for(int i=0; i<n; i++){
-           dshd[i].xuatHoaDon();
-       }
-       System.out.println("+-------------------------------------------+");
-   }
+    public void xemDS() {
+        System.out.println("Danh Sách Hóa Đơn:");
+        for(int i=0; i<n; i++){
+            dshd[i].xuatHoaDon();
+        }
+    }
 
     // Thêm 1 hóa đơn vào cuối danh sách
     public void themHoaDon() {
-        if(n >= dshd.length) {
-            System.out.println("Danh sách đã đầy, không thể thêm nhân viên mới.");
+        if(n > dshd.length) {
+            System.out.println("Danh sách đã đầy, không thể thêm hóa đơn mới.");
             return;
         }
-        // HoaDon hoaDon = new HoaDon();
-        // hoaDon.nhapHoaDon();
-        // dshd = Arrays.copyOf(dshd, n+1);
-        // dshd[n] = hoaDon;
-        // n++;
-        // System.out.println("Đã thêm 1 hóa đơn vào cuối danh sách thành công.");
         dshd = Arrays.copyOf(dshd, n+1);
         dshd[n] = new HoaDon();
         dshd[n].nhapHoaDon();
@@ -70,14 +63,21 @@ public class DanhSachHoaDon {
     // Thêm nhiều hóa đơn vào danh sách
     public void nhapDanhSachHoaDon() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("nhập số lượng hóa đơn: ");
+        System.out.println("Nhập số lượng hóa đơn muốn thêm: ");
         int soLuong = sc.nextInt();
-        for(int i=n; i<n+soLuong; i++) {
-            System.out.println("Nhập thông tin cho hóa đơn thứ " + (i + 1) + ": ");
-            dshd[i] = new HoaDon();
-            dshd[i].nhapHoaDon();
+
+        // Nếu mảng không đủ chỗ, tăng kích thước mảng
+        if (n + soLuong > dshd.length) {
+            dshd = Arrays.copyOf(dshd, n + soLuong);
         }
-        // dshd = Arrays.copyOf(dshd, n+soLuong);
+
+        // Nhập thông tin cho từng hóa đơn
+        for (int i = n; i < n + soLuong; i++) {
+            System.out.println("Nhập thông tin cho hóa đơn thứ " + (i + 1) + ": ");
+            dshd[i] = new HoaDon();  // Khởi tạo đối tượng HoaDon mới
+            dshd[i].nhapHoaDon();    // Gọi phương thức nhập thông tin cho hóa đơn
+        }
+        // Cập nhật số lượng hóa đơn đã nhập
         this.n += soLuong;
     }
 
@@ -126,6 +126,12 @@ public class DanhSachHoaDon {
         }
     }
 
+    // Xóa hóa đơn từ cuối danh sách
+    public void delete() {
+        dshd = Arrays.copyOf(dshd, n-1);
+        n--;
+    }
+
     // Tìm kiếm hóa đơn theo mã (trả về vị trí int)
     public int timMaHoaDon(int maHD) {
         for(int i=0; i<n; i++) {
@@ -135,12 +141,6 @@ public class DanhSachHoaDon {
         }
         System.out.println("Không tìm thấy mã hóa đơn: "+maHD);
         return -1;
-    }
-
-    // Xóa hóa đơn từ cuối danh sách
-    public void delete() {
-        dshd = Arrays.copyOf(dshd, n-1);
-        n--;
     }
 
     // Tìm kiếm hóa đơn theo mã (trả về HoaDon)
