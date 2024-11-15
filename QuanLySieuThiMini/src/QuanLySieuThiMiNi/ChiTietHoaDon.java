@@ -1,7 +1,5 @@
 package QuanLySieuThiMiNi;
 
-import java.util.Scanner;
-
 public class ChiTietHoaDon {
     private int maHD;
     private int maSP;
@@ -10,17 +8,11 @@ public class ChiTietHoaDon {
 
     public ChiTietHoaDon() {}
 
-    public ChiTietHoaDon( int maSP, int soLuong ,float donGia ) {
-//      this.maHD = maHD;
-        this.maSP = maSP;
-        this.soLuong = soLuong;
-        this.donGia = donGia;
-    }
-
-    public ChiTietHoaDon(int maHD, int maSP, int soLuong) {
+    public ChiTietHoaDon(int maHD, int maSP, int soLuong, float donGia) {
         this.maHD = maHD;
         this.maSP = maSP;
         this.soLuong = soLuong;
+        this.donGia = donGia;
     }
 
     public int getMaHD() {
@@ -55,18 +47,13 @@ public class ChiTietHoaDon {
         this.donGia = donGia;
     }
 
-    private DanhSachSanPham dssp;
-
-    // Tính thành tiền cho từng sản phẩm mua
-    public float tinhThanhTien() {
-        return this.soLuong*this.donGia;
+    // Tính tổng tiền cho chi tiết hóa đơn
+    public double tinhTien() {
+        return soLuong * donGia;
     }
 
-    // Hàm xuất chi tiết hóa đơn
-    public void xuatChiTiet() {
-        String tenSP = dssp.timTenSanPhamTheoMa(maSP);
-        System.out.printf("| %-10s | %-15s | %-10d | %-10d | %-10d |\n", maSP, tenSP, donGia, soLuong, tinhThanhTien());
+    // Xuất thông tin chi tiết hóa đơn
+    public void xuatChiTietHoaDon() {
+        System.out.println("Mã HD: " + maHD + ", Mã SP: " + maSP + ", Số lượng: " + soLuong + ", Đơn giá: " + donGia + ", Thành tiền: " + tinhTien());
     }
-   
-    // Giá nếu mua sản phẩm trên 500k thì được giảm 10%
 }

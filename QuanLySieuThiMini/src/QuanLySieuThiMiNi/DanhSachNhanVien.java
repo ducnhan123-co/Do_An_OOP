@@ -1,16 +1,13 @@
 package QuanLySieuThiMiNi;
 
-import java.io.BufferedReader;
+import java.io.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class DanhSachNhanVien {
+public class DanhSachNhanVien implements ThaoTacFile{
 
     private NhanVien[] dsnv;
     private int size;
@@ -70,13 +67,13 @@ public class DanhSachNhanVien {
     //NhanVien timKiemNhanVien theo ma tra ve nhan vien
     public NhanVien timKiemNhanVienTheoMa(int maNV) {
         for (NhanVien nv : dsnv) {
-            if (nv.getManv() == maNV) {
+            if (nv != null && nv.getManv() == maNV) { // Kiểm tra null trước khi truy cập getManv()
                 return nv;
             }
         }
-        System.out.println("Không tìm thấy nhân viên với mã: " + maNV);
-        return null;
+        return null; // Trả về null nếu không tìm thấy
     }
+
 
     public void suaNhanVienTheoMa() {
        Scanner sc = new Scanner(System.in);
@@ -245,11 +242,12 @@ public class DanhSachNhanVien {
         System.out.println("Lương nhân viên chức vụ 3 = " + tongluongchucvu3);
     }
 
+
     public NhanVien parseLineToNhanVien(String line) {
-        String[] parts = line.split("[;, ]+"); // Phân tách theo dấu ';', ',' hoặc khoảng trắng
+        String[] parts = line.split("[;,]+");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        if (parts.length == 9) {
+        if (parts.length == 10) {
             try {
                 int manv = Integer.parseInt(parts[0]);
                 String chucvu = parts[1];
@@ -259,31 +257,33 @@ public class DanhSachNhanVien {
                 String diachi = parts[5];
                 String sodienthoai = parts[6];
                 double luong = Double.parseDouble(parts[7]);
-                String gioitinh = parts[8];
+                String gioiTinh = parts[8];
+                String ngaybatdau = parts[9];
 
-                return new NhanVien(manv, chucvu, honhanvien, tennhanvien, ngaysinh, diachi, sodienthoai, luong, gioitinh);
+                return new NhanVien(manv, chucvu, honhanvien, tennhanvien, ngaysinh, diachi, sodienthoai, luong, gioiTinh, ngaybatdau);
             } catch (NumberFormatException | DateTimeParseException e) {
                 System.out.println("Lỗi định dạng dữ liệu trong dòng: " + line);
             }
         }
-
         return null;
     }
 
 
-    public void taiThongTinTuFile(String filename) {
+    @Override
+    public void docFile() {
+        String filename = "D:\\Desktop\\ALL\\DO_AN_OOP_JAVA\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\NhanVien.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
-            int count = 0; // Đếm số nhân viên được thêm
+            int count = 0;
             while ((line = reader.readLine()) != null) {
                 NhanVien nv = parseLineToNhanVien(line);
                 if (nv != null) {
-                    if (size < dsnv.length) { // Kiểm tra xem mảng có còn chỗ không
-                        dsnv[size++] = nv; // Thêm nhân viên vào danh sách và tăng size
-                        count++; // Tăng số lượng nhân viên đã thêm
+                    if (size < dsnv.length) {
+                        dsnv[size++] = nv;
+                        count++;
                     } else {
                         System.out.println("Không thể thêm nhân viên từ file, danh sách đã đầy.");
-                        break; // Dừng lại nếu danh sách đã đầy
+                        break;
                     }
                 } else {
                     System.out.println("Dòng không hợp lệ: " + line);
@@ -298,6 +298,28 @@ public class DanhSachNhanVien {
     }
 
 
+    @Override
+    public void ghiFile() {
+        String filename = "D:\\Desktop\\ALL\\DO_AN_OOP_JAVA\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\NhanVien.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (int i = 0; i < size; i++) {
+                NhanVien nv = dsnv[i];
+                String line = nv.toFileString();
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("Đã ghi dữ liệu nhân viên vào tệp tin: " + filename);
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi vào tệp tin: " + filename);
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void capNhatFile() {
+        ghiFile(); // Có thể tái sử dụng phương thức ghi tệp
+        System.out.println("Đã cập nhật lại dữ liệu trong tệp tin.");
+    }
 
 
     public void capNhatSoLuongNhanVien() {
