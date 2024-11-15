@@ -15,12 +15,12 @@ public class NhanVien {
     private String sodienthoai;
     private double luong;
     private String gioiTinh;
-    private String ngaybatdau;
+    private LocalDate ngaybatdau;
     private static int tongSoNhanVien = 0;
     public NhanVien() {
         tongSoNhanVien++;
     }
-    public NhanVien(int manv, String chucvu, String honhanvien, String tennhanvien, LocalDate ngaysinh, String diachi, String sodienthoai, double luong, String gioiTinh,String ngaybatdau) {
+    public NhanVien(int manv, String chucvu, String honhanvien, String tennhanvien, LocalDate ngaysinh, String diachi, String sodienthoai, double luong, String gioiTinh,LocalDate ngaybatdau) {
         this.manv = manv;
         this.chucvu = chucvu;
         this.honhanvien = honhanvien;
@@ -90,11 +90,11 @@ public class NhanVien {
         this.gioiTinh = gioiTinh;
     }
 
-    public void setNgaybatdau(String ngaybatdau)
+    public void setNgaybatdau(LocalDate ngaybatdau)
     {
         this.ngaybatdau=ngaybatdau;
     }
-    public String getNgaybatdau()
+    public LocalDate getNgaybatdau()
     {
         return ngaybatdau;
     }
@@ -107,13 +107,14 @@ public class NhanVien {
                 ngaysinh.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ";" +
                 diachi + ";" + sodienthoai + ";" + luong + ";" + gioiTinh + ";" + ngaybatdau;
     }
+
     public void nhapNhanVien() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập thông tin nhân viên");
 
-        System.out.print("Nhập mã nhân viên: ");
-        this.manv = sc.nextInt();
-        sc.nextLine();
+//        System.out.print("Nhập mã nhân viên: ");
+//        this.manv = sc.nextInt();
+//        sc.nextLine();
 
         System.out.print("Nhập chức vụ: ");
         this.chucvu = sc.nextLine();
@@ -157,6 +158,18 @@ public class NhanVien {
         }
         System.out.print("Nhập giới tính nhân viên: ");
         this.gioiTinh = sc.nextLine();
+        while (true) {
+            System.out.print("Nhập ngày bắt đầu (dd/MM/yyyy): ");
+            String dateInput = sc.nextLine();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            try {
+                this.ngaybatdau = LocalDate.parse(dateInput, formatter); // Biến `ngaybatdau` phải là kiểu `LocalDate`
+                break; // Thoát vòng lặp nếu nhập hợp lệ
+            } catch (DateTimeParseException e) {
+                System.out.println("Ngày bắt đầu không hợp lệ, vui lòng nhập lại.");
+            }
+        }
+
     }
 
     public void suaNhanVien() {
@@ -211,18 +224,10 @@ public class NhanVien {
         System.out.println("Cập nhật thông tin nhân viên hoàn tất!");
     }
 
-      public void xuatNhanVien() {
+    public void xuatNhanVien() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        System.out.println("Mã nhân viên: " + manv);
-        System.out.println("Chức vụ: " + chucvu);
-        System.out.println("Họ nhân viên: " + honhanvien);
-        System.out.println("Tên nhân viên: " + tennhanvien);
-        System.out.println("Ngày sinh: " + ngaysinh.format(formatter));
-        System.out.println("Địa chỉ: " + diachi);
-        System.out.println("Số điện thoại: " + sodienthoai);
-        System.out.println("Lương cơ bản: " + luong);
-        System.out.println("Giới tính: " + gioiTinh);
-        System.out.println("Ngày bắt đầu: " + ngaybatdau);
+        System.out.printf("|%-10d|%-15s|%-15s|%-10s|%-15s|%-10s|%-12.2f|%-8s|%-12s|\n",
+                manv, chucvu, honhanvien, tennhanvien, ngaysinh.format(formatter), diachi, luong, gioiTinh, ngaybatdau.format(formatter));
     }
     public static int getTongSoNhanVien() {
         return tongSoNhanVien;

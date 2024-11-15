@@ -23,9 +23,10 @@ public class QuanLyNhanVien {
             System.out.println("7. Tìm kiếm nhân viên theo tên");
             System.out.println("8. Thống kê theo mức lương");
             System.out.println("9. Thống kê theo chức vụ");
-            System.out.println("10. Cập nhật danh sách nhân viên hiện tại");
-            System.out.println("11. Lấy thông tin từ file");
-            System.out.println("12. In danh sách nhân viên");
+            System.out.println("10. Thống kê theo năm làm việc");
+            System.out.println("11. Cập nhật danh sách nhân viên hiện tại");
+            System.out.println("12. Lấy thông tin từ file");
+            System.out.println("13. In danh sách nhân viên");
             System.out.println("0. Thoát");
             System.out.println("-----------------------------------------------------------------");
             System.out.print("Chọn chức năng: ");
@@ -74,12 +75,13 @@ public class QuanLyNhanVien {
                 }
                 case 8 -> ds.thongKeTheoMucLuong(); // Thống kê theo mức lương
                 case 9 -> ds.thongKeTheoChucVu(); // Thống kê theo chức vụ
-                case 10 -> ds.capNhatSoLuongNhanVien(); // Cập nhật số lượng nhân viên hiện tại
-                case 11 -> {
+                case 10 -> ds.thongKeTheoNamLamViec();
+                case 11 -> ds.capNhatSoLuongNhanVien(); // Cập nhật số lượng nhân viên hiện tại
+                case 12 -> {
                     ds.docFile();
-                    ds.xuatDanhSachNhanVien();
+//                    ds.xuatDanhSachNhanVien();
                 }
-                case 12 -> ds.xuatDanhSachNhanVien(); // In danh sách nhân viên
+                case 13 -> ds.xuatDanhSachNhanVien(); // In danh sách nhân viên
                 case 0 -> {
                     System.out.println("Đã thoát chương trình.");
                     sc.close();
