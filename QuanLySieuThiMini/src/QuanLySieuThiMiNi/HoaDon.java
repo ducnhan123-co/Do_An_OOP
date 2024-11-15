@@ -195,7 +195,7 @@ public class HoaDon {
         }else {
             System.out.println("STT | Mã HD | Mã SP | Số Lượng | Đơn Giá | Thành Tiền |");
             for(int i = 0; i < chiTietCount; i++) {
-                System.out.printf("|%-4d | %-6d | %-9d | %-8.2f | %-11.2f |\n", i+1, chiTietArray[i].getMaSP(), chiTietArray[i].getSoLuong(), chiTietArray[i].getDonGia(), chiTietArray[i].tinhThanhTien());
+                System.out.printf("|%-4d | %-6d | %-9d | %-8.2f | %-11.2f |\n", i+1, chiTietArray[i].getMaSP(), chiTietArray[i].getSoLuong(), chiTietArray[i].getDonGia(), chiTietArray[i].tinhTien());
             }
         } 
         tinhTienThua();
