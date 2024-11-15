@@ -24,7 +24,8 @@ public class QuanLyNhanVien {
             System.out.println("8. Thống kê theo mức lương");
             System.out.println("9. Thống kê theo chức vụ");
             System.out.println("10. Cập nhật danh sách nhân viên hiện tại");
-            System.out.println("11. In danh sách nhân viên");
+            System.out.println("11. Lấy thông tin từ file");
+            System.out.println("12. In danh sách nhân viên");
             System.out.println("0. Thoát");
             System.out.println("-----------------------------------------------------------------");
             System.out.print("Chọn chức năng: ");
@@ -42,14 +43,23 @@ public class QuanLyNhanVien {
                     ds.xoaNhanVienTheoMaCach1(maXoa);
                 }
                 case 5 -> {
-                    System.out.print("Nhập mã nhân viên cần tìm: ");
-                    int maTim = sc.nextInt();
-                    sc.nextLine();
-                    NhanVien nhanVienTim = ds.timKiemNhanVienTheoMa(maTim);
-                    if (nhanVienTim != null) {
-                        nhanVienTim.xuatNhanVien();
-                    } else {
-                        System.out.println("Không tìm thấy nhân viên với mã " + maTim);
+                    while (true) {
+                        System.out.print("Nhập mã nhân viên cần tìm: ");
+                        int maTim = sc.nextInt();
+                        sc.nextLine();
+                        NhanVien nhanVienTim = ds.timKiemNhanVienTheoMa(maTim);
+                        if (nhanVienTim != null) {
+                            nhanVienTim.xuatNhanVien();
+                            break; // Thoát vòng lặp khi tìm thấy nhân viên
+                        } else {
+                            System.out.println("Không tìm thấy nhân viên với mã " + maTim);
+                            System.out.print("Bạn có muốn thử lại không? (y/n): ");
+                            String again = sc.nextLine();
+                            if (again.equalsIgnoreCase("n")) {
+                                System.out.println("Dừng tìm kiếm nhân viên.");
+                                break;
+                            }
+                        }
                     }
                 }
                 case 6 -> {
@@ -65,7 +75,11 @@ public class QuanLyNhanVien {
                 case 8 -> ds.thongKeTheoMucLuong(); // Thống kê theo mức lương
                 case 9 -> ds.thongKeTheoChucVu(); // Thống kê theo chức vụ
                 case 10 -> ds.capNhatSoLuongNhanVien(); // Cập nhật số lượng nhân viên hiện tại
-                case 11 -> ds.xuatDanhSachNhanVien(); // In danh sách nhân viên
+                case 11 -> {
+                    ds.docFile();
+                    ds.xuatDanhSachNhanVien();
+                }
+                case 12 -> ds.xuatDanhSachNhanVien(); // In danh sách nhân viên
                 case 0 -> {
                     System.out.println("Đã thoát chương trình.");
                     sc.close();

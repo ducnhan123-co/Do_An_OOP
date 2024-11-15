@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 1,0,dung cu bep,cai,98000,464,26-4-2024,gnNQURkYrNXEuLxwLElnetghpbdvDSlazNAHNhaB,sharp,1
 0,1,rau,gam, 45000,490,12-6-2024,CgTMbJakUYCSOUFflpjXZjhXyZFVpl,rau,8
 0,2,rau,gam, 25000,694,7-12-2024,vThNyrNPNyXsPrJKnCvFclqkZNSlbf,rau,10
@@ -98,3 +99,12 @@
 1,97,keo,cai,82000,132,8-11-2024,xLjHHFluWVSyXekHIIfObIrhhsyEopAlHZqogcGG,Thai,1
 1,98,dung cu bep,cai,30000,880,7-5-2024,qFNMrtDYKoStkdKIIpcYGuhxzWXbVDmoRQxHYNYf,Thai,3
 1,99,keo,cai,39000,461,3-11-2024,qYMaZvYQAVlsSckIqgwjxgbePzGRWxlYHCmVIxiL,Thai,2
+=======
+1. Gia dung
+2.Thuc pham
+2.Thuc pham
+2.Thuc pham
+1. Gia dung
+1. Gia dung
+1. Gia dung
+>>>>>>> Stashed changes

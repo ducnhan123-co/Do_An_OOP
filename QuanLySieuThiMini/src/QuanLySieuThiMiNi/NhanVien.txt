@@ -3,6 +3,12 @@
 3;quan ly;phan hồ,nhân, 14/03/2005, TP.HCM;093493993;50000000;Nữ
 4;bán hàng;phan siêu,nhân, 14/04/2005, TP.HCM;093493493;50009000;Nam
 5;nhap hang;phan vĩ,nhân, 14/05/2005, TP.HCM;093493949;5000000;Nam
+6;nhap hang;phan vĩ,nhân, 14/05/2005, TP.HCM;093493949;5000000;Nam
+7;nhap hang;phan vĩ,nhân, 14/05/2005, TP.HCM;093493949;5000000;Nam
+8;nhap hang;phan vĩ,nhân, 14/05/2005, TP.HCM;093493949;5000000;Nam
+9;nhap hang;phan vĩ,nhân, 14/05/2005, TP.HCM;093493949;5000000;Nam
+10;nhap hang;phan vĩ,nhân, 14/05/2005, TP.HCM;093493949;5000000;Nam
+
 
 
 
