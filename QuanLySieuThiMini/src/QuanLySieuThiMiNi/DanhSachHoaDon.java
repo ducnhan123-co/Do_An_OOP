@@ -203,12 +203,12 @@ public class DanhSachHoaDon {
             return;
         }
         System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN LỚN HƠN "+tongTienNhap+"đ-------------+");
-//        for(int i=0; i<n; i++) {
-//            if(dshd[i].getTongTien() > tongTienNhap) {
-//                dshd[i].xuatHoaDon();
-//                count++;
-//            }
-//        }
+        for(int i=0; i<n; i++) {
+            if(dshd[i].getTongTien() > tongTienNhap) {
+                dshd[i].xuatHoaDon();
+                count++;
+            }
+        }
         System.out.println("+------------------------------------------------------------------------------------+");
         System.out.println("Có "+count+" hóa đơn với tổng tiền mỗi hóa đơn lớn hơn "+tongTienNhap+"đ");
     }
@@ -228,12 +228,12 @@ public class DanhSachHoaDon {
             return;
         }
         System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN NHỎ HƠN "+tongTienNhap+"đ-------------+");
-//        for(int i=0; i<n; i++) {
-//            if(dshd[i].getTongTien() < tongTienNhap) {
-//                dshd[i].xuatHoaDon();
-//                count++;
-//            }
-//        }
+        for(int i=0; i<n; i++) {
+            if(dshd[i].getTongTien() < tongTienNhap) {
+                dshd[i].xuatHoaDon();
+                count++;
+            }
+        }
         System.out.println("+------------------------------------------------------------------------------------+");
         System.out.println("Có "+count+" hóa đơn với tổng tiền mỗi hóa đơn nhỏ hơn "+tongTienNhap+"đ");
     }

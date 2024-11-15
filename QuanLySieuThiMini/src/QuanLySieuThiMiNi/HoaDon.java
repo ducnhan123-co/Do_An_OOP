@@ -16,6 +16,8 @@ public class HoaDon {
     private float tienTra;
     private float tienThua;
 
+    private SanPham[] items;
+
     public HoaDon(){}
 
     public HoaDon(int maHD, int maKH, int maNV, String ngayTaoHoaDon, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
@@ -150,6 +152,7 @@ public class HoaDon {
                     
                     // Cách 1:
                     tongTien += soLuong*(danhSachSanPham.timSanPhamTheoMa(maSP).getDonGia());
+                    // tongTien += soLuong*(items[i].getDonGia()); mình dùng for nếu đc
                     // Cách 2:
                     // tongTien += soLuong*(danhSachSanPham.timDonGiaTheoMa(maSP));
 
