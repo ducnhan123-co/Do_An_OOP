@@ -112,7 +112,7 @@ public class DanhSachPhieuNhapHang {
                     break;
                 }
 
-                System.out.print("Nhập số lượng mới: ");
+                System.out.print("Nhập số lượng mới: "); 
                 int soLuong = sc.nextInt();
 
                 System.out.print("Nhập đơn giá mới: ");
