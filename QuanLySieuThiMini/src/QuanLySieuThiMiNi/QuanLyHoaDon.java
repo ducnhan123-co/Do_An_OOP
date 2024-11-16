@@ -66,10 +66,16 @@ public class QuanLyHoaDon {
         danhSachHoaDonChiTiet.xuatChiTietHoaDonTheoMHD(maHD);
     }
 
+    public void xuatDSHoaDon() {
+        danhSachHoaDon.xemDS();
+    }
+
     public static void main(String[] args) {
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon();
         quanLyHoaDon.nhapHoaDon();
         quanLyHoaDon.xuatHoaDon(1);
+        System.out.println("------------------");
+        quanLyHoaDon.xuatDSHoaDon();
     }
 //
 //    public void menuDSHD() {
