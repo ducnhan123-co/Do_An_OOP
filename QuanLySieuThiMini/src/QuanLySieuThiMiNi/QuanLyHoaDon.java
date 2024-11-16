@@ -35,16 +35,17 @@ public class QuanLyHoaDon {
                     System.out.println("Nhập số lượng:");
                     chiTietHoaDon.setSoLuong(in.nextInt());
                     chiTietHoaDon.setDonGia(
-                            danhSachSanPham.timDonGiaTheoMa(chiTietHoaDon.getMaSP()) * chiTietHoaDon.getSoLuong()
+                            danhSachSanPham.timDonGiaTheoMa(chiTietHoaDon.getMaSP())
                     );
-                    TongTien += chiTietHoaDon.getDonGia();
+                    TongTien += chiTietHoaDon.tinhTien();
                     danhSachHoaDonChiTiet.push(chiTietHoaDon);
-                    System.out.print("1 - Thanh toán");
-                    System.out.print("2 - Tiếp tục nhập sản phẩm");
+                    System.out.println("1 - Thanh toán");
+                    System.out.println("2 - Tiếp tục nhập sản phẩm");
                     if (in.nextInt() == 1)
                         break;
                 }
                 hoaDon.setTongTien(TongTien);
+                System.out.printf("Tổng tiền: %f\n", TongTien);
                 System.out.println("Nhập phương thức thanh toán");
                 in.nextLine();
                 hoaDon.setPhuongThucTinhToan(in.nextLine());
