@@ -16,8 +16,6 @@ public class HoaDon {
     private float tienTra;
     private float tienThua;
 
-    private SanPham[] items;
-
     public HoaDon(){}
 
     public HoaDon(int maHD, int maKH, int maNV, String ngayTaoHoaDon, float tongtien, String phuongThucTinhToan, float tienTra, float tienThua) {
@@ -120,12 +118,11 @@ public class HoaDon {
                 // Nhập ngày lập hóa đơn
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 this.ngayTaoHoaDon = LocalDate.now().format(formatter);
-                in.nextLine();
                 while (true) {
                     System.out.print("Nhập ngày lập hóa đơn (dd/MM/yyyy): ");
                     in.nextLine(); // Clear buffer
                     String ngayNhapStr = in.nextLine();
-                    try{
+                    try {
                         LocalDate.parse(ngayNhapStr, formatter);
                         this.ngayTaoHoaDon = ngayNhapStr;
                         break;

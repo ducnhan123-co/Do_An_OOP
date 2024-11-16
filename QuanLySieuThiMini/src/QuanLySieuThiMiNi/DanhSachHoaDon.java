@@ -1,6 +1,9 @@
 package QuanLySieuThiMiNi;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -249,8 +252,25 @@ public class DanhSachHoaDon {
     }
 
     // Đọc file
-    public void docFile() {}
+    public void docFile() {
+        try (BufferedReader br = new BufferedReader(new FileReader("HoaDon.txt"))) {
+            String line;
+            int count=0;
+            while((line=br.readLine()) != null && count < dshd.length) {
+                String[] parts = line.split(";");
+
+
+
+
+                dshd[count++] = new HoaDon(/* */);
+            }
+        } catch (Exception e) {
+            System.out.println("Đọc file không thành công!\n");
+        }
+    }
 
     // Ghi file
-    public void ghiFile() {}
+    public void ghiFile() {
+        
+    }
 }
