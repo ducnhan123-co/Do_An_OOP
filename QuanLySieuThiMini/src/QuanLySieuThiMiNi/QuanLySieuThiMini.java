@@ -3,7 +3,7 @@ package QuanLySieuThiMiNi;
 import java.util.Scanner;
 
 public class QuanLySieuThiMini {
-    public static void main(String[] args) {
+    public void menu() {
         Scanner sc = new Scanner(System.in);
         QuanLyNhanVien qlNhanVien = new QuanLyNhanVien(100); // Quản lý nhân viên
 //        QuanLySanPham qlSanPham = new QuanLySanPham(100); // Quản lý sản phẩm
