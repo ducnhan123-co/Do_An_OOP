@@ -81,15 +81,12 @@ public class NhanVien {
     public void setLuong(double luong) {
         this.luong = luong;
     }
-
     public String getGioiTinh() {
         return gioiTinh;
     }
-
     public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
-
     public void setNgaybatdau(LocalDate ngaybatdau)
     {
         this.ngaybatdau=ngaybatdau;
@@ -101,27 +98,18 @@ public class NhanVien {
     public static void setTongSoNhanVien(int tongSoNhanVien) {
         NhanVien.tongSoNhanVien = tongSoNhanVien;
     }
-
     public String toFileString() {
         return manv + ";" + chucvu + ";" + honhanvien + ";" + tennhanvien + ";" +
                 ngaysinh.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ";" +
                 diachi + ";" + sodienthoai + ";" + luong + ";" + gioiTinh + ";" + ngaybatdau;
     }
-
     public void nhapNhanVien() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập thông tin nhân viên");
-
-//        System.out.print("Nhập mã nhân viên: ");
-//        this.manv = sc.nextInt();
-//        sc.nextLine();
-
         System.out.print("Nhập chức vụ: ");
         this.chucvu = sc.nextLine();
-
         System.out.print("Nhập họ của nhân viên: ");
         this.honhanvien = sc.nextLine();
-
         System.out.print("Nhập tên nhân viên: ");
         this.tennhanvien = sc.nextLine();
         while (true) {
@@ -169,9 +157,7 @@ public class NhanVien {
                 System.out.println("Ngày bắt đầu không hợp lệ, vui lòng nhập lại.");
             }
         }
-
     }
-
     public void suaNhanVien() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Sửa thông tin nhân viên");
@@ -220,10 +206,8 @@ public class NhanVien {
                 System.out.println("Lương không thể là giá trị âm. Vui lòng nhập lại.");
             }
         }
-
         System.out.println("Cập nhật thông tin nhân viên hoàn tất!");
     }
-
     public void xuatNhanVien() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.printf("|%-10d|%-15s|%-15s|%-10s|%-15s|%-10s|%-12.2f|%-8s|%-12s|\n",
