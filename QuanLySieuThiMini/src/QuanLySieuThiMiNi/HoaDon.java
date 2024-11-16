@@ -2,6 +2,8 @@ package QuanLySieuThiMiNi;
 
 import java.util.Scanner;
 
+import java.time.LocalDate;
+
 public class HoaDon {
     private int maHD;
     private int maKH;
