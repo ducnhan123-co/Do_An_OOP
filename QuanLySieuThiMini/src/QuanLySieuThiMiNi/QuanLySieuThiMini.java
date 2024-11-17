@@ -13,18 +13,18 @@ public class QuanLySieuThiMini {
 //        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
         int choice;
         do {
-            System.out.println("\n======================================");
-            System.out.println("         ████████████████████████       ");
-            System.out.println("        █ QUẢN LÝ SIÊU  THỊ MINI █      ");
-            System.out.println("         ████████████████████████       ");
-            System.out.println("               ┌─────────┐              ");
-            System.out.println("               │         │              ");
-            System.out.println("       ┌───────┴─────────┴───────┐      ");
-            System.out.println("       │                         │      ");
-            System.out.println("       │   CHÀO MỪNG QUÝ KHÁCH   │      ");
-            System.out.println("       │                         │      ");
-            System.out.println("       └─────────────────────────┘      ");
-            System.out.println("========================================");
+            System.out.println("\n===============================================");
+            System.out.println("             ████████████████████████        ");
+            System.out.println("            █ QUẢN LÝ SIÊU  THỊ MINI █       ");
+            System.out.println("             ████████████████████████        ");
+            System.out.println("                   ┌─────────┐              ");
+            System.out.println("                   │         │              ");
+            System.out.println("           ┌───────┴─────────┴───────┐      ");
+            System.out.println("           │                         │      ");
+            System.out.println("           │   CHÀO MỪNG QUÝ KHÁCH   │      ");
+            System.out.println("           │                         │      ");
+            System.out.println("           └─────────────────────────┘      ");
+            System.out.println("=================================================");
 
             System.out.println("╔═══════════════════════════════════════════════╗");
             System.out.println("║              QUẢN LÝ SIÊU THỊ MINI            ║");
@@ -38,6 +38,7 @@ public class QuanLySieuThiMini {
             System.out.println("╚═══════════════════════════════════════════════╝");
             System.out.print("Nhập lựa chọn của bạn: ");
             choice = sc.nextInt();
+            sc.nextLine();
 
             switch (choice) {
                 case 1:
@@ -47,7 +48,8 @@ public class QuanLySieuThiMini {
                     System.out.println("Chức năng quản lý sản phẩm đang được phát triển...");
                     break;
                 case 3:
-//                    qlHoaDon.menuDSHD();
+                    System.out.println("Tiến hành chức năng quản lý hóa đơn...\n");
+                    qlHoaDon.menuDSHD();
                     break;
                 case 4:
                 qlPhieuNhapHang.menu();
