@@ -218,10 +218,11 @@ public class QuanLyNhanVien {
                     }
                 }
 
-                case 9 -> ds.xuatDanhSachNhanVien(); // In danh sách nhân viên
+                case 9 -> {
+                    ds.xuatDanhSachNhanVien(); // In danh sách nhân viên
+                }
                 case 0 -> {
                     System.out.println("Đã thoát chương trình.");
-                    sc.close();
                     return;
                 }
                 default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");

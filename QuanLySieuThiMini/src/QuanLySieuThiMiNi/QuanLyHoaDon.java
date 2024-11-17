@@ -74,104 +74,211 @@ public class QuanLyHoaDon {
 
     // Hàm menu quản lý hóa đơn
     public void menuDSHD() {
-       while (true) {
-           System.out.println("------------------------------MENU HÓA ĐƠN-------------------------------");
-           System.out.println("1. Thêm 1 hóa đơn vào danh sách");
-           System.out.println("2. Thêm danh sách hóa đơn");
-           System.out.println("3. Sửa hóa đơn");
-           System.out.println("4. Xóa hóa đơn từ cuối danh sách");
-           System.out.println("5. Xóa hóa đơn theo mã");
-           System.out.println("6. Xóa hóa đơn theo ngày tạo hóa đơn");
-           System.out.println("7. Tìm kiếm hóa đơn theo mã");
-           System.out.println("8. Tìm kiếm các hóa đơn theo ngày tạo hóa đơn");
-           System.out.println("9. Tìm kiếm các hóa đơn theo tổng tiền nhập");
-           System.out.println("10. Liệt kê các hóa đơn có tổng tiền lớn hơn giá trị nhập");
-           System.out.println("11. Liệt kê các hóa đơn có tổng tiền nhỏ hơn giá trị nhập");
-           System.out.println("12. Thống kê hóa đơn theo tổng tiền");
-           System.out.println("13. Xem danh sách hóa đơn");
-           System.out.println("0. Thoát");
-           System.out.println("-------------------------------------------------------------------------");
-           System.out.print("Chọn chức năng: ");
+        while (true) {
+            System.out.println("╔═════════════════════════-MENU QUẢN LÝ HÓA ĐƠN-════════════════════════╗");
+            System.out.println("║1.  Thêm 1 hóa đơn vào danh sách                                (done) ║");
+            System.out.println("║2.  Thêm danh sách hóa đơn                                      (done) ║");
+            System.out.println("║3.  Sửa hóa đơn                                              (Not yet) ║");
+            System.out.println("║4.  Xóa hóa đơn theo tùy chọn                               (done 3/3) ║");
+            System.out.println("║5.  Tìm kiếm hóa đơn theo tùy chọn                          (done 3/3) ║");
+            System.out.println("║6.  Thống kê hóa đơn theo tùy chọn                          (done 3/6) ║");
+            System.out.println("║7.  Liệt kê các hóa đơn có tổng tiền lớn hơn giá trị nhập              ║");
+            System.out.println("║8.  Liệt kê các hóa đơn có tổng tiền nhỏ hơn giá trị nhập              ║");   // 7-8 có nên bỏ vào thống kê?
+            System.out.println("║9.  Xuất hóa đơn theo tùy chọn                                         ║");   // 9-12: Not done
+            System.out.println("║10. Xuất chi tiết hóa đơn theo tùy chọn                                ║");   // (9-12 gộp chung lại?)
+            System.out.println("║11. Xuất danh sách hóa đơn theo tùy chọn                               ║");   
+            System.out.println("║12. Xuất danh sách chi tiết hóa đơn theo tùy chọn                      ║");
+            System.out.println("║13. Xem danh sách hóa đơn hiện tại                              (done) ║");
+            System.out.println("║0.  Thoát                                                              ║");
+            System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
+            System.out.print("Chọn chức năng: ");
 
-           int choice = sc.nextInt();
-           sc.nextLine(); // Bỏ qua dòng trống
+            int choice = sc.nextInt();
+            sc.nextLine(); // Bỏ qua dòng trống
 
-           switch(choice) {
-               case 1:
-                   nhapHoaDon();
-                   break;
-               case 2:
-                   //nhapDanhSachHoaDon()
-                   // mà có thể nhập nhiều hóa đơn cùng lúc
-                   break;
-               case 3:
-                   // Chức năng sửa hóa đơn, bạn cần định nghĩa phương thức sửa
-                   break;
-               case 4:
-                   // Xóa hóa đơn từ cuối danh sách
-                   danhSachHoaDon.xoaHoaDonCuoi();
-                   break;
-               case 5:
-                   System.out.print("Nhập mã hóa đơn cần xóa: ");
-                   int maHD = sc.nextInt();
-                   sc.nextLine();
-                   danhSachHoaDon.xoaHoaDonTheoMa(maHD);
-                   break;
-               case 6:
-                   System.out.print("Nhập ngày tạo hóa đơn: ");
-                   String ngay = sc.nextLine();
-                   danhSachHoaDon.xoaHoaDonTheoNgay(ngay);
-                   break;
-               case 7:
-                   System.out.print("Nhập mã hóa đơn cần tìm: ");
-                   int maTim = sc.nextInt();
-                   sc.nextLine();
-                   HoaDon hoaDonCanTim = danhSachHoaDon.timKiemHoaDon(maTim);
-                   if (hoaDonCanTim != null) {
-                       hoaDonCanTim.xuatHoaDon();
-                   } else {
-                       System.out.println("Không tìm thấy hóa đơn có mã " + maTim + "!");
-                   }
-                   break;
-               case 8:
-                   // Tìm hóa đơn theo ngày tạo
-                   danhSachHoaDon.timHoaDonTheoNgayTaoHoaDon();
-                   break;
-               case 9:
-                   System.out.println("Nhập tổng tiền hóa đơn cần tìm: ");
-                   float tong = sc.nextFloat();
-                   HoaDon tongTienTim = danhSachHoaDon.timHoaDonTheoTongTien(tong);
-                   if (tongTienTim != null) {
-                       tongTienTim.xuatHoaDon();
-                   } else {
-                       System.out.println("Không tìm thấy hóa đơn có tổng tiền là " + tongTienTim + "đ!");
-                   }
-                   break;
-               case 10:
-                   System.out.println("Nhập giá tiền: ");
-                   float tongTien1 = sc.nextFloat();
-                   danhSachHoaDon.lietKeHoaDonTongTienLonHon(tongTien1);
-                   break;
-               case 11:
-                   System.out.println("Nhập giá tiền: ");
-                   float tongTien2 = sc.nextFloat();
-                   danhSachHoaDon.lietKeHoaDonTongTienNhoHon(tongTien2);
-                   break;
-               case 12:
-                   danhSachHoaDon.thongKeTongTienHoaDon();
-                   break;
-               case 13:
-                   danhSachHoaDon.xemDS();
-                   break;
-               case 0:
-                   System.out.println("Thoát Menu Quản lý Hóa đơn...");
-                   
-                   return;
-               default:
-                   System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
-           }
-       }
-   }
+            switch(choice) {
+                case 1:
+                    nhapHoaDon();
+                    break;
+                case 2:
+                    System.out.println("Nhập số lượng hóa đơn: ");
+                    int n=sc.nextInt();
+                    for(int i=0; i<n; i++){
+                        nhapHoaDon();
+                    }
+                    break;
+                case 3:
+                    // Chức năng sửa hóa đơn
+                    break;
+                case 4: {
+                    while (true) {
+                        try {
+                            //Hiển thị menu xóa
+                            System.out.println("============ XÓA HÓA ĐƠN ============");
+                            System.out.println("1. Xóa hóa đơn từ cuối danh sách");
+                            System.out.println("2. Xóa hóa đơn theo mã");
+                            System.out.println("3. Xóa hóa đơn theo ngày tạo hóa đơn");
+                            System.out.println("0. Thoát");
+                            System.out.print("Nhập lựa chọn của bạn: ");
+                            int luaChon = sc.nextInt();
+                            sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại sau khi nhập số
+
+                            if(luaChon==0) {
+                                System.out.println("Thoát chức năng xóa hóa đơn.\n");
+                                break;
+                            }
+                            switch (luaChon) {
+                                case 1:
+                                    danhSachHoaDon.xoaHoaDonCuoi();
+                                    break;
+                                case 2:
+                                    System.out.print("Nhập mã hóa đơn cần xóa: ");
+                                    int maHD = sc.nextInt();
+                                    sc.nextLine();
+                                    danhSachHoaDon.xoaHoaDonTheoMa(maHD);
+                                    break;
+                                case 3:
+                                    System.out.print("Nhập ngày tạo hóa đơn cần xóa: ");
+                                    String ngay = sc.nextLine();
+                                    danhSachHoaDon.xoaHoaDonTheoNgay(ngay);
+                                    break;
+                                default:
+                                    System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Đã xảy ra lỗi: "+e.getMessage());
+                        }
+                    }
+                    break;
+                }
+                case 5:{
+                    while (true) {
+                        try {
+                            //Hiển thị menu tìm kiếm
+                            System.out.println("============ TÌM KIẾM HÓA ĐƠN ============");
+                            System.out.println("1. Tìm kiếm hóa đơn theo mã");
+                            System.out.println("2. Tìm kiếm hóa đơn theo tổng tiền");
+                            System.out.println("3. Tìm kiếm hóa đơn theo ngày tạo hóa đơn");
+                            System.out.println("0. Thoát");
+                            System.out.print("Nhập lựa chọn của bạn: ");
+                            int luaChon = sc.nextInt();
+                            sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại sau khi nhập số
+
+                            if(luaChon==0) {
+                                System.out.println("Thoát chức năng tìm kiếm hóa đơn.\n");
+                                break;
+                            }
+                            switch (luaChon) {
+                                case 1:
+                                    System.out.print("Nhập mã hóa đơn cần tìm: ");
+                                    int maTim = sc.nextInt();
+                                    sc.nextLine();
+                                    HoaDon hoaDonCanTim = danhSachHoaDon.timKiemHoaDon(maTim);
+                                    if (hoaDonCanTim != null) {
+                                        hoaDonCanTim.xuatHoaDon();
+                                    } else {
+                                        System.out.println("Không tìm thấy hóa đơn có mã " + maTim + "!");
+                                    }
+                                    break;
+                                case 2:
+                                    System.out.println("Nhập tổng tiền hóa đơn cần tìm: ");
+                                    float tong = sc.nextFloat();
+                                    HoaDon tongTienTim = danhSachHoaDon.timHoaDonTheoTongTien(tong);
+                                    if (tongTienTim != null) {
+                                        tongTienTim.xuatHoaDon();
+                                    } else {
+                                        System.out.println("Không tìm thấy hóa đơn có tổng tiền là " + tongTienTim + "vnd!");
+                                    }
+                                    break;
+                                case 3:
+                                    // Tìm hóa đơn theo ngày tạo
+                                    danhSachHoaDon.timHoaDonTheoNgayTaoHoaDon();
+                                    break;
+                                default:
+                                    System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Đã xảy ra lỗi: "+e.getMessage());
+                        }
+                    }
+                    break;
+                } 
+                
+                case 6: {
+                    while (true) {
+                        try {
+                            //Hiển thị menu thống kê
+                            System.out.println("================ THỐNG KÊ HÓA ĐƠN ================");
+                            System.out.println("1. Thống kê tổng doanh thu");
+                            System.out.println("2. Thống kê số lượng hóa đơn");
+                            System.out.println("3. Thống kê số lượng hóa đơn theo ngày tháng năm");
+                            System.out.println("4. Thống kê tổng doanh thu theo tháng năm");
+                            System.out.println("5. Thống kê tổng doanh thu theo năm");
+                            System.out.println("6. Thống kê tổng doanh thu theo quý (Từng quý)");
+                            System.out.println("0. Thoát");
+                            System.out.print("Nhập lựa chọn của bạn: ");
+                            int luaChon = sc.nextInt();
+                            sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại sau khi nhập số
+
+                            if(luaChon==0) {
+                                System.out.println("Thoát chức năng thống kê.\n");
+                                break;
+                            }
+                            switch (luaChon) {
+                                case 1:
+                                    danhSachHoaDon.thongKeTongTienHoaDon();
+                                    break;
+                                case 2:
+                                    danhSachHoaDon.thongKeSoLuongHoaDon1();
+                                    break;
+                                case 3:
+                                    danhSachHoaDon.thongKeHoaDonTheoNgayThangNam();
+                                    break;
+                                case 4:
+
+                                case 5:
+
+                                case 6:
+
+                                case 7:
+
+                                case 8:
+
+                                default:
+                                    System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Đã xảy ra lỗi: "+e.getMessage());
+                        }
+                    }
+                    break;
+                }
+                    
+                case 7:
+
+                case 8:
+                    int maHD = sc.nextInt();
+                    danhSachHoaDonChiTiet.xuatChiTietHoaDonTheoMHD(maHD);
+                    break;
+                case 11:
+                    System.out.println("Nhập giá tiền: ");
+                    float tongTien2 = sc.nextFloat();
+                    danhSachHoaDon.lietKeHoaDonTongTienNhoHon(tongTien2);
+                    break;
+                case 12:
+                    danhSachHoaDon.thongKeTongTienHoaDon();
+                    break;
+                case 10:
+                    danhSachHoaDon.xemDS();;
+                    break;
+                case 0:
+                    System.out.println("Thoát Menu Quản lý Hóa đơn...");
+                    return;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+            }
+        }
+    }
 
     public static void main(String[] args) {
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon();
