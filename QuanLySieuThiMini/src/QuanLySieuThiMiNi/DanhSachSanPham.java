@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
-import java.util.Arrays;
 
 import static java.util.Arrays.copyOf;
 
@@ -123,7 +122,7 @@ public class DanhSachSanPham {
         return null;
     }
 
-    public void init() {
+    public void docFile() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham.txt"));
             String line ;
@@ -140,7 +139,7 @@ public class DanhSachSanPham {
         }
     }
 
-    public void save() {
+    public void ghiFile() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham2.txt"));
             for (SanPham sanPham: DS_SanPham) {
@@ -165,7 +164,7 @@ public class DanhSachSanPham {
     }
     public static void main(String[] args) {
         DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
-        danhSachSanPham.init();
+        danhSachSanPham.docFile();
         danhSachSanPham.xuatDanhSach();
     }
 }

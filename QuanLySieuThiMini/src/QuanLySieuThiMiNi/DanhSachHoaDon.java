@@ -22,6 +22,14 @@ public class DanhSachHoaDon implements ThaoTacFile {
         this.DS_hoaDon = other.DS_hoaDon;
     }
 
+    public boolean checkHD(int maHD) {
+        for (HoaDon i: DS_hoaDon) {
+            if (i.getMaHD() == maHD)
+                return false;
+        }
+        return true;
+    }
+
     // Xem danh sách hóa đơn
     public void xemDS() {
         System.out.println("Danh Sách Hóa Đơn:");
@@ -329,11 +337,42 @@ public class DanhSachHoaDon implements ThaoTacFile {
     }
 
     // Đọc file
-    public void docFile() {}
+    public void docFile() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/HoaDon.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                HoaDon tmp = new HoaDon();
+                String[] strings = line.split(";");
+                tmp.setMaHD(Integer.parseInt(strings[0].trim()));
+                tmp.setMaKH(Integer.parseInt(strings[1].trim()));
+                tmp.setMaNV(Integer.parseInt(strings[2].trim()));
+                tmp.setNgayTaoHoaDon(strings[3].trim());
+                tmp.setTongTien(Float.parseFloat(strings[4].trim()));
+                tmp.setPhuongThucTinhToan(strings[5].trim());
+                tmp.setTienTra(Float.parseFloat(strings[6].trim()));
+                tmp.setTienThua();
+                push(tmp);
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // Ghi file
     public void ghiFile() {
-        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/HoaDon.txt"));
+            String line;
+            for (HoaDon i: DS_hoaDon) {
+                line = String.format("%d;%d;%d;%s;%f;%s;%f;%f\n", i.getMaHD(), i.getMaKH(), i.getMaNV(), i.getNgayTaoHoaDon(), i.getTongTien(), i.getPhuongThucTinhToan(), i.getTienTra(), i.getTienThua());
+                bw.write(line);
+            }
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void capNhatFile() {
