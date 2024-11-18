@@ -47,7 +47,7 @@ public class QuanLyHoaDon {
                 }
                 hoaDon.setTongTien(TongTien);
                 System.out.printf("Tổng tiền: %.2f\n", TongTien);
-                // Chọn phương thức thanh toán
+                // Chọn phương thức thanh toán 1 hoặc 2
                 while (true) {
                     System.out.println("Nhập phương thức thanh toán:");
                     System.out.println("1 - Tiền mặt");
