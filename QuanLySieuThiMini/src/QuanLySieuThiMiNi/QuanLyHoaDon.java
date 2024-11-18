@@ -94,7 +94,7 @@ public class QuanLyHoaDon {
             System.out.println("╔═════════════════════════-MENU QUẢN LÝ HÓA ĐƠN-════════════════════════╗");
             System.out.println("║1.  Thêm 1 hóa đơn vào danh sách                                (done) ║");
             System.out.println("║2.  Thêm danh sách hóa đơn                                      (done) ║");
-            System.out.println("║3.  Sửa hóa đơn                                              (Not yet) ║");
+            System.out.println("║3.  Sửa hóa 1đơn                                              (Not yet) ║");
             System.out.println("║4.  Xóa hóa đơn theo tùy chọn                               (done 3/3) ║");
             System.out.println("║5.  Tìm kiếm hóa đơn theo tùy chọn                          (done 3/3) ║");
             System.out.println("║6.  Thống kê hóa đơn theo tùy chọn                          (done 3/6) ║");

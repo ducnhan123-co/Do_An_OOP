@@ -160,27 +160,38 @@ public class NhanVien {
     }
     public void suaNhanVien() {
         Scanner sc = new Scanner(System.in);
+
         System.out.println("Sửa thông tin nhân viên");
+
+        // Nhập họ mới
         System.out.print("Nhập họ mới (nhấn Enter để giữ nguyên): ");
         String newHo = sc.nextLine();
         if (!newHo.trim().isEmpty()) {
             this.honhanvien = newHo;
         }
+
+        // Nhập tên mới
         System.out.print("Nhập tên mới (nhấn Enter để giữ nguyên): ");
         String newTen = sc.nextLine();
         if (!newTen.trim().isEmpty()) {
             this.tennhanvien = newTen;
         }
+
+        // Nhập chức vụ mới
         System.out.print("Nhập chức vụ mới (nhấn Enter để giữ nguyên): ");
         String newChucVu = sc.nextLine();
         if (!newChucVu.trim().isEmpty()) {
             this.chucvu = newChucVu;
         }
+
+        // Nhập địa chỉ mới
         System.out.print("Nhập địa chỉ mới (nhấn Enter để giữ nguyên): ");
         String newDiaChi = sc.nextLine();
         if (!newDiaChi.trim().isEmpty()) {
             this.diachi = newDiaChi;
         }
+
+        // Nhập số điện thoại mới
         while (true) {
             System.out.print("Nhập số điện thoại mới (nhấn Enter để giữ nguyên): ");
             String newSoDienThoai = sc.nextLine();
@@ -193,6 +204,8 @@ public class NhanVien {
                 System.out.println("Số điện thoại chỉ nên chứa chữ số. Vui lòng nhập lại.");
             }
         }
+
+        // Nhập lương mới
         while (true) {
             System.out.print("Nhập lương mới (nhập -1 để giữ nguyên): ");
             double newLuong = sc.nextDouble();
@@ -206,8 +219,10 @@ public class NhanVien {
                 System.out.println("Lương không thể là giá trị âm. Vui lòng nhập lại.");
             }
         }
+
         System.out.println("Cập nhật thông tin nhân viên hoàn tất!");
     }
+
     public void xuatNhanVien() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.printf("|%-10d|%-15s|%-15s|%-10s|%-15s|%-10s|%-12.2f|%-8s|%-12s|\n",

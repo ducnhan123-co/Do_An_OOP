@@ -102,17 +102,47 @@
             return null;
         }
         public void suaNhanVienTheoMa() {
-           Scanner sc = new Scanner(System.in);
-            System.out.println("Nhap ma nhan vien can chinh sua: ");
-            int ma=sc.nextInt();
-            NhanVien nv = timKiemNhanVienTheoMa(ma);
-            if(nv != null) {
-                nv.suaNhanVien();
-            }
-            else {
-                System.out.println("Khong thay nhan vien nao: ");
+            Scanner sc = new Scanner(System.in);
+            boolean tiepTucSua = true;
+
+            while (tiepTucSua) {
+                System.out.println("Nhập mã nhân viên cần chỉnh sửa: ");
+                int ma = sc.nextInt();
+                sc.nextLine(); // Đọc dòng trống sau khi nhập số
+
+                NhanVien nv = timKiemNhanVienTheoMa(ma);
+
+                if (nv != null) {
+                    // In thông tin nhân viên trước khi sửa
+                    System.out.println("Thông tin nhân viên lúc cũ:");
+                    System.out.printf("|%-10s|%-15s|%-15s|%-10s|%-15s|%-10s|%-12s|%-8s|%-12s|\n",
+                            "Mã NV", "Chức vụ", "Họ NV", "Tên NV", "Ngày sinh", "Địa chỉ", "Lương", "GT", "Ngày bắt đầu");
+                    nv.xuatNhanVien();  // Hàm này sẽ xuất thông tin nhân viên
+
+                    // Sửa thông tin nhân viên
+                    nv.suaNhanVien();
+
+                    // In thông tin nhân viên sau khi sửa
+                    System.out.println("Thông tin nhân viên sau khi cập nhật:");
+                    System.out.printf("|%-10s|%-15s|%-15s|%-10s|%-15s|%-10s|%-12s|%-8s|%-12s|\n",
+                            "Mã NV", "Chức vụ", "Họ NV", "Tên NV", "Ngày sinh", "Địa chỉ", "Lương", "GT", "Ngày bắt đầu");
+                    nv.xuatNhanVien();
+
+                    System.out.println("Đã sửa thông tin nhân viên với mã: " + ma);
+                } else {
+                    System.out.println("Không tìm thấy nhân viên nào với mã: " + ma);
+                }
+
+                // Hỏi người dùng có muốn sửa tiếp không
+                System.out.print("Bạn muốn sửa tiếp không? (y/n): ");
+                String luaChon = sc.nextLine().trim().toLowerCase();
+
+                if (luaChon.equals("n")) {
+                    tiepTucSua = false; // Nếu chọn 'n' thì dừng lại
+                }
             }
         }
+
         public void xoaNhanVienTheoMaCach1(int maNV) {
             NhanVien nv = timKiemNhanVienTheoMa(maNV);
             if (nv != null) {
@@ -397,30 +427,138 @@
         public NhanVien[] timKiemNhanVienNoiSinh(String noi1, String noi2) {
             NhanVien[] ketqua = new NhanVien[dsnv.length]; // Mảng lưu kết quả
             int index = 0; // Biến đếm số lượng kết quả
-
-            // Duyệt danh sách nhân viên và tìm kiếm
             for (NhanVien nhanVien : dsnv) {
                 if (nhanVien != null && (nhanVien.getDiachi().contains(noi1) || nhanVien.getDiachi().contains(noi2))) {
                     ketqua[index] = nhanVien; // Lưu nhân viên phù hợp vào mảng
                     index++;
                 }
             }
-
             if (index == 0) {
                 System.out.println("Không tìm thấy nhân viên nào có nơi sinh ở " + noi1 + " hoặc " + noi2 + ".");
             }
-
-            // Trả về mảng kết quả đã cắt bỏ phần null
             return Arrays.copyOf(ketqua, index);
         }
 
+        public NhanVien[] timKiemNhanVienNoiSinh(String[] danhSachTinh) {
+            NhanVien[] ketQua = new NhanVien[dsnv.length]; // Mảng kết quả
+            int soKetQua = 0; // Đếm số nhân viên tìm được
+            for (NhanVien nhanVien : dsnv) {
+                if (nhanVien != null) {
+                    for (String tinh : danhSachTinh) {
+                        if (nhanVien.getDiachi().equalsIgnoreCase(tinh)) {
+                            ketQua[soKetQua++] = nhanVien;
+                            break; // Tìm thấy, không cần so sánh thêm
+                        }
+                    }
+                }
+            }
+            NhanVien[] ketQuaChinhXac = new NhanVien[soKetQua];
+            for (int i = 0; i < soKetQua; i++) {
+                ketQuaChinhXac[i] = ketQua[i];
+            }
+            return ketQuaChinhXac;
+        }
+        public void timKiemDiaChiNhanVien() {
+            try {
+                // Đọc danh sách tỉnh từ file vào mảng
+                String[] danhSachTinh = new String[64]; // Giả sử file có tối đa 64 tỉnh
+                int soTinh = 0; // Đếm số tỉnh trong file
+                try (BufferedReader br = new BufferedReader(new FileReader("D:\\Desktop\\ALL\\DO_AN_OOP_JAVA\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\DanhSachTinh.txt"))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        danhSachTinh[soTinh++] = line.trim();
+                    }
+                }
+                System.out.println("Danh sách các tỉnh thành (chọn số tương ứng):");
+                for (int i = 0; i < soTinh; i++) {
+                    System.out.printf("%d. %s\n", i + 1, danhSachTinh[i]);
+                }
+                int[] luaChon = new int[soTinh]; // Lưu lựa chọn của người dùng
+                int soLuaChon = 0; // Đếm số lượng tỉnh đã chọn
+                Scanner scanner = new Scanner(System.in);
+                boolean tiepTuc = true;
+                while (tiepTuc) {
+                    System.out.print("Nhập số tương ứng với tỉnh (VD: 1 2): ");
+                    String input = scanner.nextLine().trim();  // Loại bỏ khoảng trắng đầu và cuối
+                    String[] inputArray = input.split("\\s+");
+                    boolean validInput = true;
+                    for (String s : inputArray) {
+                        try {
+                            int chon = Integer.parseInt(s);
+                            // Kiểm tra số nhập có hợp lệ và không vượt quá số lượng tỉnh
+                            if (chon > 0 && chon <= soTinh) {
+                                // Kiểm tra xem tỉnh đã được chọn chưa
+                                boolean isDuplicate = false;
+                                for (int i = 0; i < soLuaChon; i++) {
+                                    if (luaChon[i] == chon - 1) {
+                                        isDuplicate = true;  // Nếu trùng, bỏ qua
+                                        break;
+                                    }
+                                }
+                                if (!isDuplicate) {
+                                    luaChon[soLuaChon++] = chon - 1;  // Lưu chỉ số tỉnh (0-based)
+                                }
+                            } else {
+                                System.out.println("Số " + chon + " không hợp lệ, vui lòng thử lại.");
+                                validInput = false;  // Đánh dấu là đầu vào không hợp lệ
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Lỗi nhập: '" + s + "' không phải là số hợp lệ. Mời nhập lại.");
+                            validInput = false;  // Đánh dấu là đầu vào không hợp lệ
+                        }
+                    }
+                    if (!validInput) {
+                        continue;
+                    }
+                    String tiep;
+                    do {
+                        System.out.print("Bạn có muốn nhập thêm không? (y/n): ");
+                        tiep = scanner.nextLine().trim().toLowerCase();
+                        if (!tiep.equals("y") && !tiep.equals("n")) {
+                            System.out.println("Lựa chọn không hợp lệ, vui lòng nhập lại.");
+                        }
+                    } while (!tiep.equals("y") && !tiep.equals("n"));
+
+                    tiepTuc = tiep.equals("y");
+                }
+                String[] tinhDuocChon = new String[soLuaChon];
+                int index = 0;
+                for (int chon : luaChon) {
+                    try {
+                        tinhDuocChon[index++] = danhSachTinh[chon];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                       continue;
+                    }
+                }
+                System.out.print("Bạn đã chọn các tỉnh: ");
+                for (int i = 0; i < tinhDuocChon.length; i++) {
+                    System.out.print(tinhDuocChon[i] + (i < tinhDuocChon.length - 1 ? ", " : "\n"));
+                }
+                NhanVien[] danhSachTimDuoc = timKiemNhanVienNoiSinh(tinhDuocChon);
+                if (danhSachTimDuoc.length == 0) {
+                    System.out.println("Không có nhân viên nào có nơi sinh thuộc danh sách bạn chọn.");
+                } else {
+                    System.out.printf("|%-10s|%-15s|%-15s|%-10s|%-15s|%-10s|%-12s|%-8s|%-12s|\n",
+                            "Mã NV", "Chức vụ", "Họ NV", "Tên NV", "Ngày sinh", "Địa chỉ", "Lương", "GT", "Ngày bắt đầu");
+                    for (NhanVien nhanVien : danhSachTimDuoc) {
+                        if (nhanVien != null) {
+                            nhanVien.xuatNhanVien();
+                        }
+                    }
+                    System.out.println("Tổng số nhân viên tìm được: " + danhSachTimDuoc.length);
+                }
+            } catch (IOException e) {
+                System.out.println("Đã xảy ra lỗi khi đọc file: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Đã xảy ra lỗi: " + e.getMessage());
+            }
+        }
 
         public void thongKeTheoTuoi(int namHienTai) {
             if (size == 0) {
                 System.out.println("Danh sách nhân viên trống.");
                 return;
             }
-
             Scanner sc = new Scanner(System.in);
             System.out.println("Nhập tuổi tối thiểu để lọc nhân viên (ví dụ: 30): ");
             int tuoiCanTim = sc.nextInt();
@@ -440,7 +578,5 @@
             }
             System.out.println("Danh sách trên có : "+ dem + " nhân viên.");
         }
-
-
     }
 
