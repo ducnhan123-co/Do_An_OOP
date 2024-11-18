@@ -17,19 +17,20 @@ public class QuanLyNhanVien {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.println("------------------------------MENU-------------------------------");
-            System.out.println("1. Thêm nhân viên theo tùy chọn");
-            System.out.println("2. Sửa nhân viên theo mã");
-            System.out.println("3. Xóa nhân viên theo mã");
-            System.out.println("4. Tìm kiếm nhân viên theo tùy chọn");
-            System.out.println("5. Thống kê nhân viên theo tùy chọn");
-            System.out.println("6. Cập nhật danh sách nhân viên hiện tại");
-            System.out.println("7. Lấy thông tin từ file");
-            System.out.println("8. Tìm nhân viên có địa chỉ là TPHCM và Hà Nội");
-            System.out.println("9. In danh sách nhân viên");
-            System.out.println("0. Thoát");
-            System.out.println("-----------------------------------------------------------------");
+            System.out.println("╔═══════════════════════-MENU QUẢN LÝ NHÂN VIÊN-══════════════════════╗");
+            System.out.println("║1.  Thêm nhân viên theo tùy chọn.                                    ║");
+            System.out.println("║2.  Sửa thông tin nhân viên theo mã.                                 ║");
+            System.out.println("║3.  Xóa nhân viên theo mã.                                           ║");
+            System.out.println("║4.  Tìm kiếm nhân viên theo tùy chọn.                                ║");
+            System.out.println("║5.  Thống kê nhân viên theo tùy chọn.                                ║");
+            System.out.println("║6.  Cập nhật danh sách nhân viên hiện tại.                           ║");
+            System.out.println("║7.  Lấy thông tin từ file.                                           ║");
+            System.out.println("║8.  Tìm nhân viên nâng cao với địa chỉ do người dùng chọn.           ║");
+            System.out.println("║9.  In danh sách nhân viên.                                          ║");
+            System.out.println("║0.  Thoát.                                                           ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
+
             int choice = sc.nextInt();
             sc.nextLine(); // Bỏ qua dòng trống
 
@@ -38,9 +39,11 @@ public class QuanLyNhanVien {
                     while (true) {
                         try {
                             System.out.println("====== THÊM NHÂN VIÊN ======");
-                            System.out.println("1. Thêm 1 nhân viên.");
-                            System.out.println("2. Thêm danh sách nhân viên.");
-                            System.out.println("0. Thoát.");
+                            System.out.println("╔══════════════════════════════╗");
+                            System.out.println("║ 1. Thêm 1 nhân viên.         ║");
+                            System.out.println("║ 2. Thêm danh sách nhân viên. ║");
+                            System.out.println("║ 0. Thoát.                    ║");
+                            System.out.println("╚══════════════════════════════╝");
                             System.out.print("Nhập lựa chọn của bạn: ");
                             int luaChon = sc.nextInt();
                             sc.nextLine(); // Đọc bỏ ký tự xuống dòng còn sót lại sau khi nhập số
@@ -63,29 +66,38 @@ public class QuanLyNhanVien {
                 }
                 case 2 -> ds.suaNhanVienTheoMa(); // Sửa1 nhân viên theo mã
                 case 3 -> {
-                    System.out.print("Nhập mã nhân viên cần xóa: ");
-                    int maXoa = sc.nextInt();
-                    sc.nextLine();
-                    ds.xoaNhanVienTheoMaCach1(maXoa);
+                    boolean tiepTucXoa = true;
+                    while (tiepTucXoa) {
+                        System.out.print("Nhập mã nhân viên cần xóa: ");
+                        int maXoa = sc.nextInt();
+                        sc.nextLine(); // Đọc bỏ dòng dư
+                        // Gọi phương thức xóa nhân viên theo mã
+                        ds.xoaNhanVienTheoMaCach1(maXoa);
+                        // Hỏi người dùng có muốn xóa tiếp không
+                        System.out.print("Bạn muốn xóa tiếp không? (y/n): ");
+                        String luaChon = sc.nextLine().trim().toLowerCase();
+                        if (luaChon.equals("n")) {
+                            tiepTucXoa = false; // Dừng lại nếu người dùng chọn 'n'
+                        }
+                    }
                 }
                 case 4 -> {
                     while (true) {
                         try {
                             // Hiển thị menu tìm kiếm
-                            System.out.println("====== TÌM KIẾM NHÂN VIÊN ======");
-                            System.out.println("1. Tìm kiếm nhân viên theo mã");
-                            System.out.println("2. Tìm kiếm nhân viên theo họ");
-                            System.out.println("3. Tìm kiếm nhân viên theo tên");
-                            System.out.println("0. Thoát");
+                            System.out.println("====== THÊM NHÂN VIÊN ======");
+                            System.out.println("╔══════════════════════════════╗");
+                            System.out.println("║ 1. Thêm 1 nhân viên.         ║");
+                            System.out.println("║ 2. Thêm danh sách nhân viên. ║");
+                            System.out.println("║ 0. Thoát.                    ║");
+                            System.out.println("╚══════════════════════════════╝");
                             System.out.print("Nhập lựa chọn của bạn: ");
                             int luaChon = sc.nextInt();
                             sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại sau khi nhập số
-
                             if (luaChon == 0) {
                                 System.out.println("Thoát tìm kiếm nhân viên.");
                                 break;
                             }
-
                             switch (luaChon) {
                                 case 1 -> {
                                     // Tìm kiếm nhân viên theo mã
@@ -154,22 +166,20 @@ public class QuanLyNhanVien {
                         try {
                             // Hiển thị menu thống kê
                             System.out.println("====== THỐNG KÊ NHÂN VIÊN ======");
-                            System.out.println("1. Thống kê nhân viên theo mức lương.");
-                            System.out.println("2. Thống kê nhân viên theo năm làm việc.");
-                            System.out.println("3. Thống kê nhân viên theo độ tuổi.");
-                            System.out.println("0. Thoát.");
+                            System.out.println("╔══════════════════════════════════════════╗");
+                            System.out.println("║ 1. Thống kê nhân viên theo mức lương.    ║");
+                            System.out.println("║ 2. Thống kê nhân viên theo năm làm việc. ║");
+                            System.out.println("║ 3. Thống kê nhân viên theo độ tuổi.      ║");
+                            System.out.println("║ 0. Thoát.                                ║");
+                            System.out.println("╚══════════════════════════════════════════╝");
                             System.out.print("Nhập lựa chọn của bạn: ");
                             int luaChon = sc.nextInt();
-
-                            // Xử lý từng lựa chọn
                             switch (luaChon) {
                                 case 1 -> ds.thongKeTheoMucLuong(); // Gọi phương thức thống kê theo mức lương
                                 case 2 -> {
                                     ds.thongKeTheoNamLamViec(); // Gọi phương thức thống kê theo năm làm việc
                                 }
                                 case 3 -> {
-//                                    System.out.print("Nhập năm hiện tại: ");
-//                                    int namHienTai = sc.nextInt();
                                     ds.thongKeTheoTuoi(2024); // Gọi phương thức thống kê theo tuổi
                                 }
                                 case 0 -> {
@@ -179,7 +189,7 @@ public class QuanLyNhanVien {
                                 default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                             }
                         } catch (Exception e) {
-                            // Xử lý ngoại lệ
+
                             System.out.println("Đã xảy ra lỗi: " + e.getMessage());
                             sc.nextLine(); // Đọc bỏ dữ liệu lỗi để tránh lặp vô hạn
                         }
@@ -191,33 +201,25 @@ public class QuanLyNhanVien {
 //                    ds.xuatDanhSachNhanVien();
                 }
                 case 8 -> {
-                    try {
-                        System.out.println("Tìm kiếm nhân viên có nơi sinh ở TP.HCM hoặc Hà Nội:");
-                        String noi1 = "TP.HCM";
-                        String noi2 = "Ha Noi";
-
-                        // Gọi phương thức tìm kiếm
-                        NhanVien[] danhSachTimDuoc = ds.timKiemNhanVienNoiSinh(noi1, noi2);
-                        int dem=0;
-                        if (danhSachTimDuoc.length == 0) {
-                            System.out.println("Không có nhân viên nào có nơi sinh ở " + noi1 + " hoặc " + noi2 + ".");
-                        } else {
-                            System.out.printf("|%-10s|%-15s|%-15s|%-10s|%-15s|%-10s|%-12s|%-8s|%-12s|\n",
-                                    "Mã NV", "Chức vụ", "Họ NV", "Tên NV", "Ngày sinh", "Địa chỉ", "Lương", "GT", "Ngày bắt đầu");
-                            // In thông tin từng nhân viên
-                            for (NhanVien nhanVien : danhSachTimDuoc) {
-                                if (nhanVien != null) {
-                                    nhanVien.xuatNhanVien();
-                                    dem++;
-                                }
+                    do {
+                        ds.timKiemDiaChiNhanVien(); // Gọi phương thức tìm kiếm địa chỉ nhân viên
+                        Scanner scanner = new Scanner(System.in);
+                        String tiepTucTimKiem;
+                        do {
+                            System.out.print("Bạn có muốn tìm kiếm tiếp không? (y/n): ");
+                            tiepTucTimKiem = scanner.nextLine().trim().toLowerCase();
+                            if (!tiepTucTimKiem.equals("y") && !tiepTucTimKiem.equals("n")) {
+                                System.out.println("Lựa chọn không hợp lệ, vui lòng nhập lại.");
                             }
-                            System.out.println("Danh sách trên có : "+ dem +" nhân viên.");
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Đã xảy ra lỗi: " + e.getMessage());
-                    }
-                }
+                        } while (!tiepTucTimKiem.equals("y") && !tiepTucTimKiem.equals("n"));
 
+                        // Nếu chọn "n", thoát vòng lặp
+                        if (tiepTucTimKiem.equals("n")) {
+                            System.out.println("Đã thoát chức năng tìm kiếm.");
+                            break;
+                        }
+                    } while (true);
+                }
                 case 9 -> {
                     ds.xuatDanhSachNhanVien(); // In danh sách nhân viên
                 }
