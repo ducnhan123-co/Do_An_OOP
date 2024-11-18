@@ -13,17 +13,17 @@ public class QuanLySieuThiMini {
 //        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
         int choice;
         do {
-            System.out.println("\n===============================================");
-            System.out.println("             ████████████████████████        ");
-            System.out.println("            █ QUẢN LÝ SIÊU  THỊ MINI █       ");
-            System.out.println("             ████████████████████████        ");
-            System.out.println("                   ┌─────────┐              ");
-            System.out.println("                   │         │              ");
-            System.out.println("           ┌───────┴─────────┴───────┐      ");
-            System.out.println("           │                         │      ");
-            System.out.println("           │   CHÀO MỪNG QUÝ KHÁCH   │      ");
-            System.out.println("           │                         │      ");
-            System.out.println("           └─────────────────────────┘      ");
+            System.out.println("\n================================================");
+            System.out.println("             ████████████████████████            ");
+            System.out.println("            █ QUẢN LÝ SIÊU  THỊ MINI █           ");
+            System.out.println("             ████████████████████████            ");
+            System.out.println("                   ┌─────────┐                   ");
+            System.out.println("                   │         │                   ");
+            System.out.println("           ┌───────┴─────────┴───────┐           ");
+            System.out.println("           │                         │           ");
+            System.out.println("           │   CHÀO MỪNG QUÝ KHÁCH   │           ");
+            System.out.println("           │                         │           ");
+            System.out.println("           └─────────────────────────┘           ");
             System.out.println("=================================================");
 
             System.out.println("╔═══════════════════════════════════════════════╗");
