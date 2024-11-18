@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -151,7 +152,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 tongTien += DS_hoaDon[i].getTongTien();
             }
         }
-        System.out.println("Tổng số tiền của tất cả các hóa đơn: "+tongTien);
+        System.out.println("Tổng số tiền của tất cả các hóa đơn: "+tongTien+" VND.");
     }
 
     // Thống kê số lượng hóa đơn trả kiểu void
@@ -195,7 +196,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
                 float tongDoanhThu=0;
                 int hoaDonCount=0;
-                float avgDoanhThu=0;
+                float tongDoanhThuTrungBinh=0;
 
                 for(HoaDon hoaDon: DS_hoaDon) {
                     if(hoaDon != null) {
@@ -212,17 +213,64 @@ public class DanhSachHoaDon implements ThaoTacFile {
                     //////////////////
                     return;
                 }
-                avgDoanhThu=tongDoanhThu/hoaDonCount;
+                tongDoanhThuTrungBinh=tongDoanhThu/hoaDonCount;
 
                 System.out.println("Số lượng hóa đơn trong ngày " + ngayStr + ": " + hoaDonCount);
                 System.out.printf("Tổng doanh thu trong ngày " + ngayStr + ": %.2f VND", tongDoanhThu);
-                System.out.printf("Doanh thu trung bình: %.2f VND\n", avgDoanhThu);
+                System.out.printf("Doanh thu trung bình: %.2f VND\n", tongDoanhThuTrungBinh);
                 break;
 
             } catch (DateTimeParseException e) {
                 System.out.println("Ngày nhập không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy.");
             } catch (NumberFormatException e) {
                 System.out.println("Lỗi: Vui lòng nhập một giá trị hợp lệ.");
+            } catch (Exception e) {
+                System.out.println("Đã xảy ra lỗi: "+e.getMessage());
+            }
+        }
+    }
+
+    // Thống kê hóa đơn theo tháng năm
+    public void thongKeHoaDonTheoThangNam() {
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+
+        while (true) {
+            try {
+                System.out.println("Nhập tháng năm: ");
+                String ngayNhap = sc.nextLine().trim();
+
+                LocalDateTime date = LocalDateTime.parse(ngayNhap, formatter);
+                int thang = date.getMonthValue();
+                int nam = date.getYear();
+
+                int soluongHoaDon=0;
+                float tongDoanhThu=0;
+                float tongDoanhThuTrungBinh=0;
+                
+                for(HoaDon hoaDon: DS_hoaDon) {
+                    if(hoaDon != null) {
+                        LocalDateTime ngay = LocalDateTime.parse(ngayNhap, formatter);
+                        if(ngay.getMonthValue()==thang && ngay.getYear()==nam) {
+                            soluongHoaDon++;
+                            tongDoanhThu+=hoaDon.getTongTien();
+                        }
+                    }
+                }
+                tongDoanhThuTrungBinh = tongDoanhThu / soluongHoaDon;
+
+                if(soluongHoaDon==0) {
+                    System.out.println("Không có hóa đơn nào trong tháng "+thang+" năm "+nam);
+                }
+
+                System.out.println("Số lượng hóa đơn trong "+ngayNhap+": "+soluongHoaDon);
+                System.out.println("Tổng doanh thu trong "+ngayNhap+": "+tongDoanhThu);
+                System.out.println("Số lượng hóa đơn trong "+ngayNhap+": "+tongDoanhThuTrungBinh);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Ngày nhập không hợp lệ. Vui lòng nhập theo định dạng MM/yyyy.");
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi: Vui lòng nhập giá trị hợp lệ.");
             } catch (Exception e) {
                 System.out.println("Đã xảy ra lỗi: "+e.getMessage());
             }
