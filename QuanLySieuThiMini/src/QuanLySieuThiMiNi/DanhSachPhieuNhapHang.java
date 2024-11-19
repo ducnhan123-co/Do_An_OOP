@@ -14,16 +14,20 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class DanhSachPhieuNhapHang implements ThaoTacFile {
-    private PhieuNhapHang[] phieu = new PhieuNhapHang[0];
+    private PhieuNhapHang[] phieu = new PhieuNhapHang[10];
     private int n = 0;
 
     public void themPhieuNhapHang() {
-        phieu = Arrays.copyOf(phieu, n + 1);
+        if (n >= phieu.length) {
+            // Tăng kích thước mảng khi đã đầy
+            phieu = Arrays.copyOf(phieu, phieu.length * 2); // Tăng kích thước gấp đôi
+            System.out.println("Danh sách đã đầy, tăng kích thước mảng.");
+        }
+
         phieu[n] = new PhieuNhapHang();
         phieu[n].nhapPhieu();
         n++;
     }
-    
     public PhieuNhapHang[] getDsPhieu() {
         return phieu;
     }
@@ -225,8 +229,17 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
                 int maPhieuNhap = Integer.parseInt(parts[0].trim()); // Mã phiếu nhập
                 int maNV = Integer.parseInt(parts[1].trim()); // Mã nhân viên
                 int maNCC = Integer.parseInt(parts[2].trim()); // Mã nhà cung cấp
+
+                // Xử lý ngày nhập hàng
                 LocalDate ngayNH = LocalDate.parse(parts[3].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy")); // Ngày nhập hàng
-                double tongTien = Double.parseDouble(parts[4].trim()); // Tổng tiền
+
+                // Xử lý tổng tiền, nếu có giá trị không hợp lệ thì gán về 0
+                double tongTien = 0.0;
+                try {
+                    tongTien = Double.parseDouble(parts[4].trim()); // Tổng tiền
+                } catch (NumberFormatException e) {
+                    System.out.println("Lỗi định dạng tổng tiền trong dòng: " + line + ". Gán giá trị tổng tiền = 0.");
+                }
 
                 // Tạo đối tượng PhieuNhapHang với các tham số vừa đọc
                 return new PhieuNhapHang(maPhieuNhap, maNV, maNCC, tongTien, ngayNH);
@@ -243,20 +256,20 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
 
     @Override
     public void docFile() {
-        String filename = "C:\\Users\\ACER\\OneDrive\\Desktop\\Do_an_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
+        String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             int count = 0;
             while ((line = reader.readLine()) != null) {
                 PhieuNhapHang phieuNhap = parseLineToPhieuNhapHang(line);
                 if (phieuNhap != null) {
-                    if (n < phieu.length) { // Kiểm tra danh sách chưa đầy
-                        phieu[n++] = phieuNhap;
-                        count++;
-                    } else {
-                        System.out.println("Danh sách đã đầy, không thể thêm phiếu nhập hàng.");
-                        break;
+                    // Kiểm tra nếu danh sách đầy, sẽ tự động mở rộng
+                    if (n >= phieu.length) {
+                        phieu = Arrays.copyOf(phieu, phieu.length * 2); // Tăng kích thước mảng khi cần thiết
+                        System.out.println("Danh sách phiếu nhập hàng đã đầy, tăng kích thước mảng.");
                     }
+                    phieu[n++] = phieuNhap;
+                    count++;
                 } else {
                     System.out.println("Dòng không hợp lệ: " + line);
                 }
@@ -270,22 +283,8 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
     }
 
     @Override
-    public void ghiFile() { 
-        String filename = "C:\\Users\\ACER\\OneDrive\\Desktop\\Do_an_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            for (int i = 0; i < n; i++) {
-                PhieuNhapHang phieuNhap = phieu[i];
-                writer.write(phieuNhap.getMaPhieu() + ";" +
-                             phieuNhap.getMaNhanVien() + ";" +
-                             phieuNhap.getMaNCC() + ";" +
-                             phieuNhap.getNgayNhapHang().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ";" +
-                             phieuNhap.getTongTien());
-                writer.newLine();
-            }
-            System.out.println("Đã ghi file thành công.");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public void ghiFile() {
+
     }
 
     @Override
