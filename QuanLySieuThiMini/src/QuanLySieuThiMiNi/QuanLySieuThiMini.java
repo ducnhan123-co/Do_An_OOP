@@ -8,8 +8,8 @@ public class QuanLySieuThiMini {
         QuanLyNhanVien qlNhanVien = new QuanLyNhanVien(100); // Quản lý nhân viên
 //        QuanLySanPham qlSanPham = new QuanLySanPham(100); // Quản lý sản phẩm
         QuanLyHoaDon qlHoaDon = new QuanLyHoaDon(); // Quản lý hóa đơn
-//        QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang(100); // Quản lý phiếu nhập hàng
         QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang();
+      
 //        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
         int choice;
         do {
