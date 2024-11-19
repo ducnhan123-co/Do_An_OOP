@@ -1,21 +1,23 @@
 package QuanLySieuThiMiNi;
 
-import java.time.Month;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class KhachHang {
     private int maKH;
     private String hoKH;
     private String tenKH;
-    private Date ngaySinh = new Date();
+    private LocalDate ngaySinh;
     private String gioiTinh;
     private String sdt;
     private String diaChi;
     private float diem;
 
     public KhachHang() {}
-    public KhachHang(int maKH, String hoKH, String tenKH, Date ngaySinh, String gioiTinh, String sdt, String diaChi) {
+
+    public KhachHang(int maKH, String hoKH, String tenKH, LocalDate ngaySinh, String gioiTinh, String sdt, String diaChi) {
         this.maKH = maKH;
         this.hoKH = hoKH;
         this.tenKH = tenKH;
@@ -24,6 +26,7 @@ public class KhachHang {
         this.sdt = sdt;
         this.diaChi = diaChi;
     }
+
     public KhachHang(KhachHang other) {
         this.maKH = other.maKH;
         this.hoKH = other.hoKH;
@@ -35,6 +38,7 @@ public class KhachHang {
         this.diem = other.diem;
     }
 
+    // Getter và setter
     public int getMaKH() {
         return maKH;
     }
@@ -59,11 +63,11 @@ public class KhachHang {
         this.tenKH = tenKH;
     }
 
-    public Date getNgaySinh() {
+    public LocalDate getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
+    public void setNgaySinh(LocalDate ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -99,70 +103,116 @@ public class KhachHang {
         this.diem = diem;
     }
 
+    // Nhập thông tin khách hàng
     public void nhap() {
-        while (true) {
-            try {
-                Scanner in = new Scanner(System.in);
-                System.out.print("nhap ma khach hang: ");
-                this.maKH = in.nextInt();
-                System.out.print("nhap ho khach hang: ");
-                in.nextLine();
-                this.hoKH = in.nextLine().trim();
-                System.out.print("nhap ten khach hang: ");
-                this.tenKH = in.nextLine().trim();
-                System.out.println("nhap ngay sinh khach hang: ");
-                System.out.print("nhap ngay: ");
-                this.ngaySinh.setDate(in.nextInt());
-                System.out.print("nhap thang: ");
-                this.ngaySinh.setMonth(in.nextInt());
-                System.out.print("nhap nam: ");
-                this.ngaySinh.setYear(in.nextInt());
-                System.out.print("nhap gioi tinh khach hang: ");
-                in.nextLine();
-                this.gioiTinh = in.nextLine().trim();
-                System.out.print("nhap sdt khach hang: ");
-                this.sdt = in.nextLine().trim();
-                System.out.print("nhap dia chi khach hang: ");
-                this.diaChi = in.nextLine().trim();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập thông tin khách hàng");
 
-                if (sdt.length() != 10)
-                    throw new Exception("so dien thoai khong hop le");
+        System.out.print("Nhập mã khách hàng: ");
+        this.maKH = sc.nextInt();
+        sc.nextLine(); // Consume the newline
+
+        System.out.print("Nhập họ khách hàng: ");
+        this.hoKH = sc.nextLine().trim();
+
+        System.out.print("Nhập tên khách hàng: ");
+        this.tenKH = sc.nextLine().trim();
+
+        while (true) {
+            System.out.print("Nhập ngày sinh (dd/MM/yyyy): ");
+            String dateInput = sc.nextLine();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            try {
+                this.ngaySinh = LocalDate.parse(dateInput, formatter);
                 break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Ngày sinh không hợp lệ, vui lòng nhập lại.");
             }
         }
+
+        System.out.print("Nhập giới tính: ");
+        this.gioiTinh = sc.nextLine().trim();
+
+        while (true) {
+            System.out.print("Nhập số điện thoại: ");
+            this.sdt = sc.nextLine().trim();
+            if (this.sdt.matches("\\d{10}")) {  // Kiểm tra số điện thoại hợp lệ
+                break;
+            } else {
+                System.out.println("Số điện thoại không hợp lệ. Vui lòng nhập lại.");
+            }
+        }
+
+        System.out.print("Nhập địa chỉ: ");
+        this.diaChi = sc.nextLine().trim();
     }
 
-    public void sua () {
-        while (true) {
-            try {
-                Scanner in = new Scanner(System.in);
-                System.out.print("nhap ho khach hang: ");
-                this.hoKH = in.nextLine().trim();
-                System.out.print("nhap ten khach hang: ");
-                this.tenKH = in.nextLine().trim();
-                System.out.println("nhap ngay sinh khach hang: ");
-                System.out.print("nhap ngay: ");
-                this.ngaySinh.setDate(in.nextInt());
-                System.out.print("nhap thang: ");
-                this.ngaySinh.setMonth(in.nextInt());
-                System.out.print("nhap nam: ");
-                this.ngaySinh.setYear(in.nextInt());
-                System.out.print("nhap gioi tinh khach hang: ");
-                in.nextLine();
-                this.gioiTinh = in.nextLine().trim();
-                System.out.print("nhap sdt khach hang: ");
-                this.sdt = in.nextLine().trim();
-                System.out.print("nhap dia chi khach hang: ");
-                this.diaChi = in.nextLine().trim();
+    // Sửa thông tin khách hàng
+    public void sua() {
+        Scanner sc = new Scanner(System.in);
 
-                if (sdt.length() != 10)
-                    throw new Exception("so dien thoai khong hop le");
+        System.out.println("Sửa thông tin khách hàng");
+
+        System.out.print("Nhập họ mới (nhấn Enter để giữ nguyên): ");
+        String newHo = sc.nextLine();
+        if (!newHo.trim().isEmpty()) {
+            this.hoKH = newHo;
+        }
+
+        System.out.print("Nhập tên mới (nhấn Enter để giữ nguyên): ");
+        String newTen = sc.nextLine();
+        if (!newTen.trim().isEmpty()) {
+            this.tenKH = newTen;
+        }
+
+        while (true) {
+            System.out.print("Nhập ngày sinh mới (dd/MM/yyyy, nhấn Enter để giữ nguyên): ");
+            String dateInput = sc.nextLine();
+            if (dateInput.isEmpty()) {  // Giữ nguyên nếu không nhập
                 break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } else {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                try {
+                    this.ngaySinh = LocalDate.parse(dateInput, formatter);
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println("Ngày sinh không hợp lệ, vui lòng nhập lại.");
+                }
             }
         }
+
+        System.out.print("Nhập giới tính mới (nhấn Enter để giữ nguyên): ");
+        String newGioiTinh = sc.nextLine();
+        if (!newGioiTinh.trim().isEmpty()) {
+            this.gioiTinh = newGioiTinh;
+        }
+
+        while (true) {
+            System.out.print("Nhập số điện thoại mới (nhấn Enter để giữ nguyên): ");
+            String newSoDienThoai = sc.nextLine();
+            if (newSoDienThoai.trim().isEmpty()) {  // Giữ nguyên nếu không nhập
+                break;
+            } else if (newSoDienThoai.matches("\\d{10}")) {
+                this.sdt = newSoDienThoai;
+                break;
+            } else {
+                System.out.println("Số điện thoại không hợp lệ, vui lòng nhập lại.");
+            }
+        }
+
+        System.out.print("Nhập địa chỉ mới (nhấn Enter để giữ nguyên): ");
+        String newDiaChi = sc.nextLine();
+        if (!newDiaChi.trim().isEmpty()) {
+            this.diaChi = newDiaChi;
+        }
+
+        System.out.println("Cập nhật thông tin khách hàng hoàn tất!");
+    }
+
+    // Xuất thông tin khách hàng
+    public void xuat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.printf("|%-10d|%-15s|%-15s|%-12s|%-15s|%-10s|%-15s|\n",
+                maKH, hoKH, tenKH, ngaySinh.format(formatter), gioiTinh, sdt, diaChi);
     }
 }

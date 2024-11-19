@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-//import java.time.LocalDate;
-//import java.time.format.DateTimeFormatter;
-//import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -29,13 +26,10 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         return null; // Nếu không tìm thấy
     }
 
-    // Hàm thêm chi tiết vào phiếu nhập hàng
     public void themChiTietVaoPhieu() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu nhập hàng cần thêm chi tiết: ");
         int maPhieu = sc.nextInt();
-
-        // Tìm phiếu nhập hàng theo mã
         PhieuNhapHang phieu = timGanDungTheoMa(maPhieu);
         if (phieu != null) {
             // Tạo chi tiết phiếu nhập hàng mới
@@ -126,8 +120,6 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         if (phieu != null) {
             System.out.print("Nhập mã sản phẩm cần xóa: ");
             int maSP = sc.nextInt();
-
-            // Tìm chi tiết sản phẩm trong phiếu nhập hàng
             int index = findChiTietIndex(maPhieu, maSP);
 
             if (index != -1) {
@@ -137,8 +129,6 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
                 }
                 dsChiTiet = Arrays.copyOf(dsChiTiet, n - 1); // Cập nhật lại kích thước mảng
                 n--; // Giảm số lượng chi tiết
-
-                // Cập nhật lại tổng tiền của phiếu
                 phieu.addOrUpdateProduct(maSP, 0, 0);
                 phieu.updateTongTien();
 
@@ -153,7 +143,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     }
     
     // Hàm tìm chi tiết sản phẩm theo mã phiếu và mã sản phẩm
-    private ChiTietPhieuNhapHang findChiTietByMaSP(int maPhieu, int maSP) {
+    public ChiTietPhieuNhapHang findChiTietByMaSP(int maPhieu, int maSP) {
         for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) {
             System.out.println("Đang kiểm tra: Mã phiếu = " + chiTiet.getMaPhieu() + ", Mã sản phẩm = " + chiTiet.getMaSp());
             if (chiTiet.getMaPhieu() == maPhieu && chiTiet.getMaSp() == maSP) {
@@ -164,7 +154,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     }
 
     // Hàm tìm index của chi tiết sản phẩm theo mã phiếu và mã sản phẩm
-    private int findChiTietIndex(int maPhieu, int maSP) {
+    public int findChiTietIndex(int maPhieu, int maSP) {
         for (int i = 0; i < n; i++) {
             if (dsChiTiet[i].getMaPhieu() == maPhieu && dsChiTiet[i].getMaSp() == maSP) {
                 return i;
@@ -182,8 +172,6 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
         System.out.printf("| %-10s | %-12s | %-8s | %-9s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("-------------------------------------------------------------");
-
-        // In các chi tiết phiếu nhập hàng
         for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) 
         	chiTiet.xuatChiTiet();
             
@@ -215,11 +203,8 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             int count = 0;
-
-            // Đọc từng dòng trong file
             while ((line = reader.readLine()) != null) {
                 ChiTietPhieuNhapHang chiTiet = parseLineToChiTiet(line);
-
                 if (chiTiet != null) {
                     // Kiểm tra xem mảng chi tiết có đủ dung lượng không
                     if (n >= dsChiTiet.length) {
