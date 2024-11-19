@@ -6,11 +6,11 @@ public class QuanLySieuThiMini {
     public void menu() {
         Scanner sc = new Scanner(System.in);
         QuanLyNhanVien qlNhanVien = new QuanLyNhanVien(100); // Quản lý nhân viên
-//        QuanLySanPham qlSanPham = new QuanLySanPham(100); // Quản lý sản phẩm
+        QuanLySanPham qlSanPham = new QuanLySanPham(); // Quản lý sản phẩm
         QuanLyHoaDon qlHoaDon = new QuanLyHoaDon(); // Quản lý hóa đơn
         QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang();
-      
-//        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
+        QuanLyKhachHang qlKhachHang = new QuanLyKhachHang();
+        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
         int choice;
         do {
             System.out.println("\n================================================");
@@ -33,7 +33,8 @@ public class QuanLySieuThiMini {
             System.out.println("║    2. Quản lý sản phẩm                        ║");
             System.out.println("║    3. Quản lý hóa đơn                         ║");
             System.out.println("║    4. Quản lý phiếu nhập hàng                 ║");
-            System.out.println("║    5. Quản lý nhà cung cấp                    ║");
+            System.out.println("║    5. Quản lý khách hàng                      ║");
+            System.out.println("║    6. Quản lý nhà cung cấp                    ║");
             System.out.println("║    0. Thoát chương trình                      ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
             System.out.print("Nhập lựa chọn của bạn: ");
@@ -54,8 +55,11 @@ public class QuanLySieuThiMini {
                 case 4:
                     // qlPhieuNhapHang.menu();
                     break;
-                case 5:
-                    System.out.println("Chức năng quản lý nhà cung cấp đang được phát triển...");
+                    case 5:
+               qlKhachHang.menu();
+                    break;
+                case 6:
+                    qlNhaCungCap.menu();
                     break;
                 case 0:
                     System.out.println("Thoát chương trình. Tạm biệt!");
