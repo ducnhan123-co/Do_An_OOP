@@ -1,11 +1,6 @@
 package QuanLySieuThiMiNi;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -13,10 +8,15 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+<<<<<<< Updated upstream
 public class DanhSachPhieuNhapHang implements ThaoTacFile {
     private PhieuNhapHang[] phieu = new PhieuNhapHang[10];
+=======
+public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
+    private PhieuNhapHang[] phieu = new PhieuNhapHang[0];
+>>>>>>> Stashed changes
     private int n = 0;
-
+    
     public void themPhieuNhapHang() {
         if (n >= phieu.length) {
             // Tăng kích thước mảng khi đã đầy
@@ -46,7 +46,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
         	
     }
 
-
+    
 
 
     public int timGanDungTheoMa(String ma) {
@@ -291,6 +291,18 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
     public void capNhatFile() {
         ghiFile(); // Cập nhật file bằng cách ghi đè toàn bộ nội dung
     }
+
+	@Override
+	public void truKho(DanhSachSanPham danhSachSanPham, int maSP, int soLuong) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void congKho(DanhSachSanPham danhSachSanPham, int maSP, int soLuong) {
+		// TODO Auto-generated method stub
+		
+	}
 
     
 }
