@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
-    private ChiTietPhieuNhapHang[] dsChiTiet = new ChiTietPhieuNhapHang[0];
+    private ChiTietPhieuNhapHang[] dsChiTiet = new ChiTietPhieuNhapHang[10];
     private int n = 0;
     private DanhSachPhieuNhapHang danhSachPhieuNhapHang;
 
@@ -35,16 +35,25 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         System.out.print("Nhập mã phiếu nhập hàng cần thêm chi tiết: ");
         int maPhieu = sc.nextInt();
 
+        // Tìm phiếu nhập hàng theo mã
         PhieuNhapHang phieu = timGanDungTheoMa(maPhieu);
         if (phieu != null) {
+            // Tạo chi tiết phiếu nhập hàng mới
             ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang();
             chiTiet.setMaPhieu(maPhieu);
             chiTiet.nhap();
-            
-            dsChiTiet = Arrays.copyOf(dsChiTiet, n + 1);
+
+            // Nếu danh sách chi tiết đã đầy, tăng kích thước mảng
+            if (n >= dsChiTiet.length) {
+                dsChiTiet = Arrays.copyOf(dsChiTiet, dsChiTiet.length * 2); // Tăng kích thước mảng gấp đôi
+                System.out.println("Danh sách chi tiết đã đầy, tăng kích thước mảng.");
+            }
+
+            // Thêm chi tiết vào mảng
             dsChiTiet[n] = chiTiet;
             n++;
 
+            // Cập nhật thông tin sản phẩm vào phiếu nhập hàng
             phieu.addOrUpdateProduct(chiTiet.getMaSp(), chiTiet.getSl(), chiTiet.getDonGia());
             phieu.updateTongTien();
 
@@ -53,9 +62,10 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + maPhieu);
         }
     }
-    
-    
-    
+
+
+
+
     // Hàm sửa chi tiết theo mã phiếu
     public void suaChiTiet() {
         Scanner sc = new Scanner(System.in);
@@ -201,24 +211,31 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
     @Override
     public void docFile() {
-        String filename = "C:\\Users\\ACER\\OneDrive\\Desktop\\Do_an_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\ChiTietPhieuNhapHang.txt";
+        String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\ChiTietPhieuNhapHang.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             int count = 0;
+
+            // Đọc từng dòng trong file
             while ((line = reader.readLine()) != null) {
                 ChiTietPhieuNhapHang chiTiet = parseLineToChiTiet(line);
+
                 if (chiTiet != null) {
-                    if (n < dsChiTiet.length) {
-                        dsChiTiet[n++] = chiTiet;
-                        count++;
-                    } else {
-                        System.out.println("Danh sách đã đầy, không thể thêm chi tiết phiếu nhập hàng.");
-                        break;
+                    // Kiểm tra xem mảng chi tiết có đủ dung lượng không
+                    if (n >= dsChiTiet.length) {
+                        dsChiTiet = Arrays.copyOf(dsChiTiet, dsChiTiet.length * 100); // Tăng kích thước mảng gấp đôi nếu đầy
+                        System.out.println("Danh sách chi tiết đã đầy, tăng kích thước mảng.");
                     }
+
+                    // Thêm chi tiết vào mảng
+                    dsChiTiet[n++] = chiTiet;
+                    count++;
                 } else {
                     System.out.println("Dòng không hợp lệ: " + line);
                 }
             }
+
+            // Thông báo số lượng chi tiết đã thêm từ tệp tin
             System.out.println("Đã thêm " + count + " chi tiết phiếu nhập hàng từ tệp tin: " + filename);
         } catch (FileNotFoundException e) {
             System.out.println("Không tìm thấy tệp tin: " + filename);
@@ -229,21 +246,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
     @Override
     public void ghiFile() {
-        String filename = "C:\\Users\\ACER\\OneDrive\\Desktop\\Do_an_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\ChiTietPhieuNhapHang.txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            for (int i = 0; i < n; i++) {
-                ChiTietPhieuNhapHang chiTiet = dsChiTiet[i];
-                writer.write(chiTiet.getMaPhieu() + ";" +
-                             chiTiet.getMaSp() + ";" +
-                             chiTiet.getSl() + ";" +
-                             chiTiet.getDonGia() + ";" +
-                             chiTiet.getThanhTien());
-                writer.newLine();
-            }
-            System.out.println("Đã ghi file thành công.");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+
     }
 
     @Override
