@@ -17,6 +17,10 @@ public class DanhSachPhieuNhapHang {
         phieu[n].nhapPhieu();
         n++;
     }
+    
+    public PhieuNhapHang[] getDsPhieu() {
+        return phieu;
+    }
 
     public void xuatPhieuNhapHang() {
         if (n == 0) {
@@ -26,14 +30,10 @@ public class DanhSachPhieuNhapHang {
 
         // In danh sách các phiếu nhập (phần thông tin cơ bản của từng phiếu)
         System.out.println("Danh sách phiếu nhập:");
-        System.out.printf("|%-8s|%-15s|%-14s|%-15s|\n", "Mã Phiếu", "Mã Nhà Cung Cấp", "Ngày Nhập Hàng", "Tổng tiền");
+        System.out.printf("|%-12s|%-12s|%-12s|%-12s|%-12s|\n", "Mã phiếu", "Mã NCC", "Mã NV", "Tổng tiền", "Ngày nhập");
         for (int i = 0; i < n; i++) 
-            System.out.printf("|%-8s|%-15s|%-14s|%-15.2f|\n", phieu[i].getMaPhieu(), phieu[i].getMaNCC(), phieu[i].getNgayNhapHang(), phieu[i].getTongTien());
-
-        // Sau khi in xong danh sách các phiếu, in chi tiết sản phẩm của từng phiếu
-        for (int i = 0; i < n; i++) 
-            // In từng dòng chi tiết sản phẩm của phiếu
             phieu[i].xuatPhieu();
+        	
     }
 
 
@@ -104,25 +104,24 @@ public class DanhSachPhieuNhapHang {
                 return;
             }
 
-            while (true) {
-                System.out.print("Nhập mã sản phẩm (hoặc nhập -1 để kết thúc): ");
-                int maSP = sc.nextInt();
-
-                if (maSP == -1) {
-                    break;
-                }
-
-                System.out.print("Nhập số lượng mới: "); 
-                int soLuong = sc.nextInt();
-
-                System.out.print("Nhập đơn giá mới: ");
-                double donGia = sc.nextDouble();
-
-                phieu[vt].addOrUpdateProduct(maSP, soLuong, donGia);
-            }
+//            while (true) {
+//                System.out.print("Nhập mã sản phẩm (hoặc nhập -1 để kết thúc): ");
+//                int maSP = sc.nextInt();
+//
+//                if (maSP == -1) {
+//                    break;
+//                }
+//
+//                System.out.print("Nhập số lượng mới: "); 
+//                int soLuong = sc.nextInt();
+//
+//                System.out.print("Nhập đơn giá mới: ");
+//                double donGia = sc.nextDouble();
+//
+//                phieu[vt].addOrUpdateProduct(maSP, soLuong, donGia);
+//            }
 
             phieu[vt].updateTongTien();
-            System.out.println("Phiếu nhập hàng đã được cập nhật thành công với tổng tiền mới: " + phieu[vt].getTongTien());
         } else {
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + mp);
         }

@@ -1,5 +1,7 @@
 package QuanLySieuThiMiNi;
 
+import java.util.Scanner;
+
 public class ChiTietPhieuNhapHang {
     private int maPhieu;
     private int maSp;
@@ -69,12 +71,42 @@ public class ChiTietPhieuNhapHang {
         return thanhtien;
     }
 
-    public void setThanhTien(double donGia) {
-        this.donGia = donGia;
+    public void setThanhTien(double thanhTien) {
+        this.thanhtien = thanhTien;
     }
     
     public void updateThanhTien() {
         this.thanhtien = this.sl * this.donGia;
     }
+    
+    
+    public void nhap() {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập mã phiếu
+//        System.out.print("Nhập mã phiếu: ");
+//        this.maPhieu = scanner.nextInt();
+
+        // Nhập mã sản phẩm
+        System.out.print("Nhập mã sản phẩm: ");
+        this.maSp = scanner.nextInt();
+
+        // Nhập số lượng
+        System.out.print("Nhập số lượng: ");
+        this.sl = scanner.nextInt();
+
+        // Nhập đơn giá
+        System.out.print("Nhập đơn giá: ");
+        this.donGia = scanner.nextDouble();
+
+        // Tính thành tiền
+        updateThanhTien();
+    }
+    
+    
+    public void xuatChiTiet() {
+        System.out.printf("| %-10d | %-12d | %-8d | %-8.2f | %-12.2f |\n", getMaPhieu() , getMaSp(), getSl(), getDonGia(), getThanhTien());
+    }
+
     
 }
