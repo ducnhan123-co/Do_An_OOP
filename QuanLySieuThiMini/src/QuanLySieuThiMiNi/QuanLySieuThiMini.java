@@ -53,7 +53,7 @@ public class QuanLySieuThiMini {
                     qlHoaDon.menuDSHD();
                     break;
                 case 4:
-                qlPhieuNhapHang.menu();
+                    // qlPhieuNhapHang.menu();
                     break;
                     case 5:
                qlKhachHang.menu();

@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     private ChiTietPhieuNhapHang[] dsChiTiet = new ChiTietPhieuNhapHang[10];
     private int n = 0;
+
     private DanhSachPhieuNhapHang danhSachPhieuNhapHang;
 
     public DanhSachChiTietPhieuNhapHang(DanhSachPhieuNhapHang danhSachPhieuNhapHang) {
@@ -18,14 +19,16 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
     // Hàm tìm phiếu nhập hàng theo mã
     public PhieuNhapHang timGanDungTheoMa(int maPhieu) {
-        for (PhieuNhapHang phieu : danhSachPhieuNhapHang.getDsPhieu()) {
-            if (phieu.getMaPhieu() == maPhieu) {
-                return phieu;
+        // Kiểm tra danh sách không null và không rỗng
+        if (danhSachPhieuNhapHang != null && danhSachPhieuNhapHang.getDsPhieu() != null) {
+            for (PhieuNhapHang phieu : danhSachPhieuNhapHang.getDsPhieu()) {
+                if (phieu.getMaPhieu() == maPhieu) {
+                    return phieu; // Trả về phiếu nếu tìm thấy
+                }
             }
         }
-        return null; // Nếu không tìm thấy
+        return null; // Trả về null nếu không tìm thấy
     }
-
     public void themChiTietVaoPhieu() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu nhập hàng cần thêm chi tiết: ");
@@ -50,14 +53,38 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
             // Cập nhật thông tin sản phẩm vào phiếu nhập hàng
             phieu.addOrUpdateProduct(chiTiet.getMaSp(), chiTiet.getSl(), chiTiet.getDonGia());
             phieu.updateTongTien();
+            // Nhập chi tiết phiếu nhập hàng
+            ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang();
+            chiTiet.setMaPhieu(maPhieu);
+            chiTiet.nhap();
 
-            System.out.println("Đã thêm chi tiết vào phiếu nhập hàng.");
+            // Kiểm tra mã sản phẩm trong danh sách chi tiết của phiếu
+            boolean isExist = false;
+            for (int i = 0; i < n; i++) {
+                if (dsChiTiet[i].getMaSp() == chiTiet.getMaSp()) {
+                    isExist = true;
+                    break;
+                }
+            }
+
+            if (isExist) {
+                System.out.println("Mã sản phẩm đã tồn tại trong phiếu. Không thể thêm chi tiết này.");
+            } else {
+                // Thêm chi tiết vào mảng nếu mã sản phẩm chưa tồn tại
+                dsChiTiet = Arrays.copyOf(dsChiTiet, n + 1);
+                dsChiTiet[n] = chiTiet;
+                n++;
+
+                // Cập nhật phiếu nhập hàng với chi tiết mới
+                phieu.addOrUpdateProduct(chiTiet.getMaSp(), chiTiet.getSl(), chiTiet.getDonGia());
+                phieu.updateTongTien();
+
+                System.out.println("Đã thêm chi tiết vào phiếu nhập hàng.");
+            }
         } else {
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + maPhieu);
         }
     }
-
-
 
 
     // Hàm sửa chi tiết theo mã phiếu
@@ -106,7 +133,6 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + maPhieu);
         }
     }
-
 
 
     // Hàm xóa chi tiết theo mã phiếu

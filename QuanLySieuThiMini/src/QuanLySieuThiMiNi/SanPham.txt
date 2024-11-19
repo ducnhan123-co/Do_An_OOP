@@ -97,8 +97,4 @@
 1,96,quat,cai,49000,58,6-1-2024,ivfbqYfTZfJOWTRRLgOegzBgmCCOCVAmezhlMBNi,Thai,1
 1,97,keo,cai,82000,132,8-11-2024,xLjHHFluWVSyXekHIIfObIrhhsyEopAlHZqogcGG,Thai,1
 1,98,dung cu bep,cai,30000,880,7-5-2024,qFNMrtDYKoStkdKIIpcYGuhxzWXbVDmoRQxHYNYf,Thai,3
-<<<<<<< Updated upstream
 1,99,keo,cai,39000,461,3-11-2024,qYMaZvYQAVlsSckIqgwjxgbePzGRWxlYHCmVIxiL,Thai,2
-=======
-1,99,keo,cai,39000,461,3-11-2024,qYMaZvYQAVlsSckIqgwjxgbePzGRWxlYHCmVIxiL,Thai,2
->>>>>>> Stashed changes
