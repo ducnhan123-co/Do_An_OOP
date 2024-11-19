@@ -9,10 +9,6 @@ public class QuanLyNhanVien {
         ds = new DanhSachNhanVien(maxNhanVien);
         ds.docFile();
     }
-    public void docFile()
-    {
-        ds.docFile();
-    }
     public void menu() {
         Scanner sc = new Scanner(System.in);
 
@@ -31,8 +27,23 @@ public class QuanLyNhanVien {
             System.out.println("╚═════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine(); // Bỏ qua dòng trống
+            int choice = -1; // Khởi tạo giá trị mặc định không hợp lệ
+
+            // Lặp lại cho đến khi người dùng nhập lựa chọn hợp lệ
+            while (choice < 0 || choice > 9) {
+                try {
+                    System.out.print("Chọn chức năng: ");
+                    choice = sc.nextInt();
+                    sc.nextLine(); // Đọc bỏ dòng trống
+
+                    if (choice < 0 || choice > 9) {
+                        System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại!");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Lỗi: Vui lòng nhập một số nguyên hợp lệ.");
+                    sc.nextLine(); // Đọc bỏ dữ liệu lỗi để tránh vòng lặp vô hạn
+                }
+            }
 
             switch (choice) {
                 case 1 -> {
