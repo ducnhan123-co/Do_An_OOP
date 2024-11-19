@@ -107,8 +107,18 @@
 
             while (tiepTucSua) {
                 System.out.println("Nhập mã nhân viên cần chỉnh sửa: ");
-                int ma = sc.nextInt();
-                sc.nextLine(); // Đọc dòng trống sau khi nhập số
+                int ma = -1; // Khởi tạo biến ma với giá trị không hợp lệ ban đầu
+                boolean maHople = false;
+
+                // Lặp lại cho đến khi người dùng nhập đúng số nguyên
+                while (!maHople) {
+                    try {
+                        ma = Integer.parseInt(sc.nextLine()); // Cố gắng chuyển đổi đầu vào thành số nguyên
+                        maHople = true; // Nếu không có lỗi thì thoát khỏi vòng lặp
+                    } catch (NumberFormatException e) {
+                        System.out.println("Mã nhân viên không hợp lệ. Vui lòng nhập lại một số nguyên.");
+                    }
+                }
 
                 NhanVien nv = timKiemNhanVienTheoMa(ma);
 
@@ -142,6 +152,7 @@
                 }
             }
         }
+
 
         public void xoaNhanVienTheoMaCach1(int maNV) {
             NhanVien nv = timKiemNhanVienTheoMa(maNV);
@@ -324,7 +335,7 @@
 
         @Override
         public void docFile() {
-            String filename = "D:\\Desktop\\ALL\\DO_AN_OOP_JAVA\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\NhanVien.txt";
+            String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\NhanVien.txt";
             try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
                 String line;
                 int count = 0;
@@ -342,7 +353,7 @@
                         System.out.println("Dòng không hợp lệ: " + line);
                     }
                 }
-                System.out.println("Đã thêm " + count + " nhân viên từ tệp tin: " + filename);
+//                continue;
             } catch (FileNotFoundException e) {
                 System.out.println("Không tìm thấy tệp tin: " + filename);
             } catch (IOException ex) {
@@ -463,7 +474,7 @@
                 // Đọc danh sách tỉnh từ file vào mảng
                 String[] danhSachTinh = new String[64]; // Giả sử file có tối đa 64 tỉnh
                 int soTinh = 0; // Đếm số tỉnh trong file
-                try (BufferedReader br = new BufferedReader(new FileReader("D:\\Desktop\\ALL\\DO_AN_OOP_JAVA\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\DanhSachTinh.txt"))) {
+                try (BufferedReader br = new BufferedReader(new FileReader("D:/ALL/Do_An_OOP/QuanLySieuThiMini/src/QuanLySieuThiMiNi/DanhSachTinh.txt"))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         danhSachTinh[soTinh++] = line.trim();
