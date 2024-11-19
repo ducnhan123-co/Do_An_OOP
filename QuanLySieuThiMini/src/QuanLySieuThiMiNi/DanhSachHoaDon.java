@@ -153,14 +153,23 @@ public class DanhSachHoaDon implements ThaoTacFile {
     }
 
     // Thống kê theo tổng tiền của tất cả hóa đơn
-    public void thongKeTongTienHoaDon() {
+    public void thongKeTongDoanhThu() {
         float tongTien = 0;
+        int count=0;
         for(int i=0; i<DS_hoaDon.length; i++) {
             if(DS_hoaDon[i] != null) {
+                count++;
                 tongTien += DS_hoaDon[i].getTongTien();
             }
         }
-        System.out.println("Tổng số tiền của tất cả các hóa đơn: "+tongTien+" VND.");
+        
+        if (count == 0) {
+            System.out.println("Không có hóa đơn để thống kê.");
+        } else {
+            System.out.println("Tổng số hóa đơn: "+count+" cái hóa đơn");
+            System.out.println("Tổng doanh thu: "+tongTien+" VND.");
+            System.out.println("Trung bình tổng tiền các hóa đơn: " + ((float) tongTien / count) + " VND.");
+        }
     }
 
     // Thống kê số lượng hóa đơn trả kiểu void
@@ -190,17 +199,19 @@ public class DanhSachHoaDon implements ThaoTacFile {
     // Thống kê hóa đơn theo ngày tháng năm
     public void thongKeHoaDonTheoNgayThangNam() {
         Scanner sc = new Scanner(System.in);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
+
         while (true) {
             try {
-                System.out.println("Nhập ngày (dd/MM/yyyy): ");
+                System.out.println("Nhập ngày (dd-MM-yyyy): ");
                 String ngayStr = sc.nextLine().trim();
 
-                LocalDate date = LocalDate.parse(ngayStr, formatter);
-                int ngay = date.getDayOfMonth();
-                int thang = date.getMonthValue();
-                int nam = date.getYear();
+                String[] tmp = ngayStr.split("-");
+                if(tmp.length != 3)
+                    throw new Exception("Nhập sai định dạng (dd-mm-yyyy).");
+
+                String ngay = tmp[0].trim();
+                String thang = tmp[1].trim();
+                String nam = tmp[2].trim();
 
                 float tongDoanhThu=0;
                 int hoaDonCount=0;
@@ -208,9 +219,8 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
                 for(HoaDon hoaDon: DS_hoaDon) {
                     if(hoaDon != null) {
-                        LocalDate ngayNhap = LocalDate.parse(hoaDon.getNgayTaoHoaDon(), formatter);
-
-                        if(ngayNhap.getDayOfMonth()==ngay && ngayNhap.getMonthValue()==thang && ngayNhap.getYear()==nam) {
+                        tmp = hoaDon.getNgayTaoHoaDon().split("-");
+                        if(tmp[0].equals(ngay) && tmp[1].equals(thang) && tmp[2].equals(nam)) {
                             hoaDonCount++;
                             tongDoanhThu+=hoaDon.getTongTien();
                         }
@@ -218,19 +228,17 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 }
                 if(hoaDonCount==0) {
                     System.out.println("Không có hóa đơn nào trong "+ngayStr+".");
-                    //////////////////
                     return;
                 }
                 tongDoanhThuTrungBinh=tongDoanhThu/hoaDonCount;
 
-                System.out.println("Số lượng hóa đơn trong ngày " + ngayStr + ": " + hoaDonCount);
-                System.out.printf("Tổng doanh thu trong ngày " + ngayStr + ": %.2f VND", tongDoanhThu);
-                System.out.printf("Doanh thu trung bình: %.2f VND\n", tongDoanhThuTrungBinh);
+                System.out.println("Số lượng hóa đơn trong ngày " + ngayStr + ": " + hoaDonCount+" cái hóa đơn");
+                System.out.println("Tổng doanh thu trong ngày " + ngayStr + ": "+tongDoanhThu+" VND");
+                System.out.println("Trung bình tổng tiền các hóa đơn trong "+ngayStr+": "+tongDoanhThuTrungBinh+" VND\n");
                 break;
 
-            } catch (DateTimeParseException e) {
-                System.out.println("Ngày nhập không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy.");
-            } catch (NumberFormatException e) {
+            }
+            catch (NumberFormatException e) {
                 System.out.println("Lỗi: Vui lòng nhập một giá trị hợp lệ.");
             } catch (Exception e) {
                 System.out.println("Đã xảy ra lỗi: "+e.getMessage());
@@ -241,16 +249,17 @@ public class DanhSachHoaDon implements ThaoTacFile {
     // Thống kê hóa đơn theo tháng năm
     public void thongKeHoaDonTheoThangNam() {
         Scanner sc = new Scanner(System.in);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
 
         while (true) {
             try {
                 System.out.println("Nhập tháng năm: ");
                 String ngayNhap = sc.nextLine().trim();
 
-                LocalDateTime date = LocalDateTime.parse(ngayNhap, formatter);
-                int thang = date.getMonthValue();
-                int nam = date.getYear();
+                String[] tmp = ngayNhap.split("-");
+                if (tmp.length == 1) 
+                    throw new Exception("Nhập sai định dạng(mm-yyyy)");
+                String thang = tmp[0].trim();
+                String nam = tmp[1].trim();
 
                 int soluongHoaDon=0;
                 float tongDoanhThu=0;
@@ -258,8 +267,8 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 
                 for(HoaDon hoaDon: DS_hoaDon) {
                     if(hoaDon != null) {
-                        LocalDateTime ngay = LocalDateTime.parse(ngayNhap, formatter);
-                        if(ngay.getMonthValue()==thang && ngay.getYear()==nam) {
+                        tmp = hoaDon.getNgayTaoHoaDon().split("-");
+                        if (tmp[1].trim().equals(thang) && tmp[2].trim().equals(nam)) {
                             soluongHoaDon++;
                             tongDoanhThu+=hoaDon.getTongTien();
                         }
@@ -269,14 +278,13 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
                 if(soluongHoaDon==0) {
                     System.out.println("Không có hóa đơn nào trong tháng "+thang+" năm "+nam);
+                    return;
                 }
 
-                System.out.println("Số lượng hóa đơn trong "+ngayNhap+": "+soluongHoaDon);
-                System.out.println("Tổng doanh thu trong "+ngayNhap+": "+tongDoanhThu);
-                System.out.println("Số lượng hóa đơn trong "+ngayNhap+": "+tongDoanhThuTrungBinh);
+                System.out.println("Số lượng hóa đơn trong "+ngayNhap+": "+soluongHoaDon+" cái hóa đơn");
+                System.out.println("Tổng doanh thu trong "+ngayNhap+": "+tongDoanhThu+" VND");
+                System.out.println("Trung bình tổng tiền các hóa đơn trong "+ngayNhap+": "+tongDoanhThuTrungBinh+" VND");
                 break;
-            } catch (DateTimeParseException e) {
-                System.out.println("Ngày nhập không hợp lệ. Vui lòng nhập theo định dạng MM/yyyy.");
             } catch (NumberFormatException e) {
                 System.out.println("Lỗi: Vui lòng nhập giá trị hợp lệ.");
             } catch (Exception e) {
@@ -285,6 +293,52 @@ public class DanhSachHoaDon implements ThaoTacFile {
         }
     }
 
+    // Thống kê hóa đơn theo năm
+    public void thongKeHoaDonTheoNam() {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            try {
+                System.out.println("Nhập năm (yyyy): ");
+                String namStr = sc.nextLine();
+                int namNhap = Integer.parseInt(namStr);
+
+                int countHoaDon=0;
+                float tongTien=0;
+                float tongTienTrungBinh=0;
+
+                for(HoaDon hoaDon: DS_hoaDon) {
+                    int year = Integer.parseInt((hoaDon.getNgayTaoHoaDon().split("-")[2].trim()));
+                    if (year == namNhap) {
+                        countHoaDon++;
+                        tongTien+=hoaDon.getTongTien();
+                    }
+                }
+                tongTienTrungBinh = tongTien / countHoaDon;
+
+                if(countHoaDon==0) {
+                    System.out.println("Không có hóa đơn nào trong năm "+namNhap+".");
+                    return;
+                }
+
+                System.out.println("Số lượng hóa đơn trong "+namNhap+": "+countHoaDon+" cái hóa đơn");
+                System.out.println("Tổng doanh thu trong "+namNhap+": "+tongTien+" VND");
+                System.out.println("Tổng doanh thu reung bình trong "+namNhap+": "+tongTienTrungBinh+" VND\n");
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Ngày nhập không hợp lệ. Vui lòng nhập theo định dạng yyyy.");
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi: Vui lòng nhập giá trị hợp lệ.");
+            } catch (Exception e) {
+                System.out.println("Đã xảy ra lỗi: "+e.getMessage());
+            }
+        }
+    }
+
+    // Thống kê hóa đơn theo quý
+    public void thongKeHoaDonTheoQuy() {
+
+    }
 
     // Tìm và liệt kê các hóa đơn có tổng tiền lớn hơn giá trị nhập
     public void lietKeHoaDonTongTienLonHon(float tongTienNhap) {

@@ -22,6 +22,9 @@ public class DanhSachHoaDonChiTiet {
             return;
         }
         System.out.println("Danh sách chi tiết hóa đơn:");
+        System.out.println("-------------------------------------------------------------------");
+        System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
+        System.out.println("-------------------------------------------------------------------");
         for (int i = 0; i < DS_ChiTietHoaDon.length; i++) {
             DS_ChiTietHoaDon[i].xuatChiTietHoaDon(); // Gọi phương thức xuất chi tiết hóa đơn
         }
@@ -68,6 +71,10 @@ public class DanhSachHoaDonChiTiet {
     }
 
     public void xuatChiTietHoaDonTheoMHD(int maHD) {
+        System.out.println("Danh sách chi tiết hóa đơn theo mã hóa đơn "+maHD+": ");
+        System.out.println("-------------------------------------------------------------------");
+        System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
+        System.out.println("-------------------------------------------------------------------");
         for (ChiTietHoaDon i: DS_ChiTietHoaDon) {
             if (i.getMaHD() == maHD) {
                 i.xuatChiTietHoaDon();

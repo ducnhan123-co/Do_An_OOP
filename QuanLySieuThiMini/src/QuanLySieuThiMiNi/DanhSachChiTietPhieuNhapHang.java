@@ -160,7 +160,6 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     }
 
 
-
     // Hàm xóa chi tiết theo mã phiếu
     public void xoaChiTiet() {
         Scanner sc = new Scanner(System.in);

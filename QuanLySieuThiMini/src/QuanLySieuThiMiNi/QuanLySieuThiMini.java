@@ -52,7 +52,7 @@ public class QuanLySieuThiMini {
                     qlHoaDon.menuDSHD();
                     break;
                 case 4:
-                qlPhieuNhapHang.menu();
+                    // qlPhieuNhapHang.menu();
                     break;
                 case 5:
                     System.out.println("Chức năng quản lý nhà cung cấp đang được phát triển...");
