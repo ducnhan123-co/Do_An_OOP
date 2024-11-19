@@ -1,9 +1,16 @@
 package QuanLySieuThiMiNi;
-
+import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+//import java.time.LocalDate;
+//import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DanhSachChiTietPhieuNhapHang {
+public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     private ChiTietPhieuNhapHang[] dsChiTiet = new ChiTietPhieuNhapHang[0];
     private int n = 0;
     private DanhSachPhieuNhapHang danhSachPhieuNhapHang;
@@ -170,6 +177,78 @@ public class DanhSachChiTietPhieuNhapHang {
         for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) 
         	chiTiet.xuatChiTiet();
             
+    }
+    
+    public ChiTietPhieuNhapHang parseLineToChiTiet(String line) {
+        String[] parts = line.split(";");
+        if (parts.length == 5) { // Cần đủ 5 trường dữ liệu
+            try {
+                int maPhieuNhap = Integer.parseInt(parts[0].trim());
+                int maSanPham = Integer.parseInt(parts[1].trim());
+                int soLuong = Integer.parseInt(parts[2].trim());
+                double donGia = Double.parseDouble(parts[3].trim());
+                double thanhTien = Double.parseDouble(parts[4].trim());
+                
+                return new ChiTietPhieuNhapHang(maPhieuNhap, maSanPham, soLuong, donGia, thanhTien);
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi định dạng số trong dòng: " + line);
+            }
+        } else {
+            System.out.println("Số lượng cột không khớp trong dòng: " + line);
+        }
+        return null;
+    }
+
+    @Override
+    public void docFile() {
+        String filename = "C:\\Users\\ACER\\OneDrive\\Desktop\\Do_an_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\ChiTietPhieuNhapHang.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int count = 0;
+            while ((line = reader.readLine()) != null) {
+                ChiTietPhieuNhapHang chiTiet = parseLineToChiTiet(line);
+                if (chiTiet != null) {
+                    if (n < dsChiTiet.length) {
+                        dsChiTiet[n++] = chiTiet;
+                        count++;
+                    } else {
+                        System.out.println("Danh sách đã đầy, không thể thêm chi tiết phiếu nhập hàng.");
+                        break;
+                    }
+                } else {
+                    System.out.println("Dòng không hợp lệ: " + line);
+                }
+            }
+            System.out.println("Đã thêm " + count + " chi tiết phiếu nhập hàng từ tệp tin: " + filename);
+        } catch (FileNotFoundException e) {
+            System.out.println("Không tìm thấy tệp tin: " + filename);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void ghiFile() {
+        String filename = "C:\\Users\\ACER\\OneDrive\\Desktop\\Do_an_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\ChiTietPhieuNhapHang.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (int i = 0; i < n; i++) {
+                ChiTietPhieuNhapHang chiTiet = dsChiTiet[i];
+                writer.write(chiTiet.getMaPhieu() + ";" +
+                             chiTiet.getMaSp() + ";" +
+                             chiTiet.getSl() + ";" +
+                             chiTiet.getDonGia() + ";" +
+                             chiTiet.getThanhTien());
+                writer.newLine();
+            }
+            System.out.println("Đã ghi file thành công.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void capNhatFile() {
+        ghiFile();
     }
 
 }
