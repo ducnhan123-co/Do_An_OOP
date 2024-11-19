@@ -3,11 +3,11 @@ package QuanLySieuThiMiNi;
 import java.util.Scanner;
 
 public class QuanLyPhieuNhapHang {
-    public static void main(String[] args) {
+    public void menu() {
         Scanner sc = new Scanner(System.in);
         DanhSachPhieuNhapHang DSPNH = new DanhSachPhieuNhapHang();
         DanhSachChiTietPhieuNhapHang DSCtPNH = new DanhSachChiTietPhieuNhapHang(DSPNH); // Truyền danh sách phiếu nhập hàng
-
+        
         while (true) {
             System.out.println("---------------------------------MENU----------------------------------");
             System.out.println("1. Thêm phiếu nhập hàng");
