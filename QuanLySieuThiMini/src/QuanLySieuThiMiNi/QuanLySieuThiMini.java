@@ -6,11 +6,11 @@ public class QuanLySieuThiMini {
     public void menu() {
         Scanner sc = new Scanner(System.in);
         QuanLyNhanVien qlNhanVien = new QuanLyNhanVien(100); // Quản lý nhân viên
-        // QuanLySanPham qlSanPham = new QuanLySanPham(100); // Quản lý sản phẩm
+//        QuanLySanPham qlSanPham = new QuanLySanPham(100); // Quản lý sản phẩm
         QuanLyHoaDon qlHoaDon = new QuanLyHoaDon(); // Quản lý hóa đơn
-        // QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang(100); // Quản lý phiếu nhập hàng
         QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang();
-        // QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
+      
+//        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
         int choice;
         do {
             System.out.println("\n================================================");
@@ -36,26 +36,9 @@ public class QuanLySieuThiMini {
             System.out.println("║    5. Quản lý nhà cung cấp                    ║");
             System.out.println("║    0. Thoát chương trình                      ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
-
-            choice = -1; // Khởi tạo choice với giá trị không hợp lệ
-            boolean isValidChoice = false;
-
-            // Lặp lại để yêu cầu nhập đúng lựa chọn
-            while (!isValidChoice) {
-                try {
-                    System.out.print("Nhập lựa chọn của bạn: ");
-                    choice = sc.nextInt();
-                    sc.nextLine(); // Đọc dòng trống sau khi nhập số
-                    if (choice >= 0 && choice <= 5) {
-                        isValidChoice = true; // Nếu lựa chọn hợp lệ, thoát khỏi vòng lặp
-                    } else {
-                        System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại!");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Lỗi: Vui lòng nhập một số nguyên hợp lệ.");
-                    sc.nextLine(); // Xử lý lỗi nhập không phải số
-                }
-            }
+            System.out.print("Nhập lựa chọn của bạn: ");
+            choice = sc.nextInt();
+            sc.nextLine();
 
             switch (choice) {
                 case 1:
@@ -69,7 +52,7 @@ public class QuanLySieuThiMini {
                     qlHoaDon.menuDSHD();
                     break;
                 case 4:
-                    qlPhieuNhapHang.menu();
+                qlPhieuNhapHang.menu();
                     break;
                 case 5:
                     System.out.println("Chức năng quản lý nhà cung cấp đang được phát triển...");
@@ -83,3 +66,5 @@ public class QuanLySieuThiMini {
         } while (choice != 0);
     }
 }
+
+

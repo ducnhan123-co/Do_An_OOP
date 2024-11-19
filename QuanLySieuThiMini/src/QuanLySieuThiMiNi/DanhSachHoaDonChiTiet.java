@@ -1,20 +1,15 @@
 package QuanLySieuThiMiNi;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 import static java.util.Arrays.copyOf;
 
 public class DanhSachHoaDonChiTiet {
     private ChiTietHoaDon[] DS_ChiTietHoaDon = new ChiTietHoaDon[0]; // Mảng chứa các chi tiết hóa đơn
 
-    // Thêm một chi tiết hóa đơn vào danh sách
-//    public void themChiTietHoaDon(ChiTietHoaDon cthd) {
-//        if (n >= DS_ChiTietHoaDon.length) {
-//            System.out.println("Danh sách chi tiết hóa đơn đã đầy.");
-//            return;
-//        }
-//        DS_ChiTietHoaDon[n] = cthd;
-//        n++;
-//        System.out.println("Đã thêm chi tiết hóa đơn vào danh sách.");
-//    }
     public void push(ChiTietHoaDon chiTietHoaDon) {
         DS_ChiTietHoaDon = copyOf(DS_ChiTietHoaDon, DS_ChiTietHoaDon.length+1);
         DS_ChiTietHoaDon[DS_ChiTietHoaDon.length-1] = chiTietHoaDon;
@@ -77,6 +72,39 @@ public class DanhSachHoaDonChiTiet {
             if (i.getMaHD() == maHD) {
                 i.xuatChiTietHoaDon();
             }
+        }
+    }
+
+    public void docFile () {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/ChiTietHoaDon.txt"));
+            String line ;
+            while ((line = br.readLine()) != null) {
+                String[] strings = line.split(";");
+                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
+                chiTietHoaDon.setMaHD(Integer.parseInt(strings[0].trim()));
+                chiTietHoaDon.setMaSP(Integer.parseInt(strings[1].trim()));
+                chiTietHoaDon.setSoLuong(Integer.parseInt(strings[2].trim()));
+                chiTietHoaDon.setDonGia(Float.parseFloat(strings[3].trim()));
+                push(chiTietHoaDon);
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ghiFile() {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/ChiTietHoaDon.txt"));
+            String line;
+            for (ChiTietHoaDon i: DS_ChiTietHoaDon) {
+                line = String.format("%d;%d;%d;%f\n", i.getMaHD(),i.getMaSP(),i.getSoLuong(),i.getDonGia());
+                bw.write(line);
+            }
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

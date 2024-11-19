@@ -9,7 +9,9 @@ public class QuanLyHoaDon {
     private DanhSachHoaDonChiTiet danhSachHoaDonChiTiet = new DanhSachHoaDonChiTiet();
     
     public QuanLyHoaDon() {
-        danhSachSanPham.init();
+        danhSachSanPham.docFile();
+        danhSachHoaDon.docFile();
+        danhSachHoaDonChiTiet.docFile();
     }
     
     Scanner sc = new Scanner(System.in);
@@ -22,6 +24,8 @@ public class QuanLyHoaDon {
                 Scanner in = new Scanner(System.in);
                 System.out.print("Nhập mã hóa đơn: ");
                 hoaDon.setMaHD(in.nextInt());
+                if (!danhSachHoaDon.checkHD(hoaDon.getMaHD()))
+                    throw new Exception("Trùng lặp mã hóa đơn");
                 System.out.print("Nhập mã Khách hàng: ");
                 hoaDon.setMaKH(in.nextInt());
                 System.out.print("Nhập mã nhân viên: ");
@@ -53,7 +57,7 @@ public class QuanLyHoaDon {
                     System.out.println("1 - Tiền mặt");
                     System.out.println("2 - Chuyển khoản");
                     int paymentChoice = in.nextInt();
-                    
+
                     if(paymentChoice==1) {
                         hoaDon.setPhuongThucTinhToan("Tiền mặt");
                         break;
@@ -75,6 +79,12 @@ public class QuanLyHoaDon {
                 System.out.println(e.getMessage());
             }
         }
+        System.out.println("═══════════════════════CỬA HÀNG MINIONS══════════════════════════");
+        System.out.println("═════════════════════XIN CÁM ƠN QUÝ KHÁCH════════════════════════");
+        xuatHoaDon(hoaDon.getMaHD());
+        new Scanner(System.in).nextLine();
+        danhSachHoaDon.ghiFile();
+        danhSachHoaDonChiTiet.ghiFile();
     }
 
     // Hàm xuất hóa đơn theo mã
@@ -94,7 +104,7 @@ public class QuanLyHoaDon {
             System.out.println("╔═════════════════════════-MENU QUẢN LÝ HÓA ĐƠN-════════════════════════╗");
             System.out.println("║1.  Thêm 1 hóa đơn vào danh sách                                (done) ║");
             System.out.println("║2.  Thêm danh sách hóa đơn                                      (done) ║");
-            System.out.println("║3.  Sửa hóa 1đơn                                              (Not yet) ║");
+            System.out.println("║3.  Sửa hóa 1đơn                                             (Not yet) ║");
             System.out.println("║4.  Xóa hóa đơn theo tùy chọn                               (done 3/3) ║");
             System.out.println("║5.  Tìm kiếm hóa đơn theo tùy chọn                          (done 3/3) ║");
             System.out.println("║6.  Thống kê hóa đơn theo tùy chọn                          (done 3/6) ║");
@@ -108,7 +118,6 @@ public class QuanLyHoaDon {
 
             int choice = sc.nextInt();
             sc.nextLine(); // Bỏ qua dòng trống
-            
 
             switch(choice) {
                 case 1:
