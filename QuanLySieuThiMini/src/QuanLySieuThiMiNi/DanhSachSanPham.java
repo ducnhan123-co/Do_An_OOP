@@ -9,7 +9,7 @@ import java.util.Scanner;
 import static java.util.Arrays.copyOf;
 
 public class DanhSachSanPham {
-    private SanPham[] DS_SanPham = new SanPham[0];
+    private static SanPham[] DS_SanPham = new SanPham[0];
 
 
     private void push(SanPham sanPham) {
@@ -135,6 +135,8 @@ public class DanhSachSanPham {
             }
             reader.close();
         } catch (Exception e) {
+
+        } finally {
 
         }
     }
