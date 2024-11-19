@@ -19,8 +19,9 @@ public class QuanLyPhieuNhapHang {
             System.out.println("7. Thống kê phiếu nhập theo tháng");
             System.out.println("8. Thống kê phiếu nhập theo năm");
             System.out.println("9. Quản lý chi tiết phiếu nhập hàng");
-            System.out.println("10. Xuất danh sách toàn bộ ");
-            System.out.println("11. Thoát");
+            System.out.println("10. Lấy dữ liệu từ data");
+            System.out.println("11. Xuất danh sách toàn bộ ");
+            System.out.println("12. Thoát");
             System.out.println("-----------------------------------------------------------------------");
             System.out.print("Chọn chức năng: ");
             int choice = sc.nextInt();
@@ -56,12 +57,16 @@ public class QuanLyPhieuNhapHang {
                     QuanLyChiTietPhieuNhapHang.quanLyChiTiet(DSPNH, DSCtPNH);
                     break;
                 case 10:
+                	DSPNH.docFile();
+                	System.out.println("Lấy dữ liệu thành công");
+                	break;
+                case 11:
                 	System.out.println("Danh Sách Phiếu");
                 	DSPNH.xuatPhieuNhapHang();
                 	System.out.println("\nDanh Sách Chi Tiết Phiếu ");
                 	DSCtPNH.inDanhSachChiTiet();
                 	break;
-                case 11:
+                case 12:
                     System.out.println("Đã thoát chương trình.");
                     return;
                 default:

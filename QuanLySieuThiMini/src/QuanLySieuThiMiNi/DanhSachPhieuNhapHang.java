@@ -1,5 +1,11 @@
 package QuanLySieuThiMiNi;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +13,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class DanhSachPhieuNhapHang {
+public class DanhSachPhieuNhapHang implements ThaoTacFile {
     private PhieuNhapHang[] phieu = new PhieuNhapHang[0];
     private int n = 0;
 
@@ -212,5 +218,80 @@ public class DanhSachPhieuNhapHang {
         }
     }
 
- 
+    public PhieuNhapHang parseLineToPhieuNhapHang(String line) {
+        String[] parts = line.split(";");
+        if (parts.length == 5) { // Đảm bảo đủ 5 trường dữ liệu
+            try {
+                int maPhieuNhap = Integer.parseInt(parts[0].trim()); // Mã phiếu nhập
+                int maNV = Integer.parseInt(parts[1].trim()); // Mã nhân viên
+                int maNCC = Integer.parseInt(parts[2].trim()); // Mã nhà cung cấp
+                LocalDate ngayNH = LocalDate.parse(parts[3].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy")); // Ngày nhập hàng
+                double tongTien = Double.parseDouble(parts[4].trim()); // Tổng tiền
+
+                // Tạo đối tượng PhieuNhapHang với các tham số vừa đọc
+                return new PhieuNhapHang(maPhieuNhap, maNV, maNCC, tongTien, ngayNH);
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi định dạng số trong dòng: " + line);
+            } catch (DateTimeParseException e) {
+                System.out.println("Lỗi định dạng ngày tháng trong dòng: " + line);
+            }
+        } else {
+            System.out.println("Số lượng cột không khớp trong dòng: " + line);
+        }
+        return null;
+    }
+
+    @Override
+    public void docFile() {
+        String filename = "C:\\Users\\ACER\\OneDrive\\Desktop\\Do_an_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int count = 0;
+            while ((line = reader.readLine()) != null) {
+                PhieuNhapHang phieuNhap = parseLineToPhieuNhapHang(line);
+                if (phieuNhap != null) {
+                    if (n < phieu.length) { // Kiểm tra danh sách chưa đầy
+                        phieu[n++] = phieuNhap;
+                        count++;
+                    } else {
+                        System.out.println("Danh sách đã đầy, không thể thêm phiếu nhập hàng.");
+                        break;
+                    }
+                } else {
+                    System.out.println("Dòng không hợp lệ: " + line);
+                }
+            }
+            System.out.println("Đã thêm " + count + " phiếu nhập hàng từ tệp tin: " + filename);
+        } catch (FileNotFoundException e) {
+            System.out.println("Không tìm thấy tệp tin: " + filename);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void ghiFile() { 
+        String filename = "C:\\Users\\ACER\\OneDrive\\Desktop\\Do_an_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (int i = 0; i < n; i++) {
+                PhieuNhapHang phieuNhap = phieu[i];
+                writer.write(phieuNhap.getMaPhieu() + ";" +
+                             phieuNhap.getMaNhanVien() + ";" +
+                             phieuNhap.getMaNCC() + ";" +
+                             phieuNhap.getNgayNhapHang().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ";" +
+                             phieuNhap.getTongTien());
+                writer.newLine();
+            }
+            System.out.println("Đã ghi file thành công.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void capNhatFile() {
+        ghiFile(); // Cập nhật file bằng cách ghi đè toàn bộ nội dung
+    }
+
+    
 }

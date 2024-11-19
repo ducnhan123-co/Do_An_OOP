@@ -11,7 +11,7 @@ public class QuanLyChiTietPhieuNhapHang {
             System.out.println("1. Thêm chi tiết vào phiếu nhập hàng");
             System.out.println("2. Sửa chi tiết phiếu nhập hàng");
             System.out.println("3. Xóa chi tiết phiếu nhập hàng");
-            System.out.println("4. Xóa tất cả chi tiết của phiếu nhập hàng");
+            System.out.println("4. Lấy dữ liệu từ data");
             System.out.println("5. Xem danh sách chi tiết phiếu nhập hàng");
             System.out.println("6. Quay lại");
             System.out.println("-----------------------------------------------------------------------------------");
@@ -29,9 +29,10 @@ public class QuanLyChiTietPhieuNhapHang {
                 case 3: 
                     DSCtPNH.xoaChiTiet(); // done 
                     break;
-//                case 4:
-//                	DSCtPNH.xoaTatCaChiTiet();
-//                	break;
+                case 4:
+                	DSCtPNH.docFile();
+                	System.out.println("Lấy dữ liệu thành công");
+                	break;
                 case 5:
                     DSCtPNH.inDanhSachChiTiet(); // Gọi hàm in danh sách chi tiết
                     break;
