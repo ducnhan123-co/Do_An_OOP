@@ -4,18 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+//import java.time.LocalDate;
+//import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
-<<<<<<< Updated upstream
-    private ChiTietPhieuNhapHang[] dsChiTiet = new ChiTietPhieuNhapHang[10];
-    private int n = 0;
-
-=======
     private ChiTietPhieuNhapHang[] dsChiTiet = new ChiTietPhieuNhapHang[0];
     private int n = 0;
->>>>>>> Stashed changes
     private DanhSachPhieuNhapHang danhSachPhieuNhapHang;
 
     public DanhSachChiTietPhieuNhapHang(DanhSachPhieuNhapHang danhSachPhieuNhapHang) {
@@ -52,25 +49,16 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         phieu.setTongTien(tongTienMoi);
         System.out.println("Tổng tiền của phiếu mã " + maPhieu + " đã được cập nhật: " + tongTienMoi);
     }
-<<<<<<< Updated upstream
-=======
 
 
     // Hàm thêm chi tiết vào phiếu nhập hàng
->>>>>>> Stashed changes
     public void themChiTietVaoPhieu() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu nhập hàng cần thêm chi tiết: ");
         int maPhieu = sc.nextInt();
-<<<<<<< Updated upstream
-        PhieuNhapHang phieu = timGanDungTheoMa(maPhieu);
-        if (phieu != null) {
-            // Tạo chi tiết phiếu nhập hàng mới
-=======
 
         PhieuNhapHang phieu = timGanDungTheoMa(maPhieu);
         if (phieu != null) {
->>>>>>> Stashed changes
             ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang();
             chiTiet.setMaPhieu(maPhieu);
             chiTiet.nhap();
@@ -85,43 +73,9 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
             dsChiTiet[n] = chiTiet;
             n++;
 
-<<<<<<< Updated upstream
-            // Cập nhật thông tin sản phẩm vào phiếu nhập hàng
-            phieu.addOrUpdateProduct(chiTiet.getMaSp(), chiTiet.getSl(), chiTiet.getDonGia());
-            phieu.updateTongTien();
-            // Nhập chi tiết phiếu nhập hàng
-            ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang();
-            chiTiet.setMaPhieu(maPhieu);
-            chiTiet.nhap();
-
-            // Kiểm tra mã sản phẩm trong danh sách chi tiết của phiếu
-            boolean isExist = false;
-            for (int i = 0; i < n; i++) {
-                if (dsChiTiet[i].getMaSp() == chiTiet.getMaSp()) {
-                    isExist = true;
-                    break;
-                }
-            }
-
-            if (isExist) {
-                System.out.println("Mã sản phẩm đã tồn tại trong phiếu. Không thể thêm chi tiết này.");
-            } else {
-                // Thêm chi tiết vào mảng nếu mã sản phẩm chưa tồn tại
-                dsChiTiet = Arrays.copyOf(dsChiTiet, n + 1);
-                dsChiTiet[n] = chiTiet;
-                n++;
-
-                // Cập nhật phiếu nhập hàng với chi tiết mới
-                phieu.addOrUpdateProduct(chiTiet.getMaSp(), chiTiet.getSl(), chiTiet.getDonGia());
-                phieu.updateTongTien();
-
-                System.out.println("Đã thêm chi tiết vào phiếu nhập hàng.");
-            }
-=======
             updateTongTien(maPhieu);
 
             System.out.println("Đã thêm chi tiết vào phiếu nhập hàng.");
->>>>>>> Stashed changes
         } else {
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + maPhieu);
         }
@@ -148,9 +102,6 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         return null;
     }
 
-<<<<<<< Updated upstream
-
-=======
     // Hàm tìm index của chi tiết sản phẩm theo mã phiếu và mã sản phẩm
     private int findChiTietIndex(int maPhieu, int maSP) {
         for (int i = 0; i < n; i++) {
@@ -164,7 +115,6 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     
     
     
->>>>>>> Stashed changes
     // Hàm sửa chi tiết theo mã phiếu
     public void suaChiTiet() {
         Scanner sc = new Scanner(System.in);
@@ -220,6 +170,8 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         if (phieu != null) {
             System.out.print("Nhập mã sản phẩm cần xóa: ");
             int maSP = sc.nextInt();
+
+            // Tìm chi tiết sản phẩm trong phiếu nhập hàng
             int index = findChiTietIndex(maPhieu, maSP);
 
             if (index != -1) {
@@ -229,14 +181,9 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
                 }
                 dsChiTiet = Arrays.copyOf(dsChiTiet, n - 1); // Cập nhật lại kích thước mảng
                 n--; // Giảm số lượng chi tiết
-<<<<<<< Updated upstream
-                phieu.addOrUpdateProduct(maSP, 0, 0);
-                phieu.updateTongTien();
-=======
 
                 // Cập nhật lại tổng tiền của phiếu
                 updateTongTien(maPhieu);
->>>>>>> Stashed changes
 
                 System.out.println("Đã xóa chi tiết sản phẩm mã " + maSP + " khỏi phiếu nhập hàng.");
                 System.out.println("Tổng tiền của phiếu nhập hàng hiện tại: " + phieu.getTongTien());
@@ -249,30 +196,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     }
     
     // Hàm tìm chi tiết sản phẩm theo mã phiếu và mã sản phẩm
-<<<<<<< Updated upstream
-    public ChiTietPhieuNhapHang findChiTietByMaSP(int maPhieu, int maSP) {
-        for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) {
-            System.out.println("Đang kiểm tra: Mã phiếu = " + chiTiet.getMaPhieu() + ", Mã sản phẩm = " + chiTiet.getMaSp());
-            if (chiTiet.getMaPhieu() == maPhieu && chiTiet.getMaSp() == maSP) {
-                return chiTiet;
-            }
-        }
-        return null;
-    }
-
-    // Hàm tìm index của chi tiết sản phẩm theo mã phiếu và mã sản phẩm
-    public int findChiTietIndex(int maPhieu, int maSP) {
-        for (int i = 0; i < n; i++) {
-            if (dsChiTiet[i].getMaPhieu() == maPhieu && dsChiTiet[i].getMaSp() == maSP) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-=======
    
->>>>>>> Stashed changes
     // Hàm in danh sách chi tiết phiếu nhập
     public void inDanhSachChiTiet() {
         if (n == 0) {
@@ -282,6 +206,8 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
         System.out.printf("| %-10s | %-12s | %-8s | %-9s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("-------------------------------------------------------------");
+
+        // In các chi tiết phiếu nhập hàng
         for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) 
         	chiTiet.xuatChiTiet();
             
@@ -309,38 +235,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
     @Override
     public void docFile() {
-<<<<<<< Updated upstream
-        String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\ChiTietPhieuNhapHang.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            int count = 0;
-            while ((line = reader.readLine()) != null) {
-                ChiTietPhieuNhapHang chiTiet = parseLineToChiTiet(line);
-                if (chiTiet != null) {
-                    // Kiểm tra xem mảng chi tiết có đủ dung lượng không
-                    if (n >= dsChiTiet.length) {
-                        dsChiTiet = Arrays.copyOf(dsChiTiet, dsChiTiet.length * 100); // Tăng kích thước mảng gấp đôi nếu đầy
-                        System.out.println("Danh sách chi tiết đã đầy, tăng kích thước mảng.");
-                    }
-
-                    // Thêm chi tiết vào mảng
-                    dsChiTiet[n++] = chiTiet;
-                    count++;
-                } else {
-                    System.out.println("Dòng không hợp lệ: " + line);
-                }
-            }
-
-            // Thông báo số lượng chi tiết đã thêm từ tệp tin
-            System.out.println("Đã thêm " + count + " chi tiết phiếu nhập hàng từ tệp tin: " + filename);
-        } catch (FileNotFoundException e) {
-            System.out.println("Không tìm thấy tệp tin: " + filename);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-=======
         
->>>>>>> Stashed changes
     }
 
 	@Override
