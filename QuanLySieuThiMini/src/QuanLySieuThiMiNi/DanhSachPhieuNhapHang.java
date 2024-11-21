@@ -1,6 +1,7 @@
 package QuanLySieuThiMiNi;
 
 import java.io.*;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -8,28 +9,42 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-<<<<<<< Updated upstream
-public class DanhSachPhieuNhapHang implements ThaoTacFile {
-    private PhieuNhapHang[] phieu = new PhieuNhapHang[10];
-=======
-public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
-    private PhieuNhapHang[] phieu = new PhieuNhapHang[0];
->>>>>>> Stashed changes
+public class DanhSachPhieuNhapHang implements ThaoTacFile{
+    private PhieuNhapHang[] dsPhieu = new PhieuNhapHang[0];
     private int n = 0;
-    
-    public void themPhieuNhapHang() {
-        if (n >= phieu.length) {
-            // Tăng kích thước mảng khi đã đầy
-            phieu = Arrays.copyOf(phieu, phieu.length * 2); // Tăng kích thước gấp đôi
-            System.out.println("Danh sách đã đầy, tăng kích thước mảng.");
-        }
 
-        phieu[n] = new PhieuNhapHang();
-        phieu[n].nhapPhieu();
-        n++;
+    public void themPhieuNhapHang() {
+        while (true) {
+            // Tạo phiếu mới
+            PhieuNhapHang phieuMoi = new PhieuNhapHang();
+            phieuMoi.nhapPhieu(); // Nhập thông tin phiếu (bao gồm cả mã phiếu)
+
+            // Kiểm tra mã phiếu trùng lặp
+            if (kiemTraMaPhieuTonTai(phieuMoi.getMaPhieu())) {
+                System.out.println("Mã phiếu đã tồn tại. Vui lòng nhập lại thông tin phiếu.");
+            } else {
+                // Mã phiếu hợp lệ, thêm vào danh sách
+                dsPhieu = Arrays.copyOf(dsPhieu, n + 1);
+                dsPhieu[n] = phieuMoi;
+                n++;
+                break; // Thoát khỏi vòng lặp khi thêm phiếu thành công
+            }
+        }
     }
+
+    // Kiểm tra mã phiếu trùng lặp
+    private boolean kiemTraMaPhieuTonTai(int maPhieuMoi) {
+        for (int i = 0; i < n; i++) {
+            if (dsPhieu[i].getMaPhieu() == maPhieuMoi) {
+                return true; // Mã phiếu đã tồn tại
+            }
+        }
+        return false; // Mã phiếu chưa tồn tại
+    }
+
+    
     public PhieuNhapHang[] getDsPhieu() {
-        return phieu;
+        return dsPhieu;
     }
 
     public void xuatPhieuNhapHang() {
@@ -42,16 +57,16 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
         System.out.println("Danh sách phiếu nhập:");
         System.out.printf("|%-12s|%-12s|%-12s|%-12s|%-12s|\n", "Mã phiếu", "Mã NCC", "Mã NV", "Tổng tiền", "Ngày nhập");
         for (int i = 0; i < n; i++) 
-            phieu[i].xuatPhieu();
+            dsPhieu[i].xuatPhieu();
         	
     }
 
-    
+
 
 
     public int timGanDungTheoMa(String ma) {
         for (int i = 0; i < n; i++) {
-            String maNCC = String.valueOf(phieu[i].getMaPhieu());
+            String maNCC = String.valueOf(dsPhieu[i].getMaPhieu());
             if (maNCC.contains(ma))
                 return i;
         }
@@ -66,8 +81,8 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
 
         if (vt != -1) {
             for (int i = vt; i < n - 1; i++)
-                phieu[i] = phieu[i + 1];
-            phieu = Arrays.copyOf(phieu, n - 1);
+                dsPhieu[i] = dsPhieu[i + 1];
+            dsPhieu = Arrays.copyOf(dsPhieu, n - 1);
             n--;
             System.out.println("Đã xóa phiếu nhập hàng với mã: " + mp);
         } 
@@ -82,7 +97,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
         String mp = sc.nextLine();
         int vt = timGanDungTheoMa(mp);
         if (vt != -1)
-            phieu[vt].xuatPhieu();
+            dsPhieu[vt].xuatPhieu();
         else
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + mp);
     }
@@ -96,42 +111,25 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
         if (vt != -1) {
             System.out.println("Đang sửa phiếu nhập hàng với mã: " + mp);
 
-            System.out.print("Nhập mã nhà cung cấp mới (hiện tại: " + phieu[vt].getMaNCC() + "): ");
+            System.out.print("Nhập mã nhà cung cấp mới (hiện tại: " + dsPhieu[vt].getMaNCC() + "): ");
             int maNCC = sc.nextInt();
-            phieu[vt].setMaNCC(maNCC);
+            dsPhieu[vt].setMaNCC(maNCC);
 
             // Nhập ngày nhập hàng mới với định dạng dd/MM/yyyy
-            sc.nextLine(); // Clear the buffer
             System.out.print("Nhập ngày nhập hàng mới (dd/MM/yyyy): ");
+            sc.nextLine(); 
             String ngayNhapStr = sc.nextLine();
             
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             try {
                 LocalDate ngayNhapHang = LocalDate.parse(ngayNhapStr, formatter);
-                phieu[vt].setNgayNhapHang(ngayNhapHang);
+                dsPhieu[vt].setNgayNhapHang(ngayNhapHang);
             } catch (DateTimeParseException e) {
                 System.out.println("Ngày nhập không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy.");
                 return;
             }
-
-//            while (true) {
-//                System.out.print("Nhập mã sản phẩm (hoặc nhập -1 để kết thúc): ");
-//                int maSP = sc.nextInt();
-//
-//                if (maSP == -1) {
-//                    break;
-//                }
-//
-//                System.out.print("Nhập số lượng mới: "); 
-//                int soLuong = sc.nextInt();
-//
-//                System.out.print("Nhập đơn giá mới: ");
-//                double donGia = sc.nextDouble();
-//
-//                phieu[vt].addOrUpdateProduct(maSP, soLuong, donGia);
-//            }
-
-            phieu[vt].updateTongTien();
+            
+            System.out.println("Đã sửa thành công mã phiếu: " + mp);
         } else {
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + mp);
         }
@@ -151,8 +149,8 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
             
             boolean found = false;
             for (int i = 0; i < n; i++) {
-                if (phieu[i].getNgayNhapHang().equals(ngay)) {
-                    phieu[i].xuatPhieu();
+                if (dsPhieu[i].getNgayNhapHang().equals(ngay)) {
+                    dsPhieu[i].xuatPhieu();
                     found = true;
                 }
             }
@@ -180,9 +178,9 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
             
             boolean found = false;
             for (int i = 0; i < n; i++) {
-                YearMonth thangPhieu = YearMonth.from(phieu[i].getNgayNhapHang());
+                YearMonth thangPhieu = YearMonth.from(dsPhieu[i].getNgayNhapHang());
                 if (thang.equals(thangPhieu)) {
-                    phieu[i].xuatPhieu();
+                    dsPhieu[i].xuatPhieu();
                     found = true;
                 }
             }
@@ -207,9 +205,9 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
             
             boolean found = false;
             for (int i = 0; i < n; i++) {
-                int namPhieu = phieu[i].getNgayNhapHang().getYear();
+                int namPhieu = dsPhieu[i].getNgayNhapHang().getYear();
                 if (namPhieu == nam) {
-                    phieu[i].xuatPhieu();
+                    dsPhieu[i].xuatPhieu();
                     found = true;
                 }
             }
@@ -221,7 +219,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
             System.out.println("Năm nhập không hợp lệ. Vui lòng nhập theo định dạng yyyy.");
         }
     }
-
+    
     public PhieuNhapHang parseLineToPhieuNhapHang(String line) {
         String[] parts = line.split(";");
         if (parts.length == 5) { // Đảm bảo đủ 5 trường dữ liệu
@@ -229,17 +227,8 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
                 int maPhieuNhap = Integer.parseInt(parts[0].trim()); // Mã phiếu nhập
                 int maNV = Integer.parseInt(parts[1].trim()); // Mã nhân viên
                 int maNCC = Integer.parseInt(parts[2].trim()); // Mã nhà cung cấp
-
-                // Xử lý ngày nhập hàng
                 LocalDate ngayNH = LocalDate.parse(parts[3].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy")); // Ngày nhập hàng
-
-                // Xử lý tổng tiền, nếu có giá trị không hợp lệ thì gán về 0
-                double tongTien = 0.0;
-                try {
-                    tongTien = Double.parseDouble(parts[4].trim()); // Tổng tiền
-                } catch (NumberFormatException e) {
-                    System.out.println("Lỗi định dạng tổng tiền trong dòng: " + line + ". Gán giá trị tổng tiền = 0.");
-                }
+                double tongTien = Double.parseDouble(parts[4].trim()); // Tổng tiền
 
                 // Tạo đối tượng PhieuNhapHang với các tham số vừa đọc
                 return new PhieuNhapHang(maPhieuNhap, maNV, maNCC, tongTien, ngayNH);
@@ -256,19 +245,19 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
 
     @Override
     public void docFile() {
-        String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
+        String filename = "src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             int count = 0;
             while ((line = reader.readLine()) != null) {
                 PhieuNhapHang phieuNhap = parseLineToPhieuNhapHang(line);
                 if (phieuNhap != null) {
-                    // Kiểm tra nếu danh sách đầy, sẽ tự động mở rộng
-                    if (n >= phieu.length) {
-                        phieu = Arrays.copyOf(phieu, phieu.length * 2); // Tăng kích thước mảng khi cần thiết
-                        System.out.println("Danh sách phiếu nhập hàng đã đầy, tăng kích thước mảng.");
+                    // Kiểm tra nếu mảng đã đầy, thì tăng kích thước mảng
+                    if (n >= dsPhieu.length) {
+                        // Tăng kích thước mảng gấp đôi khi mảng đầy
+                        dsPhieu = Arrays.copyOf(dsPhieu, dsPhieu.length + 10);
                     }
-                    phieu[n++] = phieuNhap;
+                    dsPhieu[n++] = phieuNhap;
                     count++;
                 } else {
                     System.out.println("Dòng không hợp lệ: " + line);
@@ -282,9 +271,24 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
         }
     }
 
+
     @Override
     public void ghiFile() {
-
+        String filename = "D:\\Desktop\\ALL\\DO_AN_OOP_JAVA\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (int i = 0; i < n; i++) {
+                PhieuNhapHang phieuNhap = dsPhieu[i];
+                writer.write(phieuNhap.getMaPhieu() + ";" +
+                             phieuNhap.getMaNhanVien() + ";" +
+                             phieuNhap.getMaNCC() + ";" +
+                             phieuNhap.getNgayNhapHang().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ";" +
+                             phieuNhap.getTongTien());
+                writer.newLine();
+            }
+            System.out.println("Đã ghi file thành công.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -292,17 +296,9 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile, Update_Kho{
         ghiFile(); // Cập nhật file bằng cách ghi đè toàn bộ nội dung
     }
 
-	@Override
-	public void truKho(DanhSachSanPham danhSachSanPham, int maSP, int soLuong) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void congKho(DanhSachSanPham danhSachSanPham, int maSP, int soLuong) {
-		// TODO Auto-generated method stub
-		
-	}
+ 
 
+   
     
 }

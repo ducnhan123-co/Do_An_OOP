@@ -58,7 +58,6 @@ public class QuanLyPhieuNhapHang {
                     break;
                 case 10:
                 	DSPNH.docFile();
-                	System.out.println("Lấy dữ liệu thành công");
                 	break;
                 case 11:
                 	System.out.println("Danh Sách Phiếu");
@@ -75,6 +74,7 @@ public class QuanLyPhieuNhapHang {
         }
     }
 }
+
 
 
 
