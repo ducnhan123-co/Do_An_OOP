@@ -10,7 +10,8 @@ public class QuanLySieuThiMini {
         QuanLyHoaDon qlHoaDon = new QuanLyHoaDon(); // Quản lý hóa đơn
         QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang();
         QuanLyKhachHang qlKhachHang = new QuanLyKhachHang();
-        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
+        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap();
+//        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
         int choice;
         do {
             System.out.println("\n================================================");
@@ -53,10 +54,10 @@ public class QuanLySieuThiMini {
                     qlHoaDon.menuDSHD();
                     break;
                 case 4:
-                    // qlPhieuNhapHang.menu();
+                    qlPhieuNhapHang.menu();
                     break;
                     case 5:
-               qlKhachHang.menu();
+                    qlKhachHang.menu();
                     break;
                 case 6:
                     qlNhaCungCap.menu();
