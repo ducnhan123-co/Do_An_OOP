@@ -18,6 +18,7 @@ public class NhaCungCap {
     }
 
     public NhaCungCap() {}
+    
     public NhaCungCap(NhaCungCap other) {
         this.diaChiNCC = other.diaChiNCC;
         this.emailNCC = other.emailNCC;
@@ -65,45 +66,43 @@ public class NhaCungCap {
     public void setDiaChiNCC(String diaChiNCC) {
         this.diaChiNCC = diaChiNCC;
     }
+    
     public void nhap() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nhập mã nhà cung cấp: ");
+        this.maNCC = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Nhập tên nhà cung cấp: ");
+        this.tenNCC = sc.nextLine().trim();
+
         while (true) {
             try {
-                Scanner in = new Scanner(System.in);
-                System.out.print("nhap ma nha cung cap");
-                this.maNCC = in.nextInt();
-                in.nextLine();
-                System.out.print("nhap ten nha cung cap");
-                this.tenNCC = in.nextLine().trim();
-                System.out.print("nhap so dien thoai nha cung cap");
-                this.sdtNCC = in.nextLine().trim();
-                System.out.print("nhap email nha cung cap");
-                this.emailNCC = in.nextLine().trim();
-                System.out.print("nhap dia chi nha cung cap");
-                this.diaChiNCC = in.nextLine().trim();
-
+                System.out.print("Nhập số điện thoại nhà cung cấp: ");
+                this.sdtNCC = sc.nextLine().trim();
+                if (this.sdtNCC.length() != 10 || !this.sdtNCC.matches("\\d+")) {
+                    throw new IllegalArgumentException("Số điện thoại phải gồm đúng 10 chữ số.");
+                }
                 break;
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-    }
-    public void sua() {
-        while (true) {
-            try {
-                Scanner in = new Scanner(System.in);
-                System.out.print("nhap ten nha cung cap");
-                this.tenNCC = in.nextLine().trim();
-                System.out.print("nhap so dien thoai nha cung cap");
-                this.sdtNCC = in.nextLine().trim();
-                System.out.print("nhap email nha cung cap");
-                this.emailNCC = in.nextLine().trim();
-                System.out.print("nhap dia chi nha cung cap");
-                this.diaChiNCC = in.nextLine().trim();
 
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        System.out.print("Nhập Email nhà cung cấp: ");
+        this.emailNCC = sc.nextLine().trim();
+
+        System.out.print("Nhập địa chỉ nhà cung cấp: ");
+        this.diaChiNCC = sc.nextLine().trim();
     }
+
+
+    
+    public void xuat() {
+        System.out.printf("|%-12d|%-20s|%-12s|%-25s|%-45s|\n", 
+            maNCC, tenNCC, sdtNCC, emailNCC, diaChiNCC);
+    }
+
+    
 }

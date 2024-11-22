@@ -1,0 +1,20 @@
+1;PepsiCo;0123456789;pepsico@gmail.com;Số 1, Đường Nguyễn Văn Cừ, Hà Nội
+2;Coca-Cola;0987654321;coca-cola@gmail.com;Số 2, Đường Lê Duẩn, Hồ Chí Minh
+3;Điện Máy Xanh;0912345678;dienmayxanh@gmail.com;Số 3, Đường Nguyễn Tri Phương, Đà Nẵng
+4;Nestlé;0901234567;nestle@gmail.com;Số 4, Đường Nguyễn Thị Minh Khai, Cần Thơ
+5;Unilever;0934567890;unilever@gmail.com;Số 5, Đường Lý Tự Trọng, Hải Phòng
+6;Kraft Heinz;0945678901;kraftheinz@gmail.com;Số 6, Đường Trần Phú, Huế
+7;Mars;0956789012;mars@gmail.com;Số 7, Đường Nguyễn Văn Linh, Bình Dương
+8;Danone;0967890123;danone@gmail.com;Số 8, Đường Ba Tháng Hai, Vũng Tàu
+9;Mondelez;0978901234;mondelez@gmail.com;Số 9, Đường Trần Hưng Đạo, Nha Trang
+10;General Mills;0990123456;generalmills@gmail.com;Số 10, Đường Trần Phú, Quảng Ninh
+11;Cargill;0902345678;cargill@gmail.com;Số 11, Đường Nguyễn An Ninh, Phú Quốc
+12;Tyson Foods;0913456789;tysonfoods@gmail.com;Số 12, Đường Lý Chính Thắng, Thanh Hóa
+13;PepsiCo Foods;0924567890;pepsicofoods@gmail.com;Số 13, Đường Tô Hiến Thành, Long An
+14;Bánh Kinh Đô;0935678901;kinhdo@gmail.com;Số 14, Đường Lê Hồng Phong, Nam Định
+15;Acecook;0946789012;acecook@gmail.com;Số 15, Đường Lê Lai, Sóc Trăng
+16;VinaAcecook;0957890123;vinaacecook@gmail.com;Số 16, Đường Nguyễn Trãi, Bắc Giang
+17;Suntory;0968901234;suntory@gmail.com;Số 17, Đường Lê Thánh Tôn, Quảng Bình
+18;Bánh Gấu;0979012345;banhgau@gmail.com;Số 18, Đường Hùng Vương, Đắk Lắk
+19;Vinamilk;0980123456;vinamilk@gmail.com;Số 19, Đường Nguyễn Chí Thanh, Bình Định
+20;TH True Milk;0991234567;thtruemilk@gmail.com;Số 20, Đường 3 Tháng 2, Tiền Giang
