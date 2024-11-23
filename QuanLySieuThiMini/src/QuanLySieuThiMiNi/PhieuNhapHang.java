@@ -110,3 +110,5 @@ public class PhieuNhapHang {
                 this.maPhieu, this.maNCC, this.maNV, this.tongTien, formattedDate);
     }
 }
+
+

@@ -8,10 +8,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.text.DecimalFormat;
+
 
 public class DanhSachPhieuNhapHang implements ThaoTacFile{
     private PhieuNhapHang[] dsPhieu = new PhieuNhapHang[0];
     private int n = 0;
+//    private DanhSachChiTietPhieuNhapHang dsChiTiet;
 
     public void themPhieuNhapHang() {
         while (true) {
@@ -21,7 +24,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
 
             // Kiểm tra mã phiếu trùng lặp
             if (kiemTraMaPhieuTonTai(phieuMoi.getMaPhieu())) {
-                System.out.println("Mã phiếu đã tồn tại. Vui lòng nhập lại thông tin phiếu.");
+                System.out.println("Mã phiếu đã tồn tại. Vui lòng nhập lại thông tin phiếu.\n");
             } else {
                 // Mã phiếu hợp lệ, thêm vào danh sách
                 dsPhieu = Arrays.copyOf(dsPhieu, n + 1);
@@ -219,6 +222,56 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
             System.out.println("Năm nhập không hợp lệ. Vui lòng nhập theo định dạng yyyy.");
         }
     }
+    
+    public void thongKeTongTienTheoQuyVaNam() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhập năm cần thống kê: ");
+        int namCanThongKe = sc.nextInt();
+
+        double tongTienQuy1 = 0;
+        double tongTienQuy2 = 0;
+        double tongTienQuy3 = 0;
+        double tongTienQuy4 = 0;
+
+        for (int i = 0; i < n; i++) {
+            PhieuNhapHang phieu = dsPhieu[i];
+            int thang = phieu.getNgayNhapHang().getMonthValue();
+            int nam = phieu.getNgayNhapHang().getYear();
+            double tongTien = phieu.getTongTien();
+
+            // Chỉ tính tổng tiền của năm được chỉ định
+            if (nam == namCanThongKe) {
+                if (thang >= 1 && thang <= 3) {
+                    tongTienQuy1 += tongTien;
+                } else if (thang >= 4 && thang <= 6) {
+                    tongTienQuy2 += tongTien;
+                } else if (thang >= 7 && thang <= 9) {
+                    tongTienQuy3 += tongTien;
+                } else if (thang >= 10 && thang <= 12) {
+                    tongTienQuy4 += tongTien;
+                }
+            }
+        }
+
+        // Sử dụng DecimalFormat để thay đổi dấu phân cách
+        DecimalFormat df = new DecimalFormat("#,###.###");
+
+        System.out.println("Thống kê tổng tiền theo quý trong năm " + namCanThongKe + ":");
+        System.out.println("╔═════════╦════════════════════╗");
+        System.out.printf("║ %-7s ║ %-18s ║\n", "Quý", "Tổng tiền");
+        System.out.println("╠═════════╬════════════════════╣");
+        System.out.printf("║ %-7s ║ %-18s ║\n", "1", df.format(tongTienQuy1));
+        System.out.printf("║ %-7s ║ %-18s ║\n", "2", df.format(tongTienQuy2));
+        System.out.printf("║ %-7s ║ %-18s ║\n", "3", df.format(tongTienQuy3));
+        System.out.printf("║ %-7s ║ %-18s ║\n", "4", df.format(tongTienQuy4));
+        System.out.println("╚═════════╩════════════════════╝");
+    }
+
+
+    
+    
+    
+
     
     public PhieuNhapHang parseLineToPhieuNhapHang(String line) {
         String[] parts = line.split(";");
