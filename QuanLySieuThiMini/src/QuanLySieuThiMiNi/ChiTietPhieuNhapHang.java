@@ -82,12 +82,24 @@ public class ChiTietPhieuNhapHang {
     
     public void nhap() {
         Scanner scanner = new Scanner(System.in);
+
+        // Nhập mã phiếu
+//        System.out.print("Nhập mã phiếu: ");
+//        this.maPhieu = scanner.nextInt();
+
+        // Nhập mã sản phẩm
         System.out.print("Nhập mã sản phẩm: ");
         this.maSp = scanner.nextInt();
+
+        // Nhập số lượng
         System.out.print("Nhập số lượng: ");
         this.sl = scanner.nextInt();
+
+        // Nhập đơn giá
         System.out.print("Nhập đơn giá: ");
         this.donGia = scanner.nextDouble();
+
+        // Tính thành tiền
         updateThanhTien();
     }
     

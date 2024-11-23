@@ -157,7 +157,8 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + maPhieu);
         }
     }
-
+    
+    
 
     // Hàm xóa chi tiết theo mã phiếu
     public void xoaChiTiet() {
@@ -195,7 +196,6 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         }
     }
     
-    // Hàm tìm chi tiết sản phẩm theo mã phiếu và mã sản phẩm
    
     // Hàm in danh sách chi tiết phiếu nhập
     public void inDanhSachChiTiet() {
@@ -235,8 +235,31 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
     @Override
     public void docFile() {
-        
+        String filename = "src\\QuanLySieuThiMiNi\\ChiTietPhieuNhapHang.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int count = 0;
+            while ((line = reader.readLine()) != null) {
+                ChiTietPhieuNhapHang chiTiet = parseLineToChiTiet(line);
+                if (chiTiet != null) {
+                    // Kiểm tra nếu mảng đã đầy, thì tăng kích thước mảng
+                    if (n >= dsChiTiet.length) {
+                        dsChiTiet = Arrays.copyOf(dsChiTiet, dsChiTiet.length + 10); // Tăng kích thước
+                    }
+                    dsChiTiet[n++] = chiTiet;
+                    count++;
+                } else {
+                    System.out.println("Dòng không hợp lệ: " + line);
+                }
+            }
+            System.out.println("Đã thêm " + count + " chi tiết phiếu nhập hàng từ tệp tin: " + filename);
+        } catch (FileNotFoundException e) {
+            System.out.println("Không tìm thấy tệp tin: " + filename);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
+
 
 	@Override
 	public void ghiFile() {
