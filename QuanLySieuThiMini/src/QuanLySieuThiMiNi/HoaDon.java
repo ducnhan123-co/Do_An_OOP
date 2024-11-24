@@ -112,7 +112,7 @@ public class HoaDon {
         System.out.println("Phương thức thanh toán: "+phuongThucTinhToan);
         System.out.println("Tiền trả: "+tienTra+"đ");
         System.out.println("Tiền thừa: "+tienThua+"đ");
-        System.out.println("-------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
     }
 
     public void suaHoaDon(DanhSachSanPham danhSachSanPham) {
