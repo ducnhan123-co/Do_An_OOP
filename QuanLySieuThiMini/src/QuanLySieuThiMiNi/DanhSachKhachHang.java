@@ -1,10 +1,18 @@
 package QuanLySieuThiMiNi;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.util.Arrays.copyOf;
 
-public class DanhSachKhachHang {
+public class DanhSachKhachHang implements  ThaoTacFile{
     private KhachHang[] DS_KhachHang = new KhachHang[0];
     private int size = 0;
 
@@ -12,17 +20,42 @@ public class DanhSachKhachHang {
     }
 
     public void push(KhachHang khachHang) {
-        DS_KhachHang = copyOf(DS_KhachHang, DS_KhachHang.length + 1);
-        DS_KhachHang[DS_KhachHang.length - 1] = khachHang;
-        size++;
+        if (size >= DS_KhachHang.length) {
+            DS_KhachHang = copyOf(DS_KhachHang, DS_KhachHang.length + 10); // Tăng kích thước mảng
+        }
+        DS_KhachHang[size++] = khachHang;
     }
+
 
     // Thêm một khách hàng mới vào danh sách
     public void them() {
-        KhachHang khachHang = new KhachHang();
-        khachHang.nhap();
-        push(khachHang);
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            try {
+                System.out.print("Nhập mã khách hàng: ");
+                int maKH = sc.nextInt();
+                sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại
+
+                // Kiểm tra mã khách hàng đã tồn tại
+                if (timKiemKhachHangTheoMa(maKH) != null) {
+                    System.out.println("Khách hàng này đã có trong danh sách. Vui lòng nhập lại mã khác.");
+                    continue;
+                }
+
+                // Tạo khách hàng mới và nhập thông tin
+                KhachHang khachHang = new KhachHang();
+                khachHang.setMaKH(maKH); // Gán mã khách hàng vừa nhập
+                khachHang.nhap(); // Nhập các thông tin còn lại
+                push(khachHang); // Thêm khách hàng vào danh sách
+                System.out.println("Thêm khách hàng thành công!");
+                break; // Thoát vòng lặp sau khi thêm thành công
+            } catch (Exception e) {
+                System.out.println("Lỗi nhập liệu: " + e.getMessage());
+                sc.nextLine(); // Đọc bỏ dữ liệu lỗi
+            }
+        }
     }
+
 
     // Tìm kiếm khách hàng theo mã khách hàng
     public KhachHang timKiemKhachHangTheoMa(int maKH) {
@@ -33,16 +66,91 @@ public class DanhSachKhachHang {
         }
         return null;
     }
+    public void timKiemKhachHangTheoHo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhập họ khách hàng cần tìm kiếm: ");
+        String hoKH = sc.nextLine().trim();
+        boolean found = false;
+        int dem=0;
+        KhachHang[] khachHangFound = new KhachHang[DS_KhachHang.length];
+        int index = 0;  // Biến đếm số lượng khách hàng tìm được
+        for (KhachHang khachHang : DS_KhachHang) {
+            if (khachHang != null && khachHang.getHoKH().equalsIgnoreCase(hoKH)) {
+                khachHangFound[index++] = khachHang; // Lưu khách hàng vào mảng
+                found = true;
+            }
+        }
+        if (found) {
+            System.out.println("Danh sách khách hàng có họ '" + hoKH + "':");
+            System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
+                    "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
 
-    // Sửa thông tin khách hàng theo mã
-    public void sua(int maKH) {
-        KhachHang khachHang = timKiemKhachHangTheoMa(maKH);
-        if (khachHang != null) {
-            khachHang.sua();
+            // In các khách hàng trong mảng kết quả
+            for (int i = 0; i < index; i++) {
+                if (khachHangFound[i] != null) {
+                    dem++;
+                    khachHangFound[i].xuat(); // In thông tin khách hàng
+                }
+            }
+            System.out.println("Danh sách trên có : "+ dem + " khách hàng với họ là : "+ hoKH);
         } else {
-            System.out.println("Không tìm thấy khách hàng với mã: " + maKH);
+            System.out.println("Không tìm thấy khách hàng với họ: " + hoKH);
         }
     }
+    // Sửa thông tin khách hàng theo mã
+    public void suaKhachHangTheoMa() {
+        Scanner sc = new Scanner(System.in);
+        boolean tiepTucSua = true;
+
+        while (tiepTucSua) {
+            System.out.println("Nhập mã khách hàng cần chỉnh sửa: ");
+            int ma = -1; // Khởi tạo biến mã với giá trị không hợp lệ ban đầu
+            boolean maHopLe = false;
+
+            // Lặp lại cho đến khi người dùng nhập đúng số nguyên
+            while (!maHopLe) {
+                try {
+                    ma = Integer.parseInt(sc.nextLine()); // Cố gắng chuyển đổi đầu vào thành số nguyên
+                    maHopLe = true; // Nếu không có lỗi thì thoát khỏi vòng lặp
+                } catch (NumberFormatException e) {
+                    System.out.println("Mã khách hàng không hợp lệ. Vui lòng nhập lại một số nguyên.");
+                }
+            }
+
+            KhachHang kh = timKiemKhachHangTheoMa(ma);
+
+            if (kh != null) {
+                // In thông tin khách hàng trước khi sửa
+                System.out.println("Thông tin khách hàng trước khi sửa:");
+                System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
+                        "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+
+                kh.xuat(); // Gọi phương thức xuất thông tin khách hàng
+
+                // Sửa thông tin khách hàng
+                kh.sua();
+
+                // In thông tin khách hàng sau khi sửa
+                System.out.println("Thông tin khách hàng sau khi cập nhật:");
+                System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
+                        "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+                kh.xuat();
+
+                System.out.println("Đã sửa thông tin khách hàng với mã: " + ma);
+            } else {
+                System.out.println("Không tìm thấy khách hàng nào với mã: " + ma);
+            }
+
+            // Hỏi người dùng có muốn sửa tiếp không
+            System.out.print("Bạn muốn sửa tiếp không? (y/n): ");
+            String luaChon = sc.nextLine().trim().toLowerCase();
+
+            if (luaChon.equals("n")) {
+                tiepTucSua = false; // Nếu chọn 'n' thì dừng lại
+            }
+        }
+    }
+
 
     // Xóa khách hàng theo mã
     public void xoa(int maKH) {
@@ -61,32 +169,40 @@ public class DanhSachKhachHang {
     }
 
 
-    public void timKiemKhachHangTheoHo() {
+    public void timKiemKhachHangTheoTen() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập họ khách hàng cần tìm kiếm: ");
-        String hoKH = sc.nextLine().trim();
+        System.out.print("Nhập tên khách hàng cần tìm kiếm (hoặc một phần tên): ");
+        String tenKH = sc.nextLine().trim().toLowerCase();
         boolean found = false;
+        int dem = 0;
         KhachHang[] khachHangFound = new KhachHang[DS_KhachHang.length];
-        int index = 0;  // Biến đếm số lượng khách hàng tìm được
+        int index = 0; // Biến đếm số lượng khách hàng tìm được
+
         for (KhachHang khachHang : DS_KhachHang) {
-            if (khachHang != null && khachHang.getHoKH().equalsIgnoreCase(hoKH)) {
+            if (khachHang != null && khachHang.getTenKH().toLowerCase().contains(tenKH)) {
                 khachHangFound[index++] = khachHang; // Lưu khách hàng vào mảng
                 found = true;
             }
         }
+
         if (found) {
-            System.out.println("Danh sách khách hàng có họ '" + hoKH + "':");
-            System.out.printf("|%-10s|%-15s|%-15s|%-12s|%-15s|%-12s|\n", "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT");
+            System.out.println("Danh sách khách hàng có tên chứa '" + tenKH + "':");
+            System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
+                    "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+
             // In các khách hàng trong mảng kết quả
             for (int i = 0; i < index; i++) {
                 if (khachHangFound[i] != null) {
+                    dem++;
                     khachHangFound[i].xuat(); // In thông tin khách hàng
                 }
             }
+            System.out.println("Danh sách trên có: " + dem + " khách hàng chứa tên là: " + tenKH);
         } else {
-            System.out.println("Không tìm thấy khách hàng với họ: " + hoKH);
+            System.out.println("Không tìm thấy khách hàng với tên chứa: " + tenKH);
         }
     }
+
 
 
     // Thống kê số lượng khách hàng
@@ -97,18 +213,342 @@ public class DanhSachKhachHang {
         }
     }
 
+    public KhachHang parseLineToKhachHang(String line) {
+        String[] parts = line.split(";");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Cập nhật định dạng ngày
+        if (parts.length == 8) { // Đảm bảo đúng số lượng thuộc tính
+            try {
+                int maKH = Integer.parseInt(parts[0].trim());
+                String hoKH = parts[1].trim();
+                String tenKH = parts[2].trim();
+                LocalDate ngaySinh = LocalDate.parse(parts[3].trim(), formatter); // Sử dụng đúng định dạng ngày
+                String gioiTinh = parts[4].trim();
+                String sdt = parts[5].trim();
+                String diaChi = parts[6].trim();
+                float diem = Float.parseFloat(parts[7].trim());
+                return new KhachHang(maKH, hoKH, tenKH, ngaySinh, gioiTinh, sdt, diaChi, diem);
+            } catch (NumberFormatException | DateTimeParseException e) {
+                System.out.println("Lỗi định dạng dữ liệu trong dòng: " + line);
+            }
+        } else {
+            System.out.println("Số lượng cột không khớp trong dòng: " + line);
+        }
+        return null;
+    }
+
+
+    @Override
+    public void docFile() {
+        String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\KhachHang.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int count = 0;
+            while ((line = reader.readLine()) != null) {
+                KhachHang kh = parseLineToKhachHang(line);
+                if (kh != null) {
+                    // Kiểm tra và mở rộng mảng nếu cần
+                    if (size >= DS_KhachHang.length) {
+                        DS_KhachHang = copyOf(DS_KhachHang, DS_KhachHang.length + 10);
+                    }
+                    DS_KhachHang[size++] = kh;
+                    count++;
+                } else {
+                    System.out.println("Dòng không hợp lệ: " + line);
+                }
+            }
+            System.out.println("Đã đọc " + count + " khách hàng từ file: " + filename);
+        } catch (FileNotFoundException e) {
+            System.out.println("Không tìm thấy tệp tin: " + filename);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+        public  void ghiFile() {}
+
+        @Override
+        public void capNhatFile(){}
     // Xuất danh sách khách hàng
     public void xuatDanhSachKhachHang() {
         if (size == 0) {
             System.out.println("Danh sách khách hàng rỗng.");
             return;
         }
-        System.out.printf("|%-10s|%-15s|%-15s|%-12s|%-15s|%-12s|\n", "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT");
+        System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
+                "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+
+
         for (KhachHang khachHang : DS_KhachHang) {
             if (khachHang != null) {
                 khachHang.xuat();
             }
         }
         System.out.println("Danh sách trên có " + size + " khách hàng.");
+    }
+    public void thongKeTheoGioiTinh() {
+        int nam = 0;
+        int nu = 0;
+
+        for (KhachHang kh : DS_KhachHang) {
+            if (kh != null) {
+                if (kh.getGioiTinh().equalsIgnoreCase("Nam")) {
+                    nam++;
+                } else if (kh.getGioiTinh().equalsIgnoreCase("Nu")) {
+                    nu++;
+                }
+            }
+        }
+
+        System.out.println("╔══════════════════════════════════╗");
+        System.out.println("║ Thống kê số lượng khách hàng     ║");
+        System.out.println("╠══════════════════════════════════╣");
+        System.out.printf(" ║ Số lượng khách hàng Nam: %-8d    ║\n",nam);
+        System.out.printf(" ║ Số lượng khách hàng Nữ: %-8d     ║\n", nu);
+        System.out.println("╚══════════════════════════════════╝");
+    }
+
+    public void thongKeTheoTuoi() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhập tuổi để thống kê: ");
+        int tuoiNhap = sc.nextInt();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate now = LocalDate.now();
+        KhachHang[] truocTuoi = new KhachHang[size];
+        KhachHang[] sauTuoi = new KhachHang[size];
+        int truocIndex = 0;
+        int sauIndex = 0;
+        int demNho=0,demHon=0;
+        for (KhachHang kh : DS_KhachHang) {
+            if (kh != null) {
+                int tuoiKh = now.getYear() - kh.getNgaySinh().getYear();
+                if (tuoiKh < tuoiNhap) {
+                    demNho++;
+                    truocTuoi[truocIndex++] = kh;
+                } else {
+                    sauTuoi[sauIndex++] = kh;
+                    demHon++;
+                }
+            }
+        }
+
+        System.out.println("Danh sách khách hàng có tuổi nhỏ hơn " + tuoiNhap + ":");
+        System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
+                "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+        for (int i = 0; i < truocIndex; i++) {
+            if (truocTuoi[i] != null) {
+                truocTuoi[i].xuat();
+            }
+        }
+        System.out.println("Danh sách trên có : "+ demNho+ " khách hàng.");
+
+        System.out.println("\nDanh sách khách hàng có tuổi lớn hơn hoặc bằng " + tuoiNhap + ":");
+        System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
+                "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+        for (int i = 0; i < sauIndex; i++) {
+            if (sauTuoi[i] != null) {
+                sauTuoi[i].xuat();
+            }
+        }
+        System.out.println("Danh sách treen có : "+demHon+ " khách hàng.");
+    }
+
+    public void thongKeDonHangTheoQuy(DanhSachHoaDon dsHoaDon) {
+        int[] maxHoaDon = {0, 0, 0, 0}; // Số lượng hóa đơn nhiều nhất cho các quý
+        float[] maxChiTieu = {0, 0, 0, 0}; // Chi tiêu lớn nhất cho các quý
+        KhachHang[] topKhachHang = new KhachHang[4]; // Khách hàng tương ứng với các quý
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Định dạng ngày khớp với file
+
+        for (KhachHang kh : DS_KhachHang) {
+            if (kh == null) continue;
+            int[] soHoaDonTheoQuy = {0, 0, 0, 0};
+            float[] chiTieuTheoQuy = {0, 0, 0, 0};
+
+            for (HoaDon hd : dsHoaDon.getDanhSachHoaDon()) { // Sử dụng getter để lấy danh sách hóa đơn
+                if (hd != null && hd.getMaKH() == kh.getMaKH()) {
+                    try {
+                        // Chuyển đổi ngày từ String sang LocalDate
+                        LocalDate ngayHoaDon = LocalDate.parse(hd.getNgayTaoHoaDon(), formatter);
+                        int month = ngayHoaDon.getMonthValue(); // Lấy tháng từ ngày
+                        int quy = (month - 1) / 3; // Quy 1: 0, Quy 2: 1, Quy 3: 2, Quy 4: 3
+                        soHoaDonTheoQuy[quy]++;
+                        chiTieuTheoQuy[quy] += hd.getTongTien(); // Tính tổng chi tiêu
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Lỗi định dạng ngày trong hóa đơn: " + hd.getNgayTaoHoaDon());
+                    }
+                }
+            }
+
+            for (int quy = 0; quy < 4; quy++) {
+                if (soHoaDonTheoQuy[quy] > maxHoaDon[quy] ||
+                        (soHoaDonTheoQuy[quy] == maxHoaDon[quy] && chiTieuTheoQuy[quy] > maxChiTieu[quy])) {
+                    maxHoaDon[quy] = soHoaDonTheoQuy[quy];
+                    maxChiTieu[quy] = chiTieuTheoQuy[quy];
+                    topKhachHang[quy] = kh;
+                }
+            }
+        }
+
+        // In bảng thống kê
+        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║          Thống kê khách hàng mua nhiều đơn hàng nhất theo từng quý                 ║");
+        System.out.println("╠═══════╦══════════════════════╦══════════════════╦══════════════════════╦═══════════╣");
+        System.out.println("║ Quý   ║ Mã KH                ║ Tên khách hàng   ║ Số lượng hóa đơn     ║ Chi tiêu  ║");
+        System.out.println("╠═══════╬══════════════════════╬══════════════════╬══════════════════════╬═══════════╣");
+        for (int quy = 0; quy < 4; quy++) {
+            if (topKhachHang[quy] != null) {
+                System.out.printf("║ %-5d ║ %-20d ║ %-16s ║ %-20d ║ %-9.2f ║\n",
+                        quy + 1,
+                        topKhachHang[quy].getMaKH(),
+                        topKhachHang[quy].getHoKH() + " " + topKhachHang[quy].getTenKH(),
+                        maxHoaDon[quy],
+                        maxChiTieu[quy]);
+            } else {
+                System.out.printf("║ %-5d ║ %-20s ║ %-16s ║ %-20s ║ %-9s ║\n",
+                        quy + 1, "Không có", "Không có", "Không có", "Không có");
+            }
+        }
+        System.out.println("╚═══════╩══════════════════════╩══════════════════╩══════════════════════╩═══════════╝");
+    }
+
+
+    public void timKiemKhachHangNangCao() {
+        try {
+            // Đọc danh sách tỉnh từ file vào mảng
+            String[] danhSachTinh = new String[64]; // Giả sử file có tối đa 64 tỉnh
+            int soTinh = 0; // Đếm số tỉnh trong file
+            try (BufferedReader br = new BufferedReader(new FileReader("D:/ALL/Do_An_OOP/QuanLySieuThiMini/src/QuanLySieuThiMiNi/DanhSachTinh.txt"))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    danhSachTinh[soTinh++] = line.trim();
+                }
+            }
+
+            System.out.println("Danh sách các tỉnh thành (chọn số tương ứng):");
+            for (int i = 0; i < soTinh; i++) {
+                System.out.printf("%d. %s\n", i + 1, danhSachTinh[i]);
+            }
+
+            int[] luaChon = new int[soTinh]; // Lưu lựa chọn của người dùng
+            int soLuaChon = 0; // Đếm số lượng tỉnh đã chọn
+            Scanner scanner = new Scanner(System.in);
+            boolean tiepTuc = true;
+
+            while (tiepTuc) {
+                System.out.print("Nhập số tương ứng với tỉnh (VD: 1 2): ");
+                String input = scanner.nextLine().trim(); // Loại bỏ khoảng trắng đầu và cuối
+                String[] inputArray = input.split("\\s+");
+                boolean validInput = true;
+
+                for (String s : inputArray) {
+                    try {
+                        int chon = Integer.parseInt(s);
+                        // Kiểm tra số nhập có hợp lệ và không vượt quá số lượng tỉnh
+                        if (chon > 0 && chon <= soTinh) {
+                            // Kiểm tra xem tỉnh đã được chọn chưa
+                            boolean isDuplicate = false;
+                            for (int i = 0; i < soLuaChon; i++) {
+                                if (luaChon[i] == chon - 1) {
+                                    isDuplicate = true; // Nếu trùng, bỏ qua
+                                    break;
+                                }
+                            }
+                            if (!isDuplicate) {
+                                luaChon[soLuaChon++] = chon - 1; // Lưu chỉ số tỉnh (0-based)
+                            }
+                        } else {
+                            System.out.println("Số " + chon + " không hợp lệ, vui lòng thử lại.");
+                            validInput = false; // Đánh dấu là đầu vào không hợp lệ
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Lỗi nhập: '" + s + "' không phải là số hợp lệ. Mời nhập lại.");
+                        validInput = false; // Đánh dấu là đầu vào không hợp lệ
+                    }
+                }
+
+                if (!validInput) {
+                    continue;
+                }
+
+                String tiep;
+                do {
+                    System.out.print("Bạn có muốn nhập thêm không? (y/n): ");
+                    tiep = scanner.nextLine().trim().toLowerCase();
+                    if (!tiep.equals("y") && !tiep.equals("n")) {
+                        System.out.println("Lựa chọn không hợp lệ, vui lòng nhập lại.");
+                    }
+                } while (!tiep.equals("y") && !tiep.equals("n"));
+
+                tiepTuc = tiep.equals("y");
+            }
+
+            String[] tinhDuocChon = new String[soLuaChon];
+            int index = 0;
+
+            for (int chon : luaChon) {
+                try {
+                    tinhDuocChon[index++] = danhSachTinh[chon];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    continue;
+                }
+            }
+
+            System.out.print("Bạn đã chọn các tỉnh: ");
+            for (int i = 0; i < tinhDuocChon.length; i++) {
+                System.out.print(tinhDuocChon[i] + (i < tinhDuocChon.length - 1 ? ", " : "\n"));
+            }
+
+            KhachHang[] danhSachTimDuoc = timKiemKhachHangTheoDiaChi(tinhDuocChon);
+
+            if (danhSachTimDuoc.length == 0) {
+                System.out.println("Không có khách hàng nào có địa chỉ thuộc danh sách bạn chọn.");
+            } else {
+                System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
+                        "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+                for (KhachHang khachHang : danhSachTimDuoc) {
+                    if (khachHang != null) {
+                        khachHang.xuat();
+                    }
+                }
+                System.out.println("Tổng số khách hàng tìm được: " + danhSachTimDuoc.length);
+            }
+        } catch (IOException e) {
+            System.out.println("Đã xảy ra lỗi khi đọc file: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Đã xảy ra lỗi: " + e.getMessage());
+        }
+    }
+
+    // Phương thức hỗ trợ tìm kiếm khách hàng theo danh sách địa chỉ
+    public KhachHang[] timKiemKhachHangTheoDiaChi(String[] danhSachTinh) {
+        KhachHang[] ketQua = new KhachHang[DS_KhachHang.length];
+        int index = 0;
+
+        for (KhachHang khachHang : DS_KhachHang) {
+            if (khachHang == null) continue;
+
+            for (String tinh : danhSachTinh) {
+                if (khachHang.getDiaChi().contains(tinh)) {
+                    ketQua[index++] = khachHang;
+                    break; // Tìm thấy một địa chỉ khớp, không cần kiểm tra thêm
+                }
+            }
+        }
+
+        return Arrays.copyOf(ketQua, index);
+    }
+
+
+
+    public void capNhapSoLuongKhachHang() {
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (DS_KhachHang[i] != null) {
+                count++;
+            }
+        }
+        size = count; // Cập nhật lại giá trị của size
+        System.out.println("Số lượng khách hàng hiện có trong danh sách: " + size);
     }
 }
