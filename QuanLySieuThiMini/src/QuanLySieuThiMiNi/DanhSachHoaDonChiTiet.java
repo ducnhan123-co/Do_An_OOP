@@ -78,8 +78,21 @@ public class DanhSachHoaDonChiTiet {
     }
 
     public void xuatChiTietHoaDonTheoMHD(int maHD) {
+        // Kiểm tra trước xem có hóa đơn nào không
+        boolean coHoaDon = false;
+        for(ChiTietHoaDon i: DS_ChiTietHoaDon) {
+            if(i.getMaHD() == maHD) {
+                coHoaDon = true;
+                break; // Chỉ cần tìm thấy một hóa đơn là đủ
+            }
+        }
+        if(!coHoaDon) {
+            System.out.println("Không có mã hóa đơn " + maHD+"!");
+            return; // Kết thúc phương thức sớm nếu không tìm thấy
+        }
+
         double tongTienThanhToan=0;
-        System.out.println("Danh sách chi tiết hóa đơn theo mã hóa đơn "+maHD+": ");
+        System.out.println("\nDanh sách chi tiết hóa đơn theo mã hóa đơn "+maHD+": ");
         System.out.println("----------------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-10s | %-12s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("----------------------------------------------------------------------------------");
