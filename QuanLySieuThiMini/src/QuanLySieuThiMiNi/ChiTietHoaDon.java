@@ -54,7 +54,7 @@ public class ChiTietHoaDon {
 
     // Xuất thông tin chi tiết hóa đơn
     public void xuatChiTietHoaDon() {
-        System.out.printf("| %10d |  %10d | %10d | %10.2f | %10.2f |\n", maHD, maSP, soLuong, donGia, tinhTien());
+        System.out.printf("| %10d |  %10d | %-10d | %-10.2f | %10.2f |\n", maHD, maSP, soLuong, donGia, tinhTien());
         // System.out.println("Mã HD: " + maHD + ", Mã SP: " + maSP + ", Số lượng: " + soLuong + ", Đơn giá: " + donGia + ", Thành tiền: " + tinhTien());
     }
 }
