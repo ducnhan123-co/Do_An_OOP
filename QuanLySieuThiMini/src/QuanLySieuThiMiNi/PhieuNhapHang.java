@@ -110,9 +110,3 @@
                     this.maPhieu, this.maNCC, this.maNV, this.tongTien, formattedDate);
         }
     }
-<<<<<<< Updated upstream
-}
-
-
-=======
->>>>>>> Stashed changes

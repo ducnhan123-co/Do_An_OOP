@@ -1,9 +1,6 @@
 package QuanLySieuThiMiNi;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -239,16 +236,16 @@ public class DanhSachKhachHang implements  ThaoTacFile{
 
     @Override
     public void docFile() {
-        String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\KhachHang.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                getClass().getResourceAsStream("/QuanLySieuThiMiNi/KhachHang.txt")))) {
             String line;
             int count = 0;
-            while ((line = reader.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 KhachHang kh = parseLineToKhachHang(line);
                 if (kh != null) {
                     // Kiểm tra và mở rộng mảng nếu cần
                     if (size >= DS_KhachHang.length) {
-                        DS_KhachHang = copyOf(DS_KhachHang, DS_KhachHang.length + 10);
+                        DS_KhachHang = Arrays.copyOf(DS_KhachHang, DS_KhachHang.length + 10);
                     }
                     DS_KhachHang[size++] = kh;
                     count++;
@@ -256,11 +253,11 @@ public class DanhSachKhachHang implements  ThaoTacFile{
                     System.out.println("Dòng không hợp lệ: " + line);
                 }
             }
-            System.out.println("Đã đọc " + count + " khách hàng từ file: " + filename);
-        } catch (FileNotFoundException e) {
-            System.out.println("Không tìm thấy tệp tin: " + filename);
+            System.out.println("Đã đọc " + count + " khách hàng từ file KhachHang.txt.");
+        } catch (NullPointerException e) {
+            System.out.println("Không tìm thấy file: KhachHang.txt. Đảm bảo file tồn tại trong thư mục /QuanLySieuThiMiNi.");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Đã xảy ra lỗi khi đọc file: " + ex.getMessage());
         }
     }
 

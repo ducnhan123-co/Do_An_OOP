@@ -7,7 +7,7 @@ public class QuanLyNhanVien {
 
     public QuanLyNhanVien(int maxNhanVien) {
         ds = new DanhSachNhanVien(maxNhanVien);
-        ds.docFile();
+
     }
     public void menu() {
         Scanner sc = new Scanner(System.in);
