@@ -108,11 +108,11 @@ public class HoaDon {
         System.out.println("Mã khách hàng: "+this.maKH);
         System.out.println("Mã nhân viên: "+this.maNV);
         System.out.println("Ngày lập hóa đơn: "+ngayTaoHoaDon);
-        System.out.println("Tổng : "+tongTien);
+        System.out.println("Tổng : "+tongTien+" VND");
         System.out.println("Phương thức thanh toán: "+phuongThucTinhToan);
-        System.out.println("Tiền trả: "+tienTra+"đ");
-        System.out.println("Tiền thừa: "+tienThua+"đ");
-        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("Tiền trả: "+tienTra+" VND");
+        System.out.println("Tiền thừa: "+tienThua+" VND");
+        System.out.println("---------------------------------------------");
     }
 
     public void suaHoaDon(DanhSachSanPham danhSachSanPham) {

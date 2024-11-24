@@ -9,6 +9,7 @@ import static java.util.Arrays.copyOf;
 
 public class DanhSachHoaDonChiTiet {
     private ChiTietHoaDon[] DS_ChiTietHoaDon = new ChiTietHoaDon[0]; // Mảng chứa các chi tiết hóa đơn
+    private DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
 
     public void push(ChiTietHoaDon chiTietHoaDon) {
         DS_ChiTietHoaDon = copyOf(DS_ChiTietHoaDon, DS_ChiTietHoaDon.length+1);
@@ -22,17 +23,18 @@ public class DanhSachHoaDonChiTiet {
             return;
         }
         double tongCong = 0;
-        System.out.println("Danh sách chi tiết hóa đơn:");
-        System.out.println("-------------------------------------------------------------------");
-        System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
-        System.out.println("-------------------------------------------------------------------");
+        System.out.println("\nDanh sách chi tiết hóa đơn:");
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm","Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
+        System.out.println("----------------------------------------------------------------------------------");
         for (int i = 0; i < DS_ChiTietHoaDon.length; i++) {
-            DS_ChiTietHoaDon[i].xuatChiTietHoaDon(); // Gọi phương thức xuất chi tiết hóa đơn
+            DS_ChiTietHoaDon[i].xuatChiTietHoaDon(danhSachSanPham); // Gọi phương thức xuất chi tiết hóa đơn
             tongCong+=DS_ChiTietHoaDon[i].tinhTien();
         }
-        System.out.println("-------------------------------------------------------------------");
-        System.out.printf("| Tổng cộng                                          | %-10.2f |\n", tongCong);
-        System.out.println("-------------------------------------------------------------------\n");
+        System.out.println("----------------------------------------------------------------------------------");
+        // System.out.printf("| Tổng cộng                                                         | %-10.2f |\n", tongCong);
+        System.out.printf("| %-65s | %10.2f |\n", "Tổng cộng", tongCong);
+        System.out.println("----------------------------------------------------------------------------------");
     }
 
     // Tìm kiếm chi tiết hóa đơn theo mã sản phẩm
@@ -78,18 +80,19 @@ public class DanhSachHoaDonChiTiet {
     public void xuatChiTietHoaDonTheoMHD(int maHD) {
         double tongTienThanhToan=0;
         System.out.println("Danh sách chi tiết hóa đơn theo mã hóa đơn "+maHD+": ");
-        System.out.println("-------------------------------------------------------------------");
-        System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
-        System.out.println("-------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.printf("| %-10s | %-10s | %-12s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
+        System.out.println("----------------------------------------------------------------------------------");
         for (ChiTietHoaDon i: DS_ChiTietHoaDon) {
             if (i.getMaHD() == maHD) {
-                i.xuatChiTietHoaDon();
+                i.xuatChiTietHoaDon(danhSachSanPham);
                 tongTienThanhToan+=i.tinhTien();
             }
         }
-        System.out.println("-------------------------------------------------------------------");
-        System.out.printf("| Tổng cộng                                          |  %-10.2f|\n", tongTienThanhToan);
-        System.out.println("-------------------------------------------------------------------\n");
+        System.out.println("----------------------------------------------------------------------------------");
+        // System.out.printf("| Tổng cộng                                                         |  %-10.2f|\n", tongTienThanhToan);
+        System.out.printf("| %-65s | %10.2f |\n", "Tổng cộng", tongTienThanhToan);
+        System.out.println("----------------------------------------------------------------------------------");
     }
 
     public void docFile () {

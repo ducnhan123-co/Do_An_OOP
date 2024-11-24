@@ -47,6 +47,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         for(HoaDon i: DS_hoaDon) {
             i.xuatHoaDon();
             danhSachHoaDonChiTiet.xuatChiTietHoaDonTheoMHD(i.getMaHD());
+            System.out.println();
         }
     }
 
