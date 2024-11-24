@@ -47,7 +47,8 @@ public class QuanLySieuThiMini {
                     qlNhanVien.menu();
                     break;
                 case 2:
-                    System.out.println("Chức năng quản lý sản phẩm đang được phát triển...");
+                    QuanLySanPham quanLySanPham = new QuanLySanPham();
+                    quanLySanPham.menu();
                     break;
                 case 3:
                     System.out.println("Tiến hành chức năng quản lý hóa đơn...\n");

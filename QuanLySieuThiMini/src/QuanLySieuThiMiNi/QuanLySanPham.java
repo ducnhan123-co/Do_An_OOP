@@ -3,10 +3,12 @@ package QuanLySieuThiMiNi;
 import java.util.Scanner;
 
 public class QuanLySanPham {
-    public static void main(String[] args) {
-        DanhSachSanPham dsSanPham = new DanhSachSanPham();
-        Scanner sc = new Scanner(System.in);
-        
+    DanhSachSanPham dsSanPham = new DanhSachSanPham();
+    Scanner sc = new Scanner(System.in);
+    public QuanLySanPham() {
+        dsSanPham.docFile();
+    }
+    public void menu () {
         // Menu
         while (true) {
             System.out.println("===== Quản lý sản phẩm =====");
@@ -17,7 +19,7 @@ public class QuanLySanPham {
             System.out.println("5. Thoát");
             System.out.print("Chọn: ");
             int choice = sc.nextInt();
-            
+
             if (choice == 1) {
                 dsSanPham.themGiaDungHayThucPham();
             } else if (choice == 2) {
@@ -32,6 +34,10 @@ public class QuanLySanPham {
                 System.out.println("Lựa chọn không hợp lệ.");
             }
         }
+    }
+    public static void main(String[] args) {
+        QuanLySanPham a = new QuanLySanPham();
+        a.menu();
     }
 }
 
