@@ -9,14 +9,8 @@ public class QuanLySieuThiMini {
         QuanLySanPham qlSanPham = new QuanLySanPham(); // Quản lý sản phẩm
         QuanLyHoaDon qlHoaDon = new QuanLyHoaDon(); // Quản lý hóa đơn
         QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang();
-<<<<<<< Updated upstream
-        QuanLyKhachHang qlKhachHang = new QuanLyKhachHang();
-        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap();
-//        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
-=======
         QuanLyKhachHang qlKhachHang = new QuanLyKhachHang(100);
-        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(100); // Quản lý nhà cung cấp
->>>>>>> Stashed changes
+        QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(); // Quản lý nhà cung cấp
         int choice;
         do {
             System.out.println("\n================================================");
@@ -60,14 +54,12 @@ public class QuanLySieuThiMini {
                     qlHoaDon.menuDSHD();
                     break;
                 case 4:
-<<<<<<< Updated upstream
-                    qlPhieuNhapHang.menu();
-=======
+
                      qlPhieuNhapHang.menu();
->>>>>>> Stashed changes
                     break;
                     case 5:
                     qlKhachHang.menu();
+
                     break;
                 case 6:
                     qlNhaCungCap.menu();
