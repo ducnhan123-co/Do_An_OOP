@@ -42,38 +42,44 @@ public class QuanLyPhieuNhapHang {
                     DSPNH.xoaTheoMa(); // chua hoàn thiện
                     break;
                 case 6:
-                    while(true) {
-                    	System.out.println("----------------- THỐNG KÊ --------------");
-                    	System.out.println("1. Thống kê theo ngày");
-                    	System.out.println("2. Thống kê theo tháng");
-                    	System.out.println("3. Thống kê theo năm");
-                    	System.out.println("4. Thống kê tổng tiền theo quý");
-                    	System.out.println("5. Quay lại");
-                    	System.out.println("------------------------------------------");
-                    	System.out.print("Chọc chức năng: ");
-                    	int chon = sc.nextInt();
-                    	sc.nextLine();
-                    	
-                    	switch(chon) {
-                    		case 1:
-                    			DSPNH.thongKeTheoNgay();
-                    			break;
-                    		case 2:
-                    			DSPNH.thongKeTheoThang();
-                    			break;
-                    		case 3:
-                    			DSPNH.thongKeTheoNam();
-                    			break;
-                    		case 4:
-                    			DSPNH.thongKeTongTienTheoQuyVaNam();
-                    			break;
-                    		case 5:
-                    			break;
-                    		default:
-                    			System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
-                    	}
-                    	
+                    while (true) {
+                        System.out.println("----------------- THỐNG KÊ --------------");
+                        System.out.println("1. Thống kê theo ngày");
+                        System.out.println("2. Thống kê theo tháng");
+                        System.out.println("3. Thống kê theo năm");
+                        System.out.println("4. Thống kê tổng tiền theo quý");
+                        System.out.println("5. Quay lại");
+                        System.out.println("------------------------------------------");
+                        System.out.print("Chọn chức năng: ");
+                        int chon = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (chon) {
+                            case 1:
+                                DSPNH.thongKeTheoNgay();
+                                break;
+                            case 2:
+                                DSPNH.thongKeTheoThang();
+                                break;
+                            case 3:
+                                DSPNH.thongKeTheoNam();
+                                break;
+                            case 4:
+                                DSPNH.thongKeTongTienTheoQuyVaNam();
+                                break;
+                            case 5:
+                                System.out.println("Đã quay lại trang chính");
+                                break; // Just break out of the statistics menu and return to the main menu
+                            default:
+                                System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                        }
+
+                        // If user chose to go back to the main menu (option 5), break out of this loop
+                        if (chon == 5) {
+                            break;
+                        }
                     }
+                    break;
                 case 7:
                 	DSPNH.docFile();
                 	break;    
@@ -96,6 +102,10 @@ public class QuanLyPhieuNhapHang {
         }
     }
 }
+
+
+
+
 
 
 
