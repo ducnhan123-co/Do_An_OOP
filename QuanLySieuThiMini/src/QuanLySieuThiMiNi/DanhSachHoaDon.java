@@ -22,6 +22,10 @@ public class DanhSachHoaDon implements ThaoTacFile {
         this.DS_hoaDon = other.DS_hoaDon;
     }
 
+    public HoaDon[] getDanhSachHoaDon() {
+        return DS_hoaDon;
+    }
+
     public boolean checkHD(int maHD) {
         for (HoaDon i: DS_hoaDon) {
             if (i.getMaHD() == maHD)

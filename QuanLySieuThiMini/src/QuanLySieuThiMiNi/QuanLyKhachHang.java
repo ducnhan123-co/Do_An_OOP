@@ -1,16 +1,14 @@
 package QuanLySieuThiMiNi;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class QuanLyKhachHang {
-    private DanhSachKhachHang ds;
-
-    public QuanLyKhachHang() {
-    }
+    public DanhSachKhachHang ds;
 
     public QuanLyKhachHang(int maxKhachHang) {
-        ds = new DanhSachKhachHang();
-//        ds.docFile();
+     this.ds = new DanhSachKhachHang();
+        ds.docFile();
     }
 
     public void menu() {
@@ -36,7 +34,6 @@ public class QuanLyKhachHang {
             // Lặp lại cho đến khi người dùng nhập lựa chọn hợp lệ
             while (choice < 0 || choice > 9) {
                 try {
-                    System.out.print("Chọn chức năng: ");
                     choice = sc.nextInt();
                     sc.nextLine(); // Đọc bỏ dòng trống
 
@@ -79,15 +76,27 @@ public class QuanLyKhachHang {
                         }
                     }
                 }
-                case 2 -> ds.sua(1); // Sửa thông tin khách hàng theo mã
+                case 2 -> ds.suaKhachHangTheoMa(); // Sửa thông tin khách hàng theo mã
                 case 3 -> {
-                    System.out.print("Nhập mã khách hàng cần xóa: ");
-                    int maXoa = sc.nextInt();
-                    sc.nextLine(); // Đọc bỏ dòng dư
-                    ds.xoa(maXoa); // Gọi phương thức xóa khách hàng theo mã
-                }
-                case 4 -> {
                     while (true) {
+                        try {
+                            System.out.print("Nhập mã khách hàng cần xóa: ");
+                            int maXoa = sc.nextInt(); // Kiểm tra nhập đúng số nguyên
+                            sc.nextLine(); // Xóa ký tự xuống dòng
+                            ds.xoa(maXoa);
+                            break; // Thoát vòng lặp nếu không có lỗi
+                        } catch (InputMismatchException e) {
+                            System.out.println("Mã khách hàng không hợp lệ. Vui lòng nhập lại một số nguyên.");
+                            sc.nextLine(); // Xóa input lỗi
+                        } catch (Exception e) {
+                            System.out.println("Đã xảy ra lỗi: " + e.getMessage());
+                        }
+                    }
+                }
+
+                case 4 -> {
+                    boolean tiepTucTimKiem = true; // Biến để kiểm soát vòng lặp tìm kiếm
+                    while (tiepTucTimKiem) {
                         System.out.println("====== TÌM KIẾM KHÁCH HÀNG ======");
                         System.out.println("╔══════════════════════════════════╗");
                         System.out.println("║ 1. Tìm kiếm theo mã khách hàng.  ║");
@@ -96,46 +105,83 @@ public class QuanLyKhachHang {
                         System.out.println("║ 0. Thoát.                        ║");
                         System.out.println("╚══════════════════════════════════╝");
                         System.out.print("Nhập lựa chọn của bạn: ");
-                        int luaChon = sc.nextInt();
-                        sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại
+
+                        int luaChon;
+                        try {
+                            luaChon = sc.nextInt();
+                            sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại
+                        } catch (InputMismatchException e) {
+                            System.out.println("Lỗi: Vui lòng nhập số nguyên hợp lệ!");
+                            sc.nextLine(); // Đọc bỏ dữ liệu không hợp lệ
+                            continue; // Quay lại vòng lặp
+                        }
 
                         switch (luaChon) {
                             case 1 -> {
                                 // Tìm kiếm khách hàng theo mã
                                 System.out.print("Nhập mã khách hàng cần tìm: ");
-                                int maTim = sc.nextInt();
-                                sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại
-                                KhachHang khachHangTim = ds.timKiemKhachHangTheoMa(maTim);
-                                if (khachHangTim != null) {
-                                    khachHangTim.xuat();
-                                } else {
-                                    System.out.println("Không tìm thấy khách hàng với mã " + maTim);
+                                try {
+                                    int maTim = sc.nextInt();
+                                    sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại
+                                    KhachHang khachHangTim = ds.timKiemKhachHangTheoMa(maTim);
+                                    if (khachHangTim != null) {
+                                        System.out.println("Thông tin khách hàng tìm thấy với mã: " + maTim);
+                                        khachHangTim.xuat();
+                                    } else {
+                                        System.out.println("Không tìm thấy khách hàng với mã: " + maTim);
+                                    }
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Lỗi: Vui lòng nhập số nguyên hợp lệ!");
+                                    sc.nextLine(); // Đọc bỏ dữ liệu không hợp lệ
                                 }
                             }
-                            case 2 -> {
-                                // Tìm kiếm khách hàng theo họ
-                                System.out.print("Nhập họ khách hàng cần tìm: ");
-                                String hoTim = sc.nextLine().trim();
-//                                ds.timKiemKhachHangTheoHo(hoTim);
-                            }
-                            case 3 -> {
-                                // Tìm kiếm khách hàng theo tên
-                                System.out.print("Nhập tên khách hàng cần tìm: ");
-                                String tenTim = sc.nextLine().trim();
-//                                ds.timKiemKhachHangTheoTen(tenTim);
-                            }
+                            case 2 -> ds.timKiemKhachHangTheoHo(); // Tìm kiếm theo họ
+                            case 3 -> ds.timKiemKhachHangTheoTen(); // Tìm kiếm theo tên
                             case 0 -> {
                                 System.out.println("Thoát tìm kiếm khách hàng.");
-                                break;
+                                tiepTucTimKiem = false; // Thoát vòng lặp tìm kiếm
                             }
                             default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
                         }
                     }
                 }
-//                case 5 -> ds.thongKe(); // Thống kê khách hàng theo tùy chọn
-//                case 6 -> ds.capNhatDanhSachKhachHang(); // Cập nhật danh sách khách hàng hiện tại
-//                case 7 -> ds.docFile(); // Đọc thông tin khách hàng từ file
-//                case 8 -> ds.timKiemKhachHangNangCao(); // Tìm kiếm nâng cao với địa chỉ
+
+
+                case 5 -> {
+                    boolean tiepTucTimThongKe = true; // Biến để kiểm soát vòng lặp tìm kiếm
+                    while (tiepTucTimThongKe) {
+                        System.out.println("====== THỐNG KÊ KHÁCH HÀNG ======");
+                        System.out.println("╔════════════════════════════════════════════╗");
+                        System.out.println("║ 1. Thống kê theo giới tính                 ║");
+                        System.out.println("║ 2. Thống kê theo tuổi                      ║");
+                        System.out.println("║ 3. Thống kê khách hàng mua nhiều đơn hàng  ║");
+                        System.out.println("║    nhất theo quý.                          ║");
+                        System.out.println("║ 0. Quay lại                                ║");
+                        System.out.println("╚════════════════════════════════════════════╝");
+                        System.out.print("Nhập lựa chọn của bạn: ");
+                        int luaChon = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (luaChon) {
+                            case 1 -> ds.thongKeTheoGioiTinh();
+                            case 2 -> ds.thongKeTheoTuoi();
+                            case 3 -> {
+                                DanhSachHoaDon dsHoaDon = new DanhSachHoaDon();
+                                dsHoaDon.docFile();
+                                ds.thongKeDonHangTheoQuy(dsHoaDon);
+                            }
+                            case 0 -> {
+                                System.out.println("Quay lại menu khách hàng.");
+                                tiepTucTimThongKe=false;
+                            }
+                            default -> System.out.println("Lựa chọn không hợp lệ.");
+                        }
+                    }
+                }
+
+                case 6 -> ds.capNhapSoLuongKhachHang(); // Cập nhật danh sách khách hàng hiện tại
+                case 7 -> ds.docFile(); // Đọc thông tin khách hàng từ file
+             case 8 -> ds.timKiemKhachHangNangCao(); // Tìm kiếm nâng cao với địa chỉ
                 case 9 -> ds.xuatDanhSachKhachHang(); // In danh sách khách hàng
                 case 0 -> {
                     System.out.println("Đã thoát chương trình.");
