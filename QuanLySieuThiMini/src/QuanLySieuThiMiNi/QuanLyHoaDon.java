@@ -113,7 +113,7 @@ public class QuanLyHoaDon {
     }
 
     // Hàm menu quản lý hóa đơn
-    public void menuDSHD() {
+    public void menu() {
         while (true) {
             System.out.println("╔═══════════════════════════-QUẢN LÝ HÓA ĐƠN-═══════════════════════════╗");
             System.out.println("║1.  Thêm 1 hóa đơn vào danh sách và lưu trong file                     ║");
@@ -339,7 +339,7 @@ public class QuanLyHoaDon {
 
     public static void main(String[] args) {
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon();
-        quanLyHoaDon.menuDSHD(); // Gọi menu quản lý hóa đơn
+        quanLyHoaDon.menu(); // Gọi menu quản lý hóa đơn
     }
 }
 // case 4: {

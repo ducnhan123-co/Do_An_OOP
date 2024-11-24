@@ -51,7 +51,7 @@ public class QuanLySieuThiMini {
                     break;
                 case 3:
                     System.out.println("Tiến hành chức năng quản lý hóa đơn...\n");
-                    qlHoaDon.menuDSHD();
+                    qlHoaDon.menu();
                     break;
                 case 4:
 
