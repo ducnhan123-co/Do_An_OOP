@@ -116,15 +116,15 @@ public class QuanLyHoaDon {
     public void menu() {
         while (true) {
             System.out.println("╔═══════════════════════════-QUẢN LÝ HÓA ĐƠN-═══════════════════════════╗");
-            System.out.println("║1.  Thêm 1 hóa đơn vào danh sách và lưu trong file                     ║");
-            System.out.println("║2.  Thêm danh sách hóa đơn và lưu trong file                           ║");
-            System.out.println("║3.  Xóa hóa đơn theo mã hóa đơn                                        ║");
-            System.out.println("║4.  Tìm kiếm hóa đơn theo tùy chọn                                     ║");
-            System.out.println("║5.  Thống kê hóa đơn theo tùy chọn                                     ║");
-            System.out.println("║6.  Liệt kê các hóa đơn có lớn và nhỏ hơn giá trị tổng tiền nhập       ║");
-            System.out.println("║7.  Xuất hóa đơn, chi tiết hóa đơn theo tùy chọn                       ║");
-            System.out.println("║8.  Xem danh sách hóa đơn hiện tại                                     ║");
-            System.out.println("║0.  Thoát                                                              ║");
+            System.out.println("║ 1.  Thêm 1 hóa đơn vào danh sách và lưu trong file                    ║");
+            System.out.println("║ 2.  Thêm danh sách hóa đơn và lưu trong file                          ║");
+            System.out.println("║ 3.  Xóa hóa đơn theo mã hóa đơn                                       ║");
+            System.out.println("║ 4.  Tìm kiếm hóa đơn theo tùy chọn                                    ║");
+            System.out.println("║ 5.  Thống kê hóa đơn theo tùy chọn                                    ║");
+            System.out.println("║ 6.  Liệt kê các hóa đơn có lớn và nhỏ hơn giá trị tổng tiền nhập      ║");
+            System.out.println("║ 7.  Xuất hóa đơn, chi tiết hóa đơn theo tùy chọn                      ║");
+            System.out.println("║ 8.  Xem danh sách hóa đơn hiện tại                                    ║");
+            System.out.println("║ 0.  Thoát                                                             ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
 
@@ -256,6 +256,7 @@ public class QuanLyHoaDon {
                                     break;
                                 case 5:
                                     danhSachHoaDon.thongKeHoaDonTheoNam();
+                                    break;
                                 case 6:
                                     danhSachHoaDon.thongKeHoaDonTheoQuy();
                                     break;
@@ -300,7 +301,7 @@ public class QuanLyHoaDon {
                             }
                             switch (luaChon) {
                                 case 1:
-                                    danhSachHoaDon.xemDSHD();
+                                    xuatDSHoaDon();
                                     break;
                                 case 2:
                                     System.out.print("Nhập mã hóa đơn: ");
