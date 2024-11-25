@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import static java.util.Arrays.copyOf;
 
-public class DanhSachSanPham {
+public class DanhSachSanPham implements ThaoTacFile {
     private static SanPham[] DS_SanPham = new SanPham[0];
 
 
@@ -164,6 +164,11 @@ public class DanhSachSanPham {
             e.printStackTrace();
         }
     }
+
+    public void capNhatFile() {
+        ghiFile();
+    }
+
     public static void main(String[] args) {
         DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
         danhSachSanPham.docFile();
