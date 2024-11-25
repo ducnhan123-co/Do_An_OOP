@@ -28,8 +28,6 @@
             this.ngayNhapHang = LocalDate.now();
         }
 
-        // Getter và setter
-
         public int getMaNhanVien() {
             return maNV;
         }
@@ -106,7 +104,8 @@
         public void xuatPhieu() {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String formattedDate = ngayNhapHang.format(formatter);
-            System.out.printf("|%-12d|%-12d|%-12d|%-12.2f|%-12s|\n",
+            System.out.printf("| %-10d | %-15d | %-12d | %-12.2f | %-10s |\n",
                     this.maPhieu, this.maNCC, this.maNV, this.tongTien, formattedDate);
         }
     }
+

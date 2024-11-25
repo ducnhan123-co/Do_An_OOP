@@ -39,7 +39,10 @@ public class QuanLyPhieuNhapHang {
                     DSPNH.suaPhieuNhapHang();
                     break;
                 case 5:
-                    DSPNH.xoaTheoMa(); // chua hoàn thiện
+                	System.out.print("Nhập mã phiếu cần xóa: ");
+                    int maPhieuXoa = sc.nextInt();
+                    DSCtPNH.xoaChiTietTheoMaPhieu(maPhieuXoa); // Xóa chi tiết
+                    DSPNH.xoaPhieuTheoMaPhieu(maPhieuXoa); // Xóa phiếu
                     break;
                 case 6:
                     while (true) {
@@ -69,12 +72,11 @@ public class QuanLyPhieuNhapHang {
                                 break;
                             case 5:
                                 System.out.println("Đã quay lại trang chính");
-                                break; // Just break out of the statistics menu and return to the main menu
+                                break;
                             default:
                                 System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
                         }
 
-                        // If user chose to go back to the main menu (option 5), break out of this loop
                         if (chon == 5) {
                             break;
                         }
@@ -88,9 +90,7 @@ public class QuanLyPhieuNhapHang {
                     QuanLyChiTietPhieuNhapHang.quanLyChiTiet(DSPNH, DSCtPNH);
                     break;
                 case 9:
-                	System.out.println("Danh Sách Phiếu");
                 	DSPNH.xuatPhieuNhapHang();
-                	System.out.println("\nDanh Sách Chi Tiết Phiếu ");
                 	DSCtPNH.inDanhSachChiTiet();
                 	break;
                 case 10:

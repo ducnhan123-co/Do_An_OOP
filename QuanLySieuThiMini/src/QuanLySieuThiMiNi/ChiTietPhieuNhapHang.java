@@ -105,7 +105,7 @@ public class ChiTietPhieuNhapHang {
     
     
     public void xuatChiTiet() {
-        System.out.printf("| %-10d | %-12d | %-8d | %-8.2f | %-12.2f |\n", getMaPhieu() , getMaSp(), getSl(), getDonGia(), getThanhTien());
+        System.out.printf("| %-10d | %-12d | %-8d | %-9.2f | %-13.2f |\n", getMaPhieu() , getMaSp(), getSl(), getDonGia(), getThanhTien());
     }
 
     
