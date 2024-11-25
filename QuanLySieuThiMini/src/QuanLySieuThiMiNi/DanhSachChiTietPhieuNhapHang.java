@@ -134,7 +134,33 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     }
 
     
-    
+    public void xoaChiTietTheoMaPhieu(int maPhieu) {
+        int count = 0;
+
+        // Duyệt qua danh sách chi tiết phiếu nhập hàng
+        for (int i = 0; i < n; i++) {
+            if (dsChiTiet[i].getMaPhieu() == maPhieu) {
+                // Dịch chuyển các phần tử sau vị trí xóa lên trước
+                for (int j = i; j < n - 1; j++) {
+                    dsChiTiet[j] = dsChiTiet[j + 1];
+                }
+                i--; // Kiểm tra lại vị trí hiện tại sau khi dịch chuyển
+                n--; // Giảm kích thước danh sách
+                count++;
+            }
+        }
+
+        if (count > 0) {
+            dsChiTiet = Arrays.copyOf(dsChiTiet, n); // Thu gọn mảng
+            System.out.println("Đã xóa " + count + " chi tiết của phiếu với mã phiếu: " + maPhieu);
+        } else {
+            System.out.println("Không tìm thấy chi tiết của phiếu với mã phiếu: " + maPhieu);
+        }
+    }
+
+
+
+
 
     // Hàm xóa chi tiết theo mã phiếu
     public void xoaChiTiet() {
@@ -190,9 +216,9 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
             System.out.println("Chưa có chi tiết nào.");
             return;
         }
-
+        System.out.println("Danh sách chi tiết phiếu nhập:");
         System.out.printf("| %-10s | %-12s | %-8s | %-9s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
-        System.out.println("-------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
 
         // In các chi tiết phiếu nhập hàng
         for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) 
@@ -261,4 +287,3 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 	}
 
 }
-

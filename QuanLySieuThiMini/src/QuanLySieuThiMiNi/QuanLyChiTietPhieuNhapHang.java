@@ -31,7 +31,6 @@ public class QuanLyChiTietPhieuNhapHang {
                     break;
                 case 4:
                 	DSCtPNH.docFile();
-                	System.out.println("Lấy dữ liệu thành công");
                 	break;
                 case 5:
                     DSCtPNH.inDanhSachChiTiet(); // Gọi hàm in danh sách chi tiết

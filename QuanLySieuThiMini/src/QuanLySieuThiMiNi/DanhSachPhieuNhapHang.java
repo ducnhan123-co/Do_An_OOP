@@ -12,10 +12,16 @@ import java.text.DecimalFormat;
 
 
 public class DanhSachPhieuNhapHang implements ThaoTacFile{
-    private PhieuNhapHang[] dsPhieu = new PhieuNhapHang[0];
-    private int n = 0;
+    private PhieuNhapHang[] dsPhieu;
+    private int n ;
 //    private DanhSachChiTietPhieuNhapHang dsChiTiet;
-
+    
+    public DanhSachPhieuNhapHang() {
+        // Khởi tạo mảng phiếu nhập hàng với kích thước mặc định
+        dsPhieu = new PhieuNhapHang[100]; // Hoặc kích thước cần thiết
+        n = 0; // Số lượng phiếu bắt đầu là 0
+    }
+    
     public void themPhieuNhapHang() {
         while (true) {
             // Tạo phiếu mới
@@ -58,46 +64,51 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
 
         // In danh sách các phiếu nhập (phần thông tin cơ bản của từng phiếu)
         System.out.println("Danh sách phiếu nhập:");
-        System.out.printf("|%-12s|%-12s|%-12s|%-12s|%-12s|\n", "Mã phiếu", "Mã NCC", "Mã NV", "Tổng tiền", "Ngày nhập");
+        System.out.printf("| %-10s | %-15s | %-12s | %-12s | %-10s |\n", "Mã phiếu", "Mã Nhà Cung Cấp", "Mã Nhân Viên", "Tổng tiền", "Ngày nhập");
         for (int i = 0; i < n; i++) 
             dsPhieu[i].xuatPhieu();
         	
     }
 
+    public void xoaPhieuTheoMaPhieu(int maPhieu) {
+        int vt = -1;
 
-
-
-    public int timGanDungTheoMa(String ma) {
+        // Tìm vị trí phiếu nhập hàng cần xóa
         for (int i = 0; i < n; i++) {
-            String maNCC = String.valueOf(dsPhieu[i].getMaPhieu());
-            if (maNCC.contains(ma))
+            if (dsPhieu[i].getMaPhieu() == maPhieu) {
+                vt = i;
+                break;
+            }
+        }
+
+        if (vt != -1) {
+            // Dịch chuyển các phần tử sau vị trí xóa lên trước
+            for (int i = vt; i < n - 1; i++) {
+                dsPhieu[i] = dsPhieu[i + 1];
+            }
+            dsPhieu = Arrays.copyOf(dsPhieu, n - 1); // Thu gọn mảng
+            n--;
+            System.out.println("Đã xóa phiếu với mã phiếu: " + maPhieu);
+        } else {
+            System.out.println("Không tìm thấy phiếu với mã phiếu: " + maPhieu);
+        }
+    }
+
+
+
+
+    public int timGanDungTheoMa(int ma) {
+        for (int i = 0; i < n; i++) {
+            if (dsPhieu[i].getMaPhieu() == ma) // So sánh trực tiếp kiểu int
                 return i;
         }
         return -1;
     }
-    
-    public void xoaTheoMa() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập mã phiếu cần xóa: ");
-        String mp = sc.nextLine();
-        int vt = timGanDungTheoMa(mp);
-
-        if (vt != -1) {
-            for (int i = vt; i < n - 1; i++)
-                dsPhieu[i] = dsPhieu[i + 1];
-            dsPhieu = Arrays.copyOf(dsPhieu, n - 1);
-            n--;
-            System.out.println("Đã xóa phiếu nhập hàng với mã: " + mp);
-        } 
-        else
-            System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + mp);
-    }
-
 
     public void timMP() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu cần tìm: ");
-        String mp = sc.nextLine();
+        int mp = sc.nextInt();
         int vt = timGanDungTheoMa(mp);
         if (vt != -1)
             dsPhieu[vt].xuatPhieu();
@@ -108,7 +119,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
     public void suaPhieuNhapHang() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu cần sửa: ");
-        String mp = sc.nextLine();
+        int mp = sc.nextInt();
         int vt = timGanDungTheoMa(mp);
 
         if (vt != -1) {
@@ -349,9 +360,4 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
         ghiFile(); // Cập nhật file bằng cách ghi đè toàn bộ nội dung
     }
 
-
- 
-
-   
-    
 }
