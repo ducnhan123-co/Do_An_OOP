@@ -11,6 +11,8 @@ public class QuanLySieuThiMini {
         QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang();
         QuanLyKhachHang qlKhachHang = new QuanLyKhachHang(100);
         QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(); // Quản lý nhà cung cấp
+        QuanLyKho qLyKho = new QuanLyKho();// Quản lý kho
+        
         int choice;
         do {
             System.out.println("\n================================================");
@@ -35,6 +37,7 @@ public class QuanLySieuThiMini {
             System.out.println("║    4. Quản lý phiếu nhập hàng                 ║");
             System.out.println("║    5. Quản lý khách hàng                      ║");
             System.out.println("║    6. Quản lý nhà cung cấp                    ║");
+            System.out.println("║    7. Quản lý kho                             ║");
             System.out.println("║    0. Thoát chương trình                      ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
             System.out.print("Nhập lựa chọn của bạn: ");
@@ -43,9 +46,11 @@ public class QuanLySieuThiMini {
 
             switch (choice) {
                 case 1:
+                    System.out.println("Tiến hành chức năng quản lý nhân viên...\n");
                     qlNhanVien.menu();
                     break;
                 case 2:
+                    System.out.println("Tiến hành chức năng quản lý sản phẩm...\n");
                     QuanLySanPham quanLySanPham = new QuanLySanPham();
                     quanLySanPham.menu();
                     break;
@@ -54,15 +59,20 @@ public class QuanLySieuThiMini {
                     qlHoaDon.menu();
                     break;
                 case 4:
-
-                     qlPhieuNhapHang.menu();
+                    System.out.println("Tiến hành chức năng quản lý phiếu nhận hàng...\n");
+                    qlPhieuNhapHang.menu();
                     break;
-                    case 5:
+                case 5:
+                    System.out.println("Tiến hành chức năng quản lý khách hàng...\n");
                     qlKhachHang.menu();
-
                     break;
                 case 6:
+                    System.out.println("Tiến hành chức năng quản lý nhà cung cấp...\n");
                     qlNhaCungCap.menu();
+                    break;
+                case 7:
+                    System.out.println("Tiến hành chức năng quản lý kho...\n");
+                    qLyKho.menu();
                     break;
                 case 0:
                     System.out.println("Thoát chương trình. Tạm biệt!");

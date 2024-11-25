@@ -97,7 +97,7 @@ public class QuanLyKhachHang {
                 case 4 -> {
                     boolean tiepTucTimKiem = true; // Biến để kiểm soát vòng lặp tìm kiếm
                     while (tiepTucTimKiem) {
-                        System.out.println("====== TÌM KIẾM KHÁCH HÀNG ======");
+                        System.out.println("======= TÌM KIẾM KHÁCH HÀNG =======");
                         System.out.println("╔══════════════════════════════════╗");
                         System.out.println("║ 1. Tìm kiếm theo mã khách hàng.  ║");
                         System.out.println("║ 2. Tìm kiếm theo họ khách hàng.  ║");

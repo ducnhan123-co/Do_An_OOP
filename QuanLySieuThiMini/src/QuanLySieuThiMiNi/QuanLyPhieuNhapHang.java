@@ -102,11 +102,3 @@ public class QuanLyPhieuNhapHang {
         }
     }
 }
-
-
-
-
-
-
-
-
