@@ -129,9 +129,9 @@ public class DanhSachSanPham implements ThaoTacFile {
             while ((line = reader.readLine()) != null) {
                 String[] sp = line.split(",");
                 if (Integer.parseInt(sp[0].trim()) == 0)
-                    push(new ThucPham(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Integer.parseInt(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
+                    push(new ThucPham(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Float.parseFloat(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
                 else
-                    push(new GiaDung(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Integer.parseInt(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
+                    push(new GiaDung(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Float.parseFloat(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
             }
             reader.close();
         } catch (Exception e) {
@@ -143,7 +143,7 @@ public class DanhSachSanPham implements ThaoTacFile {
 
     public void ghiFile() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham2.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham.txt"));
             for (SanPham sanPham: DS_SanPham) {
                 String loai;
                 String line ;
