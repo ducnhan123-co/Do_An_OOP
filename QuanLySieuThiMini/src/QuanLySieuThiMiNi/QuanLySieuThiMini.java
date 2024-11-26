@@ -11,7 +11,6 @@ public class QuanLySieuThiMini {
         QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang();
         QuanLyKhachHang qlKhachHang = new QuanLyKhachHang(100);
         QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(); // Quản lý nhà cung cấp
-        QuanLyKho qLyKho = new QuanLyKho();// Quản lý kho
         
         int choice;
         do {

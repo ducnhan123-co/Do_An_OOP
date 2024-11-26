@@ -552,7 +552,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         int countNhoHon=0;
 
         // Liệt kê hóa đơn có tổng tiền lớn hơn giá trị nhập
-        System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN LỚN HƠN " + tongTienNhap + "đ-------------+");
+        System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN LỚN HƠN " + tongTienNhap + " VND-------------+");
         for (HoaDon hoaDon : DS_hoaDon) {
             if (hoaDon != null && hoaDon.getTongTien() > tongTienNhap) {
                 hoaDon.xuatHoaDon();
@@ -562,11 +562,11 @@ public class DanhSachHoaDon implements ThaoTacFile {
         if (countLonHon == 0) {
             System.out.println("Không có hóa đơn nào có tổng tiền lớn hơn " + tongTienNhap + " VND!");
         }
-        System.out.println("+------------------------------------------------------------------------------------+");
+        System.out.println("+-----------------------------------------------------------------------------------------+");
         System.out.println("Có " + countLonHon + " hóa đơn với tổng tiền lớn hơn " + tongTienNhap + " VND\n");
 
         // Liệt kê hóa đơn có tổng tiền nhỏ hơn giá trị nhập
-        System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN NHỎ HƠN " + tongTienNhap + "đ-------------+");
+        System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN NHỎ HƠN " + tongTienNhap + " VND-------------+");
         for (HoaDon hoaDon : DS_hoaDon) {
             if (hoaDon != null && hoaDon.getTongTien() < tongTienNhap) {
                 hoaDon.xuatHoaDon();
@@ -576,7 +576,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         if (countNhoHon == 0) {
             System.out.println("Không có hóa đơn nào có tổng tiền nhỏ hơn " + tongTienNhap + " VND!");
         }
-        System.out.println("+------------------------------------------------------------------------------------+");
+        System.out.println("+-----------------------------------------------------------------------------------------+");
         System.out.println("Có " + countNhoHon + " hóa đơn với tổng tiền nhỏ hơn " + tongTienNhap + " VND\n");
     }
 
@@ -616,18 +616,18 @@ public class DanhSachHoaDon implements ThaoTacFile {
             }
         }
         if(!found) {
-            System.out.println("Không có hóa đơn nào có tổng tiền nhỏ hơn "+tongTienNhap+"đ!");
+            System.out.println("Không có hóa đơn nào có tổng tiền nhỏ hơn "+tongTienNhap+" VND!");
             return;
         }
-        System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN NHỎ HƠN "+tongTienNhap+"đ-------------+");
+        System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN NHỎ HƠN "+tongTienNhap+" VND-------------+");
         for(int i=0; i<DS_hoaDon.length; i++) {
             if(DS_hoaDon[i].getTongTien() < tongTienNhap) {
                 DS_hoaDon[i].xuatHoaDon();
                 count++;
             }
         }
-        System.out.println("+------------------------------------------------------------------------------------+");
-        System.out.println("Có "+count+" hóa đơn với tổng tiền mỗi hóa đơn nhỏ hơn "+tongTienNhap+"vnd");
+        System.out.println("+-------------------------------------------------------------------------------------+");
+        System.out.println("Có "+count+" hóa đơn với tổng tiền mỗi hóa đơn nhỏ hơn "+tongTienNhap+" VND");
     }
 
     // Đọc file
