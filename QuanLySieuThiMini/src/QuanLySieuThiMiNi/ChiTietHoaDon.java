@@ -5,6 +5,7 @@ public class ChiTietHoaDon {
     private int maSP;
     private int soLuong;
     private float donGia;
+    private double thanhTien;
 
     public ChiTietHoaDon() {}
 
@@ -49,7 +50,8 @@ public class ChiTietHoaDon {
 
     // Tính tổng tiền cho chi tiết hóa đơn
     public double tinhTien() {
-        return soLuong * donGia;
+        thanhTien = soLuong * donGia;
+        return thanhTien;
     }
 
     // Xuất thông tin chi tiết hóa đơn

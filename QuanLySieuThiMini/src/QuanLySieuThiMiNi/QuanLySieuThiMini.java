@@ -37,7 +37,6 @@ public class QuanLySieuThiMini {
             System.out.println("║    4. Quản lý phiếu nhập hàng                 ║");
             System.out.println("║    5. Quản lý khách hàng                      ║");
             System.out.println("║    6. Quản lý nhà cung cấp                    ║");
-            System.out.println("║    7. Quản lý kho                             ║");
             System.out.println("║    0. Thoát chương trình                      ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
             System.out.print("Nhập lựa chọn của bạn: ");
@@ -69,10 +68,6 @@ public class QuanLySieuThiMini {
                 case 6:
                     System.out.println("Tiến hành chức năng quản lý nhà cung cấp...\n");
                     qlNhaCungCap.menu();
-                    break;
-                case 7:
-                    System.out.println("Tiến hành chức năng quản lý kho...\n");
-                    qLyKho.menu();
                     break;
                 case 0:
                     System.out.println("Thoát chương trình. Tạm biệt!");
