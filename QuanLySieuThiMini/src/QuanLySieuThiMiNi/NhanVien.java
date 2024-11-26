@@ -1,11 +1,12 @@
 package QuanLySieuThiMiNi;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
-public class NhanVien {
+import static QuanLySieuThiMiNi.DanhSachNhanVien.dsnv;
+public class NhanVien implements ThaoTacFile {
     private int manv;
     private String chucvu;
     private String honhanvien;
@@ -157,6 +158,7 @@ public class NhanVien {
                 System.out.println("Ngày bắt đầu không hợp lệ, vui lòng nhập lại.");
             }
         }
+//        ghiFile();
     }
     public void suaNhanVien() {
         Scanner sc = new Scanner(System.in);
@@ -234,5 +236,36 @@ public class NhanVien {
     public void xoaNhanVien() {
         System.out.println("Đã xóa nhân viên mã " + this.manv);
         tongSoNhanVien--;
+    }
+
+    @Override
+    public void docFile() {
+
+    }
+
+
+
+    @Override
+    public void ghiFile() {
+        String filename = "QuanLySieuThiMini/src/QuanLySieuThiMiNi/NhanVien.txt";
+        File file = new File(filename); // Tạo đối tượng File
+
+        // Kiểm tra file có tồn tại không
+        if (!file.exists()) {
+            System.out.println("Lỗi: File không tồn tại tại đường dẫn: " + filename);
+            return;
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) { // Ghi thêm vào file
+            writer.write(this.toFileString()); // Ghi thông tin nhân viên
+            writer.newLine(); // Xuống dòng
+            System.out.println("Nhân viên đã được lưu vào file: " + filename);
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi vào file: " + e.getMessage());
+        }
+    }
+    @Override
+    public void capNhatFile() {
+        return;
     }
 }
