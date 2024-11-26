@@ -10,17 +10,17 @@ import java.util.Scanner;
 import static java.util.Arrays.copyOf;
 
 public class DanhSachKhachHang implements  ThaoTacFile{
-    private KhachHang[] DS_KhachHang = new KhachHang[0];
-    private int size = 0;
+    public static KhachHang[] dskh = new KhachHang[0];
+    public static int size = 0;
 
     public DanhSachKhachHang() {
     }
 
     public void push(KhachHang khachHang) {
-        if (size >= DS_KhachHang.length) {
-            DS_KhachHang = copyOf(DS_KhachHang, DS_KhachHang.length + 10); // Tăng kích thước mảng
+        if (size >= dskh.length) {
+            dskh = copyOf(dskh, dskh.length + 10); // Tăng kích thước mảng
         }
-        DS_KhachHang[size++] = khachHang;
+        dskh[size++] = khachHang;
     }
 
 
@@ -56,7 +56,7 @@ public class DanhSachKhachHang implements  ThaoTacFile{
 
     // Tìm kiếm khách hàng theo mã khách hàng
     public KhachHang timKiemKhachHangTheoMa(int maKH) {
-        for (KhachHang khachHang : DS_KhachHang) {
+        for (KhachHang khachHang : dskh) {
             if (khachHang != null && khachHang.getMaKH() == maKH) {
                 return khachHang;
             }
@@ -69,9 +69,9 @@ public class DanhSachKhachHang implements  ThaoTacFile{
         String hoKH = sc.nextLine().trim();
         boolean found = false;
         int dem=0;
-        KhachHang[] khachHangFound = new KhachHang[DS_KhachHang.length];
+        KhachHang[] khachHangFound = new KhachHang[dskh.length];
         int index = 0;  // Biến đếm số lượng khách hàng tìm được
-        for (KhachHang khachHang : DS_KhachHang) {
+        for (KhachHang khachHang : dskh) {
             if (khachHang != null && khachHang.getHoKH().equalsIgnoreCase(hoKH)) {
                 khachHangFound[index++] = khachHang; // Lưu khách hàng vào mảng
                 found = true;
@@ -151,12 +151,12 @@ public class DanhSachKhachHang implements  ThaoTacFile{
 
     // Xóa khách hàng theo mã
     public void xoa(int maKH) {
-        for (int i = 0; i < DS_KhachHang.length; i++) {
-            if (DS_KhachHang[i].getMaKH() == maKH) {
-                for (int j = i; j < DS_KhachHang.length - 1; j++) {
-                    DS_KhachHang[j] = DS_KhachHang[j + 1];
+        for (int i = 0; i < dskh.length; i++) {
+            if (dskh[i].getMaKH() == maKH) {
+                for (int j = i; j < dskh.length - 1; j++) {
+                    dskh[j] = dskh[j + 1];
                 }
-                DS_KhachHang = copyOf(DS_KhachHang, DS_KhachHang.length - 1);
+                dskh = copyOf(dskh, dskh.length - 1);
                 size--;
                 System.out.println("Đã xóa khách hàng với mã: " + maKH);
                 return;
@@ -172,10 +172,10 @@ public class DanhSachKhachHang implements  ThaoTacFile{
         String tenKH = sc.nextLine().trim().toLowerCase();
         boolean found = false;
         int dem = 0;
-        KhachHang[] khachHangFound = new KhachHang[DS_KhachHang.length];
+        KhachHang[] khachHangFound = new KhachHang[dskh.length];
         int index = 0; // Biến đếm số lượng khách hàng tìm được
 
-        for (KhachHang khachHang : DS_KhachHang) {
+        for (KhachHang khachHang : dskh) {
             if (khachHang != null && khachHang.getTenKH().toLowerCase().contains(tenKH)) {
                 khachHangFound[index++] = khachHang; // Lưu khách hàng vào mảng
                 found = true;
@@ -244,10 +244,10 @@ public class DanhSachKhachHang implements  ThaoTacFile{
                 KhachHang kh = parseLineToKhachHang(line);
                 if (kh != null) {
                     // Kiểm tra và mở rộng mảng nếu cần
-                    if (size >= DS_KhachHang.length) {
-                        DS_KhachHang = Arrays.copyOf(DS_KhachHang, DS_KhachHang.length + 10);
+                    if (size >= dskh.length) {
+                        dskh = Arrays.copyOf(dskh, dskh.length + 10);
                     }
-                    DS_KhachHang[size++] = kh;
+                    dskh[size++] = kh;
                     count++;
                 } else {
                     System.out.println("Dòng không hợp lệ: " + line);
@@ -276,7 +276,7 @@ public class DanhSachKhachHang implements  ThaoTacFile{
                 "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
 
 
-        for (KhachHang khachHang : DS_KhachHang) {
+        for (KhachHang khachHang : dskh) {
             if (khachHang != null) {
                 khachHang.xuat();
             }
@@ -287,7 +287,7 @@ public class DanhSachKhachHang implements  ThaoTacFile{
         int nam = 0;
         int nu = 0;
 
-        for (KhachHang kh : DS_KhachHang) {
+        for (KhachHang kh : dskh) {
             if (kh != null) {
                 if (kh.getGioiTinh().equalsIgnoreCase("Nam")) {
                     nam++;
@@ -317,7 +317,7 @@ public class DanhSachKhachHang implements  ThaoTacFile{
         int truocIndex = 0;
         int sauIndex = 0;
         int demNho=0,demHon=0;
-        for (KhachHang kh : DS_KhachHang) {
+        for (KhachHang kh : dskh) {
             if (kh != null) {
                 int tuoiKh = now.getYear() - kh.getNgaySinh().getYear();
                 if (tuoiKh < tuoiNhap) {
@@ -357,7 +357,7 @@ public class DanhSachKhachHang implements  ThaoTacFile{
         KhachHang[] topKhachHang = new KhachHang[4]; // Khách hàng tương ứng với các quý
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Định dạng ngày khớp với file
 
-        for (KhachHang kh : DS_KhachHang) {
+        for (KhachHang kh : dskh) {
             if (kh == null) continue;
             int[] soHoaDonTheoQuy = {0, 0, 0, 0};
             float[] chiTieuTheoQuy = {0, 0, 0, 0};
@@ -519,10 +519,10 @@ public class DanhSachKhachHang implements  ThaoTacFile{
 
     // Phương thức hỗ trợ tìm kiếm khách hàng theo danh sách địa chỉ
     public KhachHang[] timKiemKhachHangTheoDiaChi(String[] danhSachTinh) {
-        KhachHang[] ketQua = new KhachHang[DS_KhachHang.length];
+        KhachHang[] ketQua = new KhachHang[dskh.length];
         int index = 0;
 
-        for (KhachHang khachHang : DS_KhachHang) {
+        for (KhachHang khachHang : dskh) {
             if (khachHang == null) continue;
 
             for (String tinh : danhSachTinh) {
@@ -539,7 +539,7 @@ public class DanhSachKhachHang implements  ThaoTacFile{
     public void capNhapSoLuongKhachHang() {
         int count = 0;
         for (int i = 0; i < size; i++) {
-            if (DS_KhachHang[i] != null) {
+            if (dskh[i] != null) {
                 count++;
             }
         }

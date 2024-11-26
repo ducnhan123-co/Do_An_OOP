@@ -7,18 +7,16 @@
     import java.util.Scanner;
     import java.text.DecimalFormat;
     public class DanhSachNhanVien implements ThaoTacFile{
-        private NhanVien[] dsnv;
-        private int size;
-        public DanhSachNhanVien() {
+        public static NhanVien[] dsnv = new NhanVien[100]; // Tối đa 100 nhân viên
+        public static int size = 0; // Đếm số nhân viên hiện có
+
+        public DanhSachNhanVien(int maxNhanVien) {
+            docFile();
         }
-        public DanhSachNhanVien(int soluong) {
-            dsnv = new NhanVien[soluong]; // Khởi tạo mảng với kích thước cho trước
-            size = 0; // Bắt đầu với 0 nhân viên
-        }
-        public NhanVien[] getDsnv() {
+        public static NhanVien[] getDsnv() {
             return dsnv;
         }
-        public int getSize() {
+        public static int getSize() {
             return size;
         }
         public boolean kiemTraTrungMaNhanVien(int manv) {
@@ -39,19 +37,22 @@
             while (true) {
                 System.out.print("Nhập mã nhân viên: ");
                 manv = sc.nextInt();
-                sc.nextLine(); // Đọc bỏ dòng trống sau `nextInt`
-
+                sc.nextLine(); // Đọc bỏ dòng trống
                 if (!kiemTraTrungMaNhanVien(manv)) {
-                    break; // Nếu không trùng mã, thoát khỏi vòng lặp
+                    break;
                 }
                 System.out.println("Mã nhân viên đã tồn tại, vui lòng nhập lại.");
             }
             NhanVien nhanVien = new NhanVien();
-            nhanVien.setManv(manv); // Gán mã nhân viên sau khi đã kiểm tra
-            nhanVien.nhapNhanVien(); // Nhập các thông tin còn lại
+            nhanVien.setManv(manv);
+            nhanVien.nhapNhanVien();
             dsnv[size++] = nhanVien;
-            System.out.println("Đã thêm nhân viên vào danh sách.");
+
+            // Ghi ngay vào file
+            nhanVien.ghiFile();
+            System.out.println("Nhân viên đã được thêm và lưu vào file.");
         }
+
         public void themDanhSachNhanVien() {
             Scanner sc = new Scanner(System.in);
             System.out.print("Nhập số lượng nhân viên cần thêm: ");
@@ -76,7 +77,8 @@
                 NhanVien nhanVien = new NhanVien();
                 nhanVien.setManv(manv);
                 nhanVien.nhapNhanVien();
-                dsnv[size++] = nhanVien;
+               dsnv[size++] = nhanVien;
+                    nhanVien.ghiFile();
             }
             System.out.println("Đã thêm " + n + " nhân viên vào danh sách.");
         }
@@ -170,6 +172,7 @@
                     }
                     dsnv[size - 1] = null;
                     size--;
+                    ghiFile();
                     System.out.println("Đã xóa nhân viên với mã: " + maNV);
                 }
             } else {
@@ -309,55 +312,77 @@
             System.out.println("Lương nhân viên chức vụ 2 = " + tongluongchucvu2);
             System.out.println("Lương nhân viên chức vụ 3 = " + tongluongchucvu3);
         }
+
+        private LocalDate parseDate(String dateStr) {
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Định dạng 1
+            DateTimeFormatter formatter2 = DateTimeFormatter.ISO_LOCAL_DATE; // Định dạng 2: yyyy-MM-dd
+
+            try {
+                return LocalDate.parse(dateStr, formatter1);
+            } catch (DateTimeParseException e) {
+                try {
+                    return LocalDate.parse(dateStr, formatter2);
+                } catch (DateTimeParseException ex) {
+                    throw new DateTimeParseException("Không thể parse ngày: " + dateStr, dateStr, 0);
+                }
+            }
+        }
+
         public NhanVien parseLineToNhanVien(String line) {
             String[] parts = line.split(";");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            if (parts.length == 9) { // Phải đúng 9 phần tử trong mỗi dòng
-                try {
-                    int manv = Integer.parseInt(parts[0].trim());
-                    String chucvu = parts[1].trim();
-                    String honhanvien = parts[2].trim();
-                    String tennhanvien = parts[3].trim();
-                    LocalDate ngaysinh = LocalDate.parse(parts[4].trim(), formatter);
-                    String diachi = parts[5].trim();
-                    String sodienthoai = parts[6].trim();
-                    double luong = Double.parseDouble(parts[7].trim());
-                    LocalDate ngaybatdau = LocalDate.parse(parts[8].trim(), formatter);
-                    return new NhanVien(manv, chucvu, honhanvien, tennhanvien, ngaysinh, diachi, sodienthoai, luong, "Nam",ngaybatdau);
-                } catch (NumberFormatException | DateTimeParseException e) {
-                    System.out.println("Lỗi định dạng dữ liệu trong dòng: " + line);
-                }
-            } else {
+
+            if (parts.length != 10) {
                 System.out.println("Số lượng cột không khớp trong dòng: " + line);
+                return null;
             }
-            return null;
+
+            try {
+                int manv = Integer.parseInt(parts[0].trim());
+                String chucvu = parts[1].trim();
+                String honhanvien = parts[2].trim();
+                String tennhanvien = parts[3].trim();
+                LocalDate ngaysinh = parseDate(parts[4].trim());
+                String diachi = parts[5].trim();
+                String sodienthoai = parts[6].trim();
+                double luong = Double.parseDouble(parts[7].trim());
+                String gioiTinh = parts[8].trim();
+                LocalDate ngaybatdau = parseDate(parts[9].trim());
+
+                return new NhanVien(manv, chucvu, honhanvien, tennhanvien, ngaysinh, diachi, sodienthoai, luong, gioiTinh, ngaybatdau);
+            } catch (NumberFormatException | DateTimeParseException e) {
+                System.out.println("Lỗi định dạng dữ liệu trong dòng: " + line);
+                e.printStackTrace();
+                return null;
+            }
         }
+
+
+
 
         @Override
         public void docFile() {
             String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\NhanVien.txt";
-            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            File file = new File(filename); // Tạo đối tượng File
+
+            // Kiểm tra file có tồn tại không
+            if (!file.exists()) {
+                System.out.println("Lỗi: File không tồn tại tại đường dẫn: " + filename);
+                return;
+            }
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
-                int count = 0;
+                size = 0; // Reset danh sách nhân viên
                 while ((line = reader.readLine()) != null) {
-                    NhanVien nv = parseLineToNhanVien(line);
+                    if (line.trim().isEmpty()) continue; // Bỏ qua dòng trống
+                    NhanVien nv = parseLineToNhanVien(line.trim()); // Gọi hàm parse
                     if (nv != null) {
-                        if (size < dsnv.length) {
-                            dsnv[size++] = nv;
-                            count++;
-                        } else {
-                            System.out.println("Không thể thêm nhân viên từ file, danh sách đã đầy.");
-                            break;
-                        }
-                    } else {
-                        System.out.println("Dòng không hợp lệ: " + line);
+                        dsnv[size++] = nv; // Thêm nhân viên vào danh sách
                     }
                 }
-//                continue;
-            } catch (FileNotFoundException e) {
-                System.out.println("Không tìm thấy tệp tin: " + filename);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+//                System.out.println("Đã đọc " + size + " nhân viên từ file.");
+            } catch (IOException e) {
+                System.out.println("Lỗi khi đọc file: " + e.getMessage());
             }
         }
 
@@ -371,18 +396,25 @@
 
         @Override
         public void ghiFile() {
-            String filename = "D:\\Desktop\\ALL\\DO_AN_OOP_JAVA\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\NhanVien.txt";
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-                for (int i = 0; i < size; i++) {
-                    NhanVien nv = dsnv[i];
-                    String line = nv.toFileString();
-                    writer.write(line);
-                    writer.newLine();
+            String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\NhanVien.txt";
+            File file = new File(filename); // Tạo đối tượng File
+
+            // Kiểm tra file có tồn tại không
+            if (!file.exists()) {
+                System.out.println("Lỗi: File không tồn tại tại đường dẫn: " + filename);
+                return;
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (NhanVien nv : dsnv) {
+                    if (nv != null) {
+                        writer.write(nv.toFileString()); // Ghi dữ liệu nhân viên vào file
+                        writer.newLine(); // Xuống dòng
+                    }
                 }
                 System.out.println("Đã ghi dữ liệu nhân viên vào tệp tin: " + filename);
             } catch (IOException e) {
-                System.out.println("Lỗi khi ghi vào tệp tin: " + filename);
-                e.printStackTrace();
+                System.out.println("Lỗi khi ghi vào tệp tin: " + e.getMessage());
             }
         }
 

@@ -1,11 +1,15 @@
 package QuanLySieuThiMiNi;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class KhachHang {
+public class KhachHang implements ThaoTacFile {
     private int maKH;
     private String hoKH;
     private String tenKH;
@@ -27,6 +31,13 @@ public class KhachHang {
         this.diaChi = diaChi;
         this.diem = diem;
     }
+    public String toFileString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return maKH + ";" + hoKH + ";" + tenKH + ";" +
+                ngaySinh.format(formatter) + ";" +
+                gioiTinh + ";" + sdt + ";" + diaChi + ";" + diem;
+    }
+
 
     public int getMaKH() {
         return maKH;
@@ -135,6 +146,7 @@ public class KhachHang {
 
         System.out.print("Nhập điểm tích lũy: ");
         this.diem = sc.nextFloat();
+        ghiFile();
     }
 
     public void sua() {
@@ -197,6 +209,36 @@ public class KhachHang {
         System.out.printf("| %-8d | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8.2f |\n",
                 this.maKH, this.hoKH, this.tenKH, this.ngaySinh.format(formatter),
                 this.gioiTinh, this.sdt, this.diaChi, this.diem);
+    }
+
+    @Override
+    public void docFile() {
+
+    }
+
+    @Override
+    public void ghiFile() {
+        String filename = "D:\\ALL\\Do_An_OOP\\QuanLySieuThiMini\\src\\QuanLySieuThiMiNi\\KhachHang.txt";
+        File file = new File(filename); // Tạo đối tượng File
+
+        // Kiểm tra file có tồn tại không
+        if (!file.exists()) {
+            System.out.println("Lỗi: File không tồn tại tại đường dẫn: " + filename);
+            return;
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) { // Ghi thêm vào file
+            writer.write(this.toFileString()); // Ghi thông tin nhân viên
+            writer.newLine(); // Xuống dòng
+            System.out.println("Nhân viên đã được lưu vào file: " + filename);
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi vào file: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void capNhatFile() {
+
     }
 
 }

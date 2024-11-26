@@ -3,11 +3,10 @@ package QuanLySieuThiMiNi;
 import java.util.Scanner;
 
 public class QuanLyNhanVien {
-    private DanhSachNhanVien ds;
+    public DanhSachNhanVien ds;
 
     public QuanLyNhanVien(int maxNhanVien) {
         ds = new DanhSachNhanVien(maxNhanVien);
-
     }
     public void menu() {
         Scanner sc = new Scanner(System.in);
@@ -32,7 +31,7 @@ public class QuanLyNhanVien {
             // Lặp lại cho đến khi người dùng nhập lựa chọn hợp lệ
             while (choice < 0 || choice > 9) {
                 try {
-                    System.out.print("Chọn chức năng: ");
+//                    System.out.print("Chọn chức năng: ");
                     choice = sc.nextInt();
                     sc.nextLine(); // Đọc bỏ dòng trống
 
@@ -173,7 +172,8 @@ public class QuanLyNhanVien {
                     }
                 }
                 case 5 -> {
-                    while (true) {
+                    boolean thongKe=true;
+                    while (thongKe) {
                         try {
                             // Hiển thị menu thống kê
                             System.out.println("====== THỐNG KÊ NHÂN VIÊN ======");
@@ -195,7 +195,7 @@ public class QuanLyNhanVien {
                                 }
                                 case 0 -> {
                                     System.out.println("Thoát thống kê nhân viên.");
-                                    break;
+                                    thongKe=false;
                                 }
                                 default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                             }
