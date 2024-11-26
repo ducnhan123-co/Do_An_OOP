@@ -3,6 +3,8 @@ package QuanLySieuThiMiNi;
 import java.util.Scanner;
 
 public class QuanLyPhieuNhapHang {
+	
+	
     public void menu() {
         Scanner sc = new Scanner(System.in);
         DanhSachPhieuNhapHang DSPNH = new DanhSachPhieuNhapHang();
@@ -27,10 +29,10 @@ public class QuanLyPhieuNhapHang {
 
             switch (choice) {
                 case 1:
-                    DSPNH.themPhieuNhapHang();
+                    DSPNH.nhapPhieuVaChiTiet(DSCtPNH);
                     break;
                 case 2:
-                    DSPNH.xuatPhieuNhapHang();
+                    DSPNH.hienThiPhieuVaChiTiet(DSCtPNH);
                     break;
                 case 3:
                     DSPNH.timMP();
@@ -102,3 +104,4 @@ public class QuanLyPhieuNhapHang {
         }
     }
 }
+

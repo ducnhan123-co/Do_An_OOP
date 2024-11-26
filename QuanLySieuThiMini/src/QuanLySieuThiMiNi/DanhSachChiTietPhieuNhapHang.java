@@ -56,7 +56,41 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         System.out.println("Tổng tiền của phiếu mã " + maPhieu + " đã được cập nhật: " + tongTienMoi);
     }
 
+    public void themChiTietVaoPhieu(int maPhieu) {
+        Scanner sc = new Scanner(System.in);
+        ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang();
+        chiTiet.setMaPhieu(maPhieu);
+        chiTiet.nhap();
 
+        // Kiểm tra mã sản phẩm trùng
+        if (kiemTraMaSPTrung(maPhieu, chiTiet.getMaSp())) {
+            System.out.println("Mã sản phẩm đã tồn tại trong phiếu. Vui lòng nhập lại.");
+            return;
+        }
+
+        dsChiTiet = Arrays.copyOf(dsChiTiet, n + 1);
+        dsChiTiet[n] = chiTiet;
+        n++;
+        
+        updateTongTien(maPhieu);
+        
+        System.out.println("Đã thêm chi tiết.");
+    }
+    
+    public void inChiTietTheoMaPhieu(int maPhieu) {
+        boolean coChiTiet = false;
+        for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) {
+            if (chiTiet.getMaPhieu() == maPhieu) {
+                chiTiet.xuatChiTiet();
+                coChiTiet = true;
+            }
+        }
+
+        if (!coChiTiet) {
+            System.out.println("Không có chi tiết nào cho phiếu này.");
+        }
+    }
+    
     // Hàm thêm chi tiết vào phiếu nhập hàng
     public void themChiTietVaoPhieu() {
         Scanner sc = new Scanner(System.in);
@@ -85,6 +119,23 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         } else {
             System.out.println("Không tìm thấy phiếu nhập hàng với mã: " + maPhieu);
         }
+    }
+    
+    
+    // Hàm in danh sách chi tiết phiếu nhập
+    public void inDanhSachChiTiet() {
+        if (n == 0) {
+            System.out.println("Chưa có chi tiết nào.");
+            return;
+        }
+        System.out.println("Danh sách chi tiết phiếu nhập:");
+        System.out.printf("| %-10s | %-12s | %-8s | %-9s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
+        System.out.println("--------------------------------------------------------------------");
+
+        // In các chi tiết phiếu nhập hàng
+        for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) 
+        	chiTiet.xuatChiTiet();
+            
     }
   
     // Hàm sửa chi tiết theo mã phiếu
@@ -210,21 +261,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
     
    
-    // Hàm in danh sách chi tiết phiếu nhập
-    public void inDanhSachChiTiet() {
-        if (n == 0) {
-            System.out.println("Chưa có chi tiết nào.");
-            return;
-        }
-        System.out.println("Danh sách chi tiết phiếu nhập:");
-        System.out.printf("| %-10s | %-12s | %-8s | %-9s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
-        System.out.println("--------------------------------------------------------------------");
 
-        // In các chi tiết phiếu nhập hàng
-        for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) 
-        	chiTiet.xuatChiTiet();
-            
-    }
     
     public ChiTietPhieuNhapHang parseLineToChiTiet(String line) {
         String[] parts = line.split(";");
@@ -287,3 +324,4 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 	}
 
 }
+

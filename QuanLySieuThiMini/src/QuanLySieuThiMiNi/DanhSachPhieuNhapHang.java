@@ -22,24 +22,6 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
         n = 0; // Số lượng phiếu bắt đầu là 0
     }
     
-    public void themPhieuNhapHang() {
-        while (true) {
-            // Tạo phiếu mới
-            PhieuNhapHang phieuMoi = new PhieuNhapHang();
-            phieuMoi.nhapPhieu(); // Nhập thông tin phiếu (bao gồm cả mã phiếu)
-
-            // Kiểm tra mã phiếu trùng lặp
-            if (kiemTraMaPhieuTonTai(phieuMoi.getMaPhieu())) {
-                System.out.println("Mã phiếu đã tồn tại. Vui lòng nhập lại thông tin phiếu.\n");
-            } else {
-                // Mã phiếu hợp lệ, thêm vào danh sách
-                dsPhieu = Arrays.copyOf(dsPhieu, n + 1);
-                dsPhieu[n] = phieuMoi;
-                n++;
-                break; // Thoát khỏi vòng lặp khi thêm phiếu thành công
-            }
-        }
-    }
 
     // Kiểm tra mã phiếu trùng lặp
     private boolean kiemTraMaPhieuTonTai(int maPhieuMoi) {
@@ -68,6 +50,55 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
         for (int i = 0; i < n; i++) 
             dsPhieu[i].xuatPhieu();
         	
+    }
+    
+    public void nhapPhieuVaChiTiet(DanhSachChiTietPhieuNhapHang dsChiTiet) {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            // Tạo phiếu mới
+            PhieuNhapHang phieuMoi = new PhieuNhapHang();
+            phieuMoi.nhapPhieu();
+
+            // Kiểm tra mã phiếu trùng lặp
+            if (kiemTraMaPhieuTonTai(phieuMoi.getMaPhieu())) {
+                System.out.println("Mã phiếu đã tồn tại. Vui lòng nhập lại.");
+            } else {
+                // Mã phiếu hợp lệ, thêm vào danh sách phiếu
+                dsPhieu = Arrays.copyOf(dsPhieu, n + 1);
+                dsPhieu[n] = phieuMoi;
+                n++;
+
+                // Nhập danh sách chi tiết cho phiếu này
+                System.out.print("Nhập số lượng chi tiết cho phiếu: ");
+                int soChiTiet = sc.nextInt();
+                for (int i = 0; i < soChiTiet; i++) {
+                    System.out.println("Nhập chi tiết thứ " + (i + 1) + ":");
+                    dsChiTiet.themChiTietVaoPhieu(phieuMoi.getMaPhieu());
+                }
+                break;
+            }
+        }
+    }
+
+    public void hienThiPhieuVaChiTiet(DanhSachChiTietPhieuNhapHang dsChiTiet) {
+        if (n == 0) {
+            System.out.println("Danh sách phiếu nhập trống.");
+            return;
+        }
+
+        System.out.println("Danh sách phiếu nhập và chi tiết:");
+        for (int i = 0; i < n; i++) {
+            System.out.println("Phiếu nhập hàng " + dsPhieu[i].getMaPhieu() + " :");
+            System.out.printf("| %-10s | %-15s | %-12s | %-12s | %-10s |\n", "Mã phiếu", "Mã Nhà Cung Cấp", "Mã Nhân Viên", "Tổng tiền", "Ngày nhập");
+            dsPhieu[i].xuatPhieu();
+
+            System.out.println("Chi tiết phiếu nhập hàng "+ dsPhieu[i].getMaPhieu()+" :");
+            System.out.printf("| %-10s | %-12s | %-8s | %-9s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
+            System.out.println("--------------------------------------------------------------------");
+            dsChiTiet.inChiTietTheoMaPhieu(dsPhieu[i].getMaPhieu());
+            System.out.println();
+        }
     }
 
     public void xoaPhieuTheoMaPhieu(int maPhieu) {
