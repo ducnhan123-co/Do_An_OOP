@@ -50,14 +50,14 @@ public class ChiTietHoaDon {
 
     // Tính tổng tiền cho chi tiết hóa đơn
     public double tinhTien() {
-        thanhTien = soLuong * donGia;
-        return thanhTien;
+        return soLuong * donGia;
     }
 
     // Xuất thông tin chi tiết hóa đơn
     public void xuatChiTietHoaDon(DanhSachSanPham danhSachSanPham) {
         String tenSP = danhSachSanPham.timTenSanPhamTheoMa(maSP);
-        System.out.printf("| %10d |  %10d | %-12s | %-10d | %-10.2f | %10.2f |\n", maHD, maSP, tenSP, soLuong, donGia, tinhTien());
+        thanhTien = tinhTien();
+        System.out.printf("| %10d |  %10d | %-12s | %-10d | %-10.2f | %10.2f |\n", maHD, maSP, tenSP, soLuong, donGia, thanhTien);
         // System.out.println("Mã HD: " + maHD + ", Mã SP: " + maSP + ", Số lượng: " + soLuong + ", Đơn giá: " + donGia + ", Thành tiền: " + tinhTien());
     }
 }
