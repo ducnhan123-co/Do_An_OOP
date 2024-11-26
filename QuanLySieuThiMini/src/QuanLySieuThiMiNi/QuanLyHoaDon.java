@@ -9,9 +9,7 @@ public class QuanLyHoaDon {
     private DanhSachHoaDonChiTiet danhSachHoaDonChiTiet = new DanhSachHoaDonChiTiet();
     
     public QuanLyHoaDon() {
-        danhSachSanPham.docFile();
-        danhSachHoaDon.docFile();
-        danhSachHoaDonChiTiet.docFile();
+
     }
     
     Scanner sc = new Scanner(System.in);
@@ -41,7 +39,7 @@ public class QuanLyHoaDon {
                     chiTietHoaDon.setMaSP(in.nextInt());
                     System.out.println("Nhập số lượng:");
                     chiTietHoaDon.setSoLuong(in.nextInt());
-                    chiTietHoaDon.setDonGia(danhSachSanPham.timDonGiaTheoMa(chiTietHoaDon.getMaSP()));
+                    chiTietHoaDon.setDonGia(danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP()).getDonGia());
                     TongTien += chiTietHoaDon.tinhTien();
                     danhSachHoaDonChiTiet.push(chiTietHoaDon);
                     System.out.println("1 - Thanh toán");
@@ -124,6 +122,7 @@ public class QuanLyHoaDon {
             System.out.println("║ 6.  Liệt kê các hóa đơn có lớn và nhỏ hơn giá trị tổng tiền nhập      ║");
             System.out.println("║ 7.  Xuất hóa đơn, chi tiết hóa đơn theo tùy chọn                      ║");
             System.out.println("║ 8.  Xem danh sách hóa đơn hiện tại                                    ║");
+            System.out.println("║ 9.  Lấy dữ liệu từ các file                                           ║");
             System.out.println("║ 0.  Thoát                                                             ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
@@ -231,6 +230,7 @@ public class QuanLyHoaDon {
                             System.out.println("4. Thống kê hóa đơn theo tháng năm");
                             System.out.println("5. Thống kê hóa đơn theo năm");
                             System.out.println("6. Thống kê hóa đơn theo quý (Từng quý)");
+                            System.out.println("7. Thống kê hóa đơn theo khoảng thời gian");
                             System.out.println("0. Thoát");
                             System.out.println("==================================================");
                             System.out.print("Nhập lựa chọn của bạn: ");
@@ -261,11 +261,8 @@ public class QuanLyHoaDon {
                                     danhSachHoaDon.thongKeHoaDonTheoQuy();
                                     break;
                                 case 7:
-                                    
-                                    break;
-                                case 8:
-                                    
-                                    break;
+                                    danhSachHoaDon.thongKeHoaDonTheoKhoangThoiGian();
+                                    break;                               
                                 default:
                                     System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                             }
@@ -328,6 +325,12 @@ public class QuanLyHoaDon {
                 }
                 case 8:
                     danhSachHoaDon.xemAll(danhSachHoaDonChiTiet);
+                    break;
+                case 9:
+                    danhSachSanPham.docFile();
+                    danhSachHoaDon.docFile();
+                    danhSachHoaDonChiTiet.docFile();
+                    System.out.println("Lấy dữ liệu từ file thành công");
                     break;
                 case 0:
                     System.out.println("Thoát Menu Quản lý Hóa đơn...");
