@@ -285,7 +285,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
 
     @Override
     public void docFile() {
-        String filename = "src\\QuanLySieuThiMiNi\\ChiTietPhieuNhapHang.txt";
+        String filename = "QuanLySieuThiMini/src/QuanLySieuThiMiNi/ChiTietPhieuNhapHang.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             int count = 0;

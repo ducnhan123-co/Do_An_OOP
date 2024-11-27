@@ -8,15 +8,15 @@ public class QuanLyNhaCungCap {
 		DanhSachNhaCungCap dSNCC = new DanhSachNhaCungCap();
 		
 		while(true) {
-			System.out.println("-------------------MENU QUẢN LÝ NHÀ CUNG CẤP-----------------");
-			System.out.println("1. Thêm nhà cung cấp");
-			System.out.println("2. Xuất danh sách nhà cung cấp");
-			System.out.println("3. Lấy dữ liệu từ data");
-			System.out.println("4. Sửa thông tin nhà cung cấp");
-			System.out.println("5. Xóa nhà cung cấp");
-			System.out.println("6. Tìm tên nhà cung cấp");
-			System.out.println("7. Quay Lại");
-			System.out.println("-------------------------------------------------------------");
+			System.out.println("╔══════════════════════════════-MENU QUẢN LÝ NHÀ CUNG CẤP-══════════════════════════════╗");
+			System.out.println("║ 1. Thêm nhà cung cấp                                                                  ║");
+			System.out.println("║ 2. Xuất danh sách nhà cung cấp                                                        ║");
+			System.out.println("║ 3. Lấy dữ liệu từ data                                                                ║");
+			System.out.println("║ 4. Sửa thông tin nhà cung cấp                                                         ║");
+			System.out.println("║ 5. Xóa nhà cung cấp                                                                   ║");
+			System.out.println("║ 6. Tìm tên nhà cung cấp                                                               ║");
+			System.out.println("║ 7. Quay lại                                                                           ║");
+			System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════╝");
 			System.out.print("Chọn chức năng: ");
 			int choice = sc.nextInt();
 			sc.nextLine();

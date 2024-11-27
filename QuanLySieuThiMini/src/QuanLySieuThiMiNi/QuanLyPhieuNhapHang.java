@@ -3,27 +3,33 @@ package QuanLySieuThiMiNi;
 import java.util.Scanner;
 
 public class QuanLyPhieuNhapHang {
-	
-	
+    DanhSachPhieuNhapHang DSPNH = new DanhSachPhieuNhapHang();
+    DanhSachChiTietPhieuNhapHang DSCtPNH = new DanhSachChiTietPhieuNhapHang(DSPNH); // Truyền danh sách phiếu nhập hàng
+
+    public QuanLyPhieuNhapHang()
+    {
+        DSPNH.docFile();
+        DSCtPNH.docFile();
+    }
     public void menu() {
         Scanner sc = new Scanner(System.in);
-        DanhSachPhieuNhapHang DSPNH = new DanhSachPhieuNhapHang();
-        DanhSachChiTietPhieuNhapHang DSCtPNH = new DanhSachChiTietPhieuNhapHang(DSPNH); // Truyền danh sách phiếu nhập hàng
+
         
         while (true) {
-            System.out.println("---------------------------------MENU----------------------------------");
-            System.out.println("1. Thêm phiếu nhập hàng");
-            System.out.println("2. Xuất danh sách phiếu nhập hàng");
-            System.out.println("3. Tìm kiếm phiếu nhập hàng");
-            System.out.println("4. Sửa thông tin phiếu");
-            System.out.println("5. Xoá phiếu nhập hàng");
-            System.out.println("6. Thống kê");
-            System.out.println("7. Lấy dữ liệu từ data");
-            System.out.println("8. Quản lý chi tiết phiếu nhập hàng");
-            System.out.println("9. Xuất danh sách toàn bộ ");
-            System.out.println("10. Quay Lại Trang Chính");
-            System.out.println("-----------------------------------------------------------------------");
+            System.out.println("╔═══════════════════════════-MENU QUẢN LÝ PHIẾU NHẬP HÀNG-═══════════════════════════╗");
+            System.out.println("║ 1.  Thêm phiếu nhập hàng.                                                          ║");
+            System.out.println("║ 2.  Tìm kiếm phiếu nhập hàng theo mã.                                              ║");
+            System.out.println("║ 3.  Sửa thông tin phiếu nhập hàng theo mã.                                         ║");
+            System.out.println("║ 4.  Xóa phiếu nhập hàng theo mã.                                                   ║");
+            System.out.println("║ 5.  Thống kê phiếu nhập hàng theo tùy chọn.                                        ║");
+            System.out.println("║ 6.  Lấy dữ liệu phiếu nhập hàng từ file.                                           ║");
+            System.out.println("║ 7.  Quản lý chi tiết phiếu nhập hàng.                                              ║");
+            System.out.println("║ 8.  Xuất danh sách phiếu nhập hàng.                                                ║");
+            System.out.println("║ 9.  Xuất danh sách toàn bộ phiếu nhập hàng.                                        ║");
+            System.out.println("║ 0.  Quay lại trang chính.                                                          ║");
+            System.out.println("╚════════════════════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
+
             int choice = sc.nextInt();
             sc.nextLine();
 
@@ -31,30 +37,30 @@ public class QuanLyPhieuNhapHang {
                 case 1:
                     DSPNH.nhapPhieuVaChiTiet(DSCtPNH);
                     break;
-                case 2:
+                case 9:
                     DSPNH.hienThiPhieuVaChiTiet(DSCtPNH);
                     break;
-                case 3:
+                case 2:
                     DSPNH.timMP();
                     break;
-                case 4:
+                case 3:
                     DSPNH.suaPhieuNhapHang();
                     break;
-                case 5:
+                case 4:
                 	System.out.print("Nhập mã phiếu cần xóa: ");
                     int maPhieuXoa = sc.nextInt();
                     DSCtPNH.xoaChiTietTheoMaPhieu(maPhieuXoa); // Xóa chi tiết
                     DSPNH.xoaPhieuTheoMaPhieu(maPhieuXoa); // Xóa phiếu
                     break;
-                case 6:
+                case 5:
                     while (true) {
-                        System.out.println("----------------- THỐNG KÊ --------------");
-                        System.out.println("1. Thống kê theo ngày");
-                        System.out.println("2. Thống kê theo tháng");
-                        System.out.println("3. Thống kê theo năm");
-                        System.out.println("4. Thống kê tổng tiền theo quý");
-                        System.out.println("5. Quay lại");
-                        System.out.println("------------------------------------------");
+                        System.out.println("╔══════════════════════════════-THỐNG KÊ-══════════════════════════════╗");
+                        System.out.println("║ 1. Thống kê theo ngày.                                               ║");
+                        System.out.println("║ 2. Thống kê theo tháng.                                              ║");
+                        System.out.println("║ 3. Thống kê theo năm.                                                ║");
+                        System.out.println("║ 4. Thống kê tổng tiền theo quý.                                      ║");
+                        System.out.println("║ 5. Quay lại.                                                         ║");
+                        System.out.println("╚══════════════════════════════════════════════════════════════════════╝");
                         System.out.print("Chọn chức năng: ");
                         int chon = sc.nextInt();
                         sc.nextLine();
@@ -84,18 +90,17 @@ public class QuanLyPhieuNhapHang {
                         }
                     }
                     break;
+                case 6:
+                    DSPNH.docFile();
                 case 7:
-                	DSPNH.docFile();
-                	break;    
-                case 8:
                     // Quản lý chi tiết phiếu nhập hàng
                     QuanLyChiTietPhieuNhapHang.quanLyChiTiet(DSPNH, DSCtPNH);
                     break;
-                case 9:
+                case 8:
                 	DSPNH.xuatPhieuNhapHang();
                 	DSCtPNH.inDanhSachChiTiet();
                 	break;
-                case 10:
+                case 0:
                     System.out.println("Đã thoát chương trình.");
                     return;
                 default:

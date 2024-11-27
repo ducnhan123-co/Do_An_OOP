@@ -83,23 +83,42 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
 
     public void hienThiPhieuVaChiTiet(DanhSachChiTietPhieuNhapHang dsChiTiet) {
         if (n == 0) {
-            System.out.println("Danh sách phiếu nhập trống.");
+            System.out.println("╔═════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                            DANH SÁCH PHIẾU NHẬP TRỐNG                       ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════════════════╝");
             return;
         }
 
-        System.out.println("Danh sách phiếu nhập và chi tiết:");
-        for (int i = 0; i < n; i++) {
-            System.out.println("Phiếu nhập hàng " + dsPhieu[i].getMaPhieu() + " :");
-            System.out.printf("| %-10s | %-15s | %-12s | %-12s | %-10s |\n", "Mã phiếu", "Mã Nhà Cung Cấp", "Mã Nhân Viên", "Tổng tiền", "Ngày nhập");
-            dsPhieu[i].xuatPhieu();
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                     DANH SÁCH PHIẾU NHẬP HÀNG VÀ CHI TIẾT                  ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════╝");
 
-            System.out.println("Chi tiết phiếu nhập hàng "+ dsPhieu[i].getMaPhieu()+" :");
-            System.out.printf("| %-10s | %-12s | %-8s | %-9s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
-            System.out.println("--------------------------------------------------------------------");
+        for (int i = 0; i < n; i++) {
+            System.out.printf("╔═════════════════════════════════════════════════════════════════════════════╗\n");
+            System.out.printf("║ Phiếu nhập hàng %-4d                                                        ║\n", dsPhieu[i].getMaPhieu());
+            System.out.printf("║ %-10s │ %-15s │ %-12s │ %-12s │ %-15s║\n", "Mã phiếu", "Mã NCC", "Mã NV", "Tổng tiền", "Ngày nhập");
+            System.out.printf("║ %-10d │ %-15d │ %-12d │ %-12.2f │ %-15s║\n",
+                    dsPhieu[i].getMaPhieu(), dsPhieu[i].getMaNCC(), dsPhieu[i].getMaNhanVien(), dsPhieu[i].getTongTien(), dsPhieu[i].getNgayNhapHang());
+            System.out.printf("╚═════════════════════════════════════════════════════════════════════════════╝\n");
+
+            System.out.println("Chi tiết phiếu nhập hàng thứ : "+ i+1);
+            System.out.printf("  ╔══════════╦════════════════╦══════════╦════════════╦════════════════╗\n");
+            System.out.printf("  ║ %-10s ║ %-14s ║ %-8s ║ %-10s ║ %-15s ║\n",
+                    "Mã Phiếu", "Mã SP", "Số Lượng", "Đơn Giá", "Thành Tiền");
+            System.out.printf("  ╠══════════╬════════════════╬══════════╬════════════╬════════════════╣\n");
+
+
+
+            // In chi tiết phiếu nhập theo mã
             dsChiTiet.inChiTietTheoMaPhieu(dsPhieu[i].getMaPhieu());
-            System.out.println();
+
+            // Kết thúc bảng chi tiết
+            System.out.println("  ╚═════════╩═════════════════╩══════════╩════════════╩══════════════════╝\n");
         }
     }
+
+
+
 
     public void xoaPhieuTheoMaPhieu(int maPhieu) {
         int vt = -1;
@@ -340,7 +359,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile{
 
     @Override
     public void docFile() {
-        String filename = "src\\QuanLySieuThiMiNi\\PhieuNhapHang.txt";
+        String filename = "QuanLySieuThiMini/src/QuanLySieuThiMiNi/PhieuNhapHang.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             int count = 0;
