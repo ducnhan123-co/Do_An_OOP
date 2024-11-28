@@ -48,6 +48,14 @@ public class ChiTietHoaDon {
         this.donGia = donGia;
     }
 
+    public float getThanhTien() {
+        return thanhTien;
+    }
+
+    public void setThanhTien(float thanhTien) {
+        this.thanhTien = thanhTien;
+    }
+
     // Tính tổng tiền cho chi tiết hóa đơn
     public double tinhTien() {
         return soLuong * donGia;

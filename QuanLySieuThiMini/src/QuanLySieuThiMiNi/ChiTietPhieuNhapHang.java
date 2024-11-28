@@ -107,10 +107,4 @@ public class ChiTietPhieuNhapHang {
         System.out.printf("  ║ %-10d ║ %-14d ║ %-8d ║ %-10.2f ║ %-15.2f ║\n",
                 getMaPhieu(), getMaSp(), getSl(), getDonGia(), getThanhTien());
     }
-
-
-
-
-
-
 }
