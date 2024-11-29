@@ -9,11 +9,12 @@ public class ChiTietHoaDon {
 
     public ChiTietHoaDon() {}
 
-    public ChiTietHoaDon(int maHD, int maSP, int soLuong, float donGia) {
+    public ChiTietHoaDon(int maHD, int maSP, int soLuong, float donGia, double thanhTien) {
         this.maHD = maHD;
         this.maSP = maSP;
         this.soLuong = soLuong;
         this.donGia = donGia;
+        this.thanhTien = thanhTien;
     }
 
     public int getMaHD() {
@@ -48,11 +49,11 @@ public class ChiTietHoaDon {
         this.donGia = donGia;
     }
 
-    public float getThanhTien() {
+    public double getThanhTien() {
         return thanhTien;
     }
 
-    public void setThanhTien(float thanhTien) {
+    public void setThanhTien(double thanhTien) {
         this.thanhTien = thanhTien;
     }
 
@@ -66,6 +67,5 @@ public class ChiTietHoaDon {
         String tenSP = danhSachSanPham.timTenSanPhamTheoMa(maSP);
         thanhTien = tinhTien();
         System.out.printf("| %10d |  %10d | %-12s | %-10d | %-10.2f | %10.2f |\n", maHD, maSP, tenSP, soLuong, donGia, thanhTien);
-        // System.out.println("Mã HD: " + maHD + ", Mã SP: " + maSP + ", Số lượng: " + soLuong + ", Đơn giá: " + donGia + ", Thành tiền: " + tinhTien());
     }
 }

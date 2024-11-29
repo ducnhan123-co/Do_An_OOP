@@ -18,6 +18,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
     private HoaDon[] DS_hoaDon = new HoaDon[0];
 
     public DanhSachHoaDon() {}
+
     public DanhSachHoaDon(DanhSachHoaDon other) {
         this.DS_hoaDon = other.DS_hoaDon;
     }
@@ -27,8 +28,8 @@ public class DanhSachHoaDon implements ThaoTacFile {
     }
 
     public boolean checkHD(int maHD) {
-        for (HoaDon i: DS_hoaDon) {
-            if (i.getMaHD() == maHD)
+        for(HoaDon i: DS_hoaDon) {
+            if(i.getMaHD() == maHD)
                 return false;
         }
         return true;
@@ -36,7 +37,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
     // Xem danh sách hóa đơn
     public void xemDSHD() {
-        System.out.println("\nDanh Sách Hóa Đơn:");
+        System.out.println("\n*Danh Sách Hóa Đơn:");
         for(HoaDon hoaDon: DS_hoaDon){
             hoaDon.xuatHoaDon();
         }
@@ -110,7 +111,6 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 return i;
             }
         }
-        System.out.println("Không tìm thấy mã hóa đơn: "+maHD);
         return -1;
     }
 

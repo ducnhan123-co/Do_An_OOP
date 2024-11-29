@@ -112,6 +112,6 @@ public class HoaDon {
         System.out.println("Phương thức thanh toán: "+phuongThucTinhToan);
         System.out.println("Tiền trả: "+tienTra+" VND");
         System.out.println("Tiền thừa: "+tienThua+" VND");
-        System.out.println("---------------------------------------------");
+        System.out.println("------------------------------------");
     }
 }
