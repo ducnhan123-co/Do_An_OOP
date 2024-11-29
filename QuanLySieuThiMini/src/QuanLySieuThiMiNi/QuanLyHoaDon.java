@@ -92,17 +92,21 @@ public class QuanLyHoaDon {
         }
         System.out.println("═══════════════════════CỬA HÀNG MINIONS══════════════════════════");
         System.out.println("═════════════════════XIN CÁM ƠN QUÝ KHÁCH════════════════════════");
-        xuatHoaDon(hoaDon.getMaHD());
-        //new Scanner(System.in).nextLine();
+        xuatHoaDon_CTHD(hoaDon.getMaHD());
         danhSachHoaDon.ghiFile();
         danhSachHoaDonChiTiet.ghiFile();
         System.out.println();
     }
 
     // Hàm xuất hóa đơn theo mã
-    public void xuatHoaDon(int maHD) {
+    public void xuatHoaDon_CTHD(int maHD) {
+        if(danhSachHoaDon.timMaHoaDon(maHD)==-1) {
+            System.out.println("Không có hóa đơn mã "+maHD+"!\n");
+            return;
+        }
         danhSachHoaDon.xuatHoaDonTheoMa(maHD);
         danhSachHoaDonChiTiet.xuatChiTietHoaDonTheoMHD(maHD);
+        System.out.println();
     }
 
     // Hàm xuất danh sách hóa đơn
@@ -116,7 +120,7 @@ public class QuanLyHoaDon {
             System.out.println("╔═══════════════════════════-QUẢN LÝ HÓA ĐƠN-═══════════════════════════╗");
             System.out.println("║ 1.  Thêm 1 hóa đơn vào danh sách và lưu trong file                    ║");
             System.out.println("║ 2.  Thêm danh sách hóa đơn và lưu trong file                          ║");
-            System.out.println("║ 3.  Xóa hóa đơn theo mã hóa đơn                                       ║");
+            System.out.println("║ 3.  Xóa hóa đơn theo mã hóa đơn và lưu trong file                     ║");
             System.out.println("║ 4.  Tìm kiếm hóa đơn theo tùy chọn                                    ║");
             System.out.println("║ 5.  Thống kê hóa đơn theo tùy chọn                                    ║");
             System.out.println("║ 6.  Liệt kê các hóa đơn có lớn và nhỏ hơn giá trị tổng tiền nhập      ║");
@@ -142,9 +146,12 @@ public class QuanLyHoaDon {
                     }
                     break;
                 case 3:
-                    System.out.println("Nhập mã hóa đơn cần xóa: ");
+                    System.out.print("Nhập mã hóa đơn cần xóa: ");
                     int maHD = sc.nextInt();
                     danhSachHoaDon.xoaHoaDonTheoMa(maHD);
+                    danhSachHoaDonChiTiet.xoaChiTietHoaDon(maHD);
+                    danhSachHoaDon.ghiFile();
+                    danhSachHoaDonChiTiet.ghiFile();
                     break;
                 case 4:{
                     while (true) {
@@ -156,8 +163,6 @@ public class QuanLyHoaDon {
                             System.out.println("3. Tìm kiếm hóa đơn có tổng tiền lớn nhất");
                             System.out.println("4. Tìm kiếm hóa đơn có tổng tiền nhỏ nhất");
                             System.out.println("5. Tìm kiếm hóa đơn theo ngày tạo hóa đơn");
-                            // System.out.println("6. Tìm kiếm các hóa đơn có tổng tiền lớn hơn giá tiền nhập");
-                            // System.out.println("7. Tìm kiếm các hóa đơn có tổng tiền nhỏ hơn giá tiền nhập");
                             System.out.println("0. Thoát");
                             System.out.println("============================================================");
                             System.out.print("Nhập lựa chọn của bạn: ");
@@ -281,13 +286,14 @@ public class QuanLyHoaDon {
                     while (true) {
                         try {
                             //Hiển thị menu thống kê
-                            System.out.println("================ XUẤT HÓA ĐƠN ================");
+                            System.out.println("=================== XUẤT HÓA ĐƠN ===================");
                             System.out.println("1. Xuất danh sách hóa đơn");
                             System.out.println("2. Xuất hóa đơn theo mã hóa đơn");
                             System.out.println("3. Xuất danh sách chi tiết hóa đơn");
                             System.out.println("4. Xuất chi tiết hóa đơn theo mã hóa đơn");
+                            System.out.println("5. Xuất hóa đơn và chi tiết hóa đơn theo mã hóa đơn");
                             System.out.println("0. Thoát");
-                            System.out.println("==============================================");
+                            System.out.println("====================================================");
                             System.out.print("Nhập lựa chọn của bạn: ");
                             int luaChon = sc.nextInt();
                             sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại sau khi nhập số
@@ -314,6 +320,11 @@ public class QuanLyHoaDon {
                                     int maCTHD = sc.nextInt();
                                     danhSachHoaDonChiTiet.xuatChiTietHoaDonTheoMHD(maCTHD);
                                     break; 
+                                case 5:
+                                    System.out.print("Nhập mã hóa đơn: ");
+                                    int maHD_CTHD= sc.nextInt();
+                                    xuatHoaDon_CTHD(maHD_CTHD);
+                                    break;
                                 default:
                                     System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                             }

@@ -23,7 +23,7 @@ public class DanhSachHoaDonChiTiet {
             return;
         }
         double tongCong = 0;
-        System.out.println("\nDanh sách chi tiết hóa đơn:");
+        System.out.println("\n*Danh sách chi tiết hóa đơn:");
         System.out.println("----------------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm","Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("----------------------------------------------------------------------------------");
@@ -92,7 +92,7 @@ public class DanhSachHoaDonChiTiet {
         }
 
         double tongTienThanhToan=0;
-        System.out.println("\nDanh sách chi tiết hóa đơn theo mã hóa đơn "+maHD+": ");
+        System.out.println("Chi tiết hóa đơn theo mã hóa đơn "+maHD+": ");
         System.out.println("----------------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-10s | %-12s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("----------------------------------------------------------------------------------");
@@ -119,6 +119,7 @@ public class DanhSachHoaDonChiTiet {
                 chiTietHoaDon.setMaSP(Integer.parseInt(strings[1].trim()));
                 chiTietHoaDon.setSoLuong(Integer.parseInt(strings[2].trim()));
                 chiTietHoaDon.setDonGia(Float.parseFloat(strings[3].trim()));
+                chiTietHoaDon.setThanhTien(Double.parseDouble(strings[3].trim()));
                 push(chiTietHoaDon);
             }
             br.close();
@@ -132,7 +133,7 @@ public class DanhSachHoaDonChiTiet {
             BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/ChiTietHoaDon.txt"));
             String line;
             for (ChiTietHoaDon i: DS_ChiTietHoaDon) {
-                line = String.format("%d;%d;%d;%f\n", i.getMaHD(),i.getMaSP(),i.getSoLuong(),i.getDonGia());
+                line = String.format("%d;%d;%d;%f;%f\n", i.getMaHD(),i.getMaSP(),i.getSoLuong(),i.getDonGia(),i.getThanhTien());
                 bw.write(line);
             }
             bw.close();
