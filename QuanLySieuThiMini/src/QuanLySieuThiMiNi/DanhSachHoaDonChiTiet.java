@@ -8,17 +8,17 @@ import java.io.FileWriter;
 import static java.util.Arrays.copyOf;
 
 public class DanhSachHoaDonChiTiet {
-    private ChiTietHoaDon[] DS_ChiTietHoaDon = new ChiTietHoaDon[0]; // Mảng chứa các chi tiết hóa đơn
+    private ChiTietHoaDon[] dscthd = new ChiTietHoaDon[0]; // Mảng chứa các chi tiết hóa đơn
     private DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
 
     public void push(ChiTietHoaDon chiTietHoaDon) {
-        DS_ChiTietHoaDon = copyOf(DS_ChiTietHoaDon, DS_ChiTietHoaDon.length+1);
-        DS_ChiTietHoaDon[DS_ChiTietHoaDon.length-1] = chiTietHoaDon;
+        dscthd = copyOf(dscthd, dscthd.length+1);
+        dscthd[dscthd.length-1] = chiTietHoaDon;
     }
 
     // Xuất toàn bộ danh sách chi tiết hóa đơn
     public void xuatDanhSachChiTietHoaDon() {
-        if (DS_ChiTietHoaDon.length == 0) {
+        if (dscthd.length == 0) {
             System.out.println("Danh sách chi tiết hóa đơn rỗng.");
             return;
         }
@@ -27,9 +27,9 @@ public class DanhSachHoaDonChiTiet {
         System.out.println("----------------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm","Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("----------------------------------------------------------------------------------");
-        for (int i = 0; i < DS_ChiTietHoaDon.length; i++) {
-            DS_ChiTietHoaDon[i].xuatChiTietHoaDon(danhSachSanPham); // Gọi phương thức xuất chi tiết hóa đơn
-            tongCong+=DS_ChiTietHoaDon[i].tinhTien();
+        for (int i = 0; i < dscthd.length; i++) {
+            dscthd[i].xuatChiTietHoaDon(danhSachSanPham); // Gọi phương thức xuất chi tiết hóa đơn
+            tongCong+=dscthd[i].tinhTien();
         }
         System.out.println("----------------------------------------------------------------------------------");
         // System.out.printf("| Tổng cộng                                                         | %-10.2f |\n", tongCong);
@@ -39,9 +39,9 @@ public class DanhSachHoaDonChiTiet {
 
     // Tìm kiếm chi tiết hóa đơn theo mã sản phẩm
     public ChiTietHoaDon timKiemTheoMaSanPham(int maSP) {
-        for (int i = 0; i < DS_ChiTietHoaDon.length; i++) {
-            if (DS_ChiTietHoaDon[i].getMaSP() == maSP) {
-                return DS_ChiTietHoaDon[i];
+        for (int i = 0; i < dscthd.length; i++) {
+            if (dscthd[i].getMaSP() == maSP) {
+                return dscthd[i];
             }
         }
         System.out.println("Không tìm thấy chi tiết hóa đơn cho mã sản phẩm: " + maSP);
@@ -51,8 +51,8 @@ public class DanhSachHoaDonChiTiet {
     // Xóa chi tiết hóa đơn theo mã sản phẩm
     public void xoaChiTietHoaDon(int maSP) {
         int index = -1;
-        for (int i = 0; i < DS_ChiTietHoaDon.length; i++) {
-            if (DS_ChiTietHoaDon[i].getMaSP() == maSP) {
+        for (int i = 0; i < dscthd.length; i++) {
+            if (dscthd[i].getMaSP() == maSP) {
                 index = i;
                 break;
             }
@@ -61,18 +61,18 @@ public class DanhSachHoaDonChiTiet {
             System.out.println("Không tìm thấy chi tiết hóa đơn cho mã sản phẩm: " + maSP);
             return;
         }
-        for (int i = index; i < DS_ChiTietHoaDon.length- 1; i++) {
-            DS_ChiTietHoaDon[i] = DS_ChiTietHoaDon[i + 1];
+        for (int i = index; i < dscthd.length- 1; i++) {
+            dscthd[i] = dscthd[i + 1];
         }
-        DS_ChiTietHoaDon[DS_ChiTietHoaDon.length - 1] = null;
+        dscthd[dscthd.length - 1] = null;
         System.out.println("Đã xóa chi tiết hóa đơn cho mã sản phẩm: " + maSP);
     }
 
     // Tính tổng tiền của toàn bộ hóa đơn
     public double tinhTongTien() {
         double tongTien = 0;
-        for (int i = 0; i < DS_ChiTietHoaDon.length; i++) {
-            tongTien += DS_ChiTietHoaDon[i].tinhTien();
+        for (int i = 0; i < dscthd.length; i++) {
+            tongTien += dscthd[i].tinhTien();
         }
         return tongTien;
     }
@@ -80,7 +80,7 @@ public class DanhSachHoaDonChiTiet {
     public void xuatChiTietHoaDonTheoMHD(int maHD) {
         // Kiểm tra trước xem có hóa đơn nào không
         boolean coHoaDon = false;
-        for(ChiTietHoaDon i: DS_ChiTietHoaDon) {
+        for(ChiTietHoaDon i: dscthd) {
             if(i.getMaHD() == maHD) {
                 coHoaDon = true;
                 break; // Chỉ cần tìm thấy một hóa đơn là đủ
@@ -96,7 +96,7 @@ public class DanhSachHoaDonChiTiet {
         System.out.println("----------------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-10s | %-12s | %-10s | %-10s | %-10s |\n", "Mã Hóa Đơn", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("----------------------------------------------------------------------------------");
-        for (ChiTietHoaDon i: DS_ChiTietHoaDon) {
+        for (ChiTietHoaDon i: dscthd) {
             if (i.getMaHD() == maHD) {
                 i.xuatChiTietHoaDon(danhSachSanPham);
                 tongTienThanhToan+=i.tinhTien();
@@ -132,7 +132,7 @@ public class DanhSachHoaDonChiTiet {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/ChiTietHoaDon.txt"));
             String line;
-            for (ChiTietHoaDon i: DS_ChiTietHoaDon) {
+            for (ChiTietHoaDon i: dscthd) {
                 line = String.format("%d;%d;%d;%f;%f\n", i.getMaHD(),i.getMaSP(),i.getSoLuong(),i.getDonGia(),i.getThanhTien());
                 bw.write(line);
             }
