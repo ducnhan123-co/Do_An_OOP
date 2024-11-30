@@ -1,4 +1,6 @@
-package QuanLySieuThiMiNi;
+package QuanLySieuThiMiNi.HoaDon;
+
+import QuanLySieuThiMiNi.*;
 
 public class ChiTietHoaDon {
     private int maHD;
@@ -15,6 +17,14 @@ public class ChiTietHoaDon {
         this.soLuong = soLuong;
         this.donGia = donGia;
         this.thanhTien = thanhTien;
+    }
+
+    public ChiTietHoaDon(ChiTietHoaDon other) {
+        this.maHD = other.maHD;
+        this.maSP = other.maSP;
+        this.soLuong = other.soLuong;
+        this.donGia = other.donGia;
+        this.thanhTien = other.thanhTien;
     }
 
     public int getMaHD() {
@@ -63,8 +73,8 @@ public class ChiTietHoaDon {
     }
 
     // Xuất thông tin chi tiết hóa đơn
-    public void xuatChiTietHoaDon(DanhSachSanPham danhSachSanPham) {
-        String tenSP = danhSachSanPham.timTenSanPhamTheoMa(maSP);
+    public void xuatChiTietHoaDon() {
+        String tenSP = new DanhSachSanPham().timTenSanPhamTheoMa(maSP);
         thanhTien = tinhTien();
         System.out.printf("| %10d |  %10d | %-12s | %-10d | %-10.2f | %10.2f |\n", maHD, maSP, tenSP, soLuong, donGia, thanhTien);
     }

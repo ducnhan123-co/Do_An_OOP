@@ -1,21 +1,16 @@
-package QuanLySieuThiMiNi;
-
+package QuanLySieuThiMiNi.HoaDon;
+import QuanLySieuThiMiNi.ThaoTacFile;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.util.Arrays.copyOf;
 
 public class DanhSachHoaDon implements ThaoTacFile {
-    private HoaDon[] dshd = new HoaDon[0];
+    private static HoaDon[] dshd = new HoaDon[0];
 
     public DanhSachHoaDon() {}
 
@@ -23,16 +18,20 @@ public class DanhSachHoaDon implements ThaoTacFile {
         this.dshd = other.dshd;
     }
 
-    public HoaDon[] getDanhSachHoaDon() {
-        return dshd;
-    }
-
-    public boolean checkHD(int maHD) {
+    public boolean checkHD_datontai(int maHD) {
         for(HoaDon i: dshd) {
             if(i.getMaHD() == maHD)
                 return false;
         }
         return true;
+    }
+
+    public boolean is_empty() {
+        return dshd.length == 0;
+    }
+
+    public static HoaDon[] getDshd() {
+        return dshd;
     }
 
     // Xem danh sách hóa đơn
@@ -44,14 +43,15 @@ public class DanhSachHoaDon implements ThaoTacFile {
         System.out.println();
     }
 
-    public void xemAll(DanhSachHoaDonChiTiet danhSachHoaDonChiTiet) {
+//    note
+    public void xemAll() {
         if(dshd.length==0){
             System.out.println("Danh sách rỗng!\n");
             return;
         }
         for(HoaDon i: dshd) {
             i.xuatHoaDon();
-            danhSachHoaDonChiTiet.xuatChiTietHoaDonTheoMHD(i.getMaHD());
+            new DanhSachHoaDonChiTiet().xuatChiTietHoaDonTheoMHD(i.getMaHD());
             System.out.println();
         }
     }
@@ -74,29 +74,8 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 return;
             }
         }
+        System.out.println("Không tìm thấy hóa đơn có mã" + maHD);
     }
-
-    // Xóa hóa đơn theo ngày (LocalDate)
-    // public void xoaHoaDonTheoNgay(String ngayXoa) {
-    //     boolean found = false;
-    //     for (int i = 0; i < dshd.length; i++) {
-    //         // Kiểm tra nếu ngày tạo hóa đơn trùng với ngày xóa
-    //         if (dshd[i].getNgayTaoHoaDon().equals(ngayXoa)) {
-    //             // Nếu có, xóa hóa đơn đó
-    //             for (int j = i; j < dshd.length-1; j++) {
-    //                 dshd[j] = dshd[j + 1];  // Dịch chuyển các phần tử sau nó lên
-    //             }
-    //             dshd = copyOf(dshd, dshd.length - 1);  // Cắt bỏ phần tử cuối cùng
-    //             // Giảm số lượng hóa đơn
-    //             System.out.println("Đã xóa hóa đơn có ngày tạo: " + ngayXoa);
-    //             found = true;
-    //             i--;  // Lùi chỉ số i để không bỏ qua phần tử tiếp theo
-    //         }
-    //     }
-    //     if (!found) {
-    //         System.out.println("Không có hóa đơn nào có ngày tạo: " + ngayXoa);
-    //     }
-    // }
 
     // Tìm kiếm hóa đơn theo mã (trả về vị trí int)
     public int timMaHoaDon(int maHD) {
@@ -167,7 +146,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
     // Tìm kiếm hóa đơn có tổng tiền lớn nhất
     public void timHoaDonTongTienLonNhat() {
-        if(dshd.length==0 && dshd==null) {
+        if(dshd.length==0 || dshd==null) {
             System.out.println("Không có hóa đơn nào!");
             return;
         } 
@@ -185,14 +164,14 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
     // Tìm kiếm hóa đơn có tổng tiền nhỏ nhất
     public void timHoaDonTongTienNhoNhat() {
-        if(dshd.length==0 && dshd==null) {
+        if(dshd.length==0 || dshd==null) {
             System.out.println("Không có hóa đơn nào!");
             return;
         } 
-        double minTongTien = 0;
+        double minTongTien = Integer.MAX_VALUE;
         HoaDon hoaDonMin = null;
         for(HoaDon i: dshd) {
-            if(i.getTongTien() > minTongTien) {
+            if(i.getTongTien() < minTongTien) {
                 minTongTien = i.getTongTien();
                 hoaDonMin = i;
             }
@@ -202,7 +181,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
     }
 
     // Thống kê theo tổng tiền của tất cả hóa đơn
-    public void thongKeTongDoanhThu() {
+    public void tongDoanhThu() {
         float tongTien = 0;
         int count=0;
         for(int i=0; i<dshd.length; i++) {
@@ -223,24 +202,12 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
     // Thống kê số lượng hóa đơn trả kiểu void
     public void thongKeSoLuongHoaDon1() {
-        int countHoaDon=0;
-        for(HoaDon i: dshd) {
-            if(i != null) {
-                countHoaDon++;
-            }
-        }
-        System.out.println("Số lượng hóa đơn: "+countHoaDon+" cái hóa đơn.\n");
+        System.out.println("Số lượng hóa đơn: "+dshd.length+" cái hóa đơn.\n");
     }
 
     // Thống kê số lượng hóa đơn trả về kiểu int
     public int thongKeSoLuongHoaDon2() {
-        int countHoaDon=0;
-        for(HoaDon i: dshd) {
-            if(i != null) {
-                countHoaDon++;
-            }
-        }
-        return countHoaDon;
+        return dshd.length;
     }
 
     // Thống kê hóa đơn theo ngày tạo hóa đơn
@@ -258,21 +225,14 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 if(tmp.length != 3)
                     throw new Exception("Nhập sai định dạng (dd-mm-yyyy).");
 
-                String ngay = tmp[0].trim();
-                String thang = tmp[1].trim();
-                String nam = tmp[2].trim();
-
                 float tongDoanhThu=0;
                 int hoaDonCount=0;
                 float tongDoanhThuTrungBinh=0;
 
                 for(HoaDon hoaDon: dshd) {
-                    if(hoaDon != null) {
-                        tmp = hoaDon.getNgayTaoHoaDon().split("-");
-                        if(tmp[0].equals(ngay) && tmp[1].equals(thang) && tmp[2].equals(nam)) {
-                            hoaDonCount++;
-                            tongDoanhThu+=hoaDon.getTongTien();
-                        }
+                    if(hoaDon.getNgayTaoHoaDon().equals(ngayStr)) {
+                        hoaDonCount++;
+                        tongDoanhThu+=hoaDon.getTongTien();
                     }
                 }
                 if(hoaDonCount==0) {
@@ -285,7 +245,6 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 System.out.println("- Tổng doanh thu trong " + ngayStr + ": "+tongDoanhThu+" VND");
                 System.out.println("- Trung bình tổng tiền các hóa đơn trong "+ngayStr+": "+tongDoanhThuTrungBinh+" VND\n");
                 break;
-
             }
             catch (NumberFormatException e) {
                 System.out.println("Lỗi: Vui lòng nhập một giá trị hợp lệ.");
@@ -627,7 +586,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
     // Đọc file
     public void docFile() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/HoaDon.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/HoaDon/HoaDon.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 HoaDon tmp = new HoaDon();
@@ -651,7 +610,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
     // Ghi file
     public void ghiFile() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/HoaDon.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/HoaDon/HoaDon.txt"));
             String line;
             for (HoaDon i: dshd) {
                 line = String.format("%d;%d;%d;%s;%f;%s;%f;%f\n", i.getMaHD(), i.getMaKH(), i.getMaNV(), i.getNgayTaoHoaDon(), i.getTongTien(), i.getPhuongThucTinhToan(), i.getTienTra(), i.getTienThua());

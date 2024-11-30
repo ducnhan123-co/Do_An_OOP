@@ -1,5 +1,7 @@
 package QuanLySieuThiMiNi;
 
+import QuanLySieuThiMiNi.HoaDon.*;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -168,7 +170,7 @@ public class QuanLyKhachHang {
                             case 3 -> {
                                 DanhSachHoaDon dsHoaDon = new DanhSachHoaDon();
                                 dsHoaDon.docFile();
-                                ds.thongKeDonHangTheoQuy(dsHoaDon);
+                                ds.thongKeDonHangTheoQuy();
                             }
                             case 0 -> {
                                 System.out.println("Quay lại menu khách hàng.");

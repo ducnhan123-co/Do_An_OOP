@@ -1,35 +1,22 @@
-package QuanLySieuThiMiNi;
+package QuanLySieuThiMiNi.HoaDon;
+
+import QuanLySieuThiMiNi.DanhSachSanPham;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.Arrays;
-import java.util.Scanner;
 
 import static java.util.Arrays.copyOf;
 
 public class DanhSachHoaDonChiTiet {
-    private ChiTietHoaDon[] dscthd = new ChiTietHoaDon[0]; // Mảng chứa các chi tiết hóa đơn
+    private static ChiTietHoaDon[] dscthd = new ChiTietHoaDon[0]; // Mảng chứa các chi tiết hóa đơn
     private DanhSachHoaDon danhSachHoaDon;
-    private DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
-
-    public DanhSachHoaDonChiTiet(DanhSachHoaDon danhSachHoaDon) {
-        this.danhSachHoaDon = danhSachHoaDon;
-    }
+    private DanhSachSanPham danhSachSanPham ;
 
     public void push(ChiTietHoaDon chiTietHoaDon) {
         dscthd = copyOf(dscthd, dscthd.length+1);
         dscthd[dscthd.length-1] = chiTietHoaDon;
-    }
-
-    public HoaDon timHoaDonTheoMa(int maHD) {
-        for(HoaDon i: danhSachHoaDon.getDanhSachHoaDon()) {
-            if(i.getMaHD()==maHD) {
-                return i;
-            }
-        }
-        return null;
     }
 
     private boolean checkMaHD(int maHD, int maSP) {
@@ -42,7 +29,7 @@ public class DanhSachHoaDonChiTiet {
     }
 
     public void updateThanhTien(int maHD) {
-        HoaDon invoice = timHoaDonTheoMa(maHD);
+        HoaDon invoice = danhSachHoaDon.timKiemHoaDon(maHD);
         if(invoice==null) {
             System.out.println("Không tìm thấy hóa đơn mã "+maHD+"!\n");
             return;
@@ -96,7 +83,7 @@ public class DanhSachHoaDonChiTiet {
             }
         }
         if(count>0) {
-            dscthd = Arrays.copyOf(dscthd, n);
+            dscthd = copyOf(dscthd, n);
         } else {
             System.out.println("Không tìm thấy chi tiết hóa đơn mã "+maHD+"!\n");
         }
@@ -143,7 +130,7 @@ public class DanhSachHoaDonChiTiet {
         System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s|\n", "Mã Hóa Đơn", "Mã Sản Phẩm","Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("----------------------------------------------------------------------------------");
         for (int i = 0; i < dscthd.length; i++) {
-            dscthd[i].xuatChiTietHoaDon(danhSachSanPham); // Gọi phương thức xuất chi tiết hóa đơn
+            dscthd[i].xuatChiTietHoaDon(); // Gọi phương thức xuất chi tiết hóa đơn
             tongCong+=dscthd[i].tinhTien();
         }
         System.out.println("----------------------------------------------------------------------------------");
@@ -173,7 +160,7 @@ public class DanhSachHoaDonChiTiet {
         System.out.println("----------------------------------------------------------------------------------");
         for (ChiTietHoaDon i: dscthd) {
             if (i.getMaHD() == maHD) {
-                i.xuatChiTietHoaDon(danhSachSanPham);
+                i.xuatChiTietHoaDon();
                 tongTienThanhToan+=i.tinhTien();
             }
         }
@@ -185,7 +172,7 @@ public class DanhSachHoaDonChiTiet {
 
     public void docFile () {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/ChiTietHoaDon.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/HoaDon/ChiTietHoaDon.txt"));
             String line ;
             while ((line = br.readLine()) != null) {
                 String[] strings = line.split(";");
@@ -205,7 +192,7 @@ public class DanhSachHoaDonChiTiet {
 
     public void ghiFile() {
         try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/ChiTietHoaDon.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/HoaDon/ChiTietHoaDon.txt"));
             String line;
             for (ChiTietHoaDon i: dscthd) {
                 line = String.format("%d;%d;%d;%f;%f\n", i.getMaHD(),i.getMaSP(),i.getSoLuong(),i.getDonGia(),i.getThanhTien());

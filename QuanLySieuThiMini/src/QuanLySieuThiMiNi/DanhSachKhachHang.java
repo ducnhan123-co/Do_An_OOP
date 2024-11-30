@@ -1,5 +1,6 @@
 package QuanLySieuThiMiNi;
 
+import QuanLySieuThiMiNi.HoaDon.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -351,7 +352,7 @@ public class DanhSachKhachHang implements  ThaoTacFile{
         System.out.println("Danh sách treen có : "+demHon+ " khách hàng.");
     }
 
-    public void thongKeDonHangTheoQuy(DanhSachHoaDon dsHoaDon) {
+    public void thongKeDonHangTheoQuy() {
         int[] maxHoaDon = {0, 0, 0, 0}; // Số lượng hóa đơn nhiều nhất cho các quý
         float[] maxChiTieu = {0, 0, 0, 0}; // Chi tiêu lớn nhất cho các quý
         KhachHang[] topKhachHang = new KhachHang[4]; // Khách hàng tương ứng với các quý
@@ -362,7 +363,7 @@ public class DanhSachKhachHang implements  ThaoTacFile{
             int[] soHoaDonTheoQuy = {0, 0, 0, 0};
             float[] chiTieuTheoQuy = {0, 0, 0, 0};
 
-            for (HoaDon hd : dsHoaDon.getDanhSachHoaDon()) { // Sử dụng getter để lấy danh sách hóa đơn
+            for (HoaDon hd : DanhSachHoaDon.getDshd()) { // Sử dụng getter để lấy danh sách hóa đơn
                 if (hd != null && hd.getMaKH() == kh.getMaKH()) {
                     try {
                         // Chuyển đổi ngày từ String sang LocalDate

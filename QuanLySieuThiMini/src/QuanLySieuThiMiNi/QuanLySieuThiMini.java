@@ -1,5 +1,7 @@
 package QuanLySieuThiMiNi;
 
+import QuanLySieuThiMiNi.HoaDon.QuanLyHoaDon;
+
 import java.util.Scanner;
 
 public class QuanLySieuThiMini {

@@ -1,8 +1,4 @@
-package QuanLySieuThiMiNi;
-
-import java.util.Scanner;
-
-import java.time.LocalDate;
+package QuanLySieuThiMiNi.HoaDon;
 
 public class HoaDon {
     private int maHD;

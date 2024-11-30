@@ -1,4 +1,6 @@
-package QuanLySieuThiMiNi;
+package QuanLySieuThiMiNi.HoaDon;
+
+import QuanLySieuThiMiNi.*;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -6,13 +8,7 @@ import java.util.Scanner;
 public class QuanLyHoaDon {
     private DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
     private DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon();
-    private DanhSachHoaDonChiTiet danhSachHoaDonChiTiet = new DanhSachHoaDonChiTiet(danhSachHoaDon);
-    
-    public QuanLyHoaDon() {
-        danhSachSanPham.docFile();
-        danhSachHoaDon.docFile();
-        danhSachHoaDonChiTiet.docFile();
-    }
+    private DanhSachHoaDonChiTiet danhSachHoaDonChiTiet = new DanhSachHoaDonChiTiet();
     
     Scanner sc = new Scanner(System.in);
 
@@ -24,7 +20,7 @@ public class QuanLyHoaDon {
                 Scanner in = new Scanner(System.in);
                 System.out.print("Nhập mã hóa đơn: ");
                 hoaDon.setMaHD(in.nextInt());
-                if (!danhSachHoaDon.checkHD(hoaDon.getMaHD()))
+                if (!danhSachHoaDon.checkHD_datontai(hoaDon.getMaHD()))
                     throw new Exception("Trùng lặp mã hóa đơn");
                 System.out.print("Nhập mã Khách hàng: ");
                 hoaDon.setMaKH(in.nextInt());
@@ -44,6 +40,7 @@ public class QuanLyHoaDon {
                     chiTietHoaDon.setDonGia(danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP()).getDonGia());
                     TongTien += chiTietHoaDon.tinhTien();
                     danhSachHoaDonChiTiet.push(chiTietHoaDon);
+                    danhSachHoaDonChiTiet.ghiFile();
                     System.out.println("1 - Thanh toán");
                     System.out.println("2 - Tiếp tục nhập sản phẩm");
                     System.out.print("Chọn: ");
@@ -84,6 +81,7 @@ public class QuanLyHoaDon {
     
                 hoaDon.setTienThua();
                 danhSachHoaDon.push(hoaDon);
+                danhSachHoaDon.ghiFile();
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -250,7 +248,7 @@ public class QuanLyHoaDon {
                             }
                             switch (luaChon) {
                                 case 1:
-                                    danhSachHoaDon.thongKeTongDoanhThu();
+                                    danhSachHoaDon.tongDoanhThu();
                                     break;
                                 case 2:
                                     danhSachHoaDon.thongKeSoLuongHoaDon1();
@@ -337,7 +335,7 @@ public class QuanLyHoaDon {
                     break;
                 }
                 case 8:
-                    danhSachHoaDon.xemAll(danhSachHoaDonChiTiet);
+                    danhSachHoaDon.xemAll();
                     break;
                 case 9:
                     danhSachSanPham.docFile();
@@ -355,6 +353,9 @@ public class QuanLyHoaDon {
     }
 
     public static void main(String[] args) {
+        new DanhSachSanPham().docFile();
+        new DanhSachHoaDon().docFile();
+        new DanhSachHoaDonChiTiet().docFile();
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon();
         quanLyHoaDon.menu(); // Gọi menu quản lý hóa đơn
     }
