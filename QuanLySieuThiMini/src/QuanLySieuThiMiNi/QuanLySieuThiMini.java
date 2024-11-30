@@ -57,7 +57,7 @@ public class QuanLySieuThiMini {
                     qlHoaDon.menu();
                     break;
                 case 4:
-                    System.out.println("Tiến hành chức năng quản lý phiếu nhận hàng...\n");
+                    System.out.println("Tiến hành chức năng quản lý phiếu nhập hàng...\n");
                     qlPhieuNhapHang.menu();
                     break;
                 case 5:
