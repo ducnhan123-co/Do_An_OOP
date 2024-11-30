@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class QuanLyHoaDon {
     private DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
     private DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon();
-    private DanhSachHoaDonChiTiet danhSachHoaDonChiTiet = new DanhSachHoaDonChiTiet();
+    private DanhSachHoaDonChiTiet danhSachHoaDonChiTiet = new DanhSachHoaDonChiTiet(danhSachHoaDon);
     
     public QuanLyHoaDon() {
-
+        danhSachSanPham.docFile();
+        danhSachHoaDon.docFile();
+        danhSachHoaDonChiTiet.docFile();
     }
     
     Scanner sc = new Scanner(System.in);
@@ -149,8 +151,8 @@ public class QuanLyHoaDon {
                     System.out.print("Nhập mã hóa đơn cần xóa: ");
                     int maHD = sc.nextInt();
                     danhSachHoaDon.xoaHoaDonTheoMa(maHD);
-                    danhSachHoaDonChiTiet.xoaChiTietHoaDon(maHD);
                     danhSachHoaDon.ghiFile();
+                    danhSachHoaDonChiTiet.xoaChiTietHoaDonTheoMaHoaDon(maHD);
                     danhSachHoaDonChiTiet.ghiFile();
                     break;
                 case 4:{

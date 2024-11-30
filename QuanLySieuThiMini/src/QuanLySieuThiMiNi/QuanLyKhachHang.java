@@ -16,16 +16,16 @@ public class QuanLyKhachHang {
         ds.docFile();
         while (true) {
             System.out.println("╔═══════════════════════-MENU QUẢN LÝ KHÁCH HÀNG-══════════════════════╗");
-            System.out.println("║1.  Thêm khách hàng theo tùy chọn.                                    ║");
-            System.out.println("║2.  Sửa thông tin khách hàng theo mã.                                 ║");
-            System.out.println("║3.  Xóa khách hàng theo mã.                                           ║");
-            System.out.println("║4.  Tìm kiếm khách hàng theo tùy chọn.                                ║");
-            System.out.println("║5.  Thống kê khách hàng theo tùy chọn.                                ║");
-            System.out.println("║6.  Cập nhật danh sách khách hàng hiện tại.                           ║");
-            System.out.println("║7.  Lấy thông tin từ file.                                            ║");
-            System.out.println("║8.  Tìm khách hàng nâng cao với địa chỉ do người dùng chọn.           ║");
-            System.out.println("║9.  In danh sách khách hàng.                                          ║");
-            System.out.println("║0.  Thoát.                                                            ║");
+            System.out.println("║ 1.  Thêm khách hàng theo tùy chọn.                                   ║");
+            System.out.println("║ 2.  Sửa thông tin khách hàng theo mã.                                ║");
+            System.out.println("║ 3.  Xóa khách hàng theo mã.                                          ║");
+            System.out.println("║ 4.  Tìm kiếm khách hàng theo tùy chọn.                               ║");
+            System.out.println("║ 5.  Thống kê khách hàng theo tùy chọn.                               ║");
+            System.out.println("║ 6.  Cập nhật danh sách khách hàng hiện tại.                          ║");
+            System.out.println("║ 7.  Lấy thông tin từ file.                                           ║");
+            System.out.println("║ 8.  Tìm khách hàng nâng cao với địa chỉ do người dùng chọn.          ║");
+            System.out.println("║ 9.  In danh sách khách hàng.                                         ║");
+            System.out.println("║ 0.  Thoát.                                                           ║");
             System.out.println("╚══════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
 

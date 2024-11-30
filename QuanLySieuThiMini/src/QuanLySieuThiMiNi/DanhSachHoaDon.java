@@ -74,7 +74,6 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 return;
             }
         }
-        System.out.println("Không tìm thấy hóa đơn có mã: " + maHD);
     }
 
     // Xóa hóa đơn theo ngày (LocalDate)
