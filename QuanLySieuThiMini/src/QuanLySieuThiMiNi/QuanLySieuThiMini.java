@@ -1,11 +1,16 @@
 package QuanLySieuThiMiNi;
 
+import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDon;
+import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDonChiTiet;
 import QuanLySieuThiMiNi.HoaDon.QuanLyHoaDon;
 
 import java.util.Scanner;
 
 public class QuanLySieuThiMini {
     public void menu() {
+        new DanhSachHoaDon().docFile();
+        new DanhSachSanPham().docFile();
+        new DanhSachHoaDonChiTiet().docFile();
         Scanner sc = new Scanner(System.in);
         QuanLyNhanVien qlNhanVien = new QuanLyNhanVien(100); // Quản lý nhân viên
         QuanLySanPham qlSanPham = new QuanLySanPham(); // Quản lý sản phẩm
