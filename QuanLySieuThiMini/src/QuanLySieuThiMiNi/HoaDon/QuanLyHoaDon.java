@@ -3,6 +3,7 @@ package QuanLySieuThiMiNi.HoaDon;
 import QuanLySieuThiMiNi.*;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class QuanLyHoaDon {
@@ -29,8 +30,9 @@ public class QuanLyHoaDon {
                 LocalDate localDate = LocalDate.now();
                 String b = String.format("%d-%d-%d", localDate.getDayOfMonth(), localDate.getMonth().getValue(), localDate.getYear());
                 hoaDon.setNgayTaoHoaDon(b);
-                float TongTien = 0;
-                while(true) {
+                float tongTien = 0;
+                // Nhập chi tiết hóa đơn
+                while(true) { 
                     ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                     chiTietHoaDon.setMaHD(hoaDon.getMaHD());
                     System.out.println("Nhập mã sản phẩm:");
@@ -38,7 +40,7 @@ public class QuanLyHoaDon {
                     System.out.println("Nhập số lượng:");
                     chiTietHoaDon.setSoLuong(in.nextInt());
                     chiTietHoaDon.setDonGia(danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP()).getDonGia());
-                    TongTien += chiTietHoaDon.tinhTien();
+                    tongTien += chiTietHoaDon.tinhTien();
                     danhSachHoaDonChiTiet.push(chiTietHoaDon);
                     danhSachHoaDonChiTiet.ghiFile();
                     System.out.println("1 - Thanh toán");
@@ -47,8 +49,8 @@ public class QuanLyHoaDon {
                     if (in.nextInt() == 1)
                         break;
                 }
-                hoaDon.setTongTien(TongTien);
-                System.out.printf("Tổng tiền: %.2f\n", TongTien);
+                hoaDon.setTongTien(tongTien);
+                System.out.printf("Tổng tiền: %.2f\n", tongTien);
                 // Chọn phương thức thanh toán 1 hoặc 2
                 while (true) {
                     System.out.println("Nhập phương thức thanh toán:");
@@ -72,7 +74,7 @@ public class QuanLyHoaDon {
                 while (true) {
                     System.out.println("Nhập tiền khách trả: ");
                     float tmp = in.nextFloat();
-                    if (tmp >= TongTien) {
+                    if (tmp >= tongTien) {
                         hoaDon.setTienTra(tmp);
                         break;
                     }
@@ -81,13 +83,98 @@ public class QuanLyHoaDon {
     
                 hoaDon.setTienThua();
                 danhSachHoaDon.push(hoaDon);
-                danhSachHoaDon.ghiFile();
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             finally {
                 
+            }
+        }
+        System.out.println("═══════════════════════CỬA HÀNG MINIONS══════════════════════════");
+        System.out.println("═════════════════════XIN CÁM ƠN QUÝ KHÁCH════════════════════════");
+        xuatHoaDon_CTHD(hoaDon.getMaHD());
+        danhSachHoaDon.ghiFile();
+        danhSachHoaDonChiTiet.ghiFile();
+    }
+
+    public void nhapHoaDon1() {
+        HoaDon hoaDon = new HoaDon();
+        while (true) {
+            try {
+                Scanner sc = new Scanner(System.in);
+                System.out.print("Nhập mã hóa đơn: ");
+                hoaDon.setMaHD(sc.nextInt());
+                if(!danhSachHoaDon.checkHD_datontai(hoaDon.getMaHD())) {
+                    throw new Exception("Trùng mã hóa đơn!\n");
+                }
+                System.out.print("Nhập mã khách hàng: ");
+                hoaDon.setMaKH(sc.nextInt());
+                System.out.print("Nhập mã nhân viên: ");
+                hoaDon.setMaNV(sc.nextInt());
+                LocalDate ngayTao = LocalDate.now();
+                String a = String.format("%d-%d-%d", ngayTao.getDayOfMonth(), ngayTao.getMonthValue(), ngayTao.getYear());
+                hoaDon.setNgayTaoHoaDon(a);
+                System.out.println("Nhập chi tiết hóa đơn mã "+hoaDon.getMaHD());
+                float tongTien=0;
+                while (true) {
+                    ChiTietHoaDon cthd = new ChiTietHoaDon();
+                    cthd.setMaHD(hoaDon.getMaHD());
+                    System.out.print("Nhập mã sản phẩm: ");
+                    cthd.setMaSP(sc.nextInt());
+                    System.out.print("Nhập mã số lượng: ");
+                    cthd.setSoLuong(sc.nextInt());
+                    cthd.setDonGia(danhSachSanPham.timSanPhamTheoMa(cthd.getMaSP()).getDonGia());
+                    cthd.setThanhTien(cthd.tinhTien());
+                    tongTien+=cthd.tinhTien();
+                    danhSachHoaDonChiTiet.push(cthd);
+                    danhSachHoaDonChiTiet.ghiFile();
+                    System.out.println("1 - Thanh Toán");
+                    System.out.println("2 - Tiếp tục thêm sản phẩm");
+                    if(sc.nextInt()==1) {
+                        break;
+                    }
+                }
+                hoaDon.setTongTien(tongTien);
+                System.out.printf("Tổng tiền: %.2f\n", tongTien);
+                //Nhập phương thức thanh toán
+                while (true) {
+                    System.out.println("Nhập phương thức thanh toán: ");
+                    System.out.println("1 - Tiền mặt");
+                    System.out.println("2 - Chuyển khoản");
+                    int paymentChoice = sc.nextInt();
+                    if(paymentChoice==1) {
+                        hoaDon.setPhuongThucTinhToan("Tiền mặt");
+                        break;
+                    }
+                    else if(paymentChoice==2) {
+                        hoaDon.setPhuongThucTinhToan("Chuyển khoản");
+                        break;
+                    }
+                    else {
+                        System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn 1 hoặc 2.");
+                    }
+                }
+                //Nhập tiền trả, tính tiền thừa
+                while (true) {
+                    System.out.println("Nhập tiền khách trả: ");
+                    float tmp = sc.nextFloat();
+                    if (tmp >= tongTien) {
+                        hoaDon.setTienTra(tmp);
+                        break;
+                    }
+                    System.out.println("Thiếu tiền. Vui lòng nhập số tiền cần thanh toán hợp lí!");
+                }
+                hoaDon.setTienThua();
+                //đẩy hóa đơn vừa tạo vào danh sách hóa đơn
+                danhSachHoaDon.push(hoaDon);
+                
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            finally {
+
             }
         }
         System.out.println("═══════════════════════CỬA HÀNG MINIONS══════════════════════════");
@@ -135,7 +222,7 @@ public class QuanLyHoaDon {
 
             switch(choice) {
                 case 1:
-                    nhapHoaDon();
+                    nhapHoaDon1();
                     break;
                 case 2:
                     System.out.println("Nhập số lượng hóa đơn: ");
@@ -179,38 +266,60 @@ public class QuanLyHoaDon {
                                     sc.nextLine();
                                     HoaDon hoaDonCanTim = danhSachHoaDon.timKiemHoaDon(maTim);
                                     if (hoaDonCanTim != null) {
-                                        hoaDonCanTim.xuatHoaDon();
+                                        xuatHoaDon_CTHD(hoaDonCanTim.getMaHD());
                                     } else {
                                         System.out.println("Không tìm thấy hóa đơn có mã " + maTim + "!");
                                     }
                                     break;
                                 case 2:
-                                    System.out.println("Nhập tổng tiền hóa đơn cần tìm: ");
+                                    System.out.print("Nhập tổng tiền hóa đơn cần tìm: ");
                                     float tong = sc.nextFloat();
                                     HoaDon tongTienTim = danhSachHoaDon.timHoaDonTheoTongTien(tong);
                                     if (tongTienTim != null) {
-                                        tongTienTim.xuatHoaDon();
+                                        xuatHoaDon_CTHD(tongTienTim.getMaHD());
                                     } else {
-                                        System.out.println("Không tìm thấy hóa đơn có tổng tiền là " + tongTienTim + "vnd!");
+                                        System.out.println("Không tìm thấy hóa đơn có tổng tiền là " + tong + " VND!");
                                     }
                                     break;
                                 case 3:
-                                    danhSachHoaDon.timHoaDonTongTienLonNhat();
+                                    HoaDon max = danhSachHoaDon.timHoaDonTongTienLonNhat();
+                                    if(max!=null) {
+                                        xuatHoaDon_CTHD(max.getMaHD());
+                                    }
+                                    else {
+                                        System.out.println("Không tìm thấy hóa đơn có tổng tiền lớn nhất!\n");
+                                    }
                                     break;
                                 case 4:
-                                    danhSachHoaDon.timHoaDonTongTienNhoNhat();
+                                    HoaDon min = danhSachHoaDon.timHoaDonTongTienNhoNhat();
+                                    if(min!=null) {
+                                        xuatHoaDon_CTHD(min.getMaHD());
+                                    }
+                                    else {
+                                        System.out.println("Không tìm thấy hóa đơn có tổng tiền nhỏ nhất!\n");
+                                    }
                                     break;
                                 case 5:
                                     // Tìm hóa đơn theo ngày tạo
-                                    danhSachHoaDon.timHoaDonTheoNgayTaoHoaDon();
+                                    HoaDon[] hoaDon = danhSachHoaDon.timHoaDonTheoNgayTaoHoaDon1();
+                                    if(hoaDon != null && hoaDon.length>0) {
+                                        for(HoaDon i: hoaDon) {
+                                            xuatHoaDon_CTHD(i.getMaHD());
+                                        }
+                                    }
+                                    else{
+                                        System.out.println("Không tìm thấy hóa đơn nào theo ngày đã nhập!\n");
+                                    }
                                     break;
-                                
                                 default:
                                     System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                             }
+                        } catch (InputMismatchException e){
+                            System.out.println("Nhập sai lựa chọn. Vui lòng chọn lại từ 0 đến 5!\n");
+                            sc.nextLine();
                         } catch (Exception e) {
                             System.out.println("Đã xảy ra lỗi: "+e.getMessage());
-                        }
+                        } 
                     }
                     break;
                 }
