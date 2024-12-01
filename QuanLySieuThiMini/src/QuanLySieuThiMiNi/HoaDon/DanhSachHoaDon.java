@@ -91,7 +91,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
     public HoaDon timKiemHoaDon(int maHD) {
         for(HoaDon i: dshd) {
             if(i.getMaHD() == maHD) {
-                System.out.println("Đã tìm thấy hóa đơn có mã "+maHD+"!");
+                System.out.println("\nĐã tìm thấy hóa đơn có mã "+maHD+"!");
                 return i;
             }
         }
@@ -117,10 +117,10 @@ public class DanhSachHoaDon implements ThaoTacFile {
         boolean found=false;
         
         // Duyệt qua tất cả các hóa đơn để tìm những hóa đơn có ngày tạo bằng ngày nhập
-        System.out.println("DANH SÁCH HÓA ĐƠN ");
+        System.out.println("DANH SÁCH HÓA ĐƠN "+ngayTao+": ");
         for (int i = 0; i < dshd.length; i++) {
             if (dshd[i].getNgayTaoHoaDon().equals(ngayTao)) {  // So sánh ngày tạo
-                dshd[i].xuatHoaDon();;  // Xuất thông tin của hóa đơn tìm được
+                dshd[i].xuatHoaDon();  // Xuất thông tin của hóa đơn tìm được
                 found = true;  // Đánh dấu là đã tìm thấy ít nhất một hóa đơn
             }
         }
@@ -132,12 +132,39 @@ public class DanhSachHoaDon implements ThaoTacFile {
         }
     }
 
+    // Tìm kiếm và liệt kê các hóa đơn theo ngày tạo hóa đơn kiểu HoaDon[]
+    public HoaDon[] timHoaDonTheoNgayTaoHoaDon1() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhập ngày hóa đơn được tạo (dd-mm-yyyy): ");
+        String ngayStr = sc.nextLine();
+        System.out.println();
+        int count=0;
+
+        for(HoaDon i: dshd) {
+            if(i!=null && i.getNgayTaoHoaDon().equals(ngayStr)) {
+                count++;
+                
+            }
+        }
+        if(count==0) {
+            return new HoaDon[0];
+        }
+
+        HoaDon[] tmp = new HoaDon[count];
+        int index=0;
+        for(HoaDon i: dshd) {
+            if(i != null && i.getNgayTaoHoaDon().equals(ngayStr)) {
+                tmp[index++] = i;
+            }
+        }
+        return tmp;
+    }
+
     // Tìm kiếm hóa đơn theo giá trị tổng tiền (Trả về kiểu HoaDon)
     public HoaDon timHoaDonTheoTongTien(float tongTien) {
         for(HoaDon i: dshd) {
             if(i.getTongTien() == tongTien) {
-                System.out.println("Đã tìm thấy hóa đơn có tổng tiền: " + tongTien+"đ!");
-                i.xuatHoaDon();
+                System.out.println("\nĐã tìm thấy hóa đơn có tổng tiền: " + tongTien+" VND!");
                 return i;
             }
         }
@@ -145,10 +172,10 @@ public class DanhSachHoaDon implements ThaoTacFile {
     }
 
     // Tìm kiếm hóa đơn có tổng tiền lớn nhất
-    public void timHoaDonTongTienLonNhat() {
+    public HoaDon timHoaDonTongTienLonNhat() {
         if(dshd.length==0 || dshd==null) {
             System.out.println("Không có hóa đơn nào!");
-            return;
+            return null;
         } 
         double maxTongTien = 0;
         HoaDon hoaDonMax = null;
@@ -158,15 +185,14 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 hoaDonMax = i;
             }
         }
-        System.out.println("Hóa đơn có tổng tiền thanh toán lớn nhất:\n");
-        hoaDonMax.xuatHoaDon();
+        return hoaDonMax;
     }
 
     // Tìm kiếm hóa đơn có tổng tiền nhỏ nhất
-    public void timHoaDonTongTienNhoNhat() {
+    public HoaDon timHoaDonTongTienNhoNhat() {
         if(dshd.length==0 || dshd==null) {
             System.out.println("Không có hóa đơn nào!");
-            return;
+            return null;
         } 
         double minTongTien = Integer.MAX_VALUE;
         HoaDon hoaDonMin = null;
@@ -176,8 +202,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 hoaDonMin = i;
             }
         }
-        System.out.println("Hóa đơn có tổng tiền thanh toán nhỏ nhất:\n");
-        hoaDonMin.xuatHoaDon();
+        return hoaDonMin;
     }
 
     // Thống kê theo tổng tiền của tất cả hóa đơn
