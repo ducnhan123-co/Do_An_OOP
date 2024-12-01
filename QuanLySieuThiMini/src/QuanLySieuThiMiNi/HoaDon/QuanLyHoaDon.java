@@ -126,7 +126,6 @@ public class QuanLyHoaDon {
             System.out.println("║ 6.  Liệt kê các hóa đơn có lớn và nhỏ hơn giá trị tổng tiền nhập      ║");
             System.out.println("║ 7.  Xuất hóa đơn, chi tiết hóa đơn theo tùy chọn                      ║");
             System.out.println("║ 8.  Xem danh sách hóa đơn hiện tại                                    ║");
-            System.out.println("║ 9.  Lấy dữ liệu từ các file                                           ║");
             System.out.println("║ 0.  Thoát                                                             ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
@@ -205,16 +204,7 @@ public class QuanLyHoaDon {
                                     // Tìm hóa đơn theo ngày tạo
                                     danhSachHoaDon.timHoaDonTheoNgayTaoHoaDon();
                                     break;
-                                // case 6:
-                                //     System.out.println("Nhập giá tiền: ");
-                                //     float tongTien1 = sc.nextFloat();
-                                //     danhSachHoaDon.lietKeHoaDonTongTienLonHon(tongTien1);
-                                //     break;
-                                // case 7:
-                                //     System.out.println("Nhập giá tiền: ");
-                                //     float tongTien2 = sc.nextFloat();
-                                //     danhSachHoaDon.lietKeHoaDonTongTienNhoHon(tongTien2);
-                                //     break;
+                                
                                 default:
                                     System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                             }
@@ -278,7 +268,7 @@ public class QuanLyHoaDon {
                     break;
                 }    
                 case 6:
-                    System.out.println("Nhập giá tiền:");
+                    System.out.print("Nhập giá tiền: ");
                     float tongTien = sc.nextFloat();
                     danhSachHoaDon.lietKeHoaDonTongTienLonNhoHon(tongTien);
                     break;
@@ -336,12 +326,6 @@ public class QuanLyHoaDon {
                 }
                 case 8:
                     danhSachHoaDon.xemAll();
-                    break;
-                case 9:
-                    danhSachSanPham.docFile();
-                    danhSachHoaDon.docFile();
-                    danhSachHoaDonChiTiet.docFile();
-                    System.out.println("Lấy dữ liệu từ file thành công");
                     break;
                 case 0:
                     System.out.println("Thoát Menu Quản lý Hóa đơn...");

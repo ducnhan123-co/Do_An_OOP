@@ -515,7 +515,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         if (countLonHon == 0) {
             System.out.println("Không có hóa đơn nào có tổng tiền lớn hơn " + tongTienNhap + " VND!");
         }
-        System.out.println("+-----------------------------------------------------------------------------------------+");
+        System.out.println("+-----------------------------------------------------------------------------+");
         System.out.println("Có " + countLonHon + " hóa đơn với tổng tiền lớn hơn " + tongTienNhap + " VND\n");
 
         // Liệt kê hóa đơn có tổng tiền nhỏ hơn giá trị nhập
@@ -529,7 +529,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         if (countNhoHon == 0) {
             System.out.println("Không có hóa đơn nào có tổng tiền nhỏ hơn " + tongTienNhap + " VND!");
         }
-        System.out.println("+-----------------------------------------------------------------------------------------+");
+        System.out.println("+-----------------------------------------------------------------------------+");
         System.out.println("Có " + countNhoHon + " hóa đơn với tổng tiền nhỏ hơn " + tongTienNhap + " VND\n");
     }
 

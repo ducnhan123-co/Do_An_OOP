@@ -57,19 +57,6 @@ public class DanhSachHoaDonChiTiet {
 
     // Xóa chi tiết hóa đơn theo mã hóa đơn
     public void xoaChiTietHoaDonTheoMaHoaDon(int maHD) {
-        // int length = dscthd.length;
-        // for(int i = 0; i < length; i++) {
-        //     if(dscthd[i].getMaSP() == maSP) {
-        //         for(int j = i; j < length - 1; j++) {
-        //             dscthd[j] = dscthd[j + 1];
-        //         }
-        //         dscthd[length - 1] = null;
-        //         dscthd = Arrays.copyOf(dscthd, dscthd.length - 1);
-        //         i--;
-        //         length--;  // Giảm chiều dài mảng
-        //     }
-        // }
-        // System.out.println("Đã xóa chi tiết hóa đơn cho mã sản phẩm: " + maSP);
         int count=0;
         int n = dscthd.length;
         for(int i=0; i<n; i++) {
