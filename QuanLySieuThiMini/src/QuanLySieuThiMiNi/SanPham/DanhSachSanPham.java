@@ -11,10 +11,10 @@ import java.util.Scanner;
 import static java.util.Arrays.copyOf;
 
 public class DanhSachSanPham implements ThaoTacFile {
-    private static SanPham[] DS_SanPham = new SanPham[0];
+    public static SanPham[] DS_SanPham = new SanPham[0];
 
 
-    private void push(SanPham sanPham) {
+    public void push(SanPham sanPham) {
         DS_SanPham = copyOf(DS_SanPham, DS_SanPham.length+1);
         DS_SanPham[DS_SanPham.length-1] = sanPham;
     }
@@ -40,6 +40,21 @@ public class DanhSachSanPham implements ThaoTacFile {
             System.out.println("Lựa chọn không hợp lệ.");
         }
     }
+
+    public boolean them1SanPham(SanPham sanPham) {
+        // Kiểm tra nếu sản phẩm đã tồn tại
+        for (SanPham sp : DS_SanPham) {
+            if (sp.getMaSP() == sanPham.getMaSP()) {
+                System.out.println("Sản phẩm đã tồn tại!");
+                return false; // Không thêm sản phẩm nếu đã tồn tại
+            }
+        }
+        // Thêm sản phẩm mới
+        this.push(sanPham); // Gọi phương thức push để thêm sản phẩm
+        return true;
+    }
+
+
 
     // Xuất danh sách sản phẩm gia dụng
     public void xuatDanhSachGiaDung() {
@@ -114,6 +129,19 @@ public class DanhSachSanPham implements ThaoTacFile {
         return -1;
     }
 
+    public boolean banSanPhamTheoMa(int maSP , int soLuongBan )
+    {
+        SanPham sp = timSanPhamTheoMa(maSP);
+        if(sp!=null && sp.getSoLuong()>=soLuongBan){
+            sp.setSoLuong(sp.getSoLuong()-soLuongBan);
+            return true;
+        }
+        System.out.println("Khong du so luong de ban.");
+        return false;
+    }
+
+
+
     // Phương thức tìm tên sản phẩm theo mã sản phẩm
     public String timTenSanPhamTheoMa(int maSP) {
         for(SanPham sp: DS_SanPham) {
@@ -123,59 +151,99 @@ public class DanhSachSanPham implements ThaoTacFile {
         }
         return null;
     }
+    public void nhapHang(DanhSachSanPham danhSachSanPham, int maSP, int soLuongNhap) {
+        // Tìm sản phẩm theo mã
+        SanPham sp = danhSachSanPham.timSanPhamTheoMa(maSP);
+        if (sp != null) {
+            sp.setSoLuong(sp.getSoLuong() + soLuongNhap);
+        } else {
+            sp = new SanPham();
+            sp.setMaSP(maSP);
+            sp.setSoLuong(soLuongNhap);
+            // Thêm sản phẩm mới vào danh sách
+            danhSachSanPham.them1SanPham(sp);
+        }
+    }
 
     public void docFile() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham.txt"));
-            String line ;
+            BufferedReader reader = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham/SanPham.txt"));
+            String line;
+            int count = 0; // Đếm số dòng được đọc
             while ((line = reader.readLine()) != null) {
                 String[] sp = line.split(",");
-                if (Integer.parseInt(sp[0].trim()) == 0)
-                    push(new ThucPham(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Float.parseFloat(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
-                else
-                    push(new GiaDung(Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(), Float.parseFloat(sp[4].trim()), Integer.parseInt(sp[5].trim()), sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())));
+                if (sp.length < 10) { // Kiểm tra cấu trúc dữ liệu
+                    System.err.println("Dữ liệu không hợp lệ: " + line);
+                    continue;
+                }
+                try {
+                    if (Integer.parseInt(sp[0].trim()) == 0) {
+                        push(new ThucPham(
+                                Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(),
+                                Float.parseFloat(sp[4].trim()), Integer.parseInt(sp[5].trim()),
+                                sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())
+                        ));
+                    } else {
+                        push(new GiaDung(
+                                Integer.parseInt(sp[1].trim()), sp[2].trim(), sp[3].trim(),
+                                Float.parseFloat(sp[4].trim()), Integer.parseInt(sp[5].trim()),
+                                sp[6].trim(), sp[7].trim(), sp[8].trim(), Integer.parseInt(sp[9].trim())
+                        ));
+                    }
+                    count++;
+                } catch (Exception e) {
+                    System.err.println("Lỗi xử lý dòng dữ liệu: " + line);
+                    e.printStackTrace();
+                }
             }
             reader.close();
+//            System.out.println("Đã đọc thành công " + count + " sản phẩm từ file.");
         } catch (Exception e) {
-
-        } finally {
-
-        }
-    }
-
-    public void ghiFile() {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham.txt"));
-            for (SanPham sanPham: DS_SanPham) {
-                String loai;
-                String line ;
-                if (sanPham instanceof ThucPham) {
-                    loai = "0";
-                    ThucPham thucPham = (ThucPham)sanPham;
-                    line = String.format("%s,%d,%s,%s,%f,%d,%s,%s,%s,%d\n", loai, sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getDVT(), sanPham.getDonGia(), sanPham.getSoLuong(), sanPham.getNgaySX(),sanPham.getMoTa(),thucPham.getLoaiThucPham(),thucPham.getHanSuDung());
-                }
-                else {
-                    loai = "1";
-                    GiaDung giaDung = (GiaDung)sanPham;
-                    line = String.format("%s,%d,%s,%s,%f,%d,%s,%s,%s,%d\n", loai, sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getDVT(), sanPham.getDonGia(), sanPham.getSoLuong(), sanPham.getNgaySX(),sanPham.getMoTa(),giaDung.getThuongHieu(),giaDung.getBaoHanh());
-                }
-                bw.write(line);
-            }
-            bw.close();
-        } catch (Exception e) {
+            System.err.println("Không thể đọc file: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+
+    public void ghiFile() {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham/SanPham.txt"));
+            int count = 0; // Đếm số sản phẩm được ghi
+            for (SanPham sanPham : DS_SanPham) {
+                String loai;
+                String line;
+                if (sanPham instanceof ThucPham) {
+                    loai = "0";
+                    ThucPham thucPham = (ThucPham) sanPham;
+                    line = String.format("%s,%d,%s,%s,%f,%d,%s,%s,%s,%d\n",
+                            loai, sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getDVT(),
+                            sanPham.getDonGia(), sanPham.getSoLuong(), sanPham.getNgaySX(),
+                            sanPham.getMoTa(), thucPham.getLoaiThucPham(), thucPham.getHanSuDung());
+                } else {
+                    loai = "1";
+                    GiaDung giaDung = (GiaDung) sanPham;
+                    line = String.format("%s,%d,%s,%s,%f,%d,%s,%s,%s,%d\n",
+                            loai, sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getDVT(),
+                            sanPham.getDonGia(), sanPham.getSoLuong(), sanPham.getNgaySX(),
+                            sanPham.getMoTa(), giaDung.getThuongHieu(), giaDung.getBaoHanh());
+                }
+                bw.write(line);
+                count++;
+            }
+            bw.close();
+            System.out.println("Đã ghi thành công " + count + " sản phẩm vào file.");
+        } catch (Exception e) {
+            System.err.println("Không thể ghi file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
     public void capNhatFile() {
         ghiFile();
     }
 
-    public static void main(String[] args) {
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
-        danhSachSanPham.docFile();
-        danhSachSanPham.xuatDanhSach();
-    }
+
 }
 
 

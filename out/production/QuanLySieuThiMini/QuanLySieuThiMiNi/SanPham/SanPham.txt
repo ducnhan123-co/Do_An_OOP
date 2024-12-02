@@ -1,100 +1,20 @@
-1,0,dung cu bep,cai,98000,464,26-4-2024,gnNQURkYrNXEuLxwLElnetghpbdvDSlazNAHNhaB,sharp,1
-0,1,rau,gam, 45000,490,12-6-2024,CgTMbJakUYCSOUFflpjXZjhXyZFVpl,rau,8
-0,2,rau,gam, 25000,694,7-12-2024,vThNyrNPNyXsPrJKnCvFclqkZNSlbf,rau,10
-1,3,quat,cai,77000,300,14-7-2024,ivYahpPUBtyQOFJBurnGoBdijQnthNUheAkOCuQA,lock&lock,3
-0,4,ca thu,gam, 15000,486,10-9-2024,VCkbdyaQIbjpGqsCafvRvZqOzYRIDA,thit,8
-1,5,keo,cai,82000,748,2-12-2024,zmdyEJgqaFgnsHjQvAJHPYuqJeIDJwrMQiTXyrFz,lock&lock,2
-1,6,dao,cai,87000,534,9-1-2024,BqsHMSRgeBsoNYSZoJvRmIxYIXswFlHHDJXXcMEv,china,2
-0,7,tieu,gam, 61000,600,10-10-2024,ZkSIMLVJYsdMCfeQIKCdEkmhWFEQdr,gia vi,8
-1,8,quat,cai,46000,406,23-7-2024,GvIEEgqrcmgXxLmTLzntNaLhYJGckPqjkjhwjgLi,sharp,2
-0,9,thit bo,gam, 29000,209,2-8-2024,JoEpfRqkrhhRToqsxaJOfdFZqkVcCd,thit,8
-0,10,rau,gam, 36000,804,8-4-2024,MMxKuFJcsvJpAtpftlYwccWdHJFqmg,rau,7
-0,11,duong,gam, 25000,543,20-9-2024,ZmuIfdvyKDJEelEGWQZEoXKbpFmALR,gia vi,7
-0,12,duong,gam, 96000,683,16-4-2024,DKgmsKWCrgJckZpqxYIhIkPnZMZQul,gia vi,8
-1,13,bang keo,cai,41000,191,3-11-2024,CryPBuZCgAUoTupopMpJffrxRBunzuZFpyWvHlCZ,sharp,2
-1,14,dung cu bep,cai,40000,890,13-7-2024,hQANkvVDLsRZwCaCECsgyhspGaxiZVfepGXthIUm,lock&lock,2
-1,15,dao,cai,84000,212,22-12-2024,OhFVNgfOguZlInoGjXCcqqoABypFhiYQuZujjUWe,china,2
-0,16,thit bo,gam, 78000,286,2-10-2024,sYnrSQbtKIHvbfTRdVhiYsHTzbrHpU,thit,6
-1,17,but,cai,93000,586,24-6-2024,mHPMfRyLXXiODgvJSzIuMzjoijVumYwXsfOZfwEn,Thai,2
-1,18,but,cai,48000,807,23-7-2024,wDbVLRedXzGHSNWxVGFGAITZmioNNVAjMDXSsFWS,VietNam,1
-1,19,kim,cai,93000,664,17-5-2024,LpJWeBwsRtnpDowlNTcHoFooHzEMbMViiTZNnNrR,sharp,1
-1,20,kim,cai,59000,178,18-1-2024,kLOEnCeLHaRxGwWrzvkIhCBaenglyfoxPxBTaBJP,Thai,2
-0,21,tieu,gam, 79000,287,24-12-2024,rbPzlZipDSITvwPpMVRfnajEViNkQb,gia vi,10
-1,22,keo,cai,41000,264,27-3-2024,KDCoOpvvNXSAgGKAOePJzvWPCoYkQaqKdxHehRHq,Thai,2
-0,23,thit bo,gam, 79000,580,26-10-2024,NZWCkMSedJrszkvwQZuPUBMuQvEEkb,thit,10
-0,24,tieu,gam, 27000,551,8-7-2024,MCagtSeqXEGYIbKcgvwcnNuaksHYqr,gia vi,6
-0,25,ga,gam, 68000,491,28-8-2024,eouRSPEAmEWffPqfFGVOHrdVnEugCv,thit,6
-1,26,dung cu bep,cai,32000,641,21-4-2024,AJaGhNyaotknCgXiBGvdoLBXCtdEorDqTqUgcMDm,VietNam,1
-0,27,rau,gam, 69000,608,19-5-2024,ZkrmxkYuJpdYGxgaFnanNWkOdtOnhI,rau,6
-0,28,duong,gam, 84000,433,10-3-2024,lKZjoedgPraOQZmJKGShVPTBdOnlcL,gia vi,8
-1,29,bang keo,cai,36000,269,25-12-2024,nPJVmNNuerSfcojCeUQTIxVjInOezXtymlQBfBHw,sharp,3
-0,30,thit heo,gam, 32000,91,5-12-2024,AgGqRyPnvzEWsGEBUmWhBYWoUwObzO,thit,10
-0,31,rau,gam, 51000,996,27-11-2024,IvWgISIFZdgZslCQeYNEBCOFddlatq,rau,10
-0,32,thit bo,gam, 22000,24,21-11-2024,yKhYQUzxHscgAjTzSPTgTqtsROqeKw,thit,6
-0,33,ca thu,gam, 80000,467,18-2-2024,WcawOGAEhMixHUelRPucLbJxFhFePX,thit,7
-1,34,keo,cai,41000,221,7-12-2024,ASolGXtveLKNeeigmjywXtUjzkqVnVxmTDOWFFpL,lock&lock,1
-1,35,bang keo,cai,16000,258,8-6-2024,GEowOpwxsvWbXzTmGLoUdZsbCLoetRkMnaodQodr,Thai,1
-0,36,rau,gam, 97000,901,13-8-2024,rLPGeVAFpkNuPcxsmblaQuWWeHIrxm,rau,6
-1,37,keo,cai,81000,629,28-12-2024,codHCYfkzcStyIYVYFNiEExrXfLvDbPLXAOvwoWu,sharp,2
-0,38,ga,gam, 17000,349,5-2-2024,eIAYvrgsUmZwFgHmuHWacfhMrYsLaB,thit,7
-0,39,thit bo,gam, 73000,880,26-5-2024,iebiSUVCDQsBDKplaWGYMxcqHiUpgc,thit,7
-1,40,dung cu bep,cai,61000,737,14-5-2024,GMcOPzOKCwnwmvPoHFBqBgeqCsfTfVYgfbWVRksk,lock&lock,3
-0,41,ca thu,gam, 73000,430,17-1-2024,CRdaxBgwclLldgyXTtUioNOInrkSzF,thit,10
-0,42,thit heo,gam, 26000,586,13-3-2024,NIGbIHsCVusjsYvTdwFrZvDaNTzHZa,thit,10
-1,43,kim,cai,27000,788,18-8-2024,PTvOOVrFgSJOCnSnCKdpPlfMVGZIAYULUwFsWnpA,china,3
-0,44,ca thu,gam, 44000,228,27-7-2024,CHKOZBVAYOrrpXwMEJyPBnnZvLhKER,thit,5
-0,45,ga,gam, 32000,746,18-5-2024,otJuPJNXIwEAynsvQPXWZPdCfnNGtU,thit,7
-1,46,dung cu bep,cai,79000,599,25-8-2024,WoVGpNJZbYDssuhsPxVRUNFUICHJcaQUiAPFeGpZ,sharp,2
-0,47,bot ngot,gam, 62000,76,28-7-2024,RQCxcOyDNWaGRSKoZIHevhKFBQbCtY,gia vi,6
-1,48,kim,cai,86000,674,12-11-2024,qkCwbNgqwQfyCvxJQWGnGGzGeBxCTVYYzsQuudfs,sharp,1
-0,49,duong,gam, 66000,658,17-8-2024,HwHcZSepVYrOgXQAkSrsmdsjQntVLG,gia vi,9
-0,50,muoi,gam, 77000,279,22-1-2024,KxGRJmegsVynmhFCrgOmssyViofgog,gia vi,7
-0,51,duong,gam, 47000,573,16-1-2024,SGKFliQZvGBbMrTlVVeCsiogTbFwga,gia vi,9
-1,52,dung cu bep,cai,53000,314,15-9-2024,EWQcmmKTqxGfmmhPqWwwLWtBAHVCTHfNQLQsvDKm,Thai,3
-0,53,rau,gam, 44000,888,15-11-2024,DgYxRqUURTWDItNeKjFOqgyMZiAPNh,rau,6
-1,54,keo,cai,24000,651,21-3-2024,UmLCXkRSoZSdUdjVYXBaaEsuyYuxsdOesIurJtAN,sharp,3
-1,55,bang keo,cai,90000,870,24-4-2024,MVmvMGpDbAsErsdzDdoKOkDuyPmqaDhFgdpXROeM,Thai,3
-0,56,tieu,gam, 11000,305,4-2-2024,uoIDKytEbNynzdwPLlaCScOQmKBaUH,gia vi,6
-0,57,ga,gam, 80000,503,2-10-2024,QptlakxrMeXQmKqIdaXzRPsoSFnafc,thit,8
-1,58,dao,cai,60000,499,1-5-2024,ysTlulOawUymUcJNfjAoPuAXCYmBxpNuSnKkeIWF,china,3
-1,59,but,cai,58000,829,17-8-2024,hgJBcibvoaBQgaERRdPSIYXjjmnRwVrwyegDTcHM,VietNam,1
-1,60,but,cai,26000,117,26-5-2024,SOyQFRxxbCbFzGijktLSORhYBlhFnFNEfDlnYPmA,Thai,3
-0,61,ca thu,gam, 40000,504,3-9-2024,RdlTaeiWXNjLGbmItkHtTvONeTakzD,thit,7
-0,62,duong,gam, 30000,289,22-2-2024,uZwSBtjBZGwoRPTmwFsjducODlTKSF,gia vi,9
-1,63,quat,cai,23000,770,16-4-2024,XSOBAwnGzGidpCsjMixJPXMXaFKQAQmxbdZQRscl,china,3
-0,64,ca thu,gam, 24000,55,2-10-2024,RTItfUpUEzbMtvHkZvaHQIuYmHLgkx,thit,5
-1,65,keo,cai,63000,873,7-12-2024,NToenOAelPFMntDiERxwxjNFbScQNJribKxmSoZK,china,1
-0,66,thit heo,gam, 86000,457,19-11-2024,jFcytrRDLzQojCVesYTmEFJnjrBOdl,thit,9
-1,67,dao,cai,64000,873,20-7-2024,XZbcGDvvOSYzEEoeZLBkjaSfYhczxoyNYWpliedP,VietNam,2
-0,68,rau,gam, 71000,722,12-2-2024,CUNbUmLhQCneruSxhTmWNjcASAVfMd,rau,9
-0,69,duong,gam, 33000,451,28-8-2024,vgmkaqtrSupATIUVOHPWTASIaFmWNy,gia vi,6
-1,70,but,cai,18000,302,17-1-2024,pweTqdaGZWvAnQFqngMhlZFXEvokvDxXhcLRKHLq,china,1
-0,71,thit bo,gam, 79000,475,3-2-2024,oIgZmmrYgrKsLKoScDnMFEdaMcHHme,thit,7
-0,72,ca thu,gam, 88000,421,21-11-2024,BgqTHtIcYzldGRaSwURiJdcuHguSYY,thit,6
-0,73,ca thu,gam, 88000,952,20-2-2024,UtdYTlPzNPaqrHMzQQduJoqmRNvNYa,thit,6
-0,74,bot ngot,gam, 61000,676,26-8-2024,SgmpwcnGmGlxRIbQBIGnSeWCEuEknc,gia vi,6
-1,75,quat,cai,63000,454,1-9-2024,noJEQPuQSagPxKPXWOIKFdtXznwkJPFzfUEpJbAP,sharp,3
-0,76,thit heo,gam, 43000,699,19-6-2024,qziiHiyJOntHuxkDXFOgHUEaZEcNgj,thit,10
-1,77,dao,cai,22000,90,6-1-2024,sQOLYkPZcuHdoKkJQYyATHRCIksuKmhrMkmZZgig,Thai,2
-0,78,bot ngot,gam, 52000,430,16-5-2024,WTDicVOTHvLeDefnBNthqaVDLwMNxA,gia vi,10
-1,79,quat,cai,19000,573,10-6-2024,JvZTTQTvUIUJQkXjmlRizpnGYLHyNVhgDnpduuaa,lock&lock,1
-1,80,but,cai,98000,701,17-12-2024,BbhVjyEgmDmxenQEWSJaVsnKVfWrIVoDUyjvkZjE,Thai,2
-1,81,bang keo,cai,16000,682,15-8-2024,DxsFOwQxqUzgQUYkJBXihhZUeyCTcMdkdUOPEVAc,lock&lock,3
-0,82,bot ngot,gam, 86000,317,5-12-2024,ZqXxHhWcvzqfisvIUrCuOwJYjqvMZT,gia vi,5
-0,83,tieu,gam, 78000,794,28-8-2024,ewosUymXsbeNZduHIMaacwdGMMTNnu,gia vi,10
-0,84,rau,gam, 81000,570,24-8-2024,vRBvyeXQzXtYEcRvmrAtymvrFVZjeN,rau,10
-1,85,but,cai,100000,887,17-12-2024,yBwuXlRCUzGfAFrORkOyCIaxXNJdwZqqfDlOVPFe,china,3
-1,86,but,cai,57000,656,13-1-2024,eXAderVnFnrdJozjvCLYpclykyVXDgtFuvNQlcUZ,lock&lock,2
-1,87,dung cu bep,cai,70000,627,23-3-2024,xzqNYMTGYpwmnpXUBZxuSrsbBNFwZTCvrswTChLK,lock&lock,1
-1,88,kim,cai,79000,651,23-2-2024,HkpCbMqOjXCcvnEovQDSENFWurvXaBsDlGWGSeBT,VietNam,1
-0,89,bot ngot,gam, 48000,908,1-12-2024,QIpLLOCbYBuotScAhdKGQxIkoBJUiS,gia vi,10
-1,90,but,cai,27000,833,1-12-2024,pUNMQqnOGLOkUIlikjbhYwhvdlorXeWldtnoFQlY,sharp,1
-1,91,kim,cai,91000,386,27-10-2024,ClzXirEYapEqYPodHvcyMxIgAbUvazpESsnbOLAh,china,1
-0,92,ca thu,gam, 36000,885,24-10-2024,dPLQdhBWfbjxOvzAJodnOeOADVUJrj,thit,9
-0,93,rau,gam, 24000,685,19-3-2024,PYRfpWppOHgPmisbhMbINTMPCWjIac,rau,9
-1,94,keo,cai,39000,424,5-8-2024,DkCScHSuQaEGFHYEHtmwKJmJVMSKLLavFitlNSrP,lock&lock,1
-1,95,dung cu bep,cai,98000,901,24-6-2024,vINvhKnSltasgWNqWlEsYNlNLGIojTKFGroLCNfa,VietNam,1
-1,96,quat,cai,49000,58,6-1-2024,ivfbqYfTZfJOWTRRLgOegzBgmCCOCVAmezhlMBNi,Thai,1
-1,97,keo,cai,82000,132,8-11-2024,xLjHHFluWVSyXekHIIfObIrhhsyEopAlHZqogcGG,Thai,1
-1,98,dung cu bep,cai,30000,880,7-5-2024,qFNMrtDYKoStkdKIIpcYGuhxzWXbVDmoRQxHYNYf,Thai,3
-1,99,keo,cai,39000,461,3-11-2024,qYMaZvYQAVlsSckIqgwjxgbePzGRWxlYHCmVIxiL,Thai,2
+0,1,Gạo,Kg,20000,100,2023-01-01,Thực phẩm sạch,Thực phẩm,12
+0,2,Rau cải,Kg,15000,80,2023-01-02,Thực phẩm xanh,Thực phẩm,7
+0,3,Thịt heo,Kg,120000,50,2023-01-03,Thịt tươi sống,Thực phẩm,6
+0,4,Thịt bò,Kg,250000,30,2023-01-04,Thịt nhập khẩu,Thực phẩm,12
+0,5,Tôm,Kg,300000,20,2023-01-05,Hải sản tươi,Thực phẩm,5
+0,6,Cá thu,Kg,220000,25,2023-01-06,Hải sản nhập,Thực phẩm,4
+0,7,Đường trắng,Kg,12000,150,2023-01-07,Nguyên liệu nấu ăn,Thực phẩm,24
+0,8,Hạt tiêu,Kg,50000,100,2023-01-08,Gia vị,Thực phẩm,24
+0,9,Mì ăn liền,Gói,5000,500,2023-01-09,Thực phẩm khô,Thực phẩm,12
+0,10,Muối,Kg,10000,200,2023-01-10,Gia vị phổ biến,Thực phẩm,36
+1,11,Quạt điện,Cái,500000,10,2023-01-11,Dùng làm mát,Sharp,24
+1,12,Bàn là,Cái,400000,15,2023-01-12,Thiết bị gia dụng,Philips,36
+1,13,Bếp ga,Cái,1500000,5,2023-01-13,Dùng để nấu ăn,Panasonic,60
+1,14,Ấm đun nước,Cái,250000,20,2023-01-14,Thiết bị gia dụng,Lock&Lock,12
+1,15,Dao,Cái,70000,50,2023-01-15,Dụng cụ nhà bếp,Thái Lan,24
+1,16,Kéo,Cái,50000,30,2023-01-16,Dụng cụ nhà bếp,Việt Nam,12
+1,17,Tủ lạnh,Cái,10000000,3,2023-01-17,Thiết bị gia dụng,Samsung,120
+1,18,Lò vi sóng,Cái,3000000,7,2023-01-18,Dụng cụ gia dụng,LG,36
+1,19,Bình nước,Cái,150000,25,2023-01-19,Thiết bị gia đình,Sunhouse,12
+1,20,Bàn ủi,Cái,450000,12,2023-01-20,Dụng cụ gia đình,Philips,242
