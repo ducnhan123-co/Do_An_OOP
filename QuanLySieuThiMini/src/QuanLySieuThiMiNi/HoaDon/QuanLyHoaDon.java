@@ -1,11 +1,11 @@
 package QuanLySieuThiMiNi.HoaDon;
 
-import QuanLySieuThiMiNi.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import QuanLySieuThiMiNi.SanPham.DanhSachSanPham;
+
 
 public class QuanLyHoaDon {
     private DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
