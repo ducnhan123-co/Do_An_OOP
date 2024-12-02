@@ -1,6 +1,5 @@
 package QuanLySieuThiMiNi.HoaDon;
-
-import QuanLySieuThiMiNi.*;
+import QuanLySieuThiMiNi.SanPham.DanhSachSanPham;
 
 public class ChiTietHoaDon {
     private int maHD;
