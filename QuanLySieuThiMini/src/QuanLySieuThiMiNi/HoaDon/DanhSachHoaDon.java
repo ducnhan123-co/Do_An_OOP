@@ -618,14 +618,14 @@ public class DanhSachHoaDon implements ThaoTacFile {
             int choice = sc.nextInt();
             if(choice==1) {
                 for(HoaDon i: dshd) {
-                    if(i.getNgayTaoHoaDon().equals("Tiền mặt")) {
+                    if(i.getPhuongThucTinhToan().equals("Tiền mặt")) {
                         i.xuatHoaDon();
                         new DanhSachHoaDonChiTiet().xuatChiTietHoaDonTheoMHD(i.getMaHD());
                     }
                 }
             } else if(choice==2) {
                 for(HoaDon i: dshd) {
-                    if(i.getNgayTaoHoaDon().equals("Chuyển khoản")) {
+                    if(i.getPhuongThucTinhToan().equals("Chuyển khoản")) {
                         i.xuatHoaDon();
                         new DanhSachHoaDonChiTiet().xuatChiTietHoaDonTheoMHD(i.getMaHD());
                     }
@@ -633,7 +633,23 @@ public class DanhSachHoaDon implements ThaoTacFile {
             } else {
                 System.out.println("Nhập sai yêu cầu. Vui lòng nhập 1 hoặc 2!\n");
             }
+            break;
         }
+    }
+    public void thongKeHoaDonTheoPhuongThucThanhToan() {
+        if (dshd.length == 0) {
+            System.out.println("Danh sách hóa đơn hiện tại đang ");
+            return;
+        }
+        int tienMat=0, chuyenKhoan=0;
+        for(HoaDon i: dshd)
+            if(i.getPhuongThucTinhToan().equals("Tiền mặt"))
+                ++tienMat;
+            else
+                ++chuyenKhoan;
+
+        System.out.printf("Số hóa đơn được thanh toán bằng phương thức tiền mặt là: %d\n", tienMat);
+        System.out.printf("Số hóa đơn được thanh toán bằng phương thức chuyển khoản là: %d\n", chuyenKhoan);
     }
 
     // Đọc file

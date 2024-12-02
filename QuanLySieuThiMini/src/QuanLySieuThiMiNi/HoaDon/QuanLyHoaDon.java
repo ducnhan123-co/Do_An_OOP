@@ -248,6 +248,7 @@ public class QuanLyHoaDon {
                             System.out.println("5. Thống kê hóa đơn theo năm");
                             System.out.println("6. Thống kê hóa đơn theo quý (Từng quý)");
                             System.out.println("7. Thống kê hóa đơn theo khoảng thời gian");
+                            System.out.println("8. Thống kê hóa đơn theo phương thức thanh ");
                             System.out.println("0. Thoát");
                             System.out.println("==================================================");
                             System.out.print("Nhập lựa chọn của bạn: ");
@@ -279,7 +280,10 @@ public class QuanLyHoaDon {
                                     break;
                                 case 7:
                                     danhSachHoaDon.thongKeHoaDonTheoKhoangThoiGian();
-                                    break;                               
+                                    break;
+                                case 8:
+                                    danhSachHoaDon.thongKeHoaDonTheoPhuongThucThanhToan();
+                                    break;
                                 default:
                                     System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                             }
@@ -304,6 +308,7 @@ public class QuanLyHoaDon {
                             System.out.println("3. Xuất danh sách chi tiết hóa đơn");
                             System.out.println("4. Xuất chi tiết hóa đơn theo mã hóa đơn");
                             System.out.println("5. Xuất hóa đơn và chi tiết hóa đơn theo mã hóa đơn");
+                            System.out.println("6. Xuất hóa đơn và chi tiết hóa đơn theo phương thức thanh ");
                             System.out.println("0. Thoát");
                             System.out.println("====================================================");
                             System.out.print("Nhập lựa chọn của bạn: ");
@@ -336,6 +341,9 @@ public class QuanLyHoaDon {
                                     System.out.print("Nhập mã hóa đơn: ");
                                     int maHD_CTHD= sc.nextInt();
                                     xuatHoaDon_CTHD(maHD_CTHD);
+                                    break;
+                                case 6:
+                                    danhSachHoaDon.lietKeHoaDonTheoPhuongThucThanhToan();
                                     break;
                                 default:
                                     System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
