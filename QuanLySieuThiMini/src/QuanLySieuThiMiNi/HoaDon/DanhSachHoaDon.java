@@ -608,6 +608,34 @@ public class DanhSachHoaDon implements ThaoTacFile {
         System.out.println("Có "+count+" hóa đơn với tổng tiền mỗi hóa đơn nhỏ hơn "+tongTienNhap+" VND");
     }
 
+    public void lietKeHoaDonTheoPhuongThucThanhToan() {
+        Scanner sc =new Scanner(System.in);
+        while (true) {
+            System.out.println("Nhập phương thức thanh toán để liệt kê: ");
+            System.out.println("1 - Tiền mặt");
+            System.out.println("2 - Chuyển khoản");
+            System.out.print("Chọn: ");
+            int choice = sc.nextInt();
+            if(choice==1) {
+                for(HoaDon i: dshd) {
+                    if(i.getNgayTaoHoaDon().equals("Tiền mặt")) {
+                        i.xuatHoaDon();
+                        new DanhSachHoaDonChiTiet().xuatChiTietHoaDonTheoMHD(i.getMaHD());
+                    }
+                }
+            } else if(choice==2) {
+                for(HoaDon i: dshd) {
+                    if(i.getNgayTaoHoaDon().equals("Chuyển khoản")) {
+                        i.xuatHoaDon();
+                        new DanhSachHoaDonChiTiet().xuatChiTietHoaDonTheoMHD(i.getMaHD());
+                    }
+                }
+            } else {
+                System.out.println("Nhập sai yêu cầu. Vui lòng nhập 1 hoặc 2!\n");
+            }
+        }
+    }
+
     // Đọc file
     public void docFile() {
         try {
