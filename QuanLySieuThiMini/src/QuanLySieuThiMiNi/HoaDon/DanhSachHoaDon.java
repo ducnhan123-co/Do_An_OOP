@@ -600,6 +600,19 @@ public class DanhSachHoaDon implements ThaoTacFile {
         }
     }
 
+    public void thongKeHoaDonTheoPTTT() {
+        int chuyenKhoan=0, tienMat=0;
+        for (HoaDon hoaDon: dshd) {
+            if (hoaDon.getPhuongThucTinhToan().contains("Tiền mặt"))
+                ++tienMat;
+            else
+                ++chuyenKhoan;
+        }
+
+        System.out.printf("Số hóa đơn được thanh toán bằng tiền mặt: %d\n", tienMat);
+        System.out.printf("Số hóa đơn được thanh toán bằng chuyển khoản: %d\n", chuyenKhoan);
+    }
+
     // Đọc file
     public void docFile() {
         try {

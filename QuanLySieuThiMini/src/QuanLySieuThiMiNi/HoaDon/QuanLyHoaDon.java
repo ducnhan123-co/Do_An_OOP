@@ -253,6 +253,7 @@ public class QuanLyHoaDon {
                                     System.out.println("5. Thống kê hóa đơn theo năm");
                                     System.out.println("6. Thống kê hóa đơn theo quý (Từng quý)");
                                     System.out.println("7. Thống kê hóa đơn theo khoảng thời gian");
+                                    System.out.println("8. Thống kê hóa đơn theo phương thức thanh toán");
                                     System.out.println("0. Thoát");
                                     System.out.println("==================================================");
                                     System.out.print("Nhập lựa chọn của bạn: ");
@@ -284,7 +285,10 @@ public class QuanLyHoaDon {
                                             break;
                                         case 7:
                                             danhSachHoaDon.thongKeHoaDonTheoKhoangThoiGian();
-                                            break;                               
+                                            break;
+                                        case 8:
+                                            danhSachHoaDon.thongKeHoaDonTheoPTTT();
+                                            break;
                                         default:
                                             System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                                     }
