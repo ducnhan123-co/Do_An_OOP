@@ -1,5 +1,7 @@
 package QuanLySieuThiMiNi.PhieuNhapHang;
 
+import QuanLySieuThiMiNi.SanPham.DanhSachSanPham;
+import QuanLySieuThiMiNi.SanPham.SanPham;
 import QuanLySieuThiMiNi.ThaoTacFile;
 
 import java.io.*;
@@ -15,6 +17,7 @@ import java.text.DecimalFormat;
 
 public class DanhSachPhieuNhapHang implements ThaoTacFile {
     private PhieuNhapHang[] dsPhieu;
+    private DanhSachSanPham danhSachSanPham;
     private int n ;
 //    private DanhSachChiTietPhieuNhapHang dsChiTiet;
     
@@ -53,7 +56,9 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
             dsPhieu[i].xuatPhieu();
         	
     }
-    
+
+
+
     public void nhapPhieuVaChiTiet(DanhSachChiTietPhieuNhapHang dsChiTiet) {
         Scanner sc = new Scanner(System.in);
 
