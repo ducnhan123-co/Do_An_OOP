@@ -122,9 +122,9 @@ public class DanhSachHoaDonChiTiet {
             tongCong+=dscthd[i].tinhTien();
         }
         System.out.println("----------------------------------------------------------------------------------");
-        // System.out.printf("| Tổng cộng                                                         | %-10.2f |\n", tongCong);
         System.out.printf("| %-65s | %-11.2f|\n", "Tổng cộng", tongCong);
         System.out.println("----------------------------------------------------------------------------------");
+        System.out.println("=> Có "+dscthd.length+" chi tiết hóa đơn trong danh sách chi tiết hóa đơn.\n");
     }
 
     public void xuatChiTietHoaDonTheoMHD(int maHD) {
