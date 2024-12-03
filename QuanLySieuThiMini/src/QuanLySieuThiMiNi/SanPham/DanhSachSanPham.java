@@ -3,6 +3,8 @@ package QuanLySieuThiMiNi.SanPham;
 import QuanLySieuThiMiNi.PhieuNhapHang.ChiTietPhieuNhapHang;
 import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachChiTietPhieuNhapHang;
 import QuanLySieuThiMiNi.ThaoTacFile;
+import QuanLySieuThiMiNi.HoaDon.ChiTietHoaDon;
+import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDonChiTiet;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -136,23 +138,78 @@ public class DanhSachSanPham implements ThaoTacFile {
         System.out.println("Không tìm thấy sản phẩm với mã: "+maSP);
         return -1;
     }
+    
+    public void capNhatTonKho(DanhSachChiTietPhieuNhapHang danhSachNhap, DanhSachHoaDonChiTiet danhSachBan) {
+        for (SanPham sp : DS_SanPham) {
+            sp.setSoLuong(0); // Đặt lại số lượng tồn kho
 
-    public void banHang(DanhSachSanPham danhSachSanPham, int maSP, int soLuongBan) {
-        // Tìm sản phẩm
-        SanPham sp = danhSachSanPham.timSanPhamTheoMa(maSP);
-        if (sp == null) {
-            System.out.println("Không tìm thấy sản phẩm với mã: " + maSP);
-            return;
+            // Cộng số lượng nhập
+            for (ChiTietPhieuNhapHang chiTiet : danhSachNhap.getDanhSachChiTiet()) {
+                if (chiTiet.getMaSp() == sp.getMaSP()) {
+                    sp.setSoLuong(sp.getSoLuong() + chiTiet.getSl());
+                }
+            }
+
+            // Trừ số lượng bán
+            for (ChiTietHoaDon chiTiet : danhSachBan.getDanhSachChiTiet()) {
+                if (chiTiet.getMaSP() == sp.getMaSP()) {
+                    sp.setSoLuong(sp.getSoLuong() - chiTiet.getSoLuong());
+                }
+            }
         }
-        // Kiểm tra tồn kho
-        if (sp.getSoLuong() < soLuongBan) {
-            System.out.println("Số lượng tồn kho không đủ để bán.");
-            return;
-        }
-        // Cập nhật số lượng tồn kho
-        sp.setSoLuong(sp.getSoLuong() - soLuongBan);
-        System.out.println("Bán hàng thành công.");
     }
+    
+    public void xemHangNhapBanVaTonKho(DanhSachChiTietPhieuNhapHang danhSachNhap, DanhSachHoaDonChiTiet danhSachBan) {
+        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                             DANH SÁCH HÀNG NHẬP, BÁN VÀ TỒN KHO                                   ║");
+        System.out.println("╠═════════════╦════════════════════════╦════════════════╦════════════════╦══════════════════════════╣");
+        System.out.printf("║ %-11s ║ %-20s ║ %-14s ║ %-14s ║ %-24s ║\n", 
+                          "Mã SP", "Tên Sản Phẩm", "Tổng Nhập", "Tổng Bán", "Số Lượng Tồn Kho");
+        System.out.println("╠═════════════╬════════════════════════╬════════════════╬════════════════╬══════════════════════════╣");
+
+        for (SanPham sp : DS_SanPham) {
+            int tongNhap = 0;
+            int tongBan = 0;
+
+            // Tính tổng số lượng nhập từ danh sách chi tiết phiếu nhập
+            for (ChiTietPhieuNhapHang chiTietNhap : danhSachNhap.getDanhSachChiTiet()) {
+                if (chiTietNhap.getMaSp() == sp.getMaSP()) {
+                    tongNhap += chiTietNhap.getSl();
+                }
+            }
+
+            // Tính tổng số lượng bán từ danh sách hóa đơn chi tiết
+            for (ChiTietHoaDon chiTietBan : danhSachBan.getDanhSachChiTiet()) {
+                if (chiTietBan.getMaSP() == sp.getMaSP()) {
+                    tongBan += chiTietBan.getSoLuong();
+                }
+            }
+
+            // In thông tin sản phẩm: Mã SP, Tên SP, Tổng Nhập, Tổng Bán, Số Lượng Tồn Kho
+            System.out.printf("║ %-11d ║ %-20s ║ %-14d ║ %-14d ║ %-24d ║\n", 
+                              sp.getMaSP(), sp.getTenSP(), tongNhap, tongBan, sp.getSoLuong());
+        }
+
+        System.out.println("╚═════════════╩════════════════════════╩════════════════╩════════════════╩══════════════════════════╝");
+    }
+
+
+//    public void banHang(DanhSachSanPham danhSachSanPham, int maSP, int soLuongBan) {
+//        // Tìm sản phẩm
+//        SanPham sp = danhSachSanPham.timSanPhamTheoMa(maSP);
+//        if (sp == null) {
+//            System.out.println("Không tìm thấy sản phẩm với mã: " + maSP);
+//            return;
+//        }
+//        // Kiểm tra tồn kho
+//        if (sp.getSoLuong() < soLuongBan) {
+//            System.out.println("Số lượng tồn kho không đủ để bán.");
+//            return;
+//        }
+//        // Cập nhật số lượng tồn kho
+//        sp.setSoLuong(sp.getSoLuong() - soLuongBan);
+//        System.out.println("Bán hàng thành công.");
+//    }
 
 
 
@@ -329,43 +386,43 @@ public class DanhSachSanPham implements ThaoTacFile {
     }
 
 
-    // public void thongKeSanPhamTheoLoaiVaThuongHieu() {
-    //     Scanner sc = new Scanner(System.in);
-    //     int countSoLuongThucPham=0, countSoLuongGiaDung=0;
-    //     int countLoai=0, countThuongHieu=0;
-    //     float tongGiaTheoLoai=0, tongGiaTheoThuongHieu=0;;
-    //     float trungBinhTongGiaTheoLoai=0, trungBinhTongGiaTheoThuongHieu=0;
-    //     while (true) {
-    //         try {
-    //             String tenLoai = sc.nextLine().trim(); 
-    //             for(SanPham i: DS_SanPham) {
-    //                 if(i instanceof ThucPham) {
-    //                     if(((ThucPham)i).getLoaiThucPham().contains(tenLoai)) {
-    //                         countLoai++;
-    //                         countSoLuongThucPham+=i.getSoLuong();
-    //                         tongGiaTheoLoai+=(i.getSoLuong()*i.getDonGia());
-    //                     }
-    //                 }
-    //                 else if(i instanceof GiaDung) {
-    //                     if(((GiaDung)i).getThuongHieu().contains(tenLoai)) {
-    //                         countLoai++;
-    //                         countSoLuongGiaDung+=i.getSoLuong();
-    //                         tongGiaTheoThuongHieu+=(i.getSoLuong()*i.getDonGia());
-    //                     }
-    //                 } else {
-    //                     System.out.println("Không có sản phẩm "+tenLoai+" để thống kê!\n");
-    //                 }
-    //                 System.out.println("--------------------------");
-    //             }
-    //         } catch (Exception e) {
+    public void thongKeSanPhamTheoLoaiVaThuongHieu() {
+        Scanner sc = new Scanner(System.in);
+        int countSoLuongThucPham=0, countSoLuongGiaDung=0;
+        int countLoai=0, countThuongHieu=0;
+        float tongGiaTheoLoai=0, tongGiaTheoThuongHieu=0;;
+        float trungBinhTongGiaTheoLoai=0, trungBinhTongGiaTheoThuongHieu=0;
+        while (true) {
+            try {
+                String tenLoai = sc.nextLine().trim(); 
+                for(SanPham i: DS_SanPham) {
+                    if(i instanceof ThucPham) {
+                        if(((ThucPham)i).getLoaiThucPham().contains(tenLoai)) {
+                            countLoai++;
+                            countSoLuongThucPham+=i.getSoLuong();
+                            tongGiaTheoLoai+=(i.getSoLuong()*i.getDonGia());
+                        }
+                    }
+                    else if(i instanceof GiaDung) {
+                        if(((GiaDung)i).getThuongHieu().contains(tenLoai)) {
+                            countLoai++;
+                            countSoLuongGiaDung+=i.getSoLuong();
+                            tongGiaTheoThuongHieu+=(i.getSoLuong()*i.getDonGia());
+                        }
+                    } else {
+                        System.out.println("Không có sản phẩm "+tenLoai+" để thống kê!\n");
+                    }
+                    System.out.println("--------------------------");
+                }
+            } catch (Exception e) {
                 
-    //         }
-    //     }
-    // }
+            }
+        }
+    }
 
     public void docFile() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham/SanPham.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/QuanLySieuThiMiNi/SanPham/SanPham.txt"));
             String line;
             int count = 0; // Đếm số dòng được đọc
             while ((line = reader.readLine()) != null) {

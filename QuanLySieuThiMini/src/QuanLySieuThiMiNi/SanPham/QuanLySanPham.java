@@ -1,5 +1,6 @@
 package QuanLySieuThiMiNi.SanPham;
 
+import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDonChiTiet;
 import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachChiTietPhieuNhapHang;
 import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachPhieuNhapHang;
 
@@ -9,6 +10,7 @@ public class QuanLySanPham {
     DanhSachSanPham dsSanPham = new DanhSachSanPham();
     DanhSachPhieuNhapHang danhSachPhieuNhapHang = new DanhSachPhieuNhapHang();
     DanhSachChiTietPhieuNhapHang dsChiTietPhieuNhap= new DanhSachChiTietPhieuNhapHang(danhSachPhieuNhapHang);
+    DanhSachHoaDonChiTiet dsChiTietHoaDon = new DanhSachHoaDonChiTiet();
     Scanner sc = new Scanner(System.in);
 
     public QuanLySanPham() {
@@ -247,11 +249,7 @@ public class QuanLySanPham {
                             break;
                         }
                         case 2 -> {
-                            System.out.print("Nhập mã sản phẩm: ");
-                            int maSPBan = sc.nextInt();
-                            System.out.print("Nhập số lượng bán: ");
-                            int soLuongBan = sc.nextInt();
-                            dsSanPham.banHang(dsSanPham, maSPBan, soLuongBan);
+                        	dsSanPham.xemHangNhapBanVaTonKho(dsChiTietPhieuNhap, dsChiTietHoaDon);
                             break;
                         }
                         case 0 -> {
