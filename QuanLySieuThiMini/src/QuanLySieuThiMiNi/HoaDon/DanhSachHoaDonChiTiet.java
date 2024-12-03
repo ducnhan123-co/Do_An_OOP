@@ -18,6 +18,10 @@ public class DanhSachHoaDonChiTiet {
         dscthd[dscthd.length-1] = chiTietHoaDon;
     }
 
+    public ChiTietHoaDon[] getDanhSachChiTiet() {
+        return dscthd;
+    }
+    
     private boolean checkMaHD(int maHD, int maSP) {
         for(ChiTietHoaDon i: dscthd) {
             if(i.getMaHD()==maHD && i.getMaSP()==maSP) {

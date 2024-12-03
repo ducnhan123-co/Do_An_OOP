@@ -17,7 +17,9 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         this.danhSachPhieuNhapHang = danhSachPhieuNhapHang;
     }
 
-
+    public ChiTietPhieuNhapHang[] getDanhSachChiTiet() {
+        return dsChiTiet;
+    }
     // Hàm tìm phiếu nhập hàng theo mã
     public PhieuNhapHang timGanDungTheoMa(int maPhieu) {
         for (PhieuNhapHang phieu : danhSachPhieuNhapHang.getDsPhieu()) {
