@@ -33,7 +33,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
     public static HoaDon[] getDshd() {
         return dshd;
     }
-
+    
     // Xem danh sách hóa đơn
     public void xemDSHD() {
         System.out.println("\n*Danh Sách Hóa Đơn:");
@@ -63,7 +63,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         dshd[dshd.length-1] = hoaDon;
     }
 
-    // Xóa hóa đơn theo Mã hóa đơn
+    // Xóa hóa đơn theo mã hóa đơn
     public void xoaHoaDonTheoMa(int maHD) {
         for(int i=0; i<dshd.length; i++) {
             if(dshd[i].getMaHD() == maHD) {
@@ -78,7 +78,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         System.out.println("Không tìm thấy hóa đơn có mã" + maHD);
     }
 
-    // Tìm kiếm hóa đơn theo mã (trả về vị trí int)
+    // Tìm kiếm hóa đơn theo mã hóa đơn (trả về vị trí int)
     public int timMaHoaDon(int maHD) {
         for(int i=0; i<dshd.length; i++) {
             if(dshd[i].getMaHD() == maHD) {
@@ -88,7 +88,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         return -1;
     }
 
-    // Tìm kiếm hóa đơn theo mã (trả về HoaDon)
+    // Tìm kiếm hóa đơn theo mã hóa đơn (trả về HoaDon)
     public HoaDon timKiemHoaDon(int maHD) {
         for(HoaDon i: dshd) {
             if(i.getMaHD() == maHD) {
@@ -100,6 +100,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         return null;
     }
 
+    // Xuất hóa đơn theo mã hóa đơn
     public void xuatHoaDonTheoMa(int maHD) {
         for (HoaDon i: dshd) {
             if (i.getMaHD() == maHD) {
@@ -222,7 +223,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         } else {
             System.out.println("Tổng số hóa đơn: "+count+" cái hóa đơn");
             System.out.println("Tổng doanh thu: "+tongTien+" VND.");
-            System.out.println("Trung bình tổng tiền các hóa đơn: " + ((float) tongTien / count) + " VND.");
+            System.out.println("Trung bình tổng doanh thu: " + ((float) tongTien / count) + " VND.");
         }
     }
 
@@ -254,7 +255,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 float tongDoanhThu=0;
                 int hoaDonCount=0;
                 float tongDoanhThuTrungBinh=0;
-
+                
                 for(HoaDon hoaDon: dshd) {
                     if(hoaDon.getNgayTaoHoaDon().equals(ngayStr)) {
                         hoaDonCount++;
@@ -308,12 +309,11 @@ public class DanhSachHoaDon implements ThaoTacFile {
                         }
                     }
                 }
-                tongDoanhThuTrungBinh = tongDoanhThu / soluongHoaDon;
-
                 if(soluongHoaDon==0) {
                     System.out.println("Không có hóa đơn nào trong tháng "+thang+" năm "+nam);
                     return;
                 }
+                tongDoanhThuTrungBinh = tongDoanhThu / soluongHoaDon;
 
                 System.out.println("\n- Số lượng hóa đơn trong tháng "+thang+" năm "+nam+": "+soluongHoaDon+" cái hóa đơn");
                 System.out.println("- Tổng doanh thu trong tháng "+thang+" năm "+nam+": "+tongDoanhThu+" VND");
@@ -412,11 +412,16 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 }
             } 
         }
+        if(!foundNam) {
+            System.out.println("Không có hóa đơn nào trong năm "+namCanThongKe+" để thống kê!");
+            return;
+        }
 
         double maxTongTienDoanhThu = tongTienQuy1;
         double minTongTienDoanhThu = Integer.MAX_VALUE;
         int quyMax = 1;
         int quyMin = -1;
+        
         // Tìm quý tổng doanh thu lớn nhất
         if(tongTienQuy2 > maxTongTienDoanhThu){
             maxTongTienDoanhThu = tongTienQuy2;
@@ -449,10 +454,6 @@ public class DanhSachHoaDon implements ThaoTacFile {
             quyMin = 4;
         }
 
-        if(!foundNam) {
-            System.out.println("Không có hóa đơn nào trong năm "+namCanThongKe+" để thống kê!");
-            return;
-        }
         System.out.println("╔═══════════════════════════════════════════════════════════════════════════════╗");
         System.out.printf("║                      THỐNG KÊ HÓA ĐƠN THEO QUÝ NĂM %d                       ║\n", namCanThongKe);
         System.out.println("╠════════════╦════════════════════╦══════════════════════╦══════════════════════╣");

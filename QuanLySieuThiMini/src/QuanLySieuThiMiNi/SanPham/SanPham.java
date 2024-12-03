@@ -83,7 +83,7 @@ public class SanPham {
 
     // Xuất thông tin sản phẩm
     public void xuat() {
-        System.out.printf("|%-10d|%-15s|%-10s|%-10.2f|%-10d|%-15s|%-40s",
+        System.out.printf("|%-10d|%-15s|%-10s|%-12.2f|%-10d|%-15s|%-40s",
                 maSP, tenSP, DVT, donGia, soLuong, ngaySX, moTa);
     }
 }

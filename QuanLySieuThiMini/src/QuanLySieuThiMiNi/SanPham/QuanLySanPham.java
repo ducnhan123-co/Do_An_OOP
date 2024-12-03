@@ -7,7 +7,7 @@ public class QuanLySanPham {
     Scanner sc = new Scanner(System.in);
 
     public QuanLySanPham() {
-
+        dsSanPham.docFile();
     }
 
     public void menu() {
@@ -19,7 +19,7 @@ public class QuanLySanPham {
             System.out.println("║ 2. Sửa sản phẩm theo tùy chọn                                               ║");
             System.out.println("║ 3. Xóa sản phẩm theo tùy chọn                                               ║");
             System.out.println("║ 4. Tìm kiếm sản phẩm theo tùy chọn                                          ║");
-            System.out.println("║ 5. Thống kê sản phẩm                                                        ║");
+            System.out.println("║ 5. Thống kê sản phẩm theo tùy chọn                                          ║");
             System.out.println("║ 6. Xuất danh sách sản phẩm                                                  ║");
             System.out.println("║ 7. Xuất danh sách gia dụng                                                  ║");
             System.out.println("║ 8. Xuất danh sách thực phẩm                                                 ║");
@@ -77,7 +77,8 @@ public class QuanLySanPham {
 
 
                 case 2 -> {
-                    while (true) { // Vòng lặp để giữ menu hiện tại
+                    boolean quayLaiMenu = false;
+                    while (!quayLaiMenu) { // Vòng lặp để giữ menu hiện tại
                         System.out.println("╔════════════════════════════-SỬA SẢN PHẨM-════════════════════════════╗");
                         System.out.println("║ 1. Sửa sản phẩm theo mã                                              ║");
                         System.out.println("║ 2. Sửa sản phẩm theo tên                                             ║");
@@ -92,16 +93,17 @@ public class QuanLySanPham {
                             // case 2 -> dsSanPham.suaSanPhamTheoTen(); // Sửa sản phẩm theo tên
                             case 0 -> { // Quay lại menu chính
                                 System.out.println("Quay lại menu quản lý...");
-                                return; // Thoát khỏi case 2
+                                quayLaiMenu = true;
+                                break;// Thoát khỏi case 2
                             }
                             default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
                         }
-                    }
+                    }    
                 }
 
                 case 3 -> {
-                    boolean quayLaiMenu = true;
-                    while (quayLaiMenu) {
+                    boolean quayLaiMenu = false;
+                    while (!quayLaiMenu) {
                         System.out.println("╔════════════════════════════-XÓA SẢN PHẨM-════════════════════════════╗");
                         System.out.println("║ 1. Xóa sản phẩm theo mã                                              ║");
                         System.out.println("║ 2. Xóa sản phẩm theo tên                                             ║");
@@ -136,6 +138,7 @@ public class QuanLySanPham {
                             case 0 -> {
                                 System.out.println("Quay lại menu quản lý...");
                                 quayLaiMenu = false;
+                                break;
                             }
                             default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
                         }
@@ -144,7 +147,8 @@ public class QuanLySanPham {
 
 
                 case 4 -> {
-                    while (true) { // Vòng lặp để giữ menu hiện tại
+                    boolean quayLaiMenu = true;
+                    while (!quayLaiMenu) { // Vòng lặp để giữ menu hiện tại
                         System.out.println("╔═══════════════════════════-TÌM KIẾM SẢN PHẨM-════════════════════════╗");
                         System.out.println("║ 1. Tìm kiếm sản phẩm theo mã                                         ║");
                         System.out.println("║ 2. Tìm kiếm sản phẩm theo tên                                        ║");
@@ -164,6 +168,7 @@ public class QuanLySanPham {
 //            case 2 -> dsSanPham.timSanPhamTheoTen(); // Tìm kiếm sản phẩm theo tên
                             case 0 -> { // Quay lại menu chính
                                 System.out.println("Quay lại menu quản lý...");
+                                quayLaiMenu = true;
                                 return; // Thoát khỏi case 4
                             }
                             default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
@@ -172,20 +177,38 @@ public class QuanLySanPham {
                 }
 
                 case 5 -> {
-                    while (true) { // Vòng lặp để giữ menu hiện tại
+                    boolean quayLaiMenu = false;
+                    while (!quayLaiMenu) { // Vòng lặp để giữ menu hiện tại
                         System.out.println("╔═════════════════════════════-THỐNG KÊ SẢN PHẨM-═════════════════════════════╗");
-                        System.out.println("║ 1. Thống kê sản phẩm theo thương hiệu                                       ║");
+                        System.out.println("║ 1. Thống kê sản phẩm theo tên loại/thương hiệu                              ║");
                         System.out.println("║ 2. Thống kê sản phẩm theo năm sản xuất                                      ║");
+                        System.out.println("║ 3. Thống kê sản phẩm theo thực phẩm                                         ║");
+                        System.out.println("║ 4. Thống kê sản phẩm theo gia dụng                                          ║");
                         System.out.println("║ 0. Quay lại menu quản lý.                                                   ║");
                         System.out.println("╚═════════════════════════════════════════════════════════════════════════════╝");
                         System.out.print("Chọn chức năng: ");
                         int subChoice = sc.nextInt();
                         sc.nextLine();
                         switch (subChoice) {
-                            // case 1 -> dsSanPham.thongKeTheoThuongHieu(); // Thống kê theo thương hiệu
-                            // case 2 -> dsSanPham.thongKeTheoNamSanXuat(); // Thống kê theo năm sản xuất
+                            case 1 -> {
+                                dsSanPham.thongKeSanPhamTheoTenLoaiORTenThuongHieu();;
+                                break;
+                            }
+                            case 2 -> {
+                                //dsSanPham.thongKeTheoNamSanXuat();
+                                break;
+                            }
+                            case 3 -> {
+                                dsSanPham.thongKeSanPhamTheoThucPham();
+                                break;
+                            }
+                            case 4 -> {
+                                dsSanPham.thongKeSanPhamTheoGiaDung();
+                                break;
+                            }
                             case 0 -> { // Quay lại menu chính
                                 System.out.println("Quay lại menu quản lý...");
+                                quayLaiMenu = true;
                                 return; // Thoát khỏi case 5
                             }
                             default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
@@ -199,9 +222,9 @@ public class QuanLySanPham {
 //                case 9 -> dsSanPham.capNhatSoLuong(); // Cập nhật số lượng sản phẩm
                 case 9 -> {
                     System.out.println("╔═══════════════════════════-CẬP NHẬT SỐ LƯỢNG-══════════════════════════╗");
-                    System.out.println("║ 1. Nhập hàng                                                          ║");
-                    System.out.println("║ 2. Bán hàng                                                           ║");
-                    System.out.println("║ 0. Quay lại menu quản lý                                              ║");
+                    System.out.println("║ 1. Nhập hàng                                                           ║");
+                    System.out.println("║ 2. Bán hàng                                                            ║");
+                    System.out.println("║ 0. Quay lại menu quản lý                                               ║");
                     System.out.println("╚════════════════════════════════════════════════════════════════════════╝");
                     System.out.print("Chọn chức năng: ");
                     int subChoice = sc.nextInt();
@@ -244,5 +267,9 @@ public class QuanLySanPham {
                 default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại!");
             }
         }
+    }
+    public static void main(String[] args) {
+        QuanLySanPham qlsp = new QuanLySanPham();
+        qlsp.menu();
     }
 }
