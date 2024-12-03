@@ -13,7 +13,6 @@ import static java.util.Arrays.copyOf;
 public class DanhSachSanPham implements ThaoTacFile {
     public static SanPham[] DS_SanPham = new SanPham[0];
 
-
     public void push(SanPham sanPham) {
         DS_SanPham = copyOf(DS_SanPham, DS_SanPham.length+1);
         DS_SanPham[DS_SanPham.length-1] = sanPham;
@@ -85,8 +84,10 @@ public class DanhSachSanPham implements ThaoTacFile {
 
     public void xuatDanhSach() {
         // Tiêu đề chung cho tất cả sản phẩm
-        System.out.printf("|%-10s|%-15s|%-10s|%-10s|%-10s|%-15s|%-40s|%-20s|%-10s|\n",
-                "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Loại/Thương Hiệu", "Hạn SD/Bảo Hành");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("|%-10s|%-15s|%-10s|%-12s|%-10s|%-15s|%-40s|%-20s|%-16s|\n",
+        "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Loại/Thương Hiệu", "Hạn SD/Bảo Hành");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         // Xuất danh sách sản phẩm gia dụng
         for (SanPham sp : DS_SanPham) {
@@ -105,6 +106,7 @@ public class DanhSachSanPham implements ThaoTacFile {
                 thucPham.xuat();  // Gọi hàm xuất của ThucPham
             }
         }
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
     
     // Phương thức tìm sản phẩm theo mã sản phẩm
@@ -151,6 +153,8 @@ public class DanhSachSanPham implements ThaoTacFile {
         }
         return null;
     }
+
+    // Nhập số lượng thêm hàng theo mã sản phẩm
     public void nhapHang(DanhSachSanPham danhSachSanPham, int maSP, int soLuongNhap) {
         // Tìm sản phẩm theo mã
         SanPham sp = danhSachSanPham.timSanPhamTheoMa(maSP);
@@ -162,6 +166,132 @@ public class DanhSachSanPham implements ThaoTacFile {
             sp.setSoLuong(soLuongNhap);
             // Thêm sản phẩm mới vào danh sách
             danhSachSanPham.them1SanPham(sp);
+        }
+    }
+
+    // thống kê sản phẩm theo thực phẩm/gia dụng
+    public void thongKeSanPhamTheoThucPham() {
+        int countTP=0;
+        float tongGiaTheoThucPham=0;
+        float trungBinhTongGia=0;
+        boolean found = false;
+
+        for(SanPham i: DS_SanPham) {
+            if(i instanceof ThucPham) {
+                countTP+=i.getSoLuong();
+                tongGiaTheoThucPham+=(i.getSoLuong()*i.getDonGia());
+                found = true;
+            }
+        }
+        if(!found) {
+            System.out.println("Không có thực phẩm nào để thống kê!\n");
+            return;
+        }
+        trungBinhTongGia = (countTP > 0) ? (tongGiaTheoThucPham/countTP) : 0;
+
+        System.out.println("- Tổng số lượng thực phẩm trong kho: "+countTP);
+        System.out.printf("- Tổng giá các thực phẩm trong kho: %.2f VND\n", tongGiaTheoThucPham);
+        System.out.println("- Trung bình tổng giá thực phẩm: "+trungBinhTongGia+" VND\n");
+    }
+
+    // Thống kê sản phẩm theo gia dụng
+    public void thongKeSanPhamTheoGiaDung() {
+        int countGD=0;
+        float tongGiaTheoGiaDung=0;
+        float trungBinhTongGia=0;
+        boolean found = false;
+
+        for(SanPham i: DS_SanPham) {
+            if(i instanceof GiaDung) {
+                countGD+=i.getSoLuong();
+                tongGiaTheoGiaDung = tongGiaTheoGiaDung + (i.getSoLuong()*i.getDonGia());
+                found = true;
+            }
+        }
+        if(!found) {
+            System.out.println("Không có gia dụng nào để thống kê!\n");
+            return;
+        }
+        trungBinhTongGia = (countGD > 0) ? (tongGiaTheoGiaDung/countGD) : 0;
+
+        System.out.println("- Tổng số lượng thực phẩm trong kho: "+countGD);
+        System.out.printf("- Tổng giá các thực phẩm trong kho: %.2f VND\n", tongGiaTheoGiaDung);
+        System.out.println("- Trung bình tổng giá thực phẩm: "+trungBinhTongGia+" VND\n");
+    }
+
+    public void thongKeSanPhamTheoTenLoaiORTenThuongHieu() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            try {
+                int count=0;
+                float tongGia=0;
+                float trungBinhTongGia=0;
+
+                System.out.print("Nhập tên loại hoặc thương hiệu của sản phẩm: ");
+                String tenLoai_ThuongHieu = sc.nextLine(); 
+                // tenLoai_ThuongHieu = tenLoai_ThuongHieu.toLowerCase();  
+
+                boolean found = false;
+                for(SanPham i: DS_SanPham) {
+                    if(i instanceof ThucPham && ((ThucPham) i).getLoaiThucPham().trim().equalsIgnoreCase(tenLoai_ThuongHieu)) {    
+                        count+=i.getSoLuong();
+                        tongGia+=(i.getSoLuong()*i.getDonGia());
+                        found = true;
+                    }
+                    else if(i instanceof GiaDung && ((GiaDung)i).getThuongHieu().trim().equalsIgnoreCase(tenLoai_ThuongHieu)) {        
+                        count+=i.getSoLuong();
+                        tongGia+=(i.getSoLuong()*i.getDonGia());
+                        found = true;
+                    }
+
+                }
+                if(found) {
+                    trungBinhTongGia = (count > 0) ? (tongGia / count) : 0;
+                    System.out.println("- Số lượng sản phẩm loại/hãng "+tenLoai_ThuongHieu+" trong kho: "+count);
+                    System.out.printf("- Tổng giá trị của sản phẩm loại/hãng %s : %.2f VND\n", tenLoai_ThuongHieu, tongGia);
+                    System.out.println("- Trung bình tổng giá của sản phẩm loại/hãng "+tenLoai_ThuongHieu+": "+trungBinhTongGia+" VND\n");
+                    break;
+                } else {
+                    System.out.println("Không có sản phẩm \""+tenLoai_ThuongHieu+"\" để thống kê!\n");
+                }
+                break;
+            } catch (Exception e) {
+                System.out.println("Lỗi: "+e.getMessage());
+            }
+        }
+    }
+
+    public void thongKeSanPhamTheoLoaiVaThuongHieu() {
+        Scanner sc = new Scanner(System.in);
+        int countSoLuongThucPham=0, countSoLuongGiaDung=0;
+        int countLoai=0, countThuongHieu=0;
+        float tongGiaTheoLoai=0, tongGiaTheoThuongHieu=0;;
+        float trungBinhTongGiaTheoLoai=0, trungBinhTongGiaTheoThuongHieu=0;
+        while (true) {
+            try {
+                String tenLoai = sc.nextLine().trim(); 
+                for(SanPham i: DS_SanPham) {
+                    if(i instanceof ThucPham) {
+                        if(((ThucPham)i).getLoaiThucPham().contains(tenLoai)) {
+                            countLoai++;
+                            countSoLuongThucPham+=i.getSoLuong();
+                            tongGiaTheoLoai+=(i.getSoLuong()*i.getDonGia());
+                        }
+                    }
+                    else if(i instanceof GiaDung) {
+                        if(((GiaDung)i).getThuongHieu().contains(tenLoai)) {
+                            countLoai++;
+                            countSoLuongGiaDung+=i.getSoLuong();
+                            tongGiaTheoThuongHieu+=(i.getSoLuong()*i.getDonGia());
+                        }
+                    } else {
+                        System.out.println("Không có sản phẩm "+tenLoai+" để thống kê!\n");
+                    }
+                    System.out.println("--------------------------");
+                }
+            } catch (Exception e) {
+                
+            }
         }
     }
 

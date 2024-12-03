@@ -47,7 +47,7 @@ public class ThucPham extends SanPham {
 
     public void xuat() {
         super.xuat();  // Gọi phương thức xuat() từ lớp cha (SanPham)
-        System.out.printf("|%-20s|%-10d ngày|\n", loaiThucPham, hanSuDung);  // Thêm thông tin loại thực phẩm và hạn sử dụng
+        System.out.printf("|%-20s|%-10d  ngày|\n", loaiThucPham, hanSuDung);  // Thêm thông tin loại thực phẩm và hạn sử dụng
     }
 
 
