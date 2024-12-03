@@ -334,12 +334,6 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
         System.out.printf("║ %-7s ║ %-18s ║\n", "4", df.format(tongTienQuy4));
         System.out.println("╚═════════╩════════════════════╝");
     }
-
-
-    
-    
-    
-
     
     public PhieuNhapHang parseLineToPhieuNhapHang(String line) {
         String[] parts = line.split(";");

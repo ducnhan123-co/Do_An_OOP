@@ -128,7 +128,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         }
 
         // Nếu không tìm thấy hóa đơn nào
-        if (!found) {
+        if(!found) {
             System.out.println("Không có hóa đơn nào được tạo vào ngày " + ngayTao);
             return;
         }

@@ -113,7 +113,7 @@ public class DanhSachHoaDonChiTiet {
         double tongCong = 0;
         System.out.println("\n*Danh sách chi tiết hóa đơn:");
         System.out.println("----------------------------------------------------------------------------------");
-        System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s|\n", "Mã Hóa Đơn", "Mã Sản Phẩm","Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
+        System.out.printf("| %-10s | %-10s | %-10s | %-10s | %-10s | %-11s|\n", "Mã Hóa Đơn", "Mã Sản Phẩm","Tên Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
         System.out.println("----------------------------------------------------------------------------------");
         for (int i = 0; i < dscthd.length; i++) {
             dscthd[i].xuatChiTietHoaDon(); // Gọi phương thức xuất chi tiết hóa đơn
