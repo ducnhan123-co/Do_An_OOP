@@ -6,7 +6,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.Normalizer;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import static java.util.Arrays.copyOf;
 
@@ -219,6 +223,52 @@ public class DanhSachSanPham implements ThaoTacFile {
         System.out.println("- Trung bình tổng giá thực phẩm: "+trungBinhTongGia+" VND\n");
     }
 
+    public void thongKeSanPhamTheoNgaySanXuat() {
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        while (true) {
+            try {
+                int countLoaiSanPham=0;
+                int count=0;
+                float tongTienSanPham=0;
+                float trungBinhTongTienSanPham=0;
+                boolean found = false;
+                
+                System.out.print("Nhập ngày sản xuất sản phẩm (yyyy-MM-dd): ");
+                String ngayStr = sc.nextLine().trim();
+
+                LocalDate ngayNhap;
+                try {
+                    ngayNhap = LocalDate.parse(ngayStr, df);
+                } catch (Exception e) {
+                    System.out.println("Nhập ngày sai định dạng. Vui lòng nhập đúng định dạng!\n");
+                    continue;
+                }
+
+                for(SanPham i: DS_SanPham) {
+                    if(i.getNgaySX().equals(ngayStr)) {
+                        countLoaiSanPham++;
+                        count+=i.getSoLuong();
+                        tongTienSanPham+=(i.getSoLuong()*i.getDonGia());
+                        found = true;
+                    }
+                }
+                if(!found) {
+                    System.out.println("Không có hóa đơn nào trong ngày "+ngayStr);
+                }
+                trungBinhTongTienSanPham = (count>0) ? (tongTienSanPham/count) : 0;
+                System.out.println("Kết quả thống kê sản phẩm ngày "+ngayStr+": ");
+                System.out.println("- "+countLoaiSanPham+" loại sản phẩm.");
+                System.out.println("- Số lượng sản phẩm trong ngày "+ngayStr+": "+count+" cái");
+                System.out.println("- Tổng giá tiền các sản phẩm trong ngày "+ngayStr+": "+tongTienSanPham+" VND");
+                System.out.println("- Trung bình tổng các sản phẩm trong ngày "+ngayStr+": "+trungBinhTongTienSanPham+" VND\n");
+                break;
+            } catch (Exception e) {
+                System.out.println("Lỗi: "+e.getMessage());
+            }
+        }
+    }
+
     public void thongKeSanPhamTheoTenLoaiORTenThuongHieu() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -229,16 +279,15 @@ public class DanhSachSanPham implements ThaoTacFile {
 
                 System.out.print("Nhập tên loại hoặc thương hiệu của sản phẩm: ");
                 String tenLoai_ThuongHieu = sc.nextLine(); 
-                // tenLoai_ThuongHieu = tenLoai_ThuongHieu.toLowerCase();  
 
                 boolean found = false;
                 for(SanPham i: DS_SanPham) {
-                    if(i instanceof ThucPham && ((ThucPham) i).getLoaiThucPham().trim().equalsIgnoreCase(tenLoai_ThuongHieu)) {    
+                    if(i instanceof ThucPham && ((ThucPham) i).getLoaiThucPham().contains(tenLoai_ThuongHieu)) {    
                         count+=i.getSoLuong();
                         tongGia+=(i.getSoLuong()*i.getDonGia());
                         found = true;
                     }
-                    else if(i instanceof GiaDung && ((GiaDung)i).getThuongHieu().trim().equalsIgnoreCase(tenLoai_ThuongHieu)) {        
+                    else if(i instanceof GiaDung && ((GiaDung)i).getThuongHieu().contains(tenLoai_ThuongHieu)) {        
                         count+=i.getSoLuong();
                         tongGia+=(i.getSoLuong()*i.getDonGia());
                         found = true;
@@ -249,7 +298,7 @@ public class DanhSachSanPham implements ThaoTacFile {
                     trungBinhTongGia = (count > 0) ? (tongGia / count) : 0;
                     System.out.println("- Số lượng sản phẩm loại/hãng "+tenLoai_ThuongHieu+" trong kho: "+count);
                     System.out.printf("- Tổng giá trị của sản phẩm loại/hãng %s : %.2f VND\n", tenLoai_ThuongHieu, tongGia);
-                    System.out.println("- Trung bình tổng giá của sản phẩm loại/hãng "+tenLoai_ThuongHieu+": "+trungBinhTongGia+" VND\n");
+                    System.out.printf("- Trung bình tổng giá của sản phẩm loại/hãng %s: .2f% VND\n", tenLoai_ThuongHieu, trungBinhTongGia);
                     break;
                 } else {
                     System.out.println("Không có sản phẩm \""+tenLoai_ThuongHieu+"\" để thống kê!\n");
@@ -260,6 +309,7 @@ public class DanhSachSanPham implements ThaoTacFile {
             }
         }
     }
+
 
     public void thongKeSanPhamTheoLoaiVaThuongHieu() {
         Scanner sc = new Scanner(System.in);

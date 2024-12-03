@@ -35,9 +35,9 @@ public class QuanLySanPham {
                     boolean quayLaiMenu = true;
                     while (quayLaiMenu) { // Vòng lặp giữ menu con
                         System.out.println("╔════════════════════════════-THÊM SẢN PHẨM-════════════════════════════╗");
-                        System.out.println("║ 1. Thêm sản phẩm gia dụng                                              ║");
-                        System.out.println("║ 2. Thêm sản phẩm thực phẩm                                             ║");
-                        System.out.println("║ 0. Quay lại menu quản lý                                               ║");
+                        System.out.println("║ 1. Thêm sản phẩm gia dụng                                             ║");
+                        System.out.println("║ 2. Thêm sản phẩm thực phẩm                                            ║");
+                        System.out.println("║ 0. Quay lại menu quản lý                                              ║");
                         System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
                         System.out.print("Chọn chức năng: ");
                         int subChoice = sc.nextInt();
@@ -181,7 +181,7 @@ public class QuanLySanPham {
                     while (!quayLaiMenu) { // Vòng lặp để giữ menu hiện tại
                         System.out.println("╔═════════════════════════════-THỐNG KÊ SẢN PHẨM-═════════════════════════════╗");
                         System.out.println("║ 1. Thống kê sản phẩm theo tên loại/thương hiệu                              ║");
-                        System.out.println("║ 2. Thống kê sản phẩm theo năm sản xuất                                      ║");
+                        System.out.println("║ 2. Thống kê sản phẩm theo ngày sản xuất                                     ║");
                         System.out.println("║ 3. Thống kê sản phẩm theo thực phẩm                                         ║");
                         System.out.println("║ 4. Thống kê sản phẩm theo gia dụng                                          ║");
                         System.out.println("║ 0. Quay lại menu quản lý.                                                   ║");
@@ -195,7 +195,7 @@ public class QuanLySanPham {
                                 break;
                             }
                             case 2 -> {
-                                //dsSanPham.thongKeTheoNamSanXuat();
+                                dsSanPham.thongKeSanPhamTheoNgaySanXuat();
                                 break;
                             }
                             case 3 -> {
