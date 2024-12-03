@@ -222,7 +222,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
             System.out.println("Không có hóa đơn để thống kê.");
         } else {
             System.out.println("Tổng số hóa đơn: "+count+" cái hóa đơn");
-            System.out.println("Tổng doanh thu: "+tongTien+" VND.");
+            System.out.printf("Tổng doanh thu: %.2f VND.", tongTien);
             System.out.println("Trung bình tổng doanh thu: " + ((float) tongTien / count) + " VND.");
         }
     }
@@ -464,8 +464,8 @@ public class DanhSachHoaDon implements ThaoTacFile {
         System.out.printf("║ %-10s ║ %-18d ║ %-20.2f ║ %-20.2f ║\n", "Quý 3", soLuongHoaDonQuy3, tongTienQuy3, (soLuongHoaDonQuy3 > 0 ? (tongTienQuy3 / soLuongHoaDonQuy3) : 0));
         System.out.printf("║ %-10s ║ %-18d ║ %-20.2f ║ %-20.2f ║\n", "Quý 4", soLuongHoaDonQuy4, tongTienQuy4, (soLuongHoaDonQuy4 > 0 ? (tongTienQuy4 / soLuongHoaDonQuy4) : 0));
         System.out.println("╚════════════╩════════════════════╩══════════════════════╩══════════════════════╝");
-        System.out.println("=> Quý "+quyMax+" có tổng doanh thu lớn nhất: "+maxTongTienDoanhThu+" VND");
-        System.out.println("=> Quý "+quyMin+" có tổng doanh thu nhỏ nhất: "+minTongTienDoanhThu+" VND");
+        System.out.printf("=> Quý %d có tổng doanh thu lớn nhất: %.2f VND\n", quyMax, maxTongTienDoanhThu);
+        System.out.printf("=> Quý %d có tổng doanh thu nhỏ nhất: %.2f VND\n", quyMin, minTongTienDoanhThu);
     }
 
     // Thống kê hóa đơn theo khoảng thời gian
