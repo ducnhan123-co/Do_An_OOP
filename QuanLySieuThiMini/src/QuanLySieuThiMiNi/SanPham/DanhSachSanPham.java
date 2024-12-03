@@ -329,39 +329,39 @@ public class DanhSachSanPham implements ThaoTacFile {
     }
 
 
-    public void thongKeSanPhamTheoLoaiVaThuongHieu() {
-        Scanner sc = new Scanner(System.in);
-        int countSoLuongThucPham=0, countSoLuongGiaDung=0;
-        int countLoai=0, countThuongHieu=0;
-        float tongGiaTheoLoai=0, tongGiaTheoThuongHieu=0;;
-        float trungBinhTongGiaTheoLoai=0, trungBinhTongGiaTheoThuongHieu=0;
-        while (true) {
-            try {
-                String tenLoai = sc.nextLine().trim(); 
-                for(SanPham i: DS_SanPham) {
-                    if(i instanceof ThucPham) {
-                        if(((ThucPham)i).getLoaiThucPham().contains(tenLoai)) {
-                            countLoai++;
-                            countSoLuongThucPham+=i.getSoLuong();
-                            tongGiaTheoLoai+=(i.getSoLuong()*i.getDonGia());
-                        }
-                    }
-                    else if(i instanceof GiaDung) {
-                        if(((GiaDung)i).getThuongHieu().contains(tenLoai)) {
-                            countLoai++;
-                            countSoLuongGiaDung+=i.getSoLuong();
-                            tongGiaTheoThuongHieu+=(i.getSoLuong()*i.getDonGia());
-                        }
-                    } else {
-                        System.out.println("Không có sản phẩm "+tenLoai+" để thống kê!\n");
-                    }
-                    System.out.println("--------------------------");
-                }
-            } catch (Exception e) {
+    // public void thongKeSanPhamTheoLoaiVaThuongHieu() {
+    //     Scanner sc = new Scanner(System.in);
+    //     int countSoLuongThucPham=0, countSoLuongGiaDung=0;
+    //     int countLoai=0, countThuongHieu=0;
+    //     float tongGiaTheoLoai=0, tongGiaTheoThuongHieu=0;;
+    //     float trungBinhTongGiaTheoLoai=0, trungBinhTongGiaTheoThuongHieu=0;
+    //     while (true) {
+    //         try {
+    //             String tenLoai = sc.nextLine().trim(); 
+    //             for(SanPham i: DS_SanPham) {
+    //                 if(i instanceof ThucPham) {
+    //                     if(((ThucPham)i).getLoaiThucPham().contains(tenLoai)) {
+    //                         countLoai++;
+    //                         countSoLuongThucPham+=i.getSoLuong();
+    //                         tongGiaTheoLoai+=(i.getSoLuong()*i.getDonGia());
+    //                     }
+    //                 }
+    //                 else if(i instanceof GiaDung) {
+    //                     if(((GiaDung)i).getThuongHieu().contains(tenLoai)) {
+    //                         countLoai++;
+    //                         countSoLuongGiaDung+=i.getSoLuong();
+    //                         tongGiaTheoThuongHieu+=(i.getSoLuong()*i.getDonGia());
+    //                     }
+    //                 } else {
+    //                     System.out.println("Không có sản phẩm "+tenLoai+" để thống kê!\n");
+    //                 }
+    //                 System.out.println("--------------------------");
+    //             }
+    //         } catch (Exception e) {
                 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     public void docFile() {
         try {
