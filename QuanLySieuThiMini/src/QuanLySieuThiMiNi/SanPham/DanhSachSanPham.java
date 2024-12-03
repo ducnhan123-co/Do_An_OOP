@@ -1,5 +1,7 @@
 package QuanLySieuThiMiNi.SanPham;
 
+import QuanLySieuThiMiNi.PhieuNhapHang.ChiTietPhieuNhapHang;
+import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachChiTietPhieuNhapHang;
 import QuanLySieuThiMiNi.ThaoTacFile;
 
 import java.io.BufferedReader;
@@ -135,16 +137,23 @@ public class DanhSachSanPham implements ThaoTacFile {
         return -1;
     }
 
-    public boolean banSanPhamTheoMa(int maSP , int soLuongBan )
-    {
-        SanPham sp = timSanPhamTheoMa(maSP);
-        if(sp!=null && sp.getSoLuong()>=soLuongBan){
-            sp.setSoLuong(sp.getSoLuong()-soLuongBan);
-            return true;
+    public void banHang(DanhSachSanPham danhSachSanPham, int maSP, int soLuongBan) {
+        // Tìm sản phẩm
+        SanPham sp = danhSachSanPham.timSanPhamTheoMa(maSP);
+        if (sp == null) {
+            System.out.println("Không tìm thấy sản phẩm với mã: " + maSP);
+            return;
         }
-        System.out.println("Khong du so luong de ban.");
-        return false;
+        // Kiểm tra tồn kho
+        if (sp.getSoLuong() < soLuongBan) {
+            System.out.println("Số lượng tồn kho không đủ để bán.");
+            return;
+        }
+        // Cập nhật số lượng tồn kho
+        sp.setSoLuong(sp.getSoLuong() - soLuongBan);
+        System.out.println("Bán hàng thành công.");
     }
+
 
 
 
@@ -159,19 +168,28 @@ public class DanhSachSanPham implements ThaoTacFile {
     }
 
     // Nhập số lượng thêm hàng theo mã sản phẩm
-    public void nhapHang(DanhSachSanPham danhSachSanPham, int maSP, int soLuongNhap) {
-        // Tìm sản phẩm theo mã
+    public void nhapHang(DanhSachSanPham danhSachSanPham, DanhSachChiTietPhieuNhapHang danhSachChiTietPhieuNhapHang, int maSP, int soLuongNhap, int maPhieu) {
+        // Tìm hoặc thêm sản phẩm
         SanPham sp = danhSachSanPham.timSanPhamTheoMa(maSP);
         if (sp != null) {
-            sp.setSoLuong(sp.getSoLuong() + soLuongNhap);
+            sp.setSoLuong(sp.getSoLuong() + soLuongNhap); // Cộng thêm số lượng
         } else {
             sp = new SanPham();
             sp.setMaSP(maSP);
             sp.setSoLuong(soLuongNhap);
-            // Thêm sản phẩm mới vào danh sách
-            danhSachSanPham.them1SanPham(sp);
+            danhSachSanPham.them1SanPham(sp); // Thêm mới
         }
+
+        // Thêm chi tiết phiếu nhập hàng
+        ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang();
+        chiTiet.setMaPhieu(maPhieu);
+        chiTiet.setMaSp(maSP);
+        chiTiet.setSl(soLuongNhap);
+        danhSachChiTietPhieuNhapHang.themChiTietVaoPhieu(chiTiet.getMaPhieu());
+
+        System.out.println("Nhập hàng thành công.");
     }
+
 
     // thống kê sản phẩm theo thực phẩm/gia dụng
     public void thongKeSanPhamTheoThucPham() {
