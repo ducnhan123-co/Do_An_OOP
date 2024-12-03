@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import QuanLySieuThiMiNi.KhachHang.DanhSachKhachHang;
+import QuanLySieuThiMiNi.NhanVien.DanhSachNhanVien;
 import QuanLySieuThiMiNi.SanPham.DanhSachSanPham;
 
 
@@ -26,8 +29,12 @@ public class QuanLyHoaDon {
                     throw new Exception("Trùng lặp mã hóa đơn");
                 System.out.print("Nhập mã Khách hàng: ");
                 hoaDon.setMaKH(in.nextInt());
+                if (new DanhSachKhachHang().timKiemKhachHangTheoMa(hoaDon.getMaKH()) == null)
+                    throw new Exception("Khách hàng không tồn tại!");
                 System.out.print("Nhập mã nhân viên: ");
                 hoaDon.setMaNV(in.nextInt());
+                if (!(new DanhSachNhanVien().kiemTraTrungMaNhanVien(hoaDon.getMaNV())))
+                    throw new Exception("Nhân viên không tồn tại!");
                 LocalDate localDate = LocalDate.now();
                 DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 String b = localDate.format(f); // Định dạng ngày thành chuỗi  "dd-MM-yyyy"

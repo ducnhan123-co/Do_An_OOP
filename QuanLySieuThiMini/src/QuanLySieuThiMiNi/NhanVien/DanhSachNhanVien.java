@@ -12,6 +12,7 @@
         public static NhanVien[] dsnv = new NhanVien[100]; // Tối đa 100 nhân viên
         public static int size = 0; // Đếm số nhân viên hiện có
 
+        public DanhSachNhanVien() {};
         public DanhSachNhanVien(int maxNhanVien) {
             docFile();
         }
