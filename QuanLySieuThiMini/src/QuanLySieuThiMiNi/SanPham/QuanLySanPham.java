@@ -1,9 +1,14 @@
 package QuanLySieuThiMiNi.SanPham;
 
+import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachChiTietPhieuNhapHang;
+import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachPhieuNhapHang;
+
 import java.util.Scanner;
 
 public class QuanLySanPham {
     DanhSachSanPham dsSanPham = new DanhSachSanPham();
+    DanhSachPhieuNhapHang danhSachPhieuNhapHang = new DanhSachPhieuNhapHang();
+    DanhSachChiTietPhieuNhapHang dsChiTietPhieuNhap= new DanhSachChiTietPhieuNhapHang(danhSachPhieuNhapHang);
     Scanner sc = new Scanner(System.in);
 
     public QuanLySanPham() {
@@ -232,26 +237,22 @@ public class QuanLySanPham {
 
                     switch (subChoice) {
                         case 1 -> {
-                            System.out.print("Nhập mã sản phẩm cần nhập hàng: ");
-                            int maSP = sc.nextInt();
+                            System.out.print("Nhập mã sản phẩm: ");
+                            int maSPNhap = sc.nextInt();
                             System.out.print("Nhập số lượng nhập: ");
-                            int soLuong = sc.nextInt();
-                            sc.nextLine();
-                            dsSanPham.nhapHang(dsSanPham,maSP,soLuong);
-                            System.out.println("Cập nhật nhập hàng thành công.");
+                            int soLuongNhap = sc.nextInt();
+                            System.out.print("Nhập mã phiếu nhập: ");
+                            int maPhieu = sc.nextInt();
+                            dsSanPham.nhapHang(dsSanPham,dsChiTietPhieuNhap , maSPNhap, soLuongNhap, maPhieu);
+                            break;
                         }
                         case 2 -> {
-                            System.out.print("Nhập mã sản phẩm cần bán: ");
-                            int maSP = sc.nextInt();
+                            System.out.print("Nhập mã sản phẩm: ");
+                            int maSPBan = sc.nextInt();
                             System.out.print("Nhập số lượng bán: ");
-                            int soLuong = sc.nextInt();
-                            sc.nextLine();
-                            boolean banThanhCong = dsSanPham.banSanPhamTheoMa(maSP, soLuong);
-                            if (banThanhCong) {
-                                System.out.println("Cập nhật bán hàng thành công.");
-                            } else {
-                                System.out.println("Không thể bán hàng (kiểm tra mã hoặc số lượng tồn kho).");
-                            }
+                            int soLuongBan = sc.nextInt();
+                            dsSanPham.banHang(dsSanPham, maSPBan, soLuongBan);
+                            break;
                         }
                         case 0 -> {
                             System.out.println("Quay lại menu quản lý...");
