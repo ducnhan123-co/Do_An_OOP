@@ -355,6 +355,11 @@ public class DanhSachKhachHang implements ThaoTacFile {
     }
 
     public void thongKeDonHangTheoQuy() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhập năm cần thống kê: ");
+        int namCanTim = sc.nextInt();
+        sc.nextLine(); // Đọc ký tự xuống dòng
+
         int[] maxHoaDon = {0, 0, 0, 0}; // Số lượng hóa đơn nhiều nhất cho các quý
         float[] maxChiTieu = {0, 0, 0, 0}; // Chi tiêu lớn nhất cho các quý
         KhachHang[] topKhachHang = new KhachHang[4]; // Khách hàng tương ứng với các quý
@@ -370,10 +375,12 @@ public class DanhSachKhachHang implements ThaoTacFile {
                     try {
                         // Chuyển đổi ngày từ String sang LocalDate
                         LocalDate ngayHoaDon = LocalDate.parse(hd.getNgayTaoHoaDon(), formatter);
-                        int month = ngayHoaDon.getMonthValue(); // Lấy tháng từ ngày
-                        int quy = (month - 1) / 3; // Quy 1: 0, Quy 2: 1, Quy 3: 2, Quy 4: 3
-                        soHoaDonTheoQuy[quy]++;
-                        chiTieuTheoQuy[quy] += hd.getTongTien(); // Tính tổng chi tiêu
+                        if (ngayHoaDon.getYear() == namCanTim) { // Kiểm tra nếu hóa đơn thuộc năm cần tìm
+                            int month = ngayHoaDon.getMonthValue(); // Lấy tháng từ ngày
+                            int quy = (month - 1) / 3; // Quy 1: 0, Quy 2: 1, Quy 3: 2, Quy 4: 3
+                            soHoaDonTheoQuy[quy]++;
+                            chiTieuTheoQuy[quy] += hd.getTongTien(); // Tính tổng chi tiêu
+                        }
                     } catch (DateTimeParseException e) {
                         System.out.println("Lỗi định dạng ngày trong hóa đơn: " + hd.getNgayTaoHoaDon());
                     }
@@ -391,33 +398,34 @@ public class DanhSachKhachHang implements ThaoTacFile {
         }
 
         // In bảng thống kê
-        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║          Thống kê khách hàng mua nhiều đơn hàng nhất theo từng quý                 ║");
-        System.out.println("╠═══════╦══════════════════════╦══════════════════╦══════════════════════╦═══════════╣");
-        System.out.println("║ Quý   ║ Mã KH                ║ Tên khách hàng   ║ Số lượng hóa đơn     ║ Chi tiêu  ║");
-        System.out.println("╠═══════╬══════════════════════╬══════════════════╬══════════════════════╬═══════════╣");
+        System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║          Thống kê khách hàng mua nhiều đơn hàng nhất theo từng quý    ║");
+        System.out.println("║                                Năm: " + namCanTim + "                               ║");
+        System.out.println("╠═══════╦════════════╦══════════════════════╦═════════════╦═══════════════════════╣");
+        System.out.println("║ Quý   ║ Mã KH      ║ Tên khách hàng       ║ Số hóa đơn  ║ Chi tiêu              ║");
+        System.out.println("╠═══════╬════════════╬══════════════════════╬═════════════╬═══════════════════════╣");
         for (int quy = 0; quy < 4; quy++) {
             if (topKhachHang[quy] != null) {
-                System.out.printf("║ %-5d ║ %-20d ║ %-16s ║ %-20d ║ %-9.2f ║\n",
+                System.out.printf("║ %-5d ║ %-10d ║ %-20s ║ %-11d ║ %-23.2f ║\n",
                         quy + 1,
                         topKhachHang[quy].getMaKH(),
                         topKhachHang[quy].getHoKH() + " " + topKhachHang[quy].getTenKH(),
                         maxHoaDon[quy],
                         maxChiTieu[quy]);
             } else {
-                System.out.printf("║ %-5d ║ %-20s ║ %-16s ║ %-20s ║ %-9s ║\n",
+                System.out.printf("║ %-5d ║ %-10s ║ %-20s ║ %-11s ║ %-23s ║\n",
                         quy + 1, "Không có", "Không có", "Không có", "Không có");
             }
         }
-        System.out.println("╚═══════╩══════════════════════╩══════════════════╩══════════════════════╩═══════════╝");
+        System.out.println("╚═══════╩════════════╩══════════════════════╩═════════════╩═══════════════════════╝");
     }
 
 
     public void timKiemKhachHangNangCao() {
         try {
-            // Đọc danh sách tỉnh từ file vào mảng
-            String[] danhSachTinh = new String[64]; // Giả sử file có tối đa 64 tỉnh
-            int soTinh = 0; // Đếm số tỉnh trong file
+            // Đọc danh sách tỉnh từ file
+            String[] danhSachTinh = new String[64];
+            int soTinh = 0;
             try (BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/KhachHang/DanhSachTinh.txt"))) {
                 String line;
                 while ((line = br.readLine()) != null) {
@@ -425,82 +433,31 @@ public class DanhSachKhachHang implements ThaoTacFile {
                 }
             }
 
-            System.out.println("Danh sách các tỉnh thành (chọn số tương ứng):");
+            // Hiển thị danh sách tỉnh
+            System.out.println("Danh sách các tỉnh thành:");
             for (int i = 0; i < soTinh; i++) {
                 System.out.printf("%d. %s\n", i + 1, danhSachTinh[i]);
             }
 
-            int[] luaChon = new int[soTinh]; // Lưu lựa chọn của người dùng
-            int soLuaChon = 0; // Đếm số lượng tỉnh đã chọn
+            // Nhập các tỉnh người dùng muốn tìm
+            System.out.print("Nhập các số tương ứng với tỉnh (cách nhau bởi khoảng trắng): ");
             Scanner scanner = new Scanner(System.in);
-            boolean tiepTuc = true;
+            String input = scanner.nextLine().trim();
+            String[] inputArray = input.split("\\s+");
 
-            while (tiepTuc) {
-                System.out.print("Nhập số tương ứng với tỉnh (VD: 1 2): ");
-                String input = scanner.nextLine().trim(); // Loại bỏ khoảng trắng đầu và cuối
-                String[] inputArray = input.split("\\s+");
-                boolean validInput = true;
-
-                for (String s : inputArray) {
-                    try {
-                        int chon = Integer.parseInt(s);
-                        // Kiểm tra số nhập có hợp lệ và không vượt quá số lượng tỉnh
-                        if (chon > 0 && chon <= soTinh) {
-                            // Kiểm tra xem tỉnh đã được chọn chưa
-                            boolean isDuplicate = false;
-                            for (int i = 0; i < soLuaChon; i++) {
-                                if (luaChon[i] == chon - 1) {
-                                    isDuplicate = true; // Nếu trùng, bỏ qua
-                                    break;
-                                }
-                            }
-                            if (!isDuplicate) {
-                                luaChon[soLuaChon++] = chon - 1; // Lưu chỉ số tỉnh (0-based)
-                            }
-                        } else {
-                            System.out.println("Số " + chon + " không hợp lệ, vui lòng thử lại.");
-                            validInput = false; // Đánh dấu là đầu vào không hợp lệ
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Lỗi nhập: '" + s + "' không phải là số hợp lệ. Mời nhập lại.");
-                        validInput = false; // Đánh dấu là đầu vào không hợp lệ
-                    }
-                }
-
-                if (!validInput) {
-                    continue;
-                }
-
-                String tiep;
-                do {
-                    System.out.print("Bạn có muốn nhập thêm không? (y/n): ");
-                    tiep = scanner.nextLine().trim().toLowerCase();
-                    if (!tiep.equals("y") && !tiep.equals("n")) {
-                        System.out.println("Lựa chọn không hợp lệ, vui lòng nhập lại.");
-                    }
-                } while (!tiep.equals("y") && !tiep.equals("n"));
-
-                tiepTuc = tiep.equals("y");
+            // Chuyển đổi số lựa chọn thành danh sách tỉnh được chọn
+            String[] tinhDuocChon = new String[inputArray.length];
+            for (int i = 0; i < inputArray.length; i++) {
+                int chon = Integer.parseInt(inputArray[i]);
+                tinhDuocChon[i] = danhSachTinh[chon - 1]; // Lưu tên tỉnh (0-based index)
             }
 
-            String[] tinhDuocChon = new String[soLuaChon];
-            int index = 0;
-
-            for (int chon : luaChon) {
-                try {
-                    tinhDuocChon[index++] = danhSachTinh[chon];
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    continue;
-                }
-            }
-
+            // Hiển thị các tỉnh được chọn
             System.out.print("Bạn đã chọn các tỉnh: ");
-            for (int i = 0; i < tinhDuocChon.length; i++) {
-                System.out.print(tinhDuocChon[i] + (i < tinhDuocChon.length - 1 ? ", " : "\n"));
-            }
+            System.out.println(String.join(", ", tinhDuocChon));
 
+            // Tìm kiếm khách hàng
             KhachHang[] danhSachTimDuoc = timKiemKhachHangTheoDiaChi(tinhDuocChon);
-
             if (danhSachTimDuoc.length == 0) {
                 System.out.println("Không có khách hàng nào có địa chỉ thuộc danh sách bạn chọn.");
             } else {
@@ -519,6 +476,7 @@ public class DanhSachKhachHang implements ThaoTacFile {
             System.out.println("Đã xảy ra lỗi: " + e.getMessage());
         }
     }
+
 
     // Phương thức hỗ trợ tìm kiếm khách hàng theo danh sách địa chỉ
     public KhachHang[] timKiemKhachHangTheoDiaChi(String[] danhSachTinh) {
