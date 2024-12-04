@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -114,52 +116,88 @@ public class DanhSachHoaDon implements ThaoTacFile {
     // Tìm kiếm và liệt kê các hóa đơn theo ngày tạo hóa đơn
     public void timHoaDonTheoNgayTaoHoaDon() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập ngày tạo hóa đơn (dd-mm-yyyy): ");
-        String ngayTao = sc.nextLine() ;
-        boolean found=false;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate ngayNhap;
         
-        // Duyệt qua tất cả các hóa đơn để tìm những hóa đơn có ngày tạo bằng ngày nhập
-        System.out.println("DANH SÁCH HÓA ĐƠN "+ngayTao+": ");
-        for (int i = 0; i < dshd.length; i++) {
-            if (dshd[i].getNgayTaoHoaDon().equals(ngayTao)) {  // So sánh ngày tạo
-                dshd[i].xuatHoaDon();  // Xuất thông tin của hóa đơn tìm được
-                found = true;  // Đánh dấu là đã tìm thấy ít nhất một hóa đơn
-            }
-        }
+        while (true) {
+            try {
+                System.out.println("Nhập ngày tạo hóa đơn (dd-MM-yyyy): ");
+                String ngayTao = sc.nextLine().trim();
+                
+                ngayNhap = LocalDate.parse(ngayTao, df);
+                
+                boolean found=false;
+                
+                try {
+                    ngayNhap = LocalDate.parse(ngayTao, df);
+                } catch (Exception e) {
+                    System.out.println("Nhập ngày sai định dạng. Vui lòng nhập đúng định dạng (dd-MM-yyyy)!\n");
+                    continue; // Yêu cầu nhập lại
+                }
 
-        // Nếu không tìm thấy hóa đơn nào
-        if(!found) {
-            System.out.println("Không có hóa đơn nào được tạo vào ngày " + ngayTao);
-            return;
+                // Duyệt qua tất cả các hóa đơn để tìm những hóa đơn có ngày tạo bằng ngày nhập
+                System.out.println("\nDANH SÁCH HÓA ĐƠN "+ngayNhap.format(df)+": ");
+                for (int i = 0; i < dshd.length; i++) {
+                    try {
+                        LocalDate ngayHoaDon = LocalDate.parse(dshd[i].getNgayTaoHoaDon(), df);
+                        if(ngayHoaDon.equals(ngayNhap)) {
+                            dshd[i].xuatHoaDon();
+                            found = true;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Lỗi khi xử lý ngày tạo hóa đơn của hóa đơn tại vị trí " + i + ": " + e.getMessage());
+                    }
+                }
+                // Nếu không tìm thấy hóa đơn nào
+                if(!found) {
+                    System.out.println("Không có hóa đơn nào được tạo vào ngày " + ngayNhap.format(df));
+                    return;
+                }
+                break;
+            } catch (Exception e) {
+                System.out.println("Nhập ngày sai định dạng. Vui lòng nhập đúng định dạng!\n");
+                continue;
+            }
         }
     }
 
     // Tìm kiếm và liệt kê các hóa đơn theo ngày tạo hóa đơn kiểu HoaDon[]
     public HoaDon[] timHoaDonTheoNgayTaoHoaDon1() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập ngày hóa đơn được tạo (dd-mm-yyyy): ");
-        String ngayStr = sc.nextLine();
-        System.out.println();
-        int count=0;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        while (true) {
+            System.out.print("Nhập ngày hóa đơn được tạo (dd-MM-yyyy): ");
+            String ngayStr = sc.nextLine();
+            int count=0;
 
-        for(HoaDon i: dshd) {
-            if(i!=null && i.getNgayTaoHoaDon().equals(ngayStr)) {
-                count++;
-                
+            LocalDate ngayNhap;
+            try {
+                ngayNhap = LocalDate.parse(ngayStr, df); // Kiểm tra định dạng
+            } catch (Exception e) {
+                System.out.println("Nhập ngày sai định dạng. Vui lòng nhập đúng định dạng (dd-MM-yyyy)!\n");
+                continue; // Yêu cầu nhập lại
             }
-        }
-        if(count==0) {
-            return new HoaDon[0];
-        }
 
-        HoaDon[] tmp = new HoaDon[count];
-        int index=0;
-        for(HoaDon i: dshd) {
-            if(i != null && i.getNgayTaoHoaDon().equals(ngayStr)) {
-                tmp[index++] = i;
+            for(HoaDon i: dshd) {
+                if(i!=null && i.getNgayTaoHoaDon().equals(ngayStr)) {
+                    count++;
+                    
+                }
             }
+            if(count==0) {
+                System.out.println("Không tìm thấy hóa đơn nào theo ngày đã nhập!\n");
+                return new HoaDon[0];
+            }
+    
+            HoaDon[] tmp = new HoaDon[count];
+            int index=0;
+            for(HoaDon i: dshd) {
+                if(i != null && i.getNgayTaoHoaDon().equals(ngayStr)) {
+                    tmp[index++] = i;
+                }
+            }
+            return tmp;
         }
-        return tmp;
     }
 
     // Tìm kiếm hóa đơn theo giá trị tổng tiền (Trả về kiểu HoaDon)
@@ -250,7 +288,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
                 String[] tmp = ngayStr.split("-");
                 if(tmp.length != 3)
-                    throw new Exception("Nhập sai định dạng (dd-mm-yyyy).");
+                    throw new Exception("Nhập sai định dạng (dd-MM-yyyy).");
 
                 float tongDoanhThu=0;
                 int hoaDonCount=0;
@@ -369,7 +407,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         }
     }
 
-    // Thống kê hóa đơn theo quý
+    // THỐNG KÊ HÓA ĐƠN THEO QUÝ 
     public void thongKeHoaDonTheoQuy() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập năm cần thống kê theo quý:");
@@ -468,7 +506,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         System.out.printf("=> Quý %d có tổng doanh thu nhỏ nhất: %.2f VND\n", quyMin, minTongTienDoanhThu);
     }
 
-    // Thống kê hóa đơn theo khoảng thời gian
+    // THỐNG KÊ HÓA ĐƠN THEO KHOẢNG THỜI GIAN (NGÀY A -> NGÀY B)
     public void thongKeHoaDonTheoKhoangThoiGian() {
         Scanner sc = new Scanner(System.in);
 
