@@ -2,13 +2,13 @@ package QuanLySieuThiMiNi.SanPham;
 
 import java.util.Scanner;
 
-public class SanPham {
-    private int maSP;
-    private String tenSP, DVT;
-    private float donGia;
-    private int soLuong;
-    private String ngaySX;
-    private String moTa;
+public abstract class SanPham {
+    protected int maSP;
+    protected String tenSP, DVT;
+    protected float donGia;
+    protected int soLuong;
+    protected String ngaySX;
+    protected String moTa;
 
     // Constructor mặc định
     public SanPham() {
@@ -86,4 +86,9 @@ public class SanPham {
         System.out.printf("|%-10d|%-15s|%-10s|%-12.2f|%-10d|%-15s|%-40s",
                 maSP, tenSP, DVT, donGia, soLuong, ngaySX, moTa);
     }
+
+    public abstract boolean kiemTraDacThu();
+    public abstract float tinhPhiVanChuyen();
+    public abstract boolean kiemTraChatLuong();
+
 }
