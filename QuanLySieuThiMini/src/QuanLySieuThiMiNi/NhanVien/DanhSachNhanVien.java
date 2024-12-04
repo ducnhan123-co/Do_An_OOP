@@ -509,7 +509,7 @@
                 // Đọc danh sách tỉnh từ file vào mảng
                 String[] danhSachTinh = new String[64]; // Giả sử file có tối đa 64 tỉnh
                 int soTinh = 0; // Đếm số tỉnh trong file
-                try (BufferedReader br = new BufferedReader(new FileReader("D:/ALL/Do_An_OOP/QuanLySieuThiMini/src/QuanLySieuThiMiNi/DanhSachTinh.txt"))) {
+                try (BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/KhachHang/DanhSachTinh.txt"))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         danhSachTinh[soTinh++] = line.trim();

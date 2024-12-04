@@ -163,7 +163,7 @@ public class DanhSachNhaCungCap implements ThaoTacFile {
 
     @Override
     public void docFile() {
-        String filename = "src\\QuanLySieuThiMiNi\\NhaCungCap.txt";
+        String filename = "QuanLySieuThiMini/src/QuanLySieuThiMiNi/NhaCungCap/NhaCungCap.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             int count = 0;
@@ -181,7 +181,7 @@ public class DanhSachNhaCungCap implements ThaoTacFile {
                     System.out.println("Dòng không hợp lệ: " + line);
                 }
             }
-            System.out.println("Đã thêm " + count + " nhà cung cấp từ tệp tin: " + filename);
+//            System.out.println("Đã thêm " + count + " nhà cung cấp từ tệp tin: " + filename);
         } catch (FileNotFoundException e) {
             System.out.println("Không tìm thấy tệp tin: " + filename);
         } catch (IOException ex) {

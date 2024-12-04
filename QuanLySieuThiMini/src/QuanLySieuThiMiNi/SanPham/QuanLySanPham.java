@@ -14,7 +14,7 @@ public class QuanLySanPham {
     Scanner sc = new Scanner(System.in);
 
     public QuanLySanPham() {
-        dsSanPham.docFile();
+
     }
 
     public void menu() {
@@ -267,8 +267,5 @@ public class QuanLySanPham {
             }
         }
     }
-    public static void main(String[] args) {
-        QuanLySanPham qlsp = new QuanLySanPham();
-        qlsp.menu();
-    }
+
 }

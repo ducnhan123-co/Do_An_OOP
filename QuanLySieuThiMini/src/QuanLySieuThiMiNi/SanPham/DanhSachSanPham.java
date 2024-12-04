@@ -161,11 +161,11 @@ public class DanhSachSanPham implements ThaoTacFile {
     
     public void xemHangNhapBanVaTonKho(DanhSachChiTietPhieuNhapHang danhSachNhap, DanhSachHoaDonChiTiet danhSachBan) {
         System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                             DANH SÁCH HÀNG NHẬP, BÁN VÀ TỒN KHO                                   ║");
-        System.out.println("╠═════════════╦════════════════════════╦════════════════╦════════════════╦══════════════════════════╣");
-        System.out.printf("║ %-11s ║ %-20s ║ %-14s ║ %-14s ║ %-24s ║\n", 
+        System.out.println("║                             DANH SÁCH HÀNG NHẬP, BÁN VÀ TỒN KHO                                    ║");
+        System.out.println("╠═════════════╦════════════════════════╦════════════════╦════════════════╦═══════════════════════════╣");
+        System.out.printf("║ %-11s ║ %-20s ║ %-14s ║ %-14s ║ %-24s ║\n",
                           "Mã SP", "Tên Sản Phẩm", "Tổng Nhập", "Tổng Bán", "Số Lượng Tồn Kho");
-        System.out.println("╠═════════════╬════════════════════════╬════════════════╬════════════════╬══════════════════════════╣");
+        System.out.println("╠═════════════╬════════════════════════╬════════════════╬════════════════╬═══════════════════════════╣");
 
         for (SanPham sp : DS_SanPham) {
             int tongNhap = 0;
@@ -177,6 +177,7 @@ public class DanhSachSanPham implements ThaoTacFile {
                     tongNhap += chiTietNhap.getSl();
                 }
             }
+
 
             // Tính tổng số lượng bán từ danh sách hóa đơn chi tiết
             for (ChiTietHoaDon chiTietBan : danhSachBan.getDanhSachChiTiet()) {
@@ -422,7 +423,7 @@ public class DanhSachSanPham implements ThaoTacFile {
 
     public void docFile() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/QuanLySieuThiMiNi/SanPham/SanPham.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham/SanPham.txt"));
             String line;
             int count = 0; // Đếm số dòng được đọc
             while ((line = reader.readLine()) != null) {

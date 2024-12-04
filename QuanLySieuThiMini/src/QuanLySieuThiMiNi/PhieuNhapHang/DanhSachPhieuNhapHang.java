@@ -97,7 +97,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
         }
 
         System.out.println("╔═════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                     DANH SÁCH PHIẾU NHẬP HÀNG VÀ CHI TIẾT                  ║");
+        System.out.println("║                     DANH SÁCH PHIẾU NHẬP HÀNG VÀ CHI TIẾT                   ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════════════════╝");
 
         for (int i = 0; i < n; i++) {
@@ -108,19 +108,19 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
                     dsPhieu[i].getMaPhieu(), dsPhieu[i].getMaNCC(), dsPhieu[i].getMaNhanVien(), dsPhieu[i].getTongTien(), dsPhieu[i].getNgayNhapHang());
             System.out.printf("╚═════════════════════════════════════════════════════════════════════════════╝\n");
 
-            System.out.println("Chi tiết phiếu nhập hàng thứ : "+ i+1);
-            System.out.printf("  ╔══════════╦════════════════╦══════════╦════════════╦════════════════╗\n");
-            System.out.printf("  ║ %-10s ║ %-14s ║ %-8s ║ %-10s ║ %-15s ║\n",
+            System.out.println("Chi tiết phiếu nhập hàng thứ : "+ (i+1));
+            System.out.printf("  ┌──────────┬──────────────┬──────────┬────────────┬───────────────┐\n");
+            System.out.printf("  │ %-8s │ %-12s │ %-8s │ %-10s │ %-13s │\n",
                     "Mã Phiếu", "Mã SP", "Số Lượng", "Đơn Giá", "Thành Tiền");
-            System.out.printf("  ╠══════════╬════════════════╬══════════╬════════════╬════════════════╣\n");
+            System.out.printf("  ├──────────┼──────────────┼──────────┼────────────┼───────────────┤\n");
 
 
 
-            // In chi tiết phiếu nhập theo mã
             dsChiTiet.inChiTietTheoMaPhieu(dsPhieu[i].getMaPhieu());
 
             // Kết thúc bảng chi tiết
-            System.out.println("  ╚═════════╩═════════════════╩══════════╩════════════╩══════════════════╝\n");
+            System.out.printf("  └──────────┴──────────────┴──────────┴────────────┴───────────────┘\n");
+
         }
     }
 

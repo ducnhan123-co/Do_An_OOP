@@ -4,6 +4,7 @@ import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDon;
 import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDonChiTiet;
 import QuanLySieuThiMiNi.HoaDon.QuanLyHoaDon;
 import QuanLySieuThiMiNi.KhachHang.QuanLyKhachHang;
+import QuanLySieuThiMiNi.NhaCungCap.DanhSachNhaCungCap;
 import QuanLySieuThiMiNi.NhaCungCap.QuanLyNhaCungCap;
 import QuanLySieuThiMiNi.NhanVien.QuanLyNhanVien;
 import QuanLySieuThiMiNi.PhieuNhapHang.QuanLyPhieuNhapHang;
@@ -16,6 +17,7 @@ public class QuanLySieuThiMini {
         new DanhSachHoaDon().docFile();
         new DanhSachSanPham().docFile();
         new DanhSachHoaDonChiTiet().docFile();
+        new DanhSachNhaCungCap().docFile();
         Scanner sc = new Scanner(System.in);
         QuanLyNhanVien qlNhanVien = new QuanLyNhanVien(100); // Quản lý nhân viên
         QuanLySanPham qlSanPham = new QuanLySanPham(); // Quản lý sản phẩm
