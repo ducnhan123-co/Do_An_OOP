@@ -409,80 +409,34 @@
         }
         public void timKiemDiaChiNhanVien() {
             try {
-                // Đọc danh sách tỉnh từ file vào mảng
-                String[] danhSachTinh = new String[64]; // Giả sử file có tối đa 64 tỉnh
-                int soTinh = 0; // Đếm số tỉnh trong file
+                String[] danhSachTinh = new String[64];
+                int soTinh = 0;
                 try (BufferedReader br = new BufferedReader(new FileReader("QuanLySieuThiMini/src/QuanLySieuThiMiNi/KhachHang/DanhSachTinh.txt"))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         danhSachTinh[soTinh++] = line.trim();
                     }
                 }
-                System.out.println("Danh sách các tỉnh thành (chọn số tương ứng):");
+
+                System.out.println("Danh sách các tỉnh thành:");
                 for (int i = 0; i < soTinh; i++) {
                     System.out.printf("%d. %s\n", i + 1, danhSachTinh[i]);
                 }
-                int[] luaChon = new int[soTinh]; // Lưu lựa chọn của người dùng
-                int soLuaChon = 0; // Đếm số lượng tỉnh đã chọn
+                System.out.print("Nhập các số tương ứng với tỉnh (cách nhau bởi khoảng trắng): ");
                 Scanner scanner = new Scanner(System.in);
-                boolean tiepTuc = true;
-                while (tiepTuc) {
-                    System.out.print("Nhập số tương ứng với tỉnh (VD: 1 2): ");
-                    String input = scanner.nextLine().trim();  // Loại bỏ khoảng trắng đầu và cuối
-                    String[] inputArray = input.split("\\s+");
-                    boolean validInput = true;
-                    for (String s : inputArray) {
-                        try {
-                            int chon = Integer.parseInt(s);
-                            // Kiểm tra số nhập có hợp lệ và không vượt quá số lượng tỉnh
-                            if (chon > 0 && chon <= soTinh) {
-                                // Kiểm tra xem tỉnh đã được chọn chưa
-                                boolean isDuplicate = false;
-                                for (int i = 0; i < soLuaChon; i++) {
-                                    if (luaChon[i] == chon - 1) {
-                                        isDuplicate = true;  // Nếu trùng, bỏ qua
-                                        break;
-                                    }
-                                }
-                                if (!isDuplicate) {
-                                    luaChon[soLuaChon++] = chon - 1;  // Lưu chỉ số tỉnh (0-based)
-                                }
-                            } else {
-                                System.out.println("Số " + chon + " không hợp lệ, vui lòng thử lại.");
-                                validInput = false;  // Đánh dấu là đầu vào không hợp lệ
-                            }
-                        } catch (NumberFormatException e) {
-                            System.out.println("Lỗi nhập: '" + s + "' không phải là số hợp lệ. Mời nhập lại.");
-                            validInput = false;  // Đánh dấu là đầu vào không hợp lệ
-                        }
-                    }
-                    if (!validInput) {
-                        continue;
-                    }
-                    String tiep;
-                    do {
-                        System.out.print("Bạn có muốn nhập thêm không? (y/n): ");
-                        tiep = scanner.nextLine().trim().toLowerCase();
-                        if (!tiep.equals("y") && !tiep.equals("n")) {
-                            System.out.println("Lựa chọn không hợp lệ, vui lòng nhập lại.");
-                        }
-                    } while (!tiep.equals("y") && !tiep.equals("n"));
+                String input = scanner.nextLine().trim();
+                String[] inputArray = input.split("\\s+");
 
-                    tiepTuc = tiep.equals("y");
+                // Chuyển đổi số lựa chọn thành danh sách tỉnh được chọn
+                String[] tinhDuocChon = new String[inputArray.length];
+                for (int i = 0; i < inputArray.length; i++) {
+                    int chon = Integer.parseInt(inputArray[i]);
+                    tinhDuocChon[i] = danhSachTinh[chon - 1]; // Lưu tên tỉnh (0-based index)
                 }
-                String[] tinhDuocChon = new String[soLuaChon];
-                int index = 0;
-                for (int chon : luaChon) {
-                    try {
-                        tinhDuocChon[index++] = danhSachTinh[chon];
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                       continue;
-                    }
-                }
+                // Hiển thị các tỉnh được chọn
                 System.out.print("Bạn đã chọn các tỉnh: ");
-                for (int i = 0; i < tinhDuocChon.length; i++) {
-                    System.out.print(tinhDuocChon[i] + (i < tinhDuocChon.length - 1 ? ", " : "\n"));
-                }
+                System.out.println(String.join(", ", tinhDuocChon));
+                // Tìm kiếm nhân viên
                 NhanVien[] danhSachTimDuoc = timKiemNhanVienNoiSinh(tinhDuocChon);
                 if (danhSachTimDuoc.length == 0) {
                     System.out.println("Không có nhân viên nào có nơi sinh thuộc danh sách bạn chọn.");
@@ -502,7 +456,6 @@
                 System.out.println("Đã xảy ra lỗi: " + e.getMessage());
             }
         }
-
         public void thongKeTheoTuoi(int namHienTai) {
             if (size == 0) {
                 System.out.println("Danh sách nhân viên trống.");

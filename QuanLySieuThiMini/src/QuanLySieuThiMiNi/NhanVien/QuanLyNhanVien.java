@@ -94,19 +94,21 @@ public class QuanLyNhanVien {
                     while (true) {
                         try {
                             // Hiển thị menu tìm kiếm
-                            System.out.println("====== THÊM NHÂN VIÊN ======");
+                            System.out.println("====== TÌM KIẾM NHÂN VIÊN ======");
                             System.out.println("╔══════════════════════════════╗");
-                            System.out.println("║ 1. Thêm 1 nhân viên.         ║");
-                            System.out.println("║ 2. Thêm danh sách nhân viên. ║");
+                            System.out.println("║ 1. Tìm kiếm theo mã.         ║");
+                            System.out.println("║ 2. Tìm kiếm theo tên.        ║");
                             System.out.println("║ 0. Thoát.                    ║");
                             System.out.println("╚══════════════════════════════╝");
                             System.out.print("Nhập lựa chọn của bạn: ");
                             int luaChon = sc.nextInt();
                             sc.nextLine(); // Đọc ký tự xuống dòng còn sót lại sau khi nhập số
+
                             if (luaChon == 0) {
                                 System.out.println("Thoát tìm kiếm nhân viên.");
-                                break;
+                                break; // Thoát khỏi vòng lặp tìm kiếm
                             }
+
                             switch (luaChon) {
                                 case 1 -> {
                                     // Tìm kiếm nhân viên theo mã
@@ -124,25 +126,6 @@ public class QuanLyNhanVien {
                                     }
                                 }
                                 case 2 -> {
-                                    // Tìm kiếm nhân viên theo họ
-                                    System.out.print("Nhập họ nhân viên cần tìm: ");
-                                    String hoTim = sc.nextLine().trim();
-                                    NhanVien[] danhSachTimDuoc = ds.timKiemNhanVienTheoHo(hoTim);
-                                    if (danhSachTimDuoc.length == 0) {
-                                        System.out.println("Không tìm thấy nhân viên nào có họ: " + hoTim);
-                                    } else {
-                                        System.out.println("Danh sách nhân viên có họ " + hoTim + ":");
-                                        System.out.printf("|%-10s|%-15s|%-15s|%-10s|%-15s|%-10s|%-12s|%-8s|%-12s|\n",
-                                                "Mã NV", "Chức vụ", "Họ NV", "Tên NV", "Ngày sinh", "Địa chỉ", "Lương", "GT", "Ngày bắt đầu");
-                                        for (NhanVien nhanVien : danhSachTimDuoc) {
-                                            if (nhanVien != null) {
-                                                nhanVien.xuatNhanVien();
-                                            }
-                                        }
-                                        System.out.println("Tổng cộng: " + danhSachTimDuoc.length + " nhân viên.");
-                                    }
-                                }
-                                case 3 -> {
                                     // Tìm kiếm nhân viên theo tên
                                     System.out.print("Nhập tên nhân viên cần tìm: ");
                                     String tenTim = sc.nextLine().trim();
@@ -170,6 +153,7 @@ public class QuanLyNhanVien {
                         }
                     }
                 }
+
                 case 5 -> {
                     boolean thongKe=true;
                     while (thongKe) {
