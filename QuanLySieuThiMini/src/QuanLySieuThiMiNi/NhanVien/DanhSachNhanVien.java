@@ -182,25 +182,7 @@
                 System.out.println("Không tìm thấy nhân viên với mã: " + maNV);
             }
         }
-        public void xoaNhanVienTheoMaCach2(int maNV) {
-            int indexToRemove = -1;
-            for (int i = 0; i < size; i++) {
-                if (dsnv[i].getManv() == maNV) {
-                    indexToRemove = i;
-                    break;
-                }
-            }
-            if (indexToRemove != -1) {
-                for (int i = indexToRemove; i < size - 1; i++) {
-                    dsnv[i] = dsnv[i + 1];
-                }
-                dsnv[size - 1] = null; // Đặt phần tử cuối cùng là null
-                size--; // Giảm kích thước mảng
-                System.out.println("Đã xóa nhân viên với mã: " + maNV);
-            } else {
-                System.out.println("Không tìm thấy nhân viên với mã: " + maNV);
-            }
-        }
+
         public NhanVien[] timKiemNhanVienTheoHo(String hoNV) {
             NhanVien[] ketQua = new NhanVien[dsnv.length]; // Mảng lưu kết quả
             int index = 0; // Biến đếm số lượng nhân viên tìm được
@@ -211,22 +193,7 @@
             }
             return Arrays.copyOf(ketQua, index);
         }
-        public void timKiemNhanVienTheoHo() {
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Nhập họ nhân viên cần tìm kiếm: ");
-            String ho = sc.nextLine().trim();
-            int dem = 0;
-            for (int i = 0; i < size; i++) { // Chỉ duyệt đến size
-                if (dsnv[i].getHonhanvien().equalsIgnoreCase(ho)) {
-                    dem++;
-                    dsnv[i].xuatNhanVien();
-                }
-            }
-            System.out.println("Danh sách có: " + dem + " nhân viên có họ: " + ho);
-            if (dem == 0) {
-                System.out.println("Không tìm thấy nhân viên nào!");
-            }
-        }
+
         public NhanVien[] timKiemNhanVienTheoTen(String tenNV) {
             NhanVien[] ketQua = new NhanVien[dsnv.length]; // Mảng để lưu kết quả tìm kiếm
             int index = 0;
@@ -240,22 +207,7 @@
             }
             return Arrays.copyOf(ketQua, index);
         }
-        public void timKiemNhanVienTheoTen() {
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Nhập tên nhân viên cần tìm kiếm: ");
-            String ten = sc.nextLine().trim(); // Xóa khoảng trắng ở đầu và cuối
-            int dem = 0;
-            for (int i = 0; i < size; i++) {
-                if (dsnv[i].getTennhanvien().equalsIgnoreCase(ten)) {
-                    dem++;
-                    dsnv[i].xuatNhanVien();
-                }
-            }
-            System.out.println("Danh sách có: " + dem + " nhân viên có tên: " + ten);
-            if (dem == 0) {
-                System.out.println("Không tìm thấy nhân viên nào!");
-            }
-        }
+
         public void thongKeTheoMucLuong() {
             if (size == 0) {
                 System.out.println("Danh sách nhân viên trống.");
@@ -290,31 +242,7 @@
                 System.out.println("Không có nhân viên nào có lương lớn hơn mức trung bình.");
             }
         }
-        public void thongKeTheoChucVu() {
-            System.out.println("Thống kê theo chức vụ:");
-            int tongluongchucvu1 = 0;
-            int tongluongchucvu2 = 0;
-            int tongluongchucvu3 = 0;
-            for (int i = 0; i < size; i++) {
-                String chucVu = dsnv[i].getChucvu();
-                switch (chucVu) {
-                    case "1":
-                        tongluongchucvu1 += dsnv[i].getLuong();
-                        break;
-                    case "2":
-                        tongluongchucvu2 += dsnv[i].getLuong();
-                        break;
-                    case "3":
-                        tongluongchucvu3 += dsnv[i].getLuong();
-                        break;
-                    default:
-                        System.out.println("Chức vụ không hợp lệ cho nhân viên mã " + dsnv[i].getManv());
-                }
-            }
-            System.out.println("Lương nhân viên chức vụ 1 = " + tongluongchucvu1);
-            System.out.println("Lương nhân viên chức vụ 2 = " + tongluongchucvu2);
-            System.out.println("Lương nhân viên chức vụ 3 = " + tongluongchucvu3);
-        }
+
 
         private LocalDate parseDate(String dateStr) {
             DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Định dạng 1
@@ -359,9 +287,6 @@
             }
         }
 
-
-
-
         @Override
         public void docFile() {
             String filename = "QuanLySieuThiMini/src/QuanLySieuThiMiNi/NhanVien/NhanVien.txt";
@@ -389,13 +314,6 @@
             }
         }
 
-        // Hàm in ra danh sách nhân viên
-        public void inDanhSachNhanVien() {
-            System.out.println("Danh sách nhân viên:");
-            for (int i = 0; i < size; i++) {
-                System.out.println(dsnv[i]);
-            }
-        }
 
         @Override
         public void ghiFile() {
@@ -468,21 +386,6 @@
             }
             size = count; // Cập nhật lại giá trị của size
             System.out.println("Số lượng nhân viên hiện có trong danh sách: " + size);
-        }
-
-        public NhanVien[] timKiemNhanVienNoiSinh(String noi1, String noi2) {
-            NhanVien[] ketqua = new NhanVien[dsnv.length]; // Mảng lưu kết quả
-            int index = 0; // Biến đếm số lượng kết quả
-            for (NhanVien nhanVien : dsnv) {
-                if (nhanVien != null && (nhanVien.getDiachi().contains(noi1) || nhanVien.getDiachi().contains(noi2))) {
-                    ketqua[index] = nhanVien; // Lưu nhân viên phù hợp vào mảng
-                    index++;
-                }
-            }
-            if (index == 0) {
-                System.out.println("Không tìm thấy nhân viên nào có nơi sinh ở " + noi1 + " hoặc " + noi2 + ".");
-            }
-            return Arrays.copyOf(ketqua, index);
         }
 
         public NhanVien[] timKiemNhanVienNoiSinh(String[] danhSachTinh) {

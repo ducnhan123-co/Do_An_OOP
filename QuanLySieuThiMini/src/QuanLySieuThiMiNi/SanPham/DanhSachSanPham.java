@@ -259,7 +259,6 @@ public  class DanhSachSanPham implements ThaoTacFile {
         if (sp != null) {
             sp.setSoLuong(sp.getSoLuong() + soLuongNhap); // Cộng thêm số lượng
         } else {
-            sp = new SanPham();
             sp.setMaSP(maSP);
             sp.setSoLuong(soLuongNhap);
             danhSachSanPham.them1SanPham(sp); // Thêm mới
