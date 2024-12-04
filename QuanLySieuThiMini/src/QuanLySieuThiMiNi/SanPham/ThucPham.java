@@ -50,7 +50,19 @@ public class ThucPham extends SanPham {
         System.out.printf("|%-20s|%-10d  ngày|\n", loaiThucPham, hanSuDung);  // Thêm thông tin loại thực phẩm và hạn sử dụng
     }
 
+    @Override
+    public boolean kiemTraDacThu() {
+        return this.hanSuDung>0;
+    }
 
+    @Override
+    public float tinhPhiVanChuyen() {
+        return this.soLuong*5000;
+    }
 
+    @Override
+    public boolean kiemTraChatLuong() {
+        return hanSuDung>0 && !loaiThucPham.isEmpty();
+    }
 }
 

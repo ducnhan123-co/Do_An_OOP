@@ -18,17 +18,17 @@ import java.util.regex.Pattern;
 
 import static java.util.Arrays.copyOf;
 
-public class DanhSachSanPham implements ThaoTacFile {
-    public static SanPham[] DS_SanPham = new SanPham[0];
+public  class DanhSachSanPham implements ThaoTacFile {
+    public static SanPham[] dssp= new SanPham[0];
 
     public void push(SanPham sanPham) {
-        DS_SanPham = copyOf(DS_SanPham, DS_SanPham.length+1);
-        DS_SanPham[DS_SanPham.length-1] = sanPham;
+        dssp = copyOf(dssp, dssp.length+1);
+        dssp[dssp.length-1] = sanPham;
     }
     // Thêm sản phẩm gia dụng hoặc thực phẩm vào danh sách
     public void themGiaDungHayThucPham() {
         // Resize array dynamically
-        DS_SanPham = copyOf(DS_SanPham, DS_SanPham.length + 1);
+        dssp = copyOf(dssp, dssp.length + 1);
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Chọn loại sản phẩm (1-Gia dụng, 2-Thực phẩm): ");
@@ -38,11 +38,11 @@ public class DanhSachSanPham implements ThaoTacFile {
         if (choice == 1) {
             GiaDung giaDung = new GiaDung();
             giaDung.nhap();  // Nhập thông tin gia dụng
-            DS_SanPham[DS_SanPham.length - 1] = giaDung;  // Add to the array
+            dssp[dssp.length - 1] = giaDung;  // Add to the array
         } else if (choice == 2) {
             ThucPham thucPham = new ThucPham();
             thucPham.nhap();  // Nhập thông tin thực phẩm
-            DS_SanPham[DS_SanPham.length - 1] = thucPham;  // Add to the array
+            dssp[dssp.length - 1] = thucPham;  // Add to the array
         } else {
             System.out.println("Lựa chọn không hợp lệ.");
         }
@@ -50,7 +50,7 @@ public class DanhSachSanPham implements ThaoTacFile {
 
     public boolean them1SanPham(SanPham sanPham) {
         // Kiểm tra nếu sản phẩm đã tồn tại
-        for (SanPham sp : DS_SanPham) {
+        for (SanPham sp : dssp) {
             if (sp.getMaSP() == sanPham.getMaSP()) {
                 System.out.println("Sản phẩm đã tồn tại!");
                 return false; // Không thêm sản phẩm nếu đã tồn tại
@@ -70,7 +70,7 @@ public class DanhSachSanPham implements ThaoTacFile {
                 "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Thương Hiệu", "Bảo Hành");
 
         // Xuất các sản phẩm gia dụng
-        for (SanPham sp : DS_SanPham) {
+        for (SanPham sp : dssp) {
             if (sp instanceof GiaDung) {
                 sp.xuat();  // Xuất thông tin của sản phẩm gia dụng
             }
@@ -83,7 +83,7 @@ public class DanhSachSanPham implements ThaoTacFile {
         System.out.printf("|%-10s|%-15s|%-10s|%-10s|%-10s|%-15s|%-20s|%-20s|%-15s|\n",
                 "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Loại TP", "Hạn SD");
 
-        for (SanPham sp : DS_SanPham) {
+        for (SanPham sp : dssp) {
             if (sp instanceof ThucPham) {
                 sp.xuat();  // Xuất thông tin của sản phẩm thực phẩm
             }
@@ -98,7 +98,7 @@ public class DanhSachSanPham implements ThaoTacFile {
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         // Xuất danh sách sản phẩm gia dụng
-        for (SanPham sp : DS_SanPham) {
+        for (SanPham sp : dssp) {
             if (sp instanceof GiaDung) {
                 // Xuất thông tin của sản phẩm gia dụng
                 GiaDung giaDung = (GiaDung) sp;
@@ -107,7 +107,7 @@ public class DanhSachSanPham implements ThaoTacFile {
         }
 
         // Xuất danh sách sản phẩm thực phẩm
-        for (SanPham sp : DS_SanPham) {
+        for (SanPham sp : dssp) {
             if (sp instanceof ThucPham) {
                 // Xuất thông tin của sản phẩm thực phẩm
                 ThucPham thucPham = (ThucPham) sp;
@@ -119,18 +119,45 @@ public class DanhSachSanPham implements ThaoTacFile {
     
     // Phương thức tìm sản phẩm theo mã sản phẩm
     public SanPham timSanPhamTheoMa(int maSP) {
-        for(SanPham sp: DS_SanPham){
+        for(SanPham sp: dssp){
             if(sp.getMaSP() == maSP){
+                System.out.println("Đã tìm thấy sản phẩm với mã : "+ maSP);
                 return sp;  // Trả về sản phẩm nếu tìm thấy
             }
         }
+
         System.out.println("Sản phẩm với mã " + maSP + " không tồn tại!");
         return null;  // Nếu không tìm thấy, trả về null
     }
 
+    public void timSanPhamTheoTen()
+    {
+        System.out.println("Nhập tên sản phẩm cần tìm kiếm ");
+        Scanner sc = new Scanner(System.in);
+        String ten = sc.nextLine();
+        boolean found = false;
+        int dem=0;
+        System.out.println("Danh sách sản phẩm có tên là : "+ ten+ " là : ");
+        for(SanPham sanPham : dssp)
+        {
+            if(sanPham.getTenSP().contains(ten))
+            {
+
+                sanPham.xuat();
+                dem++;
+                found = true;
+            }
+        }
+        System.out.println("Danh sách trên có :  "+ dem + " sản phẩm tên " + ten);
+        if(!found)
+        {
+            System.out.println("Khoong tìm thấy sản phẩm nào với tên "+ ten);
+        }
+    }
+
     // Phương thức tìm sản phẩm theo mã và trả về đơn giá
     public float timDonGiaTheoMa(int maSP) {
-        for(SanPham sp: DS_SanPham) {
+        for(SanPham sp: dssp) {
             if(sp.getMaSP() == maSP) {
                 return sp.getDonGia();
             }
@@ -140,7 +167,7 @@ public class DanhSachSanPham implements ThaoTacFile {
     }
     
     public void capNhatTonKho(DanhSachChiTietPhieuNhapHang danhSachNhap, DanhSachHoaDonChiTiet danhSachBan) {
-        for (SanPham sp : DS_SanPham) {
+        for (SanPham sp : dssp) {
             sp.setSoLuong(0); // Đặt lại số lượng tồn kho
 
             // Cộng số lượng nhập
@@ -167,7 +194,7 @@ public class DanhSachSanPham implements ThaoTacFile {
                           "Mã SP", "Tên Sản Phẩm", "Tổng Nhập", "Tổng Bán", "Số Lượng Tồn Kho");
         System.out.println("╠═════════════╬════════════════════════╬════════════════╬════════════════╬═══════════════════════════╣");
 
-        for (SanPham sp : DS_SanPham) {
+        for (SanPham sp : dssp) {
             int tongNhap = 0;
             int tongBan = 0;
 
@@ -217,7 +244,7 @@ public class DanhSachSanPham implements ThaoTacFile {
 
     // Phương thức tìm tên sản phẩm theo mã sản phẩm
     public String timTenSanPhamTheoMa(int maSP) {
-        for(SanPham sp: DS_SanPham) {
+        for(SanPham sp: dssp) {
             if(sp.getMaSP() == maSP) {
                 return sp.getTenSP();
             }
@@ -256,7 +283,7 @@ public class DanhSachSanPham implements ThaoTacFile {
         float trungBinhTongGia=0;
         boolean found = false;
 
-        for(SanPham i: DS_SanPham) {
+        for(SanPham i: dssp) {
             if(i instanceof ThucPham) {
                 countTP+=i.getSoLuong();
                 tongGiaTheoThucPham+=(i.getSoLuong()*i.getDonGia());
@@ -281,7 +308,7 @@ public class DanhSachSanPham implements ThaoTacFile {
         float trungBinhTongGia=0;
         boolean found = false;
 
-        for(SanPham i: DS_SanPham) {
+        for(SanPham i: dssp) {
             if(i instanceof GiaDung) {
                 countGD+=i.getSoLuong();
                 tongGiaTheoGiaDung = tongGiaTheoGiaDung + (i.getSoLuong()*i.getDonGia());
@@ -321,7 +348,7 @@ public class DanhSachSanPham implements ThaoTacFile {
                     continue;
                 }
 
-                for(SanPham i: DS_SanPham) {
+                for(SanPham i: dssp) {
                     if(i.getNgaySX().equals(ngayStr)) {
                         countLoaiSanPham++;
                         count+=i.getSoLuong();
@@ -344,6 +371,53 @@ public class DanhSachSanPham implements ThaoTacFile {
             }
         }
     }
+    public boolean xoaSanPhamTheoMa(int maSP) {
+        boolean timThay = false;
+
+        for (int i = 0; i < dssp.length; i++) {
+            // Kiểm tra nếu mã sản phẩm trùng khớp
+            if (dssp[i] != null && dssp[i].getMaSP() == maSP) {
+                timThay = true;
+
+                // Dịch chuyển các phần tử phía sau lên trước
+                for (int j = i; j < dssp.length - 1; j++) {
+                    dssp[j] = dssp[j + 1];
+                }
+
+                // Gán phần tử cuối cùng là null (sau khi dịch chuyển)
+                dssp[dssp.length - 1] = null;
+
+                break; // Thoát khỏi vòng lặp sau khi xóa
+            }
+        }
+
+        return timThay;
+    }
+
+    public boolean xoaSanPhamTheoTen(String tenSP) {
+        boolean timThay = false;
+
+        for (int i = 0; i < dssp.length; i++) {
+            // Kiểm tra nếu tên sản phẩm trùng khớp
+            if (dssp[i] != null && dssp[i].getTenSP().equalsIgnoreCase(tenSP)) {
+                timThay = true;
+
+                // Dịch chuyển các phần tử phía sau lên trước
+                for (int j = i; j < dssp.length - 1; j++) {
+                    dssp[j] = dssp[j + 1];
+                }
+
+                // Gán phần tử cuối cùng là null (sau khi dịch chuyển)
+                dssp[dssp.length - 1] = null;
+
+                break; // Thoát khỏi vòng lặp sau khi xóa
+            }
+        }
+
+        return timThay;
+    }
+
+
 
     public void thongKeSanPhamTheoTenLoaiORTenThuongHieu() {
         Scanner sc = new Scanner(System.in);
@@ -357,7 +431,7 @@ public class DanhSachSanPham implements ThaoTacFile {
                 String tenLoai_ThuongHieu = sc.nextLine(); 
 
                 boolean found = false;
-                for(SanPham i: DS_SanPham) {
+                for(SanPham i: dssp) {
                     if(i instanceof ThucPham && ((ThucPham) i).getLoaiThucPham().contains(tenLoai_ThuongHieu)) {    
                         count+=i.getSoLuong();
                         tongGia+=(i.getSoLuong()*i.getDonGia());
@@ -396,7 +470,7 @@ public class DanhSachSanPham implements ThaoTacFile {
         while (true) {
             try {
                 String tenLoai = sc.nextLine().trim(); 
-                for(SanPham i: DS_SanPham) {
+                for(SanPham i: dssp) {
                     if(i instanceof ThucPham) {
                         if(((ThucPham)i).getLoaiThucPham().contains(tenLoai)) {
                             countLoai++;
@@ -465,7 +539,7 @@ public class DanhSachSanPham implements ThaoTacFile {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("QuanLySieuThiMini/src/QuanLySieuThiMiNi/SanPham/SanPham.txt"));
             int count = 0; // Đếm số sản phẩm được ghi
-            for (SanPham sanPham : DS_SanPham) {
+            for (SanPham sanPham : dssp) {
                 String loai;
                 String line;
                 if (sanPham instanceof ThucPham) {

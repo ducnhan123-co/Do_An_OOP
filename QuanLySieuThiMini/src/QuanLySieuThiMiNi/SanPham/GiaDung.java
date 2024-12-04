@@ -49,5 +49,19 @@ public class GiaDung extends SanPham {
         super.xuat();  // Gọi phương thức xuat() từ lớp cha (SanPham)
         System.out.printf("|%-20s|%-10d tháng|\n", thuongHieu, baoHanh);  // Thêm thông tin thương hiệu và bảo hành
     }
+
+    @Override
+    public boolean kiemTraDacThu() {
+        return baoHanh > 12; // Trả về true nếu bảo hành trên 12 tháng
+    }
+
+    @Override
+    public float tinhPhiVanChuyen() {
+        return soLuong * 10_000; // Giả sử mỗi sản phẩm có phí 10.000 VNĐ
+    }
+    @Override
+    public boolean kiemTraChatLuong() {
+        return baoHanh >= 12 && !thuongHieu.isEmpty(); // Bảo hành dài và có thương hiệu
+    }
 }
 
