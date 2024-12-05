@@ -358,6 +358,7 @@ public class QuanLyHoaDon {
                                     System.out.println("Đã xảy ra lỗi: "+e.getMessage());    
                                 }
                             }
+                            break;
                         }
                         case 7: {
                             while (true) {
