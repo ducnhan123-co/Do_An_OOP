@@ -1,22 +1,20 @@
 package QuanLySieuThiMiNi.SanPham;
 
-import QuanLySieuThiMiNi.PhieuNhapHang.ChiTietPhieuNhapHang;
-import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachChiTietPhieuNhapHang;
-import QuanLySieuThiMiNi.ThaoTacFile;
-import QuanLySieuThiMiNi.HoaDon.ChiTietHoaDon;
-import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDonChiTiet;
+import static java.util.Arrays.copyOf;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
-import static java.util.Arrays.copyOf;
+import QuanLySieuThiMiNi.ThaoTacFile;
+import QuanLySieuThiMiNi.HoaDon.ChiTietHoaDon;
+import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDonChiTiet;
+import QuanLySieuThiMiNi.PhieuNhapHang.ChiTietPhieuNhapHang;
+import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachChiTietPhieuNhapHang;
 
 public  class DanhSachSanPham implements ThaoTacFile {
     public static SanPham[] dssp= new SanPham[0];
@@ -188,6 +186,50 @@ public  class DanhSachSanPham implements ThaoTacFile {
                 }
             }
         }
+    }
+    
+    public void capNhatSoLuongSanPhamNhap() {
+    	Scanner sc = new Scanner(System.in);
+    	System.out.print("Nhập mã sản phầm : ");
+    	int maSP = sc.nextInt();
+    	System.out.print("Nhập số lượng thêm vào: ");
+    	int soLuongMoi = sc.nextInt();
+        for (SanPham sp : dssp) {
+            if (sp.getMaSP() == maSP) {
+                // Cập nhật số lượng sản phẩm
+                sp.setSoLuong(sp.getSoLuong() + soLuongMoi);
+                System.out.println("Số lượng sản phẩm " + sp.getTenSP() + " đã được cập nhật: " + sp.getSoLuong());
+                return;
+            }
+        }
+        System.out.println("Sản phẩm với mã " + maSP + " không tồn tại!");
+    }
+    
+    public void capNhatSoLuongSanPhamBan() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nhập mã sản phẩm: ");
+        int maSP = sc.nextInt();
+
+        System.out.println("Nhập số lượng cần lấy: ");
+        int soLuongMoi = sc.nextInt();
+
+        for (SanPham sp : dssp) {
+            if (sp.getMaSP() == maSP) {
+                // Kiểm tra xem số lượng sản phẩm có đủ để trừ hay không
+                if (sp.getSoLuong() < soLuongMoi) {
+                    System.out.println("Không đủ sản phẩm để bán!\n Số lượng hiện tại: " + sp.getSoLuong());
+                } else {
+                    // Cập nhật số lượng sản phẩm
+                    sp.setSoLuong(sp.getSoLuong() - soLuongMoi);
+                    System.out.println("Số lượng sản phẩm " + sp.getTenSP() + " đã được cập nhật: " + sp.getSoLuong());
+                }
+                return; // Thoát khỏi vòng lặp sau khi tìm thấy sản phẩm
+            }
+        }
+
+        // Nếu không tìm thấy sản phẩm trong danh sách
+        System.out.println("Sản phẩm với mã " + maSP + " không tồn tại!");
     }
     
     public void xemHangNhapBanVaTonKho(DanhSachChiTietPhieuNhapHang danhSachNhap, DanhSachHoaDonChiTiet danhSachBan) {
