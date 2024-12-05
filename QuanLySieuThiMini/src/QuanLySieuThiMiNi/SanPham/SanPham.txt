@@ -1,20 +1,20 @@
-0,1,Gạo,Kg,20000,100,2023-01-01,Thực phẩm sạch,Thực phẩm,12
-0,2,Rau cải,Kg,15000,80,2023-01-02,Thực phẩm xanh,Thực phẩm,7
-0,3,Thịt heo,Kg,120000,50,2023-01-03,Thịt tươi sống,Thực phẩm,6
-0,4,Thịt bò,Kg,250000,30,2023-01-04,Thịt nhập khẩu,Thực phẩm,12
-0,5,Tôm,Kg,300000,20,2023-01-05,Hải sản tươi,Thực phẩm,5
-0,6,Tôm Càng,Kg,220000,25,2023-01-06,Hải sản nhập,Thực phẩm,4
-0,7,Đường trắng,Kg,12000,150,2023-01-07,Nguyên liệu nấu ăn,Thực phẩm,24
-0,8,Hạt tiêu,Kg,50000,100,2023-01-08,Gia vị,Thực phẩm,24
-0,9,Mì ăn liền,Gói,5000,500,2023-01-09,Thực phẩm khô,Thực phẩm,12
-0,10,Muối,Kg,10000,200,2023-01-10,Gia vị phổ biến,Thực phẩm,36
-1,11,Quạt điện,Cái,500000,10,2023-01-11,Dùng làm mát,Sharp,24
-1,12,Bàn là,Cái,400000,15,2023-01-12,Thiết bị gia dụng,Philips,36
-1,13,Bếp ga,Cái,1500000,5,2023-01-13,Dùng để nấu ăn,Panasonic,60
-1,14,Ấm đun nước,Cái,250000,20,2023-01-14,Thiết bị gia dụng,Lock&Lock,12
-1,15,Dao,Cái,70000,50,2023-01-15,Dụng cụ nhà bếp,Thái Lan,24
-1,16,Kéo,Cái,50000,30,2023-01-16,Dụng cụ nhà bếp,Việt Nam,12
-1,17,Tủ lạnh,Cái,10000000,3,2023-01-17,Thiết bị gia dụng,Samsung,120
-1,18,Lò vi sóng,Cái,3000000,7,2023-01-18,Dụng cụ gia dụng,LG,36
-1,19,Bình nước,Cái,150000,25,2023-01-19,Thiết bị gia đình,Sunhouse,12
-1,20,Bàn ủi,Cái,450000,12,2023-01-20,Dụng cụ gia đình,Philips,242
+0,1,Gạo,Kg,20000.000000,100,2023-01-01,Thực phẩm sạch,Thực phẩm,12
+0,2,Rau cải,Kg,15000.000000,66,2023-01-02,Thực phẩm xanh,Thực phẩm,100
+0,3,Thịt heo,Kg,120000.000000,50,2023-01-03,Thịt tươi sống,Thực phẩm,6
+0,4,Thịt bò,Kg,250000.000000,30,2023-01-04,Thịt nhập khẩu,Thực phẩm,12
+0,5,Tôm,Kg,300000.000000,20,2023-01-05,Hải sản tươi,Thực phẩm,5
+0,6,Tôm Càng,Kg,220000.000000,25,2023-01-06,Hải sản nhập,Thực phẩm,4
+0,7,Đường trắng,Kg,12000.000000,150,2023-01-07,Nguyên liệu nấu ăn,Thực phẩm,24
+0,8,Hạt tiêu,Kg,50000.000000,100,2023-01-08,Gia vị,Thực phẩm,24
+0,9,Mì ăn liền,Gói,5000.000000,500,2023-01-09,Thực phẩm khô,Thực phẩm,12
+0,10,Muối,Kg,10000.000000,200,2023-01-10,Gia vị phổ biến,Thực phẩm,36
+1,11,Quạt điện,Cái,500000.000000,10,2023-01-11,Dùng làm mát,Sharp,24
+1,12,Bàn là,Cái,400000.000000,15,2023-01-12,Thiết bị gia dụng,Philips,36
+1,13,Bếp ga,Cái,1500000.000000,5,2023-01-13,Dùng để nấu ăn,Panasonic,60
+1,14,Ấm đun nước,Cái,250000.000000,20,2023-01-14,Thiết bị gia dụng,Lock&Lock,12
+1,15,Dao,Cái,70000.000000,50,2023-01-15,Dụng cụ nhà bếp,Thái Lan,24
+1,16,Kéo,Cái,50000.000000,30,2023-01-16,Dụng cụ nhà bếp,Việt Nam,12
+1,17,Tủ lạnh,Cái,10000000.000000,3,2023-01-17,Thiết bị gia dụng,Samsung,120
+1,18,Lò vi sóng,Cái,3000000.000000,7,2023-01-18,Dụng cụ gia dụng,LG,36
+1,19,Bình nước,Cái,150000.000000,25,2023-01-19,Thiết bị gia đình,Sunhouse,12
+1,20,Bàn ủi,Cái,450000.000000,12,2023-01-20,Dụng cụ gia đình,Philips,242

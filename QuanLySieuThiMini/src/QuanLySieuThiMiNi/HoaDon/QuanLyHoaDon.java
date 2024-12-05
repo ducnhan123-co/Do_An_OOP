@@ -11,7 +11,6 @@ import QuanLySieuThiMiNi.NhanVien.DanhSachNhanVien;
 import QuanLySieuThiMiNi.SanPham.DanhSachSanPham;
 import QuanLySieuThiMiNi.SanPham.SanPham;
 
-
 public class QuanLyHoaDon {
     private DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
     private DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon();
@@ -29,33 +28,42 @@ public class QuanLyHoaDon {
                 hoaDon.setMaHD(in.nextInt());
                 if (!danhSachHoaDon.checkHD_datontai(hoaDon.getMaHD()))
                     throw new Exception("Trùng lặp mã hóa đơn");
+
                 System.out.print("Nhập mã Khách hàng: ");
                 hoaDon.setMaKH(in.nextInt());
                 if (new DanhSachKhachHang().timKiemKhachHangTheoMa(hoaDon.getMaKH()) == null)
                     throw new Exception("Khách hàng không tồn tại!");
+
                 System.out.print("Nhập mã nhân viên: ");
                 hoaDon.setMaNV(in.nextInt());
                 if (!(new DanhSachNhanVien().kiemTraTrungMaNhanVien(hoaDon.getMaNV())))
                     throw new Exception("Nhân viên không tồn tại!");
+
                 LocalDate localDate = LocalDate.now();
                 DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 String b = localDate.format(f); // Định dạng ngày thành chuỗi  "dd-MM-yyyy"
                 hoaDon.setNgayTaoHoaDon(b);
+
                 float tongTien = 0;
                 // Nhập chi tiết hóa đơn
                 while(true) { 
                     ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                     chiTietHoaDon.setMaHD(hoaDon.getMaHD());
+
                     System.out.println("Nhập mã sản phẩm:");
                     chiTietHoaDon.setMaSP(in.nextInt());
                     if (danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP()) == null) {
                         throw new Exception("Không tìm thấy sản phẩm");
                     }
+
                     System.out.println("Nhập số lượng:");
                     chiTietHoaDon.setSoLuong(in.nextInt());
+
                     SanPham sanPham = danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP());
                     sanPham.setSoLuong(sanPham.getSoLuong() - chiTietHoaDon.getSoLuong());
+
                     chiTietHoaDon.setDonGia(danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP()).getDonGia());
+
                     tongTien += chiTietHoaDon.tinhTien();
                     danhSachHoaDonChiTiet.push(chiTietHoaDon);
                     System.out.println("1 - Thanh toán");
@@ -429,6 +437,8 @@ public class QuanLyHoaDon {
         new DanhSachSanPham().docFile();
         new DanhSachHoaDon().docFile();
         new DanhSachHoaDonChiTiet().docFile();
+        new DanhSachNhanVien().docFile();
+        new DanhSachKhachHang().docFile();
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon();
         quanLyHoaDon.menu(); // Gọi menu quản lý hóa đơn
     }
