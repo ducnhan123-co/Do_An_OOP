@@ -78,3 +78,4 @@ public class ChiTietHoaDon {
         System.out.printf("| %10d |  %10d | %-12s | %-10d | %-10.2f | %10.2f |\n", maHD, maSP, tenSP, soLuong, donGia, thanhTien);
     }
 }
+//hello
