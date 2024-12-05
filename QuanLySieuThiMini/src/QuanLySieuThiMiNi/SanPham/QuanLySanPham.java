@@ -237,6 +237,7 @@ public class QuanLySanPham {
                     System.out.println("╔═══════════════════════════-CẬP NHẬT SỐ LƯỢNG-══════════════════════════╗");
                     System.out.println("║ 1. Nhập hàng                                                           ║");
                     System.out.println("║ 2. Bán hàng                                                            ║");
+                    System.out.println("  3. Xem danh sách số lượng hiện tại");
                     System.out.println("║ 0. Quay lại menu quản lý                                               ║");
                     System.out.println("╚════════════════════════════════════════════════════════════════════════╝");
                     System.out.print("Chọn chức năng: ");
@@ -245,19 +246,19 @@ public class QuanLySanPham {
 
                     switch (subChoice) {
                         case 1 -> {
-                            System.out.print("Nhập mã sản phẩm: ");
-                            int maSPNhap = sc.nextInt();
-                            System.out.print("Nhập số lượng nhập: ");
-                            int soLuongNhap = sc.nextInt();
-                            System.out.print("Nhập mã phiếu nhập: ");
-                            int maPhieu = sc.nextInt();
-                            dsSanPham.nhapHang(dsSanPham,dsChiTietPhieuNhap , maSPNhap, soLuongNhap, maPhieu);
+                            dsSanPham.capNhatSoLuongSanPhamNhap();
                             break;
                         }
                         case 2 -> {
-                        	dsSanPham.xemHangNhapBanVaTonKho(dsChiTietPhieuNhap, dsChiTietHoaDon);
+                        	dsSanPham.capNhatSoLuongSanPhamBan();
                             break;
                         }
+                        
+                        case 3 ->{
+                        	dsSanPham.xemHangNhapBanVaTonKho(dsChiTietPhieuNhap, dsChiTietHoaDon);
+                        	break;
+                        }
+                        
                         case 0 -> {
                             System.out.println("Quay lại menu quản lý...");
                         }
