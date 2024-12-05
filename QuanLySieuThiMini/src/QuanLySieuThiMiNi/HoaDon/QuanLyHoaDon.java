@@ -1,5 +1,6 @@
 package QuanLySieuThiMiNi.HoaDon;
 
+import java.rmi.server.ExportException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 import QuanLySieuThiMiNi.KhachHang.DanhSachKhachHang;
 import QuanLySieuThiMiNi.NhanVien.DanhSachNhanVien;
 import QuanLySieuThiMiNi.SanPham.DanhSachSanPham;
+import QuanLySieuThiMiNi.SanPham.SanPham;
 
 
 public class QuanLyHoaDon {
@@ -46,12 +48,16 @@ public class QuanLyHoaDon {
                     chiTietHoaDon.setMaHD(hoaDon.getMaHD());
                     System.out.println("Nhập mã sản phẩm:");
                     chiTietHoaDon.setMaSP(in.nextInt());
+                    if (danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP()) == null) {
+                        throw new Exception("Không tìm thấy sản phẩm");
+                    }
                     System.out.println("Nhập số lượng:");
                     chiTietHoaDon.setSoLuong(in.nextInt());
+                    SanPham sanPham = danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP());
+                    sanPham.setSoLuong(sanPham.getSoLuong() - chiTietHoaDon.getSoLuong());
                     chiTietHoaDon.setDonGia(danhSachSanPham.timSanPhamTheoMa(chiTietHoaDon.getMaSP()).getDonGia());
                     tongTien += chiTietHoaDon.tinhTien();
                     danhSachHoaDonChiTiet.push(chiTietHoaDon);
-                    danhSachHoaDonChiTiet.ghiFile();
                     System.out.println("1 - Thanh toán");
                     System.out.println("2 - Tiếp tục nhập sản phẩm");
                     System.out.print("Chọn: ");
@@ -106,6 +112,7 @@ public class QuanLyHoaDon {
         xuatHoaDon_CTHD(hoaDon.getMaHD());
         danhSachHoaDon.ghiFile();
         danhSachHoaDonChiTiet.ghiFile();
+        danhSachSanPham.ghiFile();
     }
 
     // Hàm xuất hóa đơn theo mã
