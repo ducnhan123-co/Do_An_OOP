@@ -6,7 +6,7 @@ public class QuanLyNhaCungCap {
 	public void menu(){
 		Scanner sc = new Scanner(System.in);
 		DanhSachNhaCungCap dSNCC = new DanhSachNhaCungCap();
-		
+		// dSNCC.docFile();
 		while(true) {
 			System.out.println("╔══════════════════════════════-MENU QUẢN LÝ NHÀ CUNG CẤP-══════════════════════════════╗");
 			System.out.println("║ 1. Thêm nhà cung cấp                                                                  ║");

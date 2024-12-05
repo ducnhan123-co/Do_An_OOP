@@ -14,7 +14,7 @@
 
         public DanhSachNhanVien() {};
         public DanhSachNhanVien(int maxNhanVien) {
-            docFile();
+            // docFile();
         }
         public static NhanVien[] getDsnv() {
             return dsnv;
@@ -90,12 +90,15 @@
                 System.out.println("Danh sách nhân viên rỗng.");
                 return;
             }
+            System.out.println(new String(new char[117]).replace("\0", "-")); // Đường kẻ ngang
             System.out.printf("|%-10s|%-15s|%-15s|%-10s|%-15s|%-10s|%-12s|%-8s|%-12s|\n",
-                    "Mã NV", "Chức vụ", "Họ NV", "Tên NV", "Ngày sinh", "Địa chỉ", "Lương", "GT", "Ngày bắt đầu");
-
+            "Mã NV", "Chức vụ", "Họ NV", "Tên NV", "Ngày sinh", "Địa chỉ", "Lương", "GT", "Ngày bắt đầu");
+            System.out.println(new String(new char[117]).replace("\0", "-")); // Đường kẻ ngang
+            
             for (int i = 0; i < size; i++) {
                 dsnv[i].xuatNhanVien();
             }
+            System.out.println(new String(new char[117]).replace("\0", "-")); // Đường kẻ ngang
             System.out.println("Danh sách trên có : " + getSize() + " nhân viên ");
         }
         public NhanVien timKiemNhanVienTheoMa(int maNV) {

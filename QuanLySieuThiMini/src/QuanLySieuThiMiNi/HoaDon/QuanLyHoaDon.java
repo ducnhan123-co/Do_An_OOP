@@ -147,7 +147,7 @@ public class QuanLyHoaDon {
                     System.out.println("╔═══════════════════════════-QUẢN LÝ HÓA ĐƠN-═══════════════════════════╗");
                     System.out.println("║ 1.  Thêm 1 hóa đơn vào danh sách và lưu trong file                    ║");
                     System.out.println("║ 2.  Thêm danh sách hóa đơn và lưu trong file                          ║");
-                    System.out.println("║ 3.  Xóa hóa đơn theo mã hóa đơn và lưu trong file                     ║");
+                    System.out.println("║ 3.  Xóa hóa đơn và chi tiết theo mã hóa đơn và lưu trong file         ║");
                     System.out.println("║ 4.  Tìm kiếm hóa đơn theo tùy chọn                                    ║");
                     System.out.println("║ 5.  Thống kê hóa đơn theo tùy chọn                                    ║");
                     System.out.println("║ 6.  Liệt kê hóa đơn theo tùy chọn                                     ║");

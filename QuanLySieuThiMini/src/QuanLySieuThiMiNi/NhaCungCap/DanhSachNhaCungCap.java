@@ -7,8 +7,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class DanhSachNhaCungCap implements ThaoTacFile {
-    private NhaCungCap[] dsNCC = new NhaCungCap[0];
-    private int n = 0;
+    private static NhaCungCap[] dsNCC = new NhaCungCap[0];
+    private static int n = 0;
+
+    public DanhSachNhaCungCap() {
+
+    }
+
+    public DanhSachNhaCungCap(DanhSachNhaCungCap other) {
+        this.dsNCC = other.dsNCC;
+    }
     
     public void themNCC() {
         NhaCungCap ncc = new NhaCungCap();
@@ -37,6 +45,7 @@ public class DanhSachNhaCungCap implements ThaoTacFile {
         }
 
         // Tiêu đề bảng
+        System.out.println(new String(new char[120]).replace("\0", "-")); // Đường kẻ ngang
         System.out.printf("|%-12s|%-20s|%-12s|%-25s|%-45s|\n",  
             "Mã NCC", "Tên NCC", "SĐT", "Email", "Địa chỉ");
         System.out.println(new String(new char[120]).replace("\0", "-")); // Đường kẻ ngang
@@ -45,6 +54,7 @@ public class DanhSachNhaCungCap implements ThaoTacFile {
         for (int i = 0; i < n; i++) {
             dsNCC[i].xuat();
         }
+        System.out.println(new String(new char[120]).replace("\0", "-")); // Đường kẻ ngang
     }
     
     public void suaNCC() {

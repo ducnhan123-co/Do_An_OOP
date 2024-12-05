@@ -13,6 +13,10 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     private int n = 0;
     private DanhSachPhieuNhapHang danhSachPhieuNhapHang;
 
+    public DanhSachChiTietPhieuNhapHang() {
+        
+    }
+
     public DanhSachChiTietPhieuNhapHang(DanhSachPhieuNhapHang danhSachPhieuNhapHang) {
         this.danhSachPhieuNhapHang = danhSachPhieuNhapHang;
     }

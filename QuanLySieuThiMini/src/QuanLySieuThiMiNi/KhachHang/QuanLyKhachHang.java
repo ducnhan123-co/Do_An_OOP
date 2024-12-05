@@ -15,7 +15,7 @@ public class QuanLyKhachHang {
 
     public void menu() {
         Scanner sc = new Scanner(System.in);
-        ds.docFile();
+
         while (true) {
             System.out.println("╔═══════════════════════-MENU QUẢN LÝ KHÁCH HÀNG-══════════════════════╗");
             System.out.println("║ 1.  Thêm khách hàng theo tùy chọn.                                   ║");

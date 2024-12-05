@@ -21,6 +21,10 @@ import static java.util.Arrays.copyOf;
 public  class DanhSachSanPham implements ThaoTacFile {
     public static SanPham[] dssp= new SanPham[0];
 
+    public DanhSachSanPham() {
+        
+    }
+
     public void push(SanPham sanPham) {
         dssp = copyOf(dssp, dssp.length+1);
         dssp[dssp.length-1] = sanPham;

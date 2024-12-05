@@ -3,10 +3,14 @@ package QuanLySieuThiMiNi.Main;
 import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDon;
 import QuanLySieuThiMiNi.HoaDon.DanhSachHoaDonChiTiet;
 import QuanLySieuThiMiNi.HoaDon.QuanLyHoaDon;
+import QuanLySieuThiMiNi.KhachHang.DanhSachKhachHang;
 import QuanLySieuThiMiNi.KhachHang.QuanLyKhachHang;
 import QuanLySieuThiMiNi.NhaCungCap.DanhSachNhaCungCap;
 import QuanLySieuThiMiNi.NhaCungCap.QuanLyNhaCungCap;
+import QuanLySieuThiMiNi.NhanVien.DanhSachNhanVien;
 import QuanLySieuThiMiNi.NhanVien.QuanLyNhanVien;
+import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachChiTietPhieuNhapHang;
+import QuanLySieuThiMiNi.PhieuNhapHang.DanhSachPhieuNhapHang;
 import QuanLySieuThiMiNi.PhieuNhapHang.QuanLyPhieuNhapHang;
 import QuanLySieuThiMiNi.SanPham.QuanLySanPham;
 import QuanLySieuThiMiNi.SanPham.DanhSachSanPham;
@@ -14,10 +18,15 @@ import java.util.Scanner;
 
 public class QuanLySieuThiMini {
     public void menu() {
-        new DanhSachHoaDon().docFile();
         new DanhSachSanPham().docFile();
+        new DanhSachKhachHang().docFile();
+        new DanhSachNhanVien().docFile();
+        new DanhSachHoaDon().docFile();
         new DanhSachHoaDonChiTiet().docFile();
+        new DanhSachPhieuNhapHang().docFile();
+        new DanhSachChiTietPhieuNhapHang().docFile();
         new DanhSachNhaCungCap().docFile();
+
         Scanner sc = new Scanner(System.in);
         QuanLyNhanVien qlNhanVien = new QuanLyNhanVien(100); // Quản lý nhân viên
         QuanLySanPham qlSanPham = new QuanLySanPham(); // Quản lý sản phẩm
@@ -25,10 +34,11 @@ public class QuanLySieuThiMini {
         QuanLyPhieuNhapHang qlPhieuNhapHang = new QuanLyPhieuNhapHang();
         QuanLyKhachHang qlKhachHang = new QuanLyKhachHang(100);
         QuanLyNhaCungCap qlNhaCungCap = new QuanLyNhaCungCap(); // Quản lý nhà cung cấp
+    
         
         int choice;
         do {
-            System.out.println("\n================================================");
+            System.out.println("\n=================================================");
             System.out.println("             ████████████████████████            ");
             System.out.println("            █ QUẢN LÝ SIÊU  THỊ MINI █           ");
             System.out.println("             ████████████████████████            ");
@@ -63,8 +73,7 @@ public class QuanLySieuThiMini {
                     break;
                 case 2:
                     System.out.println("Tiến hành chức năng quản lý sản phẩm...\n");
-                    QuanLySanPham quanLySanPham = new QuanLySanPham();
-                    quanLySanPham.menu();
+                    qlSanPham.menu();
                     break;
                 case 3:
                     System.out.println("Tiến hành chức năng quản lý hóa đơn...\n");
