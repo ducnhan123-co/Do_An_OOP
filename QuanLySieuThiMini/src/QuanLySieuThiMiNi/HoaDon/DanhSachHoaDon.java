@@ -301,7 +301,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                     }
                 }
                 if(hoaDonCount==0) {
-                    System.out.println("Không có hóa đơn nào trong "+ngayStr+".");
+                    System.out.println("Không có hóa đơn nào trong "+ngayStr+" để thống kê!\n");
                     return;
                 }
                 tongDoanhThuTrungBinh=tongDoanhThu/hoaDonCount;
@@ -330,7 +330,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
                 String[] tmp = ngayNhap.split("-");
                 if (tmp.length != 2) 
-                    throw new Exception("Nhập sai định dạng(mm-yyyy)");
+                    throw new Exception("Nhập sai định dạng(MM-yyyy)");
                 String thang = tmp[0].trim();
                 String nam = tmp[1].trim();
 
@@ -348,7 +348,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                     }
                 }
                 if(soluongHoaDon==0) {
-                    System.out.println("Không có hóa đơn nào trong tháng "+thang+" năm "+nam);
+                    System.out.println("Không có hóa đơn nào trong tháng "+thang+" năm "+nam+" để thống kê!\n");
                     return;
                 }
                 tongDoanhThuTrungBinh = tongDoanhThu / soluongHoaDon;
@@ -389,7 +389,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 tongTienTrungBinh = tongTien / countHoaDon;
 
                 if(countHoaDon==0) {
-                    System.out.println("Không có hóa đơn nào trong năm "+namNhap+".");
+                    System.out.println("Không có hóa đơn nào trong năm "+namNhap+" để thống kê!\n");
                     return;
                 }
 
@@ -398,7 +398,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 System.out.println("- Tổng doanh thu trung bình trong năm "+namNhap+": "+tongTienTrungBinh+" VND\n");
                 break;
             } catch (DateTimeParseException e) {
-                System.out.println("Ngày nhập không hợp lệ. Vui lòng nhập theo định dạng yyyy.");
+                System.out.println("Ngày nhập không hợp lệ. Vui lòng nhập theo định dạng (yyyy).");
             } catch (NumberFormatException e) {
                 System.out.println("Lỗi: Vui lòng nhập giá trị hợp lệ.");
             } catch (Exception e) {
@@ -423,7 +423,6 @@ public class DanhSachHoaDon implements ThaoTacFile {
         int soLuongHoaDonQuy3 = 0;
         int soLuongHoaDonQuy4 = 0;
 
-        
         boolean foundNam = false;
         
         for(int i=0; i<dshd.length; i++){
@@ -582,7 +581,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
             System.out.println("Không có hóa đơn nào có tổng tiền lớn hơn " + tongTienNhap + " VND!");
         }
         System.out.println("+--------------------------------------------------------------------------------+");
-        System.out.println("Có " + countLonHon + " hóa đơn với tổng tiền lớn hơn " + tongTienNhap + " VND\n");
+        System.out.println("=> Có " + countLonHon + " hóa đơn với tổng tiền lớn hơn " + tongTienNhap + " VND\n");
 
         // Liệt kê hóa đơn có tổng tiền nhỏ hơn giá trị nhập
         System.out.println("+-------------DANH SÁCH HÓA ĐƠN CÓ TỔNG TIỀN NHỎ HƠN " + tongTienNhap + " VND-------------+");
@@ -597,7 +596,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
             System.out.println("Không có hóa đơn nào có tổng tiền nhỏ hơn " + tongTienNhap + " VND!");
         }
         System.out.println("+-----------------------------------------------------------------------------+");
-        System.out.println("Có " + countNhoHon + " hóa đơn với tổng tiền nhỏ hơn " + tongTienNhap + " VND\n");
+        System.out.println("=> Có " + countNhoHon + " hóa đơn với tổng tiền nhỏ hơn " + tongTienNhap + " VND\n");
     }
 
     // Liệt kê các hóa đơn theo phương thức thanh toán
@@ -634,6 +633,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 System.out.println();
             } else {
                 System.out.println("Nhập sai yêu cầu. Vui lòng nhập 1 hoặc 2!\n");
+                continue;
             }
             break;
         }
