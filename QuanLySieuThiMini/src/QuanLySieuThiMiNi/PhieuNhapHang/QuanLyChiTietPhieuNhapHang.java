@@ -11,7 +11,7 @@ public class QuanLyChiTietPhieuNhapHang {
             System.out.println("║ 1. Thêm chi tiết vào phiếu nhập hàng                                                      ║");
             System.out.println("║ 2. Sửa chi tiết phiếu nhập hàng                                                           ║");
             System.out.println("║ 3. Xóa chi tiết phiếu nhập hàng                                                           ║");
-            System.out.println("║ 5. Xem danh sách chi tiết phiếu nhập hàng                                                 ║");
+            System.out.println("║ 4. Xem danh sách chi tiết phiếu nhập hàng                                                 ║");
             System.out.println("║ 0. Quay lại                                                                               ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
