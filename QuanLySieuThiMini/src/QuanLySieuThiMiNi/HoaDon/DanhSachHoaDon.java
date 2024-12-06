@@ -14,7 +14,7 @@ import static java.util.Arrays.copyOf;
 public class DanhSachHoaDon implements ThaoTacFile {
     private static HoaDon[] dshd = new HoaDon[0];
 
-    public DanhSachHoaDon() {}
+    public DanhSachHoaDon() {} 
 
     public DanhSachHoaDon(DanhSachHoaDon other) {
         this.dshd = other.dshd;
@@ -260,8 +260,8 @@ public class DanhSachHoaDon implements ThaoTacFile {
             System.out.println("Không có hóa đơn để thống kê.");
         } else {
             System.out.println("Tổng số hóa đơn: "+count+" cái hóa đơn");
-            System.out.printf("Tổng doanh thu: %.2f VND.", tongTien);
-            System.out.println("Trung bình tổng doanh thu: " + ((float) tongTien / count) + " VND.");
+            System.out.printf("Tổng doanh thu: %.2f VND\n", tongTien);
+            System.out.println("Trung bình tổng doanh thu: " + ((float) tongTien / count) + " VND.\n");
         }
     }
 
@@ -494,7 +494,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         System.out.println("╔═══════════════════════════════════════════════════════════════════════════════╗");
         System.out.printf("║                      THỐNG KÊ HÓA ĐƠN THEO QUÝ NĂM %d                       ║\n", namCanThongKe);
         System.out.println("╠════════════╦════════════════════╦══════════════════════╦══════════════════════╣");
-        System.out.printf("║ %-10s ║ %-18s ║ %-20s ║ %-20s ║\n", "Quý", "Số Lượng Hóa Đơn", "Tổng Doanh Thu", "Doanh Thu Trung Bình");
+        System.out.printf("║ %-10s ║ %-18s ║ %-20s ║ %-20s ║\n", "Quý", "Số Lượng Hóa Đơn", "Tổng Doanh Thu", "Trung Bình Doanh Thu");
         System.out.println("╠════════════╬════════════════════╬══════════════════════╬══════════════════════╣");
         System.out.printf("║ %-10s ║ %-18d ║ %-20.2f ║ %-20.2f ║\n", "Quý 1", soLuongHoaDonQuy1, tongTienQuy1, (soLuongHoaDonQuy1 > 0 ? (tongTienQuy1 / soLuongHoaDonQuy1) : 0));
         System.out.printf("║ %-10s ║ %-18d ║ %-20.2f ║ %-20.2f ║\n", "Quý 2", soLuongHoaDonQuy2, tongTienQuy2, (soLuongHoaDonQuy2 > 0 ? (tongTienQuy2 / soLuongHoaDonQuy2) : 0));
@@ -502,7 +502,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
         System.out.printf("║ %-10s ║ %-18d ║ %-20.2f ║ %-20.2f ║\n", "Quý 4", soLuongHoaDonQuy4, tongTienQuy4, (soLuongHoaDonQuy4 > 0 ? (tongTienQuy4 / soLuongHoaDonQuy4) : 0));
         System.out.println("╚════════════╩════════════════════╩══════════════════════╩══════════════════════╝");
         System.out.printf("=> Quý %d có tổng doanh thu lớn nhất: %.2f VND\n", quyMax, maxTongTienDoanhThu);
-        System.out.printf("=> Quý %d có tổng doanh thu nhỏ nhất: %.2f VND\n", quyMin, minTongTienDoanhThu);
+        System.out.printf("=> Quý %d có tổng doanh thu nhỏ nhất: %.2f VND\n\n", quyMin, minTongTienDoanhThu);
     }
 
     // THỐNG KÊ HÓA ĐƠN THEO KHOẢNG THỜI GIAN (NGÀY A -> NGÀY B)
@@ -641,15 +641,22 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
     public void thongKeHoaDonTheoPTTT() {
         int chuyenKhoan=0, tienMat=0;
+        float tongCK=0, tongTM=0;
         for (HoaDon hoaDon: dshd) {
-            if (hoaDon.getPhuongThucTinhToan().contains("Tiền mặt"))
+            if (hoaDon.getPhuongThucTinhToan().contains("Tiền mặt")) {
                 ++tienMat;
-            else
+                tongTM+=hoaDon.getTongTien();
+            }
+            else {
                 ++chuyenKhoan;
+                tongCK+=hoaDon.getTongTien();
+            }
         }
 
         System.out.printf("Số hóa đơn được thanh toán bằng tiền mặt: %d\n", tienMat);
+        System.out.printf("Tổng doanh thu hóa đơn bằng tiền mặt: %.2f VND\n\n", tongTM);
         System.out.printf("Số hóa đơn được thanh toán bằng chuyển khoản: %d\n", chuyenKhoan);
+        System.out.printf("Tổng doanh thu hóa đơn bằng chuyển khoản: %.2f VND\n\n", tongCK);
     }
 
     // Đọc file
@@ -693,5 +700,52 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
     public void capNhatFile() {
         
+    }
+
+    // Thống kê hóa đơn theo ngày tạo hóa đơn
+    public void A() {
+        Scanner sc = new Scanner(System.in);
+        
+        while (true) {
+            try {
+                int count=0;
+                float tong=0;
+                float trungBinhTongDoanhThu=0;
+
+                System.out.println("Nhập ngày tạo hóa đơn (dd-MM-yyyy): ");
+                String ngayStr = sc.nextLine().trim();
+
+                String[] tmp = ngayStr.split("-");
+                if(tmp.length != 3) {
+                    throw new Exception("AAA");
+                }
+                
+                for(HoaDon i: dshd) {
+                    if(i.getNgayTaoHoaDon().equals(ngayStr)) { 
+                        count++;
+                        tong+=i.getTongTien();
+                    }
+                }
+                if(count==0) {
+                    System.out.println("Không có hóa đơn nào trong ngày "+ngayStr+"!\n");
+                    return;
+                }
+
+                trungBinhTongDoanhThu = tong/count;
+                System.out.println("Kết quả thống kê ngày "+ngayStr);
+                System.out.println("Số lượng hóa đơn: "+count);
+                System.out.println("Tổng: "+tong);
+                System.out.println("Trung bình tổng "+trungBinhTongDoanhThu);
+                break;
+            } catch (Exception e) {
+                System.out.println("Lỗi: "+e.getMessage());
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        DanhSachHoaDon dSachHoaDon = new DanhSachHoaDon();
+        dSachHoaDon.docFile();
+        dSachHoaDon.A();
     }
 }
