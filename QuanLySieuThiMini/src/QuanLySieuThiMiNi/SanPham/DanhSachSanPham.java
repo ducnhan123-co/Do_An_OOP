@@ -211,7 +211,7 @@ public  class DanhSachSanPham implements ThaoTacFile {
         System.out.print("Nhập mã sản phẩm: ");
         int maSP = sc.nextInt();
 
-        System.out.println("Nhập số lượng cần lấy: ");
+        System.out.print("Nhập số lượng cần lấy: ");
         int soLuongMoi = sc.nextInt();
 
         for (SanPham sp : dssp) {
@@ -233,12 +233,9 @@ public  class DanhSachSanPham implements ThaoTacFile {
     }
     
     public void xemHangNhapBanVaTonKho(DanhSachChiTietPhieuNhapHang danhSachNhap, DanhSachHoaDonChiTiet danhSachBan) {
-        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                             DANH SÁCH HÀNG NHẬP, BÁN VÀ TỒN KHO                                    ║");
-        System.out.println("╠═════════════╦════════════════════════╦════════════════╦════════════════╦═══════════════════════════╣");
-        System.out.printf("║ %-11s ║ %-20s ║ %-14s ║ %-14s ║ %-24s ║\n",
-                          "Mã SP", "Tên Sản Phẩm", "Tổng Nhập", "Tổng Bán", "Số Lượng Tồn Kho");
-        System.out.println("╠═════════════╬════════════════════════╬════════════════╬════════════════╬═══════════════════════════╣");
+        System.out.println("╔═════════════╦════════════════════════╦════════════════╗");
+        System.out.println("║   Mã SP     ║       Tên Sản Phẩm     ║ Số Lượng Tồn   ║");
+        System.out.println("╠═════════════╬════════════════════════╬════════════════╣");
 
         for (SanPham sp : dssp) {
             int tongNhap = 0;
@@ -251,7 +248,6 @@ public  class DanhSachSanPham implements ThaoTacFile {
                 }
             }
 
-
             // Tính tổng số lượng bán từ danh sách hóa đơn chi tiết
             for (ChiTietHoaDon chiTietBan : danhSachBan.getDanhSachChiTiet()) {
                 if (chiTietBan.getMaSP() == sp.getMaSP()) {
@@ -259,12 +255,12 @@ public  class DanhSachSanPham implements ThaoTacFile {
                 }
             }
 
-            // In thông tin sản phẩm: Mã SP, Tên SP, Tổng Nhập, Tổng Bán, Số Lượng Tồn Kho
-            System.out.printf("║ %-11d ║ %-20s ║ %-14d ║ %-14d ║ %-24d ║\n", 
-                              sp.getMaSP(), sp.getTenSP(), tongNhap, tongBan, sp.getSoLuong());
+            // In thông tin sản phẩm: Mã SP, Tên SP, Số Lượng Tồn Kho
+            System.out.printf("║ %-11d ║ %-22s ║ %-14d ║\n",
+                              sp.getMaSP(), sp.getTenSP(), sp.getSoLuong());
         }
 
-        System.out.println("╚═════════════╩════════════════════════╩════════════════╩════════════════╩══════════════════════════╝");
+        System.out.println("╚═════════════╩════════════════════════╩════════════════╝");
     }
 
 
