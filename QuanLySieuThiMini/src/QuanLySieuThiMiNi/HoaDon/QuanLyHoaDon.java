@@ -153,7 +153,7 @@ public class QuanLyHoaDon {
                     System.out.println("║ 5. Thống kê hóa đơn theo tùy chọn                                     ║");
                     System.out.println("║ 6. Liệt kê hóa đơn theo tùy chọn                                      ║");
                     System.out.println("║ 7. Xuất hóa đơn, chi tiết hóa đơn theo tùy chọn                       ║");
-                    System.out.println("║ 8. Xem danh sách hóa đơn hiện tại                                     ║");
+                    System.out.println("║ 8. Xem danh sách toàn bộ hóa đơn hiện tại                             ║");
                     System.out.println("║ 0. Thoát                                                              ║");
                     System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
                     System.out.print("Chọn chức năng: ");

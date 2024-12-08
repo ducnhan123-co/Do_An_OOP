@@ -5,7 +5,6 @@ import QuanLySieuThiMiNi.SanPham.SanPham;
 import QuanLySieuThiMiNi.ThaoTacFile;
 
 import java.io.*;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -51,10 +50,12 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
 
         // In danh sách các phiếu nhập (phần thông tin cơ bản của từng phiếu)
         System.out.println("Danh sách phiếu nhập:");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-15s | %-12s | %-12s | %-10s |\n", "Mã phiếu", "Mã Nhà Cung Cấp", "Mã Nhân Viên", "Tổng tiền", "Ngày nhập");
+        System.out.println("---------------------------------------------------------------------------");
         for (int i = 0; i < n; i++) 
             dsPhieu[i].xuatPhieu();
-        	
+        System.out.println("---------------------------------------------------------------------------\n");
     }
 
 
@@ -109,17 +110,17 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
             System.out.printf("╚═════════════════════════════════════════════════════════════════════════════╝\n");
 
             System.out.println("Chi tiết phiếu nhập hàng thứ : "+ (i+1));
-            System.out.printf("  ┌──────────┬──────────────┬──────────┬────────────┬───────────────┐\n");
-            System.out.printf("  │ %-8s │ %-12s │ %-8s │ %-10s │ %-13s │\n",
+            System.out.printf("┌────────────┬──────────────┬──────────┬────────────┬───────────────┐\n");
+            System.out.printf("│ %-10s │ %-12s │ %-8s │ %-10s │ %-13s │\n",
                     "Mã Phiếu", "Mã SP", "Số Lượng", "Đơn Giá", "Thành Tiền");
-            System.out.printf("  ├──────────┼──────────────┼──────────┼────────────┼───────────────┤\n");
+            System.out.printf("├────────────┼──────────────┼──────────┼────────────┼───────────────┤\n");
 
 
 
             dsChiTiet.inChiTietTheoMaPhieu(dsPhieu[i].getMaPhieu());
 
             // Kết thúc bảng chi tiết
-            System.out.printf("  └──────────┴──────────────┴──────────┴────────────┴───────────────┘\n");
+            System.out.printf("└────────────┴──────────────┴──────────┴────────────┴───────────────┘\n");
 
         }
     }

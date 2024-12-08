@@ -275,8 +275,10 @@ public class DanhSachKhachHang implements ThaoTacFile {
             System.out.println("Danh sách khách hàng rỗng.");
             return;
         }
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
                 "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
 
 
         for (KhachHang khachHang : dskh) {
@@ -284,7 +286,8 @@ public class DanhSachKhachHang implements ThaoTacFile {
                 khachHang.xuat();
             }
         }
-        System.out.println("Danh sách trên có " + size + " khách hàng.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("Danh sách trên có " + size + " khách hàng.\n");
     }
     public void thongKeTheoGioiTinh() {
         int nam = 0;
@@ -303,8 +306,8 @@ public class DanhSachKhachHang implements ThaoTacFile {
         System.out.println("╔══════════════════════════════════╗");
         System.out.println("║ Thống kê số lượng khách hàng     ║");
         System.out.println("╠══════════════════════════════════╣");
-        System.out.printf(" ║ Số lượng khách hàng Nam: %-8d    ║\n",nam);
-        System.out.printf(" ║ Số lượng khách hàng Nữ: %-8d     ║\n", nu);
+        System.out.printf("║ Số lượng khách hàng Nam: %-4d    ║\n",nam);
+        System.out.printf("║ Số lượng khách hàng Nữ: %-4d     ║\n", nu);
         System.out.println("╚══════════════════════════════════╝");
     }
 
@@ -334,24 +337,30 @@ public class DanhSachKhachHang implements ThaoTacFile {
         }
 
         System.out.println("Danh sách khách hàng có tuổi nhỏ hơn " + tuoiNhap + ":");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
                 "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < truocIndex; i++) {
             if (truocTuoi[i] != null) {
                 truocTuoi[i].xuat();
             }
         }
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.println("Danh sách trên có : "+ demNho+ " khách hàng.");
 
         System.out.println("\nDanh sách khách hàng có tuổi lớn hơn hoặc bằng " + tuoiNhap + ":");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
                 "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < sauIndex; i++) {
             if (sauTuoi[i] != null) {
                 sauTuoi[i].xuat();
             }
         }
-        System.out.println("Danh sách treen có : "+demHon+ " khách hàng.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------");
+        System.out.println("Danh sách treen có : "+demHon+ " khách hàng.\n");
     }
 
     public void thongKeDonHangTheoQuy() {
@@ -400,24 +409,24 @@ public class DanhSachKhachHang implements ThaoTacFile {
         // In bảng thống kê
         System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
         System.out.println("║          Thống kê khách hàng mua nhiều đơn hàng nhất theo từng quý    ║");
-        System.out.println("║                                Năm: " + namCanTim + "                               ║");
-        System.out.println("╠═══════╦════════════╦══════════════════════╦═════════════╦═══════════════════════╣");
-        System.out.println("║ Quý   ║ Mã KH      ║ Tên khách hàng       ║ Số hóa đơn  ║ Chi tiêu              ║");
-        System.out.println("╠═══════╬════════════╬══════════════════════╬═════════════╬═══════════════════════╣");
+        System.out.println("║                                Năm: " + namCanTim + "                              ║");
+        System.out.println("╠═══════╦════════════╦══════════════════════╦═════════════╦═════════════╣");
+        System.out.println("║ Quý   ║ Mã KH      ║ Tên khách hàng       ║ Số hóa đơn  ║ Chi tiêu    ║");
+        System.out.println("╠═══════╬════════════╬══════════════════════╬═════════════╬═════════════╣");
         for (int quy = 0; quy < 4; quy++) {
             if (topKhachHang[quy] != null) {
-                System.out.printf("║ %-5d ║ %-10d ║ %-20s ║ %-11d ║ %-23.2f ║\n",
+                System.out.printf("║ %-5d ║ %-10d ║ %-20s ║ %-11d ║ %-11.2f ║\n",
                         quy + 1,
                         topKhachHang[quy].getMaKH(),
                         topKhachHang[quy].getHoKH() + " " + topKhachHang[quy].getTenKH(),
                         maxHoaDon[quy],
                         maxChiTieu[quy]);
             } else {
-                System.out.printf("║ %-5d ║ %-10s ║ %-20s ║ %-11s ║ %-23s ║\n",
+                System.out.printf("║ %-5d ║ %-10s ║ %-20s ║ %-11s ║ %-11s ║\n",
                         quy + 1, "Không có", "Không có", "Không có", "Không có");
             }
         }
-        System.out.println("╚═══════╩════════════╩══════════════════════╩═════════════╩═══════════════════════╝");
+        System.out.println("╚═══════╩════════════╩══════════════════════╩═════════════╩═════════════╝");
     }
 
 
@@ -453,7 +462,7 @@ public class DanhSachKhachHang implements ThaoTacFile {
             }
 
             // Hiển thị các tỉnh được chọn
-            System.out.print("Bạn đã chọn các tỉnh: ");
+            System.out.print("Bạn đã chọn tỉnh: ");
             System.out.println(String.join(", ", tinhDuocChon));
 
             // Tìm kiếm khách hàng
@@ -461,13 +470,16 @@ public class DanhSachKhachHang implements ThaoTacFile {
             if (danhSachTimDuoc.length == 0) {
                 System.out.println("Không có khách hàng nào có địa chỉ thuộc danh sách bạn chọn.");
             } else {
+                System.out.println("---------------------------------------------------------------------------------------------------------------------");
                 System.out.printf("| %-8s | %-12s | %-12s | %-12s | %-10s | %-12s | %-18s | %-8s |\n",
                         "Mã KH", "Họ KH", "Tên KH", "Ngày Sinh", "Giới tính", "SĐT", "Địa chỉ", "Điểm");
+                System.out.println("---------------------------------------------------------------------------------------------------------------------");
                 for (KhachHang khachHang : danhSachTimDuoc) {
                     if (khachHang != null) {
                         khachHang.xuat();
                     }
                 }
+                System.out.println("---------------------------------------------------------------------------------------------------------------------");
                 System.out.println("Tổng số khách hàng tìm được: " + danhSachTimDuoc.length);
             }
         } catch (IOException e) {
