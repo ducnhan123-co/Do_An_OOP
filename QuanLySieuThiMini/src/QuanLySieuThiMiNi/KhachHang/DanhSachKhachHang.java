@@ -360,7 +360,7 @@ public class DanhSachKhachHang implements ThaoTacFile {
             }
         }
         System.out.println("---------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Danh sách treen có : "+demHon+ " khách hàng.\n");
+        System.out.println("Danh sách trên có : "+demHon+ " khách hàng.\n");
     }
 
     public void thongKeDonHangTheoQuy() {
