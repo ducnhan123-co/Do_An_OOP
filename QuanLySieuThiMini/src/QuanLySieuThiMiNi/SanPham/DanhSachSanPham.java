@@ -136,30 +136,29 @@ public  class DanhSachSanPham implements ThaoTacFile {
         return null;  // Nếu không tìm thấy, trả về null
     }
 
-    public void timSanPhamTheoTen()
-    {
-        System.out.println("Nhập tên sản phẩm cần tìm kiếm ");
+    public void timSanPhamTheoTen() {
+        System.out.println("Nhập tên sản phẩm cần tìm kiếm: ");
         Scanner sc = new Scanner(System.in);
         String ten = sc.nextLine();
         boolean found = false;
-        int dem=0;
-        System.out.println("Danh sách sản phẩm có tên "+ten+" là : ");
-        for(SanPham sanPham : dssp)
-        {
-            if(sanPham.getTenSP().contains(ten))
-            {
+        int dem = 0;
 
+        System.out.println("Danh sách sản phẩm chứa từ khóa \"" + ten + "\" là: ");
+        System.out.printf("|%-10s|%-15s|%-10s|%-12s|%-10s|%-15s|%-40s|%-20s|%-16s|\n",
+                "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Thương Hiệu", "Bảo Hành");
+        for (SanPham sanPham : dssp) {
+            if (sanPham.getTenSP().toLowerCase().contains(ten.toLowerCase())) {
                 sanPham.xuat();
                 dem++;
                 found = true;
             }
         }
-        System.out.println("Danh sách trên có :  "+ dem + " sản phẩm tên " + ten);
-        if(!found)
-        {
-            System.out.println("Khoong tìm thấy sản phẩm nào với tên "+ ten);
+        System.out.println("Danh sách trên có: " + dem + " sản phẩm chứa từ khóa \"" + ten + "\".");
+        if (!found) {
+            System.out.println("Không tìm thấy sản phẩm nào với từ khóa \"" + ten + "\".");
         }
     }
+
 
     // Phương thức tìm sản phẩm theo mã và trả về đơn giá
     public float timDonGiaTheoMa(int maSP) {

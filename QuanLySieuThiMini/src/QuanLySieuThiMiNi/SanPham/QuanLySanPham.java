@@ -313,10 +313,5 @@ public class QuanLySanPham {
         }
     }
 
-    public static void main(String[] args) {
-        QuanLySanPham qLySanPham = new QuanLySanPham();
-        DanhSachSanPham dSachSanPham = new DanhSachSanPham();
-        dSachSanPham.docFile();
-        qLySanPham.menu();
-    }
+
 }
