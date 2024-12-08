@@ -182,7 +182,7 @@ public class QuanLyKhachHang {
 
                 case 6 -> ds.capNhapSoLuongKhachHang(); // Cập nhật danh sách khách hàng hiện tại
 
-             case 7 -> ds.timKiemKhachHangNangCao(); // Tìm kiếm nâng cao với địa chỉ
+                case 7 -> ds.timKiemKhachHangNangCao(); // Tìm kiếm nâng cao với địa chỉ
                 case 8 -> ds.xuatDanhSachKhachHang(); // In danh sách khách hàng
                 case 0 -> {
                     System.out.println("Đã thoát chương trình.");

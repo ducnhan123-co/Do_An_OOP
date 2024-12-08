@@ -136,13 +136,14 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
             return;
         }
         System.out.println("Danh sách chi tiết phiếu nhập:");
-        System.out.printf("| %-10s | %-12s | %-8s | %-9s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.printf("| %-10s | %-12s | %-8s | %-10s | %-13s |\n", "Mã Phiếu", "Mã Sản Phẩm", "Số Lượng", "Đơn Giá", "Thành Tiền");
+        System.out.println("---------------------------------------------------------------------");
 
         // In các chi tiết phiếu nhập hàng
         for (ChiTietPhieuNhapHang chiTiet : dsChiTiet) 
         	chiTiet.xuatChiTiet();
-            
+        System.out.println("---------------------------------------------------------------------");
     }
   
     // Hàm sửa chi tiết theo mã phiếu

@@ -411,7 +411,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
     // THỐNG KÊ HÓA ĐƠN THEO QUÝ 
     public void thongKeHoaDonTheoQuy() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập năm cần thống kê theo quý:");
+        System.out.print("Nhập năm cần thống kê theo quý: ");
         int namCanThongKe = sc.nextInt();
 
         double tongTienQuy1 = 0;
@@ -554,9 +554,30 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
                 trungBinhTongDoanhThu = (soluongHoaDon>0) ? (tongDoanhThu/soluongHoaDon) : 0;
 
-                System.out.println("\n- Tổng số lượng hóa đơn từ "+ngayStrBD+" đến "+ngayStrKT+": "+soluongHoaDon+" cái");
-                System.out.println("- Tổng doanh thu từ "+ngayStrBD+" đến "+ngayStrKT+": "+tongDoanhThu+" VND");
-                System.out.println("- Trung bình tổng doanh thu từ "+ngayStrBD+" đến ngày "+ngayStrKT+": "+trungBinhTongDoanhThu+" VND\n");
+                // System.out.println("\n- Tổng số lượng hóa đơn từ "+ngayStrBD+" đến "+ngayStrKT+": "+soluongHoaDon+" cái");
+                // System.out.println("- Tổng doanh thu từ "+ngayStrBD+" đến "+ngayStrKT+": "+tongDoanhThu+" VND");
+                // System.out.println("- Trung bình tổng doanh thu từ "+ngayStrBD+" đến ngày "+ngayStrKT+": "+trungBinhTongDoanhThu+" VND\n");
+
+                System.out.println("╔════════════════════════════════════════════════════════╗");
+                System.out.printf("║     THỐNG KÊ HÓA ĐƠN TỪ %s ĐẾN %s      ║\n", ngayStrBD, ngayStrKT);
+                System.out.println("╠════════════╦════════════════════╦══════════════════════╣");
+                System.out.printf("║ %-10s ║ %-18s ║ %-20s ║\n", "Mã Hóa Đơn", "Ngày Tạo Hóa Đơn", "Tổng tiền");
+                System.out.println("╠════════════╬════════════════════╬══════════════════════╣");
+                for(HoaDon i: dshd) {
+                    String[] tmp3 = i.getNgayTaoHoaDon().split("-");
+                    int ngay = Integer.parseInt(tmp3[0]);
+                    int thang = Integer.parseInt(tmp3[1]);
+                    int nam = Integer.parseInt(tmp3[2]);
+                    if((nam>namBD || (nam==namBD && thang>thangBD) || (nam==namBD && thang==thangBD && ngay>=ngayBD)) 
+                        && (nam<namKT || (nam==namKT && thang<thangKT) || (nam==namKT && thang==thangKT && ngay<=ngayKT))) {
+                        System.out.printf("║ %-10d ║ %-18s ║ %-16.1f VND ║\n", i.getMaHD(), i.getNgayTaoHoaDon(), i.getTongTien());
+                    }        
+                }
+                System.out.println("╠════════════╩════════════════════╬══════════════════════╣");
+                System.out.printf("║  Tổng Doanh Thu                 ║ %-16.2f VND ║\n", tongDoanhThu);
+                System.out.println("╠═════════════════════════════════╬══════════════════════╣");
+                System.out.printf("║  Trung Bình Tổng Doanh Thu      ║ %-16.2f VND ║\n", trungBinhTongDoanhThu);
+                System.out.println("╚═════════════════════════════════╩══════════════════════╝\n");
                 break;
             } catch (Exception e) {
                 System.out.println("Lỗi: "+e.getMessage());

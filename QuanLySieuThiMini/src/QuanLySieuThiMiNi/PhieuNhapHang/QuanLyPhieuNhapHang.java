@@ -36,9 +36,6 @@ public class QuanLyPhieuNhapHang {
                 case 1:
                     DSPNH.nhapPhieuVaChiTiet(DSCtPNH);
                     break;
-                case 8:
-                    DSPNH.hienThiPhieuVaChiTiet(DSCtPNH);
-                    break;
                 case 2:
                     DSPNH.timMP();
                     break;
@@ -98,6 +95,9 @@ public class QuanLyPhieuNhapHang {
                 	DSPNH.xuatPhieuNhapHang();
                 	DSCtPNH.inDanhSachChiTiet();
                 	break;
+                case 8:
+                    DSPNH.hienThiPhieuVaChiTiet(DSCtPNH);
+                    break;
                 case 0:
                     System.out.println("Đã thoát chương trình.");
                     return;
