@@ -13,15 +13,15 @@ public class QuanLyNhanVien {
 
         while (true) {
             System.out.println("╔═══════════════════════-MENU QUẢN LÝ NHÂN VIÊN-══════════════════════╗");
-            System.out.println("║1.  Thêm nhân viên theo tùy chọn.                                    ║");
-            System.out.println("║2.  Sửa thông tin nhân viên theo mã.                                 ║");
-            System.out.println("║3.  Xóa nhân viên theo mã.                                           ║");
-            System.out.println("║4.  Tìm kiếm nhân viên theo tùy chọn.                                ║");
-            System.out.println("║5.  Thống kê nhân viên theo tùy chọn.                                ║");
-            System.out.println("║6.  Cập nhật danh sách nhân viên hiện tại.                           ║");
-            System.out.println("║7.  Tìm nhân viên nâng cao với địa chỉ do người dùng chọn.           ║");
-            System.out.println("║8.  In danh sách nhân viên.                                          ║");
-            System.out.println("║0.  Thoát.                                                           ║");
+            System.out.println("║ 1. Thêm nhân viên theo tùy chọn.                                    ║");
+            System.out.println("║ 2. Sửa thông tin nhân viên theo mã.                                 ║");
+            System.out.println("║ 3. Xóa nhân viên theo mã.                                           ║");
+            System.out.println("║ 4. Tìm kiếm nhân viên theo tùy chọn.                                ║");
+            System.out.println("║ 5. Thống kê nhân viên theo tùy chọn.                                ║");
+            System.out.println("║ 6. Cập nhật danh sách nhân viên hiện tại.                           ║");
+            System.out.println("║ 7. Tìm nhân viên nâng cao với địa chỉ do người dùng chọn.           ║");
+            System.out.println("║ 8. In danh sách nhân viên.                                          ║");
+            System.out.println("║ 0. Thoát.                                                           ║");
             System.out.println("╚═════════════════════════════════════════════════════════════════════╝");
             System.out.print("Chọn chức năng: ");
 
@@ -159,7 +159,7 @@ public class QuanLyNhanVien {
                     while (thongKe) {
                         try {
                             // Hiển thị menu thống kê
-                            System.out.println("====== THỐNG KÊ NHÂN VIÊN ======");
+                            System.out.println("============ THỐNG KÊ NHÂN VIÊN ============");
                             System.out.println("╔══════════════════════════════════════════╗");
                             System.out.println("║ 1. Thống kê nhân viên theo mức lương.    ║");
                             System.out.println("║ 2. Thống kê nhân viên theo năm làm việc. ║");
