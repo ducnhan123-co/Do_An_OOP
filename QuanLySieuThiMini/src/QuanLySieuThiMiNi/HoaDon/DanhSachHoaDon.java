@@ -587,6 +587,90 @@ public class DanhSachHoaDon implements ThaoTacFile {
         }
     }
 
+    // Thống kê hóa đơn theo nhân viên
+    public void thongKeHoaDonTheoNhanVien() {
+        if(dshd.length==0) {
+            System.out.println("Danh sách rỗng!\n");
+            return;
+        }
+        int tmp;
+        int soluongNhanVien=0;
+        float tongTien=0;
+
+        int[] daThongKe = new int[dshd.length];
+        int countThongKe=0;
+
+        System.out.println("╔═════════════════════════════════════╗");
+        System.out.println("║   Thống kê hóa đơn theo nhân viên   ║");
+        System.out.println("╠══════════════╦══════════════════════╣");
+        System.out.println("║ Mã nhân viên ║  Tổng tiền thu nhập  ║");
+        System.out.println("╠══════════════╬══════════════════════╣");
+        for(HoaDon i: dshd) {
+            int maNV = i.getMaNV();
+            boolean found = false;
+            for(int j=0; j<countThongKe; j++) {
+                if(daThongKe[j]==maNV) {
+                    found=true;
+                    break;
+                }
+            }
+            if(found)
+                continue;
+
+            tongTien=0;
+            for(HoaDon hoaDon: dshd) {
+                if(hoaDon.getMaNV()==maNV) {
+                    tongTien+=hoaDon.getTongTien();
+                }
+            }
+            daThongKe[countThongKe++] = maNV;
+            System.out.printf("║ %12d ║ %16.2f VND ║\n", maNV, tongTien);
+        }
+        System.out.println("╚══════════════╩══════════════════════╝\n");
+    }
+
+    // Thống kê hóa đơn theo khách hàng
+    public void thongKeHoaDonTheoKhachHang() {
+        if(dshd.length==0) {
+            System.out.println("Danh sách rỗng!\n");
+            return;
+        }
+        int maKH;
+        float tongTien;
+        int[] daThongKe = new int[dshd.length];
+        int countThongKe=0;
+
+        System.out.println("╔═══════════════════════════════════════╗");
+        System.out.println("║    Thống Kê Hóa Đơn Theo Khách Hàng   ║");
+        System.out.println("╠═══════════════╦═══════════════════════╣");
+        System.out.println("║ Mã Khách Hàng ║ Tổng Tiền Đã Chi Tiêu ║");
+        System.out.println("╠═══════════════╬═══════════════════════╣");
+        for(HoaDon i: dshd) {
+            maKH = i.getMaKH();
+            boolean found = false;
+            for(int j=0; j<countThongKe; j++) {
+                if(daThongKe[j]==maKH) {
+                    found = true;
+                    break;
+                }
+            }
+            if(found) {
+                continue;
+            }
+
+            tongTien=0;
+            for(HoaDon hoaDon: dshd) {
+                if(hoaDon.getMaKH()==maKH) {
+                    tongTien+=hoaDon.getTongTien();
+                }
+            }
+            daThongKe[countThongKe++]=maKH;
+            System.out.printf("║ %13d ║ %17.2f VND ║\n", maKH, tongTien);
+        }
+        System.out.println("╚═══════════════╩═══════════════════════╝\n");
+    }
+
+
     // liệt kê các hóa đơn có tổng tiền lớn và nhỏ hơn giá trị tổng tiền nhập
     public void lietKeHoaDonTongTienLonNhoHon(float tongTienNhap) {
         int countLonHon=0;
