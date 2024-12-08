@@ -269,15 +269,17 @@ public class QuanLyHoaDon {
                                 try {
                                     //Hiển thị menu thống kê
                                     System.out.println("================ THỐNG KÊ HÓA ĐƠN ================");
-                                    System.out.println("1. Thống kê tổng doanh thu");
-                                    System.out.println("2. Thống kê số lượng hóa đơn");
-                                    System.out.println("3. Thống kê hóa đơn theo ngày tháng năm");
-                                    System.out.println("4. Thống kê hóa đơn theo tháng năm");
-                                    System.out.println("5. Thống kê hóa đơn theo năm");
-                                    System.out.println("6. Thống kê hóa đơn theo quý (Từng quý)");
-                                    System.out.println("7. Thống kê hóa đơn theo khoảng thời gian");
-                                    System.out.println("8. Thống kê hóa đơn theo phương thức thanh toán");
-                                    System.out.println("0. Thoát");
+                                    System.out.println("1.  Thống kê tổng doanh thu");
+                                    System.out.println("2.  Thống kê số lượng hóa đơn");
+                                    System.out.println("3.  Thống kê hóa đơn theo ngày tháng năm");
+                                    System.out.println("4.  Thống kê hóa đơn theo tháng năm");
+                                    System.out.println("5.  Thống kê hóa đơn theo năm");
+                                    System.out.println("6.  Thống kê hóa đơn theo quý (Từng quý)");
+                                    System.out.println("7.  Thống kê hóa đơn theo khoảng thời gian");
+                                    System.out.println("8.  Thống kê hóa đơn theo phương thức thanh toán");
+                                    System.out.println("9.  Thống kê hóa đơn theo nhân viên");
+                                    System.out.println("10. Thống kê hóa đơn theo khách hàng");
+                                    System.out.println("0.  Thoát");
                                     System.out.println("==================================================");
                                     System.out.print("Nhập lựa chọn của bạn: ");
                                     int luaChon = sc.nextInt();
@@ -310,7 +312,13 @@ public class QuanLyHoaDon {
                                             danhSachHoaDon.thongKeHoaDonTheoKhoangThoiGian();
                                             break;
                                         case 8:
-                                            danhSachHoaDon.thongKeHoaDonTheoPTTT();;
+                                            danhSachHoaDon.thongKeHoaDonTheoPTTT();
+                                            break;
+                                        case 9:
+                                            danhSachHoaDon.thongKeHoaDonTheoNhanVien();
+                                            break;
+                                        case 10:
+                                            danhSachHoaDon.thongKeHoaDonTheoKhachHang();
                                             break;
                                         default:
                                             System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
