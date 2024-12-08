@@ -75,7 +75,7 @@ public class ChiTietHoaDon {
     public void xuatChiTietHoaDon() {
         String tenSP = new DanhSachSanPham().timTenSanPhamTheoMa(maSP);
         thanhTien = tinhTien();
-        System.out.printf("| %10d |  %10d | %-12s | %-10d | %-10.2f | %10.2f |\n", maHD, maSP, tenSP, soLuong, donGia, thanhTien);
+        System.out.printf("| %10d |  %10d | %12s | %10d | %10.2f | %10.2f |\n", maHD, maSP, tenSP, soLuong, donGia, thanhTien);
     }
 }
 

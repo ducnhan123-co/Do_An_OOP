@@ -68,28 +68,32 @@ public  class DanhSachSanPham implements ThaoTacFile {
     // Xuất danh sách sản phẩm gia dụng
     public void xuatDanhSachGiaDung() {
         // Tiêu đề cho danh sách gia dụng
-        System.out.printf("|%-10s|%-15s|%-10s|%-10s|%-10s|%-15s|%-20s|%-20s|\n",
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("|%-10s|%-15s|%-10s|%-12s|%-10s|%-15s|%-40s|%-20s|%-16s|\n",
                 "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Thương Hiệu", "Bảo Hành");
-
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
         // Xuất các sản phẩm gia dụng
         for (SanPham sp : dssp) {
             if (sp instanceof GiaDung) {
                 sp.xuat();  // Xuất thông tin của sản phẩm gia dụng
             }
         }
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
 
     // Xuất danh sách sản phẩm thực phẩm
     public void xuatDanhSachThucPham() {
-        System.out.printf("|%-10s|%-15s|%-10s|%-10s|%-10s|%-15s|%-20s|%-20s|%-15s|\n",
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("|%-10s|%-15s|%-10s|%-12s|%-10s|%-15s|%-40s|%-20s|%-16s|\n",
                 "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Loại TP", "Hạn SD");
-
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
         for (SanPham sp : dssp) {
             if (sp instanceof ThucPham) {
                 sp.xuat();  // Xuất thông tin của sản phẩm thực phẩm
             }
         }
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     public void xuatDanhSach() {
@@ -103,7 +107,7 @@ public  class DanhSachSanPham implements ThaoTacFile {
         for (SanPham sp : dssp) {
             if (sp instanceof GiaDung) {
                 // Xuất thông tin của sản phẩm gia dụng
-                GiaDung giaDung = (GiaDung) sp;
+                GiaDung giaDung = (GiaDung) sp; // uboxing
                 giaDung.xuat();  // Gọi hàm xuất của GiaDung
             }
         }
@@ -116,7 +120,7 @@ public  class DanhSachSanPham implements ThaoTacFile {
                 thucPham.xuat();  // Gọi hàm xuất của ThucPham
             }
         }
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
     }
     
     // Phương thức tìm sản phẩm theo mã sản phẩm
@@ -139,7 +143,7 @@ public  class DanhSachSanPham implements ThaoTacFile {
         String ten = sc.nextLine();
         boolean found = false;
         int dem=0;
-        System.out.println("Danh sách sản phẩm có tên là : "+ ten+ " là : ");
+        System.out.println("Danh sách sản phẩm có tên "+ten+" là : ");
         for(SanPham sanPham : dssp)
         {
             if(sanPham.getTenSP().contains(ten))
@@ -474,13 +478,17 @@ public  class DanhSachSanPham implements ThaoTacFile {
                 boolean found = false;
                 for(SanPham i: dssp) {
                     if(i instanceof ThucPham && ((ThucPham) i).getLoaiThucPham().contains(tenLoai_ThuongHieu)) {    
-                        count+=i.getSoLuong();
-                        tongGia+=(i.getSoLuong()*i.getDonGia());
+                        ThucPham thucPham = new ThucPham();
+                        thucPham = (ThucPham) i;
+                        count+=thucPham.getSoLuong();
+                        tongGia+=(thucPham.getSoLuong()*thucPham.getDonGia());
                         found = true;
                     }
                     else if(i instanceof GiaDung && ((GiaDung)i).getThuongHieu().contains(tenLoai_ThuongHieu)) {        
-                        count+=i.getSoLuong();
-                        tongGia+=(i.getSoLuong()*i.getDonGia());
+                        GiaDung giaDung = new GiaDung();
+                        giaDung = (GiaDung) i;
+                        count+=giaDung.getSoLuong();
+                        tongGia+=(giaDung.getSoLuong()*giaDung.getDonGia());
                         found = true;
                     }
 
@@ -502,39 +510,39 @@ public  class DanhSachSanPham implements ThaoTacFile {
     }
 
 
-    public void thongKeSanPhamTheoLoaiVaThuongHieu() {
-        Scanner sc = new Scanner(System.in);
-        int countSoLuongThucPham=0, countSoLuongGiaDung=0;
-        int countLoai=0, countThuongHieu=0;
-        float tongGiaTheoLoai=0, tongGiaTheoThuongHieu=0;;
-        float trungBinhTongGiaTheoLoai=0, trungBinhTongGiaTheoThuongHieu=0;
-        while (true) {
-            try {
-                String tenLoai = sc.nextLine().trim(); 
-                for(SanPham i: dssp) {
-                    if(i instanceof ThucPham) {
-                        if(((ThucPham)i).getLoaiThucPham().contains(tenLoai)) {
-                            countLoai++;
-                            countSoLuongThucPham+=i.getSoLuong();
-                            tongGiaTheoLoai+=(i.getSoLuong()*i.getDonGia());
-                        }
-                    }
-                    else if(i instanceof GiaDung) {
-                        if(((GiaDung)i).getThuongHieu().contains(tenLoai)) {
-                            countLoai++;
-                            countSoLuongGiaDung+=i.getSoLuong();
-                            tongGiaTheoThuongHieu+=(i.getSoLuong()*i.getDonGia());
-                        }
-                    } else {
-                        System.out.println("Không có sản phẩm "+tenLoai+" để thống kê!\n");
-                    }
-                    System.out.println("--------------------------");
-                }
-            } catch (Exception e) {
+    // public void thongKeSanPhamTheoLoaiVaThuongHieu() {
+    //     Scanner sc = new Scanner(System.in);
+    //     int countSoLuongThucPham=0, countSoLuongGiaDung=0;
+    //     int countLoai=0, countThuongHieu=0;
+    //     float tongGiaTheoLoai=0, tongGiaTheoThuongHieu=0;;
+    //     float trungBinhTongGiaTheoLoai=0, trungBinhTongGiaTheoThuongHieu=0;
+    //     while (true) {
+    //         try {
+    //             String tenLoai = sc.nextLine().trim(); 
+    //             for(SanPham i: dssp) {
+    //                 if(i instanceof ThucPham) {
+    //                     if(((ThucPham)i).getLoaiThucPham().contains(tenLoai)) {
+    //                         countLoai++;
+    //                         countSoLuongThucPham+=i.getSoLuong();
+    //                         tongGiaTheoLoai+=(i.getSoLuong()*i.getDonGia());
+    //                     }
+    //                 }
+    //                 else if(i instanceof GiaDung) {
+    //                     if(((GiaDung)i).getThuongHieu().contains(tenLoai)) {
+    //                         countLoai++;
+    //                         countSoLuongGiaDung+=i.getSoLuong();
+    //                         tongGiaTheoThuongHieu+=(i.getSoLuong()*i.getDonGia());
+    //                     }
+    //                 } else {
+    //                     System.out.println("Không có sản phẩm "+tenLoai+" để thống kê!\n");
+    //                 }
+    //                 System.out.println("--------------------------");
+    //             }
+    //         } catch (Exception e) {
                 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     public void docFile() {
         try {
