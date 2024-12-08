@@ -574,6 +574,8 @@ public class DanhSachHoaDon implements ThaoTacFile {
                     }        
                 }
                 System.out.println("╠════════════╩════════════════════╬══════════════════════╣");
+                System.out.printf("║  Tổng Số Lượng Hóa Đơn          ║ %-16d cái ║\n", soluongHoaDon);
+                System.out.println("╠═════════════════════════════════╬══════════════════════╣");
                 System.out.printf("║  Tổng Doanh Thu                 ║ %-16.2f VND ║\n", tongDoanhThu);
                 System.out.println("╠═════════════════════════════════╬══════════════════════╣");
                 System.out.printf("║  Trung Bình Tổng Doanh Thu      ║ %-16.2f VND ║\n", trungBinhTongDoanhThu);
