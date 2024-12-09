@@ -11,17 +11,26 @@ import static java.util.Arrays.copyOf;
 public class DanhSachHoaDonChiTiet {
     private static ChiTietHoaDon[] dscthd = new ChiTietHoaDon[0]; // Mảng chứa các chi tiết hóa đơn
     private DanhSachHoaDon danhSachHoaDon;
-    private DanhSachSanPham danhSachSanPham ;
+    // private DanhSachSanPham danhSachSanPham ;
 
+    public DanhSachHoaDonChiTiet() {
+
+    }
+
+    public DanhSachHoaDonChiTiet(DanhSachHoaDon danhSachHoaDon) {
+        this.danhSachHoaDon = danhSachHoaDon;
+    }
+
+    
+    public ChiTietHoaDon[] getDanhSachChiTiet() {
+        return dscthd;
+    }
+    
     public void push(ChiTietHoaDon chiTietHoaDon) {
         dscthd = copyOf(dscthd, dscthd.length+1);
         dscthd[dscthd.length-1] = chiTietHoaDon;
     }
 
-    public ChiTietHoaDon[] getDanhSachChiTiet() {
-        return dscthd;
-    }
-    
     private boolean checkMaHD(int maHD, int maSP) {
         for(ChiTietHoaDon i: dscthd) {
             if(i.getMaHD()==maHD && i.getMaSP()==maSP) {
@@ -79,7 +88,7 @@ public class DanhSachHoaDonChiTiet {
         }
     }
 
-    // Xóa chi tiết hóa đơn theo mã sản phẩm
+    // Xóa chi tiết hóa đơn theo mã sản phẩm (Không dùng)
     public void xoaChiTietHoaDonTheoMaSanPham(int maSP) {
         int index = -1;
         for (int i = 0; i < dscthd.length; i++) {
@@ -139,7 +148,7 @@ public class DanhSachHoaDonChiTiet {
             }
         }
         if(!coHoaDon) {
-            System.out.println("Không có mã hóa đơn " + maHD+"!");
+            System.out.println("Không có chi tiết hóa đơn mã " + maHD+"!");
             return; // Kết thúc phương thức sớm nếu không tìm thấy
         }
 

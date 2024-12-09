@@ -44,6 +44,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
             hoaDon.xuatHoaDon();
         }
         System.out.println();
+        System.out.println("=> Có "+dshd.length+" hóa đơn trong danh sách hóa đơn.\n");
     }
 
 //    note
@@ -57,7 +58,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
             new DanhSachHoaDonChiTiet().xuatChiTietHoaDonTheoMHD(i.getMaHD());
             System.out.println();
         }
-        System.out.println("=> Có "+dshd.length+" hóa đơn trong danh sách hóa đơn.\n");
+        System.out.println("=> Có "+dshd.length+" hóa đơn trong danh sách.\n");
     }
 
     // Thêm 1 hóa đơn vào cuối danh sách
@@ -111,7 +112,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 return ;
             }
         }
-        System.out.println("Không tìm thấy hóa đơn!\n");
+        System.out.println("Không tìm thấy hóa đơn mã"+maHD+"!\n");
     }
 
     // Tìm kiếm và liệt kê các hóa đơn theo ngày tạo hóa đơn
@@ -124,8 +125,6 @@ public class DanhSachHoaDon implements ThaoTacFile {
             try {
                 System.out.println("Nhập ngày tạo hóa đơn (dd-MM-yyyy): ");
                 String ngayTao = sc.nextLine().trim();
-                
-                ngayNhap = LocalDate.parse(ngayTao, df);
                 
                 boolean found=false;
                 

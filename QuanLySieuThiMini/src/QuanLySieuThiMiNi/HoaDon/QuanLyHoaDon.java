@@ -112,7 +112,7 @@ public class QuanLyHoaDon {
                 System.out.println(e.getMessage());
             }
             finally {
-                
+                System.out.println("Dữ liệu hóa đơn, chi tiết hóa đơn và sản phẩm đã được cập nhật.");
             }
         }
         System.out.println("═══════════════════════CỬA HÀNG MINIONS══════════════════════════");
@@ -146,8 +146,8 @@ public class QuanLyHoaDon {
             try {
                 while (true) {
                     System.out.println("╔═══════════════════════════-QUẢN LÝ HÓA ĐƠN-═══════════════════════════╗");
-                    System.out.println("║ 1. Thêm 1 hóa đơn vào danh sách và lưu trong file                     ║");
-                    System.out.println("║ 2. Thêm danh sách hóa đơn và lưu trong file                           ║");
+                    System.out.println("║ 1. Thêm 1 hóa đơn kèm chi tiết vào danh sách và lưu trong file        ║");
+                    System.out.println("║ 2. Thêm danh sách hóa đơn kèm chi tiết và lưu trong file              ║");
                     System.out.println("║ 3. Xóa hóa đơn và chi tiết theo mã hóa đơn và lưu trong file          ║");
                     System.out.println("║ 4. Tìm kiếm hóa đơn theo tùy chọn                                     ║");
                     System.out.println("║ 5. Thống kê hóa đơn theo tùy chọn                                     ║");
