@@ -263,8 +263,8 @@ public class QuanLySanPham {
                 case 8 -> dsSanPham.xuatDanhSachThucPham(); // Xuất danh sách thực phẩm
 //                case 9 -> dsSanPham.capNhatSoLuong(); // Cập nhật số lượng sản phẩm
                 case 9 -> {
-                    boolean quayLaiMenu = false;
-                    while (!quayLaiMenu) {
+                    boolean quayLaiMenu = true;
+                    while (quayLaiMenu) {
                         try {
                             System.out.println("╔═══════════════════════════-CẬP NHẬT SỐ LƯỢNG-══════════════════════════╗");
                             System.out.println("║ 1. Nhập hàng                                                           ║");
@@ -293,6 +293,7 @@ public class QuanLySanPham {
                                 
                                 case 0 -> {
                                     System.out.println("Quay lại menu quản lý...");
+                                    quayLaiMenu = false;
                                 }
                                 default -> System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
                             }
