@@ -136,30 +136,28 @@ public  class DanhSachSanPham implements ThaoTacFile {
         return null;  // Nếu không tìm thấy, trả về null
     }
 
-    public void timSanPhamTheoTen()
-    {
-        System.out.println("Nhập tên sản phẩm cần tìm kiếm ");
+    public void timSanPhamTheoTen() {
+        System.out.println("Nhập tên sản phẩm cần tìm kiếm: ");
         Scanner sc = new Scanner(System.in);
-        String ten = sc.nextLine();
+        String ten = sc.nextLine().toLowerCase(); // Chuyển tên nhập vào về chữ thường để dễ so sánh
         boolean found = false;
-        int dem=0;
-        System.out.println("Danh sách sản phẩm có tên "+ten+" là : ");
-        for(SanPham sanPham : dssp)
-        {
-            if(sanPham.getTenSP().contains(ten))
-            {
+        int dem = 0;
+        System.out.println("Danh sách sản phẩm có tên chứa '" + ten + "' là: ");
 
+        for (SanPham sanPham : dssp) {
+            if (sanPham.getTenSP().toLowerCase().contains(ten)) { // So sánh không phân biệt hoa thường
                 sanPham.xuat();
                 dem++;
                 found = true;
             }
         }
-        System.out.println("Danh sách trên có :  "+ dem + " sản phẩm tên " + ten);
-        if(!found)
-        {
-            System.out.println("Khoong tìm thấy sản phẩm nào với tên "+ ten);
+
+        System.out.println("Danh sách trên có: " + dem + " sản phẩm tên chứa '" + ten + "'");
+        if (!found) {
+            System.out.println("Không tìm thấy sản phẩm nào với tên chứa '" + ten + "'");
         }
     }
+
 
     // Phương thức tìm sản phẩm theo mã và trả về đơn giá
     public float timDonGiaTheoMa(int maSP) {
@@ -266,6 +264,54 @@ public  class DanhSachSanPham implements ThaoTacFile {
 
         System.out.println("╚═════════════╩════════════════════════╩════════════════╝");
     }
+
+    public void suaSanPhamTheoMa() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập mã sản phẩm cần sửa: ");
+        int maSP = sc.nextInt();
+        sc.nextLine(); // Xóa dòng trống sau khi đọc số nguyên
+        boolean found = false;
+
+        for (SanPham sp : dssp) {
+            if (sp.getMaSP() == maSP) {
+                System.out.println("Thông tin sản phẩm cũ: ");
+                System.out.printf("|%-10s|%-15s|%-10s|%-12s|%-10s|%-15s|%-40s|%-20s|%-16s|\n",
+                        "Mã SP", "Tên SP", "ĐVT", "Đơn Giá", "Số Lượng", "Ngày SX", "Mô Tả", "Loại/Thương Hiệu", "Hạn SD/Bảo Hành");
+                sp.xuat();
+
+                System.out.println("Nhập thông tin mới cho sản phẩm với mã: " + maSP);
+                found = true;
+                sp.setMaSP(maSP);
+
+                System.out.print("Nhập tên sản phẩm: ");
+                sp.setTenSP(sc.nextLine());
+
+                System.out.print("Nhập đơn vị tính (ĐVT): ");
+                sp.setDVT(sc.nextLine());
+
+                System.out.print("Nhập đơn giá: ");
+                sp.setDonGia(sc.nextFloat());
+                sc.nextLine(); // Xóa dòng trống sau khi đọc số thực
+
+                System.out.print("Nhập số lượng: ");
+                sp.setSoLuong(sc.nextInt());
+                sc.nextLine(); // Xóa dòng trống sau khi đọc số nguyên
+
+                System.out.print("Nhập mô tả sản phẩm: ");
+                sp.setMoTa(sc.nextLine());
+
+                System.out.print("Nhập ngày sản xuất (yyyy-MM-dd): ");
+                sp.setNgaySX(sc.nextLine());
+
+                System.out.println("Cập nhật thông tin mới thành công.");
+            }
+        }
+
+        if (!found) {
+            System.out.println("Không tìm thấy sản phẩm với mã: " + maSP);
+        }
+    }
+
 
 
 //    public void banHang(DanhSachSanPham danhSachSanPham, int maSP, int soLuongBan) {
