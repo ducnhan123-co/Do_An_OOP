@@ -97,8 +97,8 @@ public class QuanLySanPham {
                         sc.nextLine();
 
                         switch (subChoice) {
-                            // case 1 -> dsSanPham.suaSanPhamTheoMa(); // Sửa sản phẩm theo mã
-                            // case 2 -> dsSanPham.suaSanPhamTheoTen(); // Sửa sản phẩm theo tên
+                             case 1 -> dsSanPham.suaSanPhamTheoMa(); // Sửa sản phẩm theo mã
+//                             case 2 -> dsSanPham.suaSanPhamTheoTen(); // Sửa sản phẩm theo tên
                             case 0 -> { // Quay lại menu chính
                                 System.out.println("Quay lại menu quản lý...");
                                 quayLaiMenu = true;
