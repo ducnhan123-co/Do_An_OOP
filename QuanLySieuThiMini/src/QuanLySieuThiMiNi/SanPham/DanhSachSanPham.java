@@ -389,7 +389,7 @@ public  class DanhSachSanPham implements ThaoTacFile {
 
         System.out.println("- Tổng số lượng thực phẩm trong kho: "+countTP);
         System.out.printf("- Tổng giá các thực phẩm trong kho: %.2f VND\n", tongGiaTheoThucPham);
-        System.out.println("- Trung bình tổng giá thực phẩm: "+trungBinhTongGia+" VND\n");
+        System.out.println("- Trung bình tổng giá các thực phẩm: "+trungBinhTongGia+" VND\n");
     }
 
     // Thống kê sản phẩm theo gia dụng
@@ -412,9 +412,9 @@ public  class DanhSachSanPham implements ThaoTacFile {
         }
         trungBinhTongGia = (countGD > 0) ? (tongGiaTheoGiaDung/countGD) : 0;
 
-        System.out.println("- Tổng số lượng thực phẩm trong kho: "+countGD);
-        System.out.printf("- Tổng giá các thực phẩm trong kho: %.2f VND\n", tongGiaTheoGiaDung);
-        System.out.println("- Trung bình tổng giá thực phẩm: "+trungBinhTongGia+" VND\n");
+        System.out.println("- Tổng số lượng gia dụng trong kho: "+countGD);
+        System.out.printf("- Tổng giá các gia dụng trong kho: %.2f VND\n", tongGiaTheoGiaDung);
+        System.out.println("- Trung bình tổng giá các gia dụng: "+trungBinhTongGia+" VND\n");
     }
 
     public void thongKeSanPhamTheoNgaySanXuat() {
