@@ -180,8 +180,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
             for(HoaDon i: dshd) {
                 if(i!=null && i.getNgayTaoHoaDon().equals(ngayStr)) {
-                    count++;
-                    
+                    count++;      
                 }
             }
             if(count==0) {
@@ -330,7 +329,7 @@ public class DanhSachHoaDon implements ThaoTacFile {
 
                 String[] tmp = ngayNhap.split("-");
                 if (tmp.length != 2) 
-                    throw new Exception("Nhập sai định dạng(MM-yyyy)");
+                    throw new Exception("Nhập sai định dạng (MM-yyyy).");
                 String thang = tmp[0].trim();
                 String nam = tmp[1].trim();
 
@@ -386,12 +385,12 @@ public class DanhSachHoaDon implements ThaoTacFile {
                         tongTien+=hoaDon.getTongTien();
                     }
                 }
-                tongTienTrungBinh = tongTien / countHoaDon;
-
                 if(countHoaDon==0) {
                     System.out.println("Không có hóa đơn nào trong năm "+namNhap+" để thống kê!\n");
                     return;
                 }
+                
+                tongTienTrungBinh = tongTien / countHoaDon;
 
                 System.out.println("\n- Số lượng hóa đơn trong năm "+namNhap+": "+countHoaDon+" cái hóa đơn");
                 System.out.println("- Tổng doanh thu trong năm "+namNhap+": "+tongTien+" VND");
@@ -539,19 +538,19 @@ public class DanhSachHoaDon implements ThaoTacFile {
                 int soluongHoaDon=0;
                 double trungBinhTongDoanhThu=0;
 
-                for(HoaDon i: dshd) {
-                    String[] tmp3 = i.getNgayTaoHoaDon().split("-");
-                    int ngay = Integer.parseInt(tmp3[0]);
-                    int thang = Integer.parseInt(tmp3[1]);
-                    int nam = Integer.parseInt(tmp3[2]);
-                    if((nam>namBD || (nam==namBD && thang>thangBD) || (nam==namBD && thang==thangBD && ngay>=ngayBD)) 
-                        && (nam<namKT || (nam==namKT && thang<thangKT) || (nam==namKT && thang==thangKT && ngay<=ngayKT))) {
-                        tongDoanhThu+=i.getTongTien();
-                        soluongHoaDon++;
-                    }        
-                }
+                // for(HoaDon i: dshd) {
+                //     String[] tmp3 = i.getNgayTaoHoaDon().split("-");
+                //     int ngay = Integer.parseInt(tmp3[0]);
+                //     int thang = Integer.parseInt(tmp3[1]);
+                //     int nam = Integer.parseInt(tmp3[2]);
+                //     if((nam>namBD || (nam==namBD && thang>thangBD) || (nam==namBD && thang==thangBD && ngay>=ngayBD)) 
+                //         && (nam<namKT || (nam==namKT && thang<thangKT) || (nam==namKT && thang==thangKT && ngay<=ngayKT))) {
+                //         tongDoanhThu+=i.getTongTien();
+                //         soluongHoaDon++;
+                //     }        
+                // }
 
-                trungBinhTongDoanhThu = (soluongHoaDon>0) ? (tongDoanhThu/soluongHoaDon) : 0;
+                // trungBinhTongDoanhThu = (soluongHoaDon>0) ? (tongDoanhThu/soluongHoaDon) : 0;
 
                 // System.out.println("\n- Tổng số lượng hóa đơn từ "+ngayStrBD+" đến "+ngayStrKT+": "+soluongHoaDon+" cái");
                 // System.out.println("- Tổng doanh thu từ "+ngayStrBD+" đến "+ngayStrKT+": "+tongDoanhThu+" VND");
@@ -569,9 +568,12 @@ public class DanhSachHoaDon implements ThaoTacFile {
                     int nam = Integer.parseInt(tmp3[2]);
                     if((nam>namBD || (nam==namBD && thang>thangBD) || (nam==namBD && thang==thangBD && ngay>=ngayBD)) 
                         && (nam<namKT || (nam==namKT && thang<thangKT) || (nam==namKT && thang==thangKT && ngay<=ngayKT))) {
+                        tongDoanhThu+=i.getTongTien();
+                        soluongHoaDon++;    
                         System.out.printf("║ %-10d ║ %-18s ║ %-16.1f VND ║\n", i.getMaHD(), i.getNgayTaoHoaDon(), i.getTongTien());
                     }        
                 }
+                trungBinhTongDoanhThu = (soluongHoaDon>0) ? (tongDoanhThu/soluongHoaDon) : 0;
                 System.out.println("╠════════════╩════════════════════╬══════════════════════╣");
                 System.out.printf("║  Tổng Số Lượng Hóa Đơn          ║ %-16d cái ║\n", soluongHoaDon);
                 System.out.println("╠═════════════════════════════════╬══════════════════════╣");
