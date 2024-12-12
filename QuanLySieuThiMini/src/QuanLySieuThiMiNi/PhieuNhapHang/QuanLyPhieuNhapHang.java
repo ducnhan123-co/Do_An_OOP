@@ -34,7 +34,7 @@ public class QuanLyPhieuNhapHang {
 
             switch (choice) {
                 case 1:
-                    DSPNH.nhapPhieuVaChiTiet(DSCtPNH);
+                    DSPNH.nhapPhieuVaChiTiet();
                     break;
                 case 2:
                     DSPNH.timMP();

@@ -120,7 +120,14 @@ public class DanhSachNhaCungCap implements ThaoTacFile {
         System.out.println("Đã xóa nhà cung cấp với mã: " + maNCC);
     }
 
-    
+    public boolean checkMa(int ma) {
+        for (NhaCungCap i: dsNCC) {
+            if (i.getMaNCC() == ma) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     public void timTenNCCGanDung() {
         if (n == 0) {

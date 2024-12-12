@@ -1,5 +1,7 @@
 package QuanLySieuThiMiNi.PhieuNhapHang;
 
+import QuanLySieuThiMiNi.NhaCungCap.DanhSachNhaCungCap;
+import QuanLySieuThiMiNi.NhanVien.DanhSachNhanVien;
 import QuanLySieuThiMiNi.SanPham.DanhSachSanPham;
 import QuanLySieuThiMiNi.SanPham.SanPham;
 import QuanLySieuThiMiNi.ThaoTacFile;
@@ -13,6 +15,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.text.DecimalFormat;
 
+import static java.util.Arrays.copyOf;
+
 
 public class DanhSachPhieuNhapHang implements ThaoTacFile {
     private PhieuNhapHang[] dsPhieu;
@@ -25,7 +29,11 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
         dsPhieu = new PhieuNhapHang[100]; // Hoặc kích thước cần thiết
         n = 0; // Số lượng phiếu bắt đầu là 0
     }
-    
+
+    public void push (PhieuNhapHang phieuNhapHang) {
+        dsPhieu = copyOf(dsPhieu, dsPhieu.length+1);
+        dsPhieu[n++] = phieuNhapHang;
+    }
 
     // Kiểm tra mã phiếu trùng lặp
     private boolean kiemTraMaPhieuTonTai(int maPhieuMoi) {
@@ -60,31 +68,76 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
 
 
 
-    public void nhapPhieuVaChiTiet(DanhSachChiTietPhieuNhapHang dsChiTiet) {
-        Scanner sc = new Scanner(System.in);
-
+    public void nhapPhieuVaChiTiet() {
         while (true) {
-            // Tạo phiếu mới
-            PhieuNhapHang phieuMoi = new PhieuNhapHang();
-            phieuMoi.nhapPhieu();
 
-            // Kiểm tra mã phiếu trùng lặp
-            if (kiemTraMaPhieuTonTai(phieuMoi.getMaPhieu())) {
-                System.out.println("Mã phiếu đã tồn tại. Vui lòng nhập lại.");
-            } else {
-                // Mã phiếu hợp lệ, thêm vào danh sách phiếu
-                dsPhieu = Arrays.copyOf(dsPhieu, n + 1);
-                dsPhieu[n] = phieuMoi;
-                n++;
+            try {
+                DanhSachNhaCungCap NCC = new DanhSachNhaCungCap();
+                DanhSachChiTietPhieuNhapHang danhSachChiTietPhieuNhapHang = new DanhSachChiTietPhieuNhapHang();
+                DanhSachSanPham danhSachSanPham = new DanhSachSanPham();
+                DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien();
 
-                // Nhập danh sách chi tiết cho phiếu này
-                System.out.print("Nhập số lượng chi tiết cho phiếu: ");
-                int soChiTiet = sc.nextInt();
-                for (int i = 0; i < soChiTiet; i++) {
-                    System.out.println("Nhập chi tiết thứ " + (i + 1) + ":");
-                    dsChiTiet.themChiTietVaoPhieu(phieuMoi.getMaPhieu());
+                Scanner in = new Scanner(System.in);
+                PhieuNhapHang phieuNhapHang = new PhieuNhapHang();
+
+                System.out.println("nhap ma phieu");
+                phieuNhapHang.setMaPhieu(in.nextInt());
+                if (kiemTraMaPhieuTonTai(phieuNhapHang.getMaPhieu()))
+                    throw new Exception("ma phieu da ton tai");
+
+                System.out.println("nhap ma nha cung cap: ");
+                phieuNhapHang.setMaNCC(in.nextInt());
+                if (!NCC.checkMa(phieuNhapHang.getMaNCC()))
+                    throw new Exception("khong ton tai nha cung cap");
+
+                System.out.println("nhap ma nhan vien:");
+                phieuNhapHang.setMaNhanVien(in.nextInt());
+                if (!danhSachNhanVien.kiemTraTrungMaNhanVien(phieuNhapHang.getMaNhanVien()))
+                    throw new Exception("khong tim thay nhan vien");
+
+                double tongtien = 0;
+
+                System.out.println("nhap chi tiet phieu nhap hang:");
+                while (true) {
+                    try {
+                        Scanner inn = new Scanner(System.in);
+                        ChiTietPhieuNhapHang chiTietPhieuNhapHang = new ChiTietPhieuNhapHang();
+
+                        chiTietPhieuNhapHang.setMaPhieu(phieuNhapHang.getMaPhieu());
+
+                        System.out.println("nhap ma san pham: ");
+                        chiTietPhieuNhapHang.setMaSp(inn.nextInt());
+                        if (danhSachSanPham.timSanPhamTheoMa(chiTietPhieuNhapHang.getMaSp()) == null)
+                            throw new Exception("ma san pham khong ton tai");
+
+                        System.out.println("nhap so luong:");
+                        chiTietPhieuNhapHang.setSl(inn.nextInt());
+
+                        SanPham sanPham = danhSachSanPham.timSanPhamTheoMa(chiTietPhieuNhapHang.getMaSp());
+                        chiTietPhieuNhapHang.setDonGia(sanPham.getDonGia());
+                        chiTietPhieuNhapHang.setThanhTien(sanPham.getDonGia()*chiTietPhieuNhapHang.getSl());
+
+                        tongtien += chiTietPhieuNhapHang.getThanhTien();
+
+                        danhSachChiTietPhieuNhapHang.push(chiTietPhieuNhapHang);
+
+                        System.out.println("(0) tiep tuc");
+                        System.out.println("(1) dung lai");
+                        if (inn.nextInt() == 1) {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+
+                phieuNhapHang.setTongTien(tongtien);
+                LocalDate time = LocalDate.now();
+                phieuNhapHang.setNgayNhapHang(time);
+                push(phieuNhapHang);
                 break;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -144,7 +197,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
             for (int i = vt; i < n - 1; i++) {
                 dsPhieu[i] = dsPhieu[i + 1];
             }
-            dsPhieu = Arrays.copyOf(dsPhieu, n - 1); // Thu gọn mảng
+            dsPhieu = copyOf(dsPhieu, n - 1); // Thu gọn mảng
             n--;
             System.out.println("Đã xóa phiếu với mã phiếu: " + maPhieu);
         } else {
@@ -371,7 +424,7 @@ public class DanhSachPhieuNhapHang implements ThaoTacFile {
                     // Kiểm tra nếu mảng đã đầy, thì tăng kích thước mảng
                     if (n >= dsPhieu.length) {
                         // Tăng kích thước mảng gấp đôi khi mảng đầy
-                        dsPhieu = Arrays.copyOf(dsPhieu, dsPhieu.length + 10);
+                        dsPhieu = copyOf(dsPhieu, dsPhieu.length + 10);
                     }
                     dsPhieu[n++] = phieuNhap;
                     count++;

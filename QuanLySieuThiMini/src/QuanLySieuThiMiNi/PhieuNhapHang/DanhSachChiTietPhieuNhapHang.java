@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static java.util.Arrays.copyOf;
+
 public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
     private ChiTietPhieuNhapHang[] dsChiTiet = new ChiTietPhieuNhapHang[0];
     private int n = 0;
@@ -63,6 +65,11 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         System.out.println("Tổng tiền của phiếu mã " + maPhieu + " đã được cập nhật: " + tongTienMoi);
     }
 
+    public void push(ChiTietPhieuNhapHang chiTietPhieuNhapHang) {
+        dsChiTiet = copyOf(dsChiTiet, dsChiTiet.length+1);
+        dsChiTiet[n++] = chiTietPhieuNhapHang;
+    }
+
     public void themChiTietVaoPhieu(int maPhieu) {
         Scanner sc = new Scanner(System.in);
         ChiTietPhieuNhapHang chiTiet = new ChiTietPhieuNhapHang();
@@ -75,7 +82,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
             return;
         }
 
-        dsChiTiet = Arrays.copyOf(dsChiTiet, n + 1);
+        dsChiTiet = copyOf(dsChiTiet, n + 1);
         dsChiTiet[n] = chiTiet;
         n++;
         
@@ -116,7 +123,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
                 return; // Dừng thêm chi tiết
             }
 
-            dsChiTiet = Arrays.copyOf(dsChiTiet, n + 1);
+            dsChiTiet = copyOf(dsChiTiet, n + 1);
             dsChiTiet[n] = chiTiet;
             n++;
 
@@ -210,7 +217,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
         }
 
         if (count > 0) {
-            dsChiTiet = Arrays.copyOf(dsChiTiet, n); // Thu gọn mảng
+            dsChiTiet = copyOf(dsChiTiet, n); // Thu gọn mảng
             System.out.println("Đã xóa " + count + " chi tiết của phiếu với mã phiếu: " + maPhieu);
         } else {
             System.out.println("Không tìm thấy chi tiết của phiếu với mã phiếu: " + maPhieu);
@@ -252,7 +259,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
                 for (int j = i; j < n - 1; j++) {
                     dsChiTiet[j] = dsChiTiet[j + 1];
                 }
-                dsChiTiet = Arrays.copyOf(dsChiTiet, n - 1); // Giảm kích thước mảng
+                dsChiTiet = copyOf(dsChiTiet, n - 1); // Giảm kích thước mảng
                 n--;
 
                 updateTongTien(maPhieu); // Cập nhật lại tổng tiền phiếu
@@ -302,7 +309,7 @@ public class DanhSachChiTietPhieuNhapHang implements ThaoTacFile {
                 if (chiTiet != null) {
                     // Kiểm tra nếu mảng đã đầy, thì tăng kích thước mảng
                     if (n >= dsChiTiet.length) {
-                        dsChiTiet = Arrays.copyOf(dsChiTiet, dsChiTiet.length + 10); // Tăng kích thước
+                        dsChiTiet = copyOf(dsChiTiet, dsChiTiet.length + 10); // Tăng kích thước
                     }
                     dsChiTiet[n++] = chiTiet;
                     count++;
