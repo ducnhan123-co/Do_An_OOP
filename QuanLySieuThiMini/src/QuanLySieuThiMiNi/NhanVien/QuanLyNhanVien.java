@@ -44,7 +44,7 @@ public class QuanLyNhanVien {
             }
 
             switch (choice) {
-                case 1 -> {
+                case 1 : {
                     while (true) {
                         try {
                             System.out.println("====== THÊM NHÂN VIÊN ======");
@@ -73,8 +73,8 @@ public class QuanLyNhanVien {
                         }
                     }
                 }
-                case 2 -> ds.suaNhanVienTheoMa(); // Sửa1 nhân viên theo mã
-                case 3 -> {
+                case 2 : ds.suaNhanVienTheoMa(); // Sửa1 nhân viên theo mã
+                case 3 : {
                     boolean tiepTucXoa = true;
                     while (tiepTucXoa) {
                         System.out.print("Nhập mã nhân viên cần xóa: ");
@@ -90,7 +90,7 @@ public class QuanLyNhanVien {
                         }
                     }
                 }
-                case 4 -> {
+                case 4 : {
                     while (true) {
                         try {
                             // Hiển thị menu tìm kiếm
@@ -110,7 +110,7 @@ public class QuanLyNhanVien {
                             }
 
                             switch (luaChon) {
-                                case 1 -> {
+                                case 1 : {
                                     // Tìm kiếm nhân viên theo mã
                                     System.out.print("Nhập mã nhân viên cần tìm: ");
                                     int maTim = sc.nextInt();
@@ -125,7 +125,7 @@ public class QuanLyNhanVien {
                                         System.out.println("Không tìm thấy nhân viên với mã " + maTim);
                                     }
                                 }
-                                case 2 -> {
+                                case 2 : {
                                     // Tìm kiếm nhân viên theo tên
                                     System.out.print("Nhập tên nhân viên cần tìm: ");
                                     String tenTim = sc.nextLine().trim();
@@ -144,7 +144,7 @@ public class QuanLyNhanVien {
                                         System.out.println("Tổng cộng: " + danhSachTimDuoc.length + " nhân viên.");
                                     }
                                 }
-                                default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                                default : System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
                             }
                         } catch (Exception e) {
                             // Xử lý lỗi ngoại lệ
@@ -154,7 +154,7 @@ public class QuanLyNhanVien {
                     }
                 }
 
-                case 5 -> {
+                case 5 : {
                     boolean thongKe=true;
                     while (thongKe) {
                         try {
@@ -169,18 +169,18 @@ public class QuanLyNhanVien {
                             System.out.print("Nhập lựa chọn của bạn: ");
                             int luaChon = sc.nextInt();
                             switch (luaChon) {
-                                case 1 -> ds.thongKeTheoMucLuong(); // Gọi phương thức thống kê theo mức lương
-                                case 2 -> {
+                                case 1 : ds.thongKeTheoMucLuong(); // Gọi phương thức thống kê theo mức lương
+                                case 2 : {
                                     ds.thongKeTheoNamLamViec(); // Gọi phương thức thống kê theo năm làm việc
                                 }
-                                case 3 -> {
+                                case 3 : {
                                     ds.thongKeTheoTuoi(2024); // Gọi phương thức thống kê theo tuổi
                                 }
-                                case 0 -> {
+                                case 0 : {
                                     System.out.println("Thoát thống kê nhân viên.");
                                     thongKe=false;
                                 }
-                                default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
+                                default : System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                             }
                         } catch (Exception e) {
 
@@ -189,9 +189,9 @@ public class QuanLyNhanVien {
                         }
                     }
                 }
-                case 6 -> ds.capNhatSoLuongNhanVien(); // Cập nhật số lượng nhân viên hiện tại
+                case 6 : ds.capNhatSoLuongNhanVien(); // Cập nhật số lượng nhân viên hiện tại
 
-                case 7 -> {
+                case 7 : {
                     do {
                         ds.timKiemDiaChiNhanVien(); // Gọi phương thức tìm kiếm địa chỉ nhân viên
                         Scanner scanner = new Scanner(System.in);
@@ -211,14 +211,14 @@ public class QuanLyNhanVien {
                         }
                     } while (true);
                 }
-                case 8 -> {
+                case 8 : {
                     ds.xuatDanhSachNhanVien(); // In danh sách nhân viên
                 }
-                case 0 -> {
+                case 0 : {
                     System.out.println("Đã thoát chương trình.");
                     return;
                 }
-                default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                default : System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
             }
         }
     }

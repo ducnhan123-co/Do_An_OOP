@@ -48,7 +48,7 @@ public class QuanLyKhachHang {
             }
 
             switch (choice) {
-                case 1 -> {
+                case 1: {
                     while (true) {
                         try {
                             System.out.println("====== THÊM KHÁCH HÀNG ======");
@@ -77,8 +77,8 @@ public class QuanLyKhachHang {
                         }
                     }
                 }
-                case 2 -> ds.suaKhachHangTheoMa(); // Sửa thông tin khách hàng theo mã
-                case 3 -> {
+                case 2 : ds.suaKhachHangTheoMa(); // Sửa thông tin khách hàng theo mã
+                case 3 : {
                     while (true) {
                         try {
                             System.out.print("Nhập mã khách hàng cần xóa: ");
@@ -95,7 +95,7 @@ public class QuanLyKhachHang {
                     }
                 }
 
-                case 4 -> {
+                case 4 : {
                     boolean tiepTucTimKiem = true; // Biến để kiểm soát vòng lặp tìm kiếm
                     while (tiepTucTimKiem) {
                         System.out.println("======= TÌM KIẾM KHÁCH HÀNG =======");
@@ -118,7 +118,7 @@ public class QuanLyKhachHang {
                         }
 
                         switch (luaChon) {
-                            case 1 -> {
+                            case 1 : {
                                 // Tìm kiếm khách hàng theo mã
                                 System.out.print("Nhập mã khách hàng cần tìm: ");
                                 try {
@@ -136,19 +136,19 @@ public class QuanLyKhachHang {
                                     sc.nextLine(); // Đọc bỏ dữ liệu không hợp lệ
                                 }
                             }
-                            case 2 -> ds.timKiemKhachHangTheoHo(); // Tìm kiếm theo họ
-                            case 3 -> ds.timKiemKhachHangTheoTen(); // Tìm kiếm theo tên
-                            case 0 -> {
+                            case 2 : ds.timKiemKhachHangTheoHo(); // Tìm kiếm theo họ
+                            case 3 : ds.timKiemKhachHangTheoTen(); // Tìm kiếm theo tên
+                            case 0 : {
                                 System.out.println("Thoát tìm kiếm khách hàng.");
                                 tiepTucTimKiem = false; // Thoát vòng lặp tìm kiếm
                             }
-                            default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                            default : System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
                         }
                     }
                 }
 
 
-                case 5 -> {
+                case 5 : {
                     boolean tiepTucTimThongKe = true; // Biến để kiểm soát vòng lặp tìm kiếm
                     while (tiepTucTimThongKe) {
                         System.out.println("====== THỐNG KÊ KHÁCH HÀNG ======");
@@ -164,31 +164,31 @@ public class QuanLyKhachHang {
                         sc.nextLine();
 
                         switch (luaChon) {
-                            case 1 -> ds.thongKeTheoGioiTinh();
-                            case 2 -> ds.thongKeTheoTuoi();
-                            case 3 -> {
+                            case 1 : ds.thongKeTheoGioiTinh();
+                            case 2 : ds.thongKeTheoTuoi();
+                            case 3 : {
                                 DanhSachHoaDon dsHoaDon = new DanhSachHoaDon();
                                 dsHoaDon.docFile();
                                 ds.thongKeDonHangTheoQuy();
                             }
-                            case 0 -> {
+                            case 0 : {
                                 System.out.println("Quay lại menu khách hàng.");
                                 tiepTucTimThongKe=false;
                             }
-                            default -> System.out.println("Lựa chọn không hợp lệ.");
+                            default : System.out.println("Lựa chọn không hợp lệ.");
                         }
                     }
                 }
 
-                case 6 -> ds.capNhapSoLuongKhachHang(); // Cập nhật danh sách khách hàng hiện tại
+                case 6: ds.capNhapSoLuongKhachHang(); // Cập nhật danh sách khách hàng hiện tại
 
-                case 7 -> ds.timKiemKhachHangNangCao(); // Tìm kiếm nâng cao với địa chỉ
-                case 8 -> ds.xuatDanhSachKhachHang(); // In danh sách khách hàng
-                case 0 -> {
+                case 7: ds.timKiemKhachHangNangCao(); // Tìm kiếm nâng cao với địa chỉ
+                case 8 : ds.xuatDanhSachKhachHang(); // In danh sách khách hàng
+                case 0:{
                     System.out.println("Đã thoát chương trình.");
                     return;
                 }
-                default -> System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                default : System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
             }
         }
     }

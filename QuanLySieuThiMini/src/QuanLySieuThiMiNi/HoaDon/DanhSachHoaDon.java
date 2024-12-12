@@ -504,13 +504,13 @@ public class DanhSachHoaDon implements ThaoTacFile {
         System.out.printf("=> Quý %d có tổng doanh thu nhỏ nhất: %.2f VND\n\n", quyMin, minTongTienDoanhThu);
     }
 
-    // THỐNG KÊ HÓA ĐƠN THEO KHOẢNG THỜI GIAN (NGÀY A -> NGÀY B)
+    // THỐNG KÊ HÓA ĐƠN THEO KHOẢNG THỜI GIAN (NGÀY A : NGÀY B)
     public void thongKeHoaDonTheoKhoangThoiGian() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             try {
-                System.out.println("Nhập khoảng thời gian (từ ngày A -> ngày B):");
+                System.out.println("Nhập khoảng thời gian (từ ngày A : ngày B):");
                 
                 System.out.print("Từ ngày (dd-MM-yyyy): ");
                 String ngayStrBD = sc.nextLine().trim();
